@@ -1,0 +1,46 @@
+package sk.upjs.ics.diplomovka.base;
+
+import java.util.List;
+
+public abstract class ChromosomeBase<GeneType> {
+
+    private List<GeneType> genes;
+    private Double fitness = null;
+
+    public ChromosomeBase() { }
+
+    public ChromosomeBase(List<GeneType> genes) {
+        this.genes = genes;
+    }
+
+    public int getLength() {
+        return genes.size();
+    }
+
+    public GeneType getGeneOnPosition(int position) {
+        return genes.get(position);
+    }
+
+    public void setGeneOnPosition(int position, GeneType gene) {
+        genes.set(position, gene);
+    }
+
+    public List<GeneType> getGenes() {
+        return genes;
+    }
+
+    public void setGenes(List<GeneType> genes) {
+        this.genes = genes;
+    }
+
+    public double getFitness() {
+        return fitness;
+    }
+
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
+    }
+
+    public abstract ChromosomeBase generateRandom();
+
+}
