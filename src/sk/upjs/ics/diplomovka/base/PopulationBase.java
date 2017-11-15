@@ -29,11 +29,6 @@ public class PopulationBase<ChromosomeType extends ChromosomeBase> {
         population.add(chromosome);
     }
 
-    public void add(ChromosomePair<ChromosomeType> pair) {
-        population.add(pair.getFirst());
-        population.add(pair.getSecond());
-    }
-
     public int getSize() {
         return population.size();
     }

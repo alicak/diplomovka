@@ -6,8 +6,10 @@ public abstract class ChromosomeBase implements Comparable<ChromosomeBase> {
 
     private List<Integer> genes;
     private double fitness;
+    private int maxValue;
 
-    public ChromosomeBase() { }
+    public ChromosomeBase() {
+    }
 
     public ChromosomeBase(List<Integer> genes) {
         this.genes = genes;
@@ -41,11 +43,19 @@ public abstract class ChromosomeBase implements Comparable<ChromosomeBase> {
         this.fitness = fitness;
     }
 
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
     @Override
     public int compareTo(ChromosomeBase chromosome) {
-        if(fitness == chromosome.fitness)
+        if (fitness == chromosome.fitness)
             return 0;
-        if(fitness < chromosome.fitness)
+        if (fitness < chromosome.fitness)
             return 1;
         return -1;
     }

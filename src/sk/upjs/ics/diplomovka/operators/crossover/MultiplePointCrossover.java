@@ -26,7 +26,7 @@ public class MultiplePointCrossover<ChromosomeType extends ChromosomeBase> exten
         return doCrossover(chromosome1, chromosome2, positions);
     }
 
-    private ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, List<Integer> positions) {
+    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, List<Integer> positions) {
         List<Integer> new1 = new LinkedList<>();
         List<Integer> new2 = new LinkedList<>();
 

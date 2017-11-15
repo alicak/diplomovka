@@ -16,7 +16,7 @@ public class OnePointCrossover<ChromosomeType extends ChromosomeBase> extends Cr
         return doCrossover(chromosome1, chromosome2, position, length);
     }
 
-    private ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, int position, int length) {
+    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, int position, int length) {
         List<Integer> new1 = new LinkedList<>();
         List<Integer> new2 = new LinkedList<>();
 
