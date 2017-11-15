@@ -18,6 +18,4 @@ public class ChromosomePair<ChromosomeType extends ChromosomeBase> {
         return second;
     }
 
-
-
 }

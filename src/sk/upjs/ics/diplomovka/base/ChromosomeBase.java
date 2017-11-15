@@ -2,14 +2,14 @@ package sk.upjs.ics.diplomovka.base;
 
 import java.util.List;
 
-public abstract class ChromosomeBase<GeneType> implements Comparable<ChromosomeBase> {
+public abstract class ChromosomeBase implements Comparable<ChromosomeBase> {
 
-    private List<GeneType> genes;
+    private List<Integer> genes;
     private double fitness;
 
     public ChromosomeBase() { }
 
-    public ChromosomeBase(List<GeneType> genes) {
+    public ChromosomeBase(List<Integer> genes) {
         this.genes = genes;
     }
 
@@ -17,19 +17,19 @@ public abstract class ChromosomeBase<GeneType> implements Comparable<ChromosomeB
         return genes.size();
     }
 
-    public GeneType getGeneOnPosition(int position) {
+    public Integer getGeneOnPosition(int position) {
         return genes.get(position);
     }
 
-    public void setGeneOnPosition(int position, GeneType gene) {
+    public void setGeneOnPosition(int position, Integer gene) {
         genes.set(position, gene);
     }
 
-    public List<GeneType> getGenes() {
+    public List<Integer> getGenes() {
         return genes;
     }
 
-    public void setGenes(List<GeneType> genes) {
+    public void setGenes(List<Integer> genes) {
         this.genes = genes;
     }
 
