@@ -14,8 +14,7 @@ public class UniformFlipMutation extends MutationBase {
     public void doMutation(ChromosomeBase chromosome) {
         for (int i = 0; i < chromosome.getLength(); i++) {
             if (Math.random() < probability) {
-                int newValue = Utils.randomInt(0, chromosome.getMaxValue());
-                chromosome.setGeneOnPosition(i, newValue);
+                chromosome.generateGene(i);
             }
         }
     }

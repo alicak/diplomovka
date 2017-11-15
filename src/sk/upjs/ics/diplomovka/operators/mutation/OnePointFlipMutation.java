@@ -18,8 +18,7 @@ public class OnePointFlipMutation extends MutationBase {
 
     public void doMutation(ChromosomeBase chromosome, int position) {
         if (Math.random() < probability) {
-            int newValue = Utils.randomInt(0, chromosome.getMaxValue());
-            chromosome.setGeneOnPosition(position, newValue);
+            chromosome.generateGene(position);
         }
     }
 }
