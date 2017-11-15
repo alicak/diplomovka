@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.operators;
+package sk.upjs.ics.diplomovka.operators.crossover;
 
 import sk.upjs.ics.diplomovka.base.ChromosomeBase;
 import sk.upjs.ics.diplomovka.base.ChromosomeGenesPair;
