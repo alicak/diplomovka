@@ -2,7 +2,6 @@ package sk.upjs.ics.diplomovka.operators;
 
 import sk.upjs.ics.diplomovka.base.ChromosomeBase;
 import sk.upjs.ics.diplomovka.base.ChromosomeGenesPair;
-import sk.upjs.ics.diplomovka.base.ChromosomePair;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
