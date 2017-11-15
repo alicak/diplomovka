@@ -52,15 +52,6 @@ public abstract class ChromosomeBase implements Comparable<ChromosomeBase> {
 
     public abstract ChromosomeBase createNew();
 
-    @Override
-    public int compareTo(ChromosomeBase chromosome) {
-        if (fitness == chromosome.fitness)
-            return 0;
-        if (fitness < chromosome.fitness)
-            return 1;
-        return -1;
-    }
-
     public String toString() {
         return genes.toString();
     }

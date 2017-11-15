@@ -27,6 +27,8 @@ public abstract class PopulationBase<ChromosomeType extends ChromosomeBase> {
         population.add(chromosome);
     }
 
+    public abstract void add(List<Integer> chromosomeGenes);
+
     public int getSize() {
         return population.size();
     }
