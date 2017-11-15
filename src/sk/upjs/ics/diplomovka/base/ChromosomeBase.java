@@ -2,10 +2,10 @@ package sk.upjs.ics.diplomovka.base;
 
 import java.util.List;
 
-public abstract class ChromosomeBase<GeneType> {
+public abstract class ChromosomeBase<GeneType> implements Comparable<ChromosomeBase> {
 
     private List<GeneType> genes;
-    private Double fitness = null;
+    private double fitness;
 
     public ChromosomeBase() { }
 
@@ -41,6 +41,12 @@ public abstract class ChromosomeBase<GeneType> {
         this.fitness = fitness;
     }
 
-    public abstract ChromosomeBase generateRandom();
-
+    @Override
+    public int compareTo(ChromosomeBase chromosome) {
+        if(fitness == chromosome.fitness)
+            return 0;
+        if(fitness < chromosome.fitness)
+            return 1;
+        return -1;
+    }
 }
