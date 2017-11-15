@@ -1,11 +1,9 @@
 package sk.upjs.ics.diplomovka.base;
 
-import sk.upjs.ics.diplomovka.base.ChromosomeBase;
-import sk.upjs.ics.diplomovka.base.ChromosomePair;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class PopulationBase<ChromosomeType extends ChromosomeBase> {
+public abstract class PopulationBase<ChromosomeType extends ChromosomeBase> {
 
     private List<ChromosomeType> population;
 
@@ -32,5 +30,7 @@ public class PopulationBase<ChromosomeType extends ChromosomeBase> {
     public int getSize() {
         return population.size();
     }
+
+    public abstract void generateRandom();
 
 }

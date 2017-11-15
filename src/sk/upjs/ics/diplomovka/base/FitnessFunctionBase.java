@@ -1,12 +1,14 @@
 package sk.upjs.ics.diplomovka.base;
 
+import sk.upjs.ics.diplomovka.flights.Flight;
+
 import java.util.List;
 
-public abstract class FitnessFunctionBase<FlightType, ChromosomeType extends ChromosomeBase> {
+public abstract class FitnessFunctionBase<ChromosomeType extends ChromosomeBase> {
 
-    private List<FlightType> flights;
+    private List<Flight> flights;
 
-    public FitnessFunctionBase(List<FlightType> flights) {
+    public FitnessFunctionBase(List<Flight> flights) {
         this.flights = flights;
     }
 

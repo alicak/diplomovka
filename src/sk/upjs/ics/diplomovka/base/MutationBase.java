@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.base;
 
 public abstract class MutationBase<ChromosomeType extends ChromosomeBase> {
 
-    protected double probability = 0.05;
+    protected double probability = 0.05; // default value
 
     public MutationBase(double probability) {
         this.probability = probability;
