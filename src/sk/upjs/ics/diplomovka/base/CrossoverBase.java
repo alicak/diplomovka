@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.base;
 
 public abstract class CrossoverBase<ChromosomeType extends ChromosomeBase> {
 
-    protected double probability = 0.8;
+    protected double probability;
 
     public CrossoverBase(double probability) {
         this.probability = probability;
