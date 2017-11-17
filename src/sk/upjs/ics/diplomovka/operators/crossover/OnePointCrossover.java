@@ -14,13 +14,17 @@ public class OnePointCrossover<ChromosomeType extends ChromosomeBase> extends Cr
     }
 
     @Override
-    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2) {
+    public void doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2) {
         int length = chromosome1.getLength();
         int position = Utils.randomInt(0, length);
-        return doCrossover(chromosome1, chromosome2, position, length);
+        doCrossover(chromosome1, chromosome2, position, length);
     }
 
-    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, int position, int length) {
+    public void doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, int position, int length) {
+        if(Math.random() > probability) {
+            return;
+        }
+
         List<Integer> new1 = new ArrayList<>();
         List<Integer> new2 = new ArrayList<>();
 
@@ -34,6 +38,7 @@ public class OnePointCrossover<ChromosomeType extends ChromosomeBase> extends Cr
             new2.set(g, chromosome1.getGene(g));
         }
 
-        return new ChromosomeGenesPair(new1, new2);
+        chromosome1.setGenes(new1);
+        chromosome2.setGenes(new2);
     }
 }
