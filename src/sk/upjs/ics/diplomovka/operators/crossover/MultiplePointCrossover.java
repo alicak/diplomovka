@@ -18,18 +18,18 @@ public class MultiplePointCrossover<ChromosomeType extends ChromosomeBase> exten
     }
 
     @Override
-    public void doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2) {
+    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2) {
         List<Integer> positions = new ArrayList<>();
         int space = chromosome1.getLength() / numberOfPoints;
         for (int p = 1; p < numberOfPoints; p++) {
             positions.add(Utils.randomInt(space * (p - 1), space * p));
         }
-        doCrossover(chromosome1, chromosome2, positions);
+        return doCrossover(chromosome1, chromosome2, positions);
     }
 
-    public void doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, List<Integer> positions) {
+    public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2, List<Integer> positions) {
         if(Math.random() > probability) {
-            return;
+            return null;
         }
 
         List<Integer> new1 = new ArrayList<>();
@@ -48,7 +48,6 @@ public class MultiplePointCrossover<ChromosomeType extends ChromosomeBase> exten
                 }
             }
         }
-        chromosome1.setGenes(new1);
-        chromosome2.setGenes(new2);
+        return new ChromosomeGenesPair(new1, new2);
     }
 }

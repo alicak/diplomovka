@@ -8,6 +8,6 @@ public abstract class CrossoverBase<ChromosomeType extends ChromosomeBase> {
         this.probability = probability;
     }
 
-    public abstract void doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2);
+    public abstract ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2);
 
 }
