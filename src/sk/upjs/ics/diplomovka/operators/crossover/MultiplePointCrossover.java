@@ -10,9 +10,10 @@ import java.util.List;
 
 public class MultiplePointCrossover<ChromosomeType extends ChromosomeBase> extends CrossoverBase<ChromosomeType> {
 
-    int numberOfPoints;
+    private int numberOfPoints;
 
-    public MultiplePointCrossover(int numberOfPoints) {
+    public MultiplePointCrossover(int numberOfPoints, double probability) {
+        super(probability);
         this.numberOfPoints = numberOfPoints;
     }
 

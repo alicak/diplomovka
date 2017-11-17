@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OnePointCrossover<ChromosomeType extends ChromosomeBase> extends CrossoverBase<ChromosomeType> {
+    public OnePointCrossover(double probability) {
+        super(probability);
+    }
+
     @Override
     public ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2) {
         int length = chromosome1.getLength();
