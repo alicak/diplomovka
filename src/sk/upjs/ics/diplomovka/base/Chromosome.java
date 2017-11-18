@@ -2,15 +2,15 @@ package sk.upjs.ics.diplomovka.base;
 
 import java.util.List;
 
-public class ChromosomeBase implements Comparable<ChromosomeBase> {
+public class Chromosome implements Comparable<Chromosome> {
 
     private List<Integer> genes;
     private double fitness;
 
-    public ChromosomeBase() {
+    public Chromosome() {
     }
 
-    public ChromosomeBase(List<Integer> genes) {
+    public Chromosome(List<Integer> genes) {
         this.genes = genes;
     }
 
@@ -53,7 +53,7 @@ public class ChromosomeBase implements Comparable<ChromosomeBase> {
     }
 
     @Override
-    public int compareTo(ChromosomeBase c) {
+    public int compareTo(Chromosome c) {
         if (this.getFitness() == c.getFitness())
             return 0;
 

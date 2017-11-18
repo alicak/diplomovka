@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.operators.crossover;
 
-import sk.upjs.ics.diplomovka.base.ChromosomeBase;
+import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -13,13 +13,13 @@ public class OnePointCrossover extends CrossoverBase{
     }
 
     @Override
-    public List<ChromosomeBase> doCrossover(ChromosomeBase chromosome1, ChromosomeBase chromosome2) {
+    public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2) {
         int length = chromosome1.getLength();
         int position = Utils.randomInt(0, length);
         return doCrossover(chromosome1, chromosome2, position, length);
     }
 
-    public List<ChromosomeBase> doCrossover(ChromosomeBase chromosome1, ChromosomeBase chromosome2, int position, int length) {
+    public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2, int position, int length) {
         if(Math.random() > probability) {
             return null;
         }
@@ -37,9 +37,9 @@ public class OnePointCrossover extends CrossoverBase{
             new2.set(g, chromosome1.getGene(g));
         }
 
-        List<ChromosomeBase> result = new ArrayList<>();
-        result.add(new ChromosomeBase(new1));
-        result.add(new ChromosomeBase(new2));
+        List<Chromosome> result = new ArrayList<>();
+        result.add(new Chromosome(new1));
+        result.add(new Chromosome(new2));
         return result;
     }
 }

@@ -10,6 +10,6 @@ public abstract class CrossoverBase {
         this.probability = probability;
     }
 
-    public abstract List<ChromosomeBase> doCrossover(ChromosomeBase chromosome1, ChromosomeBase chromosome2);
+    public abstract List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2);
 
 }

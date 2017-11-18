@@ -10,8 +10,8 @@ public abstract class SelectionBase {
         this.population = population;
     }
 
-    public abstract List<ChromosomeBase> select(int numberOfChromosomes);
+    public abstract List<Chromosome> select(int numberOfChromosomes);
 
-    public abstract ChromosomeBase select();
+    public abstract Chromosome select();
 
 }

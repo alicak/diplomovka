@@ -4,29 +4,29 @@ import java.util.List;
 
 public abstract class PopulationBase {
 
-    private List<ChromosomeBase> generation;
+    private List<Chromosome> generation;
 
     protected int newGenerationSize;
 
 
-    public PopulationBase(List<ChromosomeBase> generation) {
+    public PopulationBase(List<Chromosome> generation) {
         this.generation = generation;
         this.newGenerationSize = generation.size();
     }
 
-    public void set(List<ChromosomeBase> population) {
+    public void set(List<Chromosome> population) {
         this.generation = population;
     }
 
-    public List<ChromosomeBase> get() {
+    public List<Chromosome> get() {
         return generation;
     }
 
-    public ChromosomeBase get(int index) {
+    public Chromosome get(int index) {
         return generation.get(index);
     }
 
-    public void add(ChromosomeBase chromosome) {
+    public void add(Chromosome chromosome) {
         generation.add(chromosome);
     }
 

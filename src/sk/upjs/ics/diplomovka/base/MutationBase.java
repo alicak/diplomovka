@@ -20,10 +20,10 @@ public abstract class MutationBase {
         this.probability = probability;
     }
 
-    public abstract void doMutation(ChromosomeBase chromosome);
+    public abstract void doMutation(Chromosome chromosome);
 
-    public void doMutation(List<ChromosomeBase> chromosomes) {
-        for(ChromosomeBase chromosome : chromosomes)
+    public void doMutation(List<Chromosome> chromosomes) {
+        for(Chromosome chromosome : chromosomes)
             doMutation(chromosome);
     }
 }

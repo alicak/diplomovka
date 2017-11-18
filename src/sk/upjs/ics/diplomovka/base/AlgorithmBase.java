@@ -22,12 +22,12 @@ public abstract class AlgorithmBase {
     public abstract void evolveOneGeneration();
 
     public void evolveOneGenerationSimple() {
-        List<ChromosomeBase> oldGeneration = population.get();
-        List<ChromosomeBase> newGeneration = new ArrayList<>();
+        List<Chromosome> oldGeneration = population.get();
+        List<Chromosome> newGeneration = new ArrayList<>();
 
         while (newGeneration.size() < population.getNewGenerationSize()) {
-            List<ChromosomeBase> pair = selection.select(2);
-            List<ChromosomeBase> newPair = crossover.doCrossover(pair.get(0), pair.get(1));
+            List<Chromosome> pair = selection.select(2);
+            List<Chromosome> newPair = crossover.doCrossover(pair.get(0), pair.get(1));
             mutation.doMutation(newPair);
             newGeneration.addAll(newPair);
         }
