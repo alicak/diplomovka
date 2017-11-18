@@ -1,11 +1,13 @@
 package sk.upjs.ics.diplomovka.base;
 
-public abstract class MutationBase<ChromosomeType extends ChromosomeBase> {
+public abstract class MutationBase {
 
     protected double probability;
+    protected ChromosomeGenerator generator;
 
-    public MutationBase(double probability) {
+    public MutationBase(double probability, ChromosomeGenerator generator) {
         this.probability = probability;
+        this.generator = generator;
     }
 
     public double getProbability(){
@@ -16,5 +18,5 @@ public abstract class MutationBase<ChromosomeType extends ChromosomeBase> {
         this.probability = probability;
     }
 
-    public abstract void doMutation(ChromosomeType chromosome);
+    public abstract void doMutation(ChromosomeBase chromosome);
 }

@@ -1,6 +1,8 @@
 package sk.upjs.ics.diplomovka.base;
 
-public abstract class CrossoverBase<ChromosomeType extends ChromosomeBase> {
+import java.util.List;
+
+public abstract class CrossoverBase {
 
     protected double probability;
 
@@ -8,6 +10,6 @@ public abstract class CrossoverBase<ChromosomeType extends ChromosomeBase> {
         this.probability = probability;
     }
 
-    public abstract ChromosomeGenesPair doCrossover(ChromosomeType chromosome1, ChromosomeType chromosome2);
+    public abstract List<ChromosomeBase> doCrossover(ChromosomeBase chromosome1, ChromosomeBase chromosome2);
 
 }

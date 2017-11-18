@@ -1,38 +1,46 @@
 package sk.upjs.ics.diplomovka.base;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PopulationBase<ChromosomeType extends ChromosomeBase> {
+public abstract class PopulationBase {
 
-    private List<ChromosomeType> population;
+    private List<ChromosomeBase> generation;
 
-    public PopulationBase(List<ChromosomeType> population) {
-        this.population = population;
+    protected int newGenerationSize;
+
+
+    public PopulationBase(List<ChromosomeBase> generation) {
+        this.generation = generation;
+        this.newGenerationSize = generation.size();
     }
 
-    public void set(List<ChromosomeType> population) {
-        this.population = population;
+    public void set(List<ChromosomeBase> population) {
+        this.generation = population;
     }
 
-    public List<ChromosomeType> getAll() {
-        return population;
+    public List<ChromosomeBase> get() {
+        return generation;
     }
 
-    public ChromosomeType get(int index) {
-        return population.get(index);
+    public ChromosomeBase get(int index) {
+        return generation.get(index);
     }
 
-    public void add(ChromosomeType chromosome) {
-        population.add(chromosome);
+    public void add(ChromosomeBase chromosome) {
+        generation.add(chromosome);
     }
 
-    public abstract void add(List<Integer> chromosomeGenes);
-
-    public int getSize() {
-        return population.size();
+    public int size() {
+        return generation.size();
     }
 
     public abstract void generateRandom();
 
+    public int getNewGenerationSize() {
+        return newGenerationSize;
+    }
+
+    public void setNewGenerationSize(int newGenerationSize) {
+        this.newGenerationSize = newGenerationSize;
+    }
 }

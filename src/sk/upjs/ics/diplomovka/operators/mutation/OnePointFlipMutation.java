@@ -1,13 +1,14 @@
 package sk.upjs.ics.diplomovka.operators.mutation;
 
+import sk.upjs.ics.diplomovka.base.ChromosomeGenerator;
 import sk.upjs.ics.diplomovka.base.ChromosomeBase;
 import sk.upjs.ics.diplomovka.base.MutationBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class OnePointFlipMutation extends MutationBase {
 
-    public OnePointFlipMutation(double probability) {
-        super(probability);
+    public OnePointFlipMutation(double probability, ChromosomeGenerator generator) {
+        super(probability, generator);
     }
 
     @Override
@@ -18,7 +19,7 @@ public class OnePointFlipMutation extends MutationBase {
 
     public void doMutation(ChromosomeBase chromosome, int position) {
         if (Math.random() < probability) {
-            chromosome.generateGene(position);
+            generator.generateGene(position);
         }
     }
 }
