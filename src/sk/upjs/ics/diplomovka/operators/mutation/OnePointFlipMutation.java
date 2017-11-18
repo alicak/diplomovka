@@ -19,7 +19,7 @@ public class OnePointFlipMutation extends MutationBase {
 
     public void doMutation(Chromosome chromosome, int position) {
         if (Math.random() < probability) {
-            generator.generateGene(position);
+            generator.generateGene(chromosome, position);
         }
     }
 }
