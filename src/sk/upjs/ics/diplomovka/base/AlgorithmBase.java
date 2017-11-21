@@ -5,18 +5,20 @@ import java.util.List;
 
 public abstract class AlgorithmBase {
 
-    private MutationBase mutation;
-    private CrossoverBase crossover;
-    private FitnessFunctionBase fitnessFunction;
-    private PopulationBase population;
-    private SelectionBase selection;
+    protected MutationBase mutation;
+    protected CrossoverBase crossover;
+    protected FitnessFunctionBase fitnessFunction;
+    protected PopulationBase population;
+    protected SelectionBase selection;
+    protected TerminationBase termination;
 
-    public AlgorithmBase(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection) {
+    public AlgorithmBase(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection, TerminationBase termination) {
         this.population = population;
         this.fitnessFunction = fitnessFunction;
         this.crossover = crossover;
         this.mutation = mutation;
         this.selection = selection;
+        this.termination = termination;
     }
 
     public abstract void evolveOneGeneration();
@@ -44,5 +46,11 @@ public abstract class AlgorithmBase {
         }
     }
 
-    // TODO: termination strategies
+    public PopulationBase evolve() {
+        while (!termination.isTerminated()){
+            evolveOneGeneration();
+            termination.onStepPerformed();
+        }
+        return population;
+    }
 }

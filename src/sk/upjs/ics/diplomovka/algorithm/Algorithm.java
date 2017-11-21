@@ -7,25 +7,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Algorithm<ChromosomeType extends Chromosome> {
-
-    private MutationBase mutation;
-    private CrossoverBase crossover;
-    private FitnessFunctionBase fitnessFunction;
-    private PopulationBase population;
+public class Algorithm extends AlgorithmBase {
 
     private static int NUMBER_OF_UNMUTATED;
     private static final double PORTION_UNMUTATED = 0.1;
 
-    public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation) {
-        this.population = population;
-        this.fitnessFunction = fitnessFunction;
-        this.crossover = crossover;
-        this.mutation = mutation;
+    public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection) {
+        super(population, fitnessFunction, crossover, mutation, selection);
         NUMBER_OF_UNMUTATED = (int) (population.size() * PORTION_UNMUTATED);
     }
 
-    public PopulationBase evolve() {
+    @Override
+    public void evolveOneGeneration() {
         int size = population.size();
 
         for (int i = 0; i < size / 2; i++) {
@@ -48,7 +41,5 @@ public class Algorithm<ChromosomeType extends Chromosome> {
         }
 
         population.set(newPopulation);
-        return population;
     }
-
 }
