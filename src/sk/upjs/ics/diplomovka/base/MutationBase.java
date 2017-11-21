@@ -7,6 +7,10 @@ public abstract class MutationBase {
     protected double probability;
     protected ChromosomeGenerator generator;
 
+    public MutationBase(double probability) {
+        this.probability = probability;
+    }
+
     public MutationBase(double probability, ChromosomeGenerator generator) {
         this.probability = probability;
         this.generator = generator;
