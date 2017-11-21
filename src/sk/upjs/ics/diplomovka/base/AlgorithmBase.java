@@ -32,7 +32,16 @@ public abstract class AlgorithmBase {
             newGeneration.addAll(newPair);
         }
 
+        calculateAndSetFitness(newGeneration);
         population.set(newGeneration);
+    }
+
+    protected void calculateAndSetFitness(List<Chromosome> chromosomes) {
+        for(Chromosome chromosome : chromosomes) {
+            if(!chromosome.hasFitness()) {
+                chromosome.setFitness(fitnessFunction.calculateFitness(chromosome));
+            }
+        }
     }
 
     // TODO: termination strategies

@@ -4,7 +4,7 @@ import sk.upjs.ics.diplomovka.flights.Flight;
 
 import java.util.List;
 
-public abstract class FitnessFunctionBase<ChromosomeType extends Chromosome> {
+public abstract class FitnessFunctionBase {
 
     private List<Flight> flights;
 
@@ -12,6 +12,5 @@ public abstract class FitnessFunctionBase<ChromosomeType extends Chromosome> {
         this.flights = flights;
     }
 
-    public abstract double calculateFitness(ChromosomeType chromosome);
-
+    public abstract double calculateFitness(Chromosome chromosome);
 }
