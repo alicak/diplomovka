@@ -6,4 +6,8 @@ public class Utils {
         return (int) (Math.random() * max + min);
     }
 
+    public static int randomInt(int max) {
+        return (int) (Math.random() * max);
+    }
+
 }

@@ -1,19 +1,26 @@
 package sk.upjs.ics.diplomovka.model1;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.MutationBase;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
-public class SwapSuccessiveFlightsMutation extends MutationBase {
+public class SwapSuccessiveFlightsMutation extends RelativePositionMutation
+{
     public SwapSuccessiveFlightsMutation(double probability) {
         super(probability);
     }
 
-    @Override
-    public void doMutation(Chromosome chromosome) {
+    public void doMutation(AbsolutePositionChromosome chromosome) {
         if(Math.random() > probability) {
             return;
         }
 
-        // TODO
+        int gate = Utils.randomInt(chromosome.getGates());
+        int flightIdx1 = Utils.randomInt(chromosome.getFlights());
+        int flightIdx2 = (flightIdx1 + 1) % chromosome.getFlights();
+
+        int flight1 = chromosome.getGene(gate, flightIdx1);
+        int flight2 = chromosome.getGene(gate, flightIdx2);
+
+        chromosome.setGene(gate, flightIdx1, flight2);
+        chromosome.setGene(gate, flightIdx2, flight1);
     }
 }
