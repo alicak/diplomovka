@@ -3,14 +3,14 @@ package sk.upjs.ics.diplomovka.model1.chromosomes;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 
 public class AbsolutePositionChromosome extends Chromosome {
-    private int gates;
-    private int[] noOfFlights;
-    private int maxNoFlights;
+    private final int noOfGates;
+    private int[] noOfFlights; // number of flights per gate
+    private final int maxNoFlights;
 
-    public AbsolutePositionChromosome(int gates, int maxNoFlights) {
-        this.gates = gates;
+    public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
+        this.noOfGates = noOfGates;
         this.maxNoFlights = maxNoFlights;
-        this.noOfFlights = new int[gates];
+        this.noOfFlights = new int[noOfGates];
     }
 
     public int getGene(int gate, int flight) {
@@ -22,6 +22,14 @@ public class AbsolutePositionChromosome extends Chromosome {
         if (flightIdx > noOfFlights[gate]) {
             noOfFlights[gate]++;
         }
+    }
+
+    public RelativePositionChromosome relativePositionChromosome() {
+        RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
+
+        // TODO
+
+        return chromosome;
     }
 
     public int getNoOfFlights(int gate) {
@@ -40,7 +48,7 @@ public class AbsolutePositionChromosome extends Chromosome {
         return maxNoFlights;
     }
 
-    public int getGates() {
-        return gates;
+    public int getNoOfGates() {
+        return noOfGates;
     }
 }

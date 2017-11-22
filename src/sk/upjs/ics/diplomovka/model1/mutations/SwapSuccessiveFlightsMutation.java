@@ -14,7 +14,7 @@ public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation
             return;
         }
 
-        int gate = Utils.randomInt(chromosome.getGates());
+        int gate = Utils.randomInt(chromosome.getNoOfGates());
         int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate));
         int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights(gate);
 
