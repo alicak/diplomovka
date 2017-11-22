@@ -27,6 +27,10 @@ public class AbsolutePositionChromosome extends Chromosome {
         }
     }
 
+    protected void incrementNoOfFlights(int gate) {
+        noOfFlights[gate]++;
+    }
+
     public RelativePositionChromosome relativePositionChromosome() {
         RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
 
