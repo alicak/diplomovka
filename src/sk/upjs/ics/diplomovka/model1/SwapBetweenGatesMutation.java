@@ -2,8 +2,8 @@ package sk.upjs.ics.diplomovka.model1;
 
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-public class SwapBetweenQueuesMutation extends RelativePositionMutation {
-    public SwapBetweenQueuesMutation(double probability) {
+public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
+    public SwapBetweenGatesMutation(double probability) {
         super(probability);
     }
 

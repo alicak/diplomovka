@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.model1;
 
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-public class SwapSuccessiveFlightsMutation extends RelativePositionMutation
+public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation
 {
     public SwapSuccessiveFlightsMutation(double probability) {
         super(probability);

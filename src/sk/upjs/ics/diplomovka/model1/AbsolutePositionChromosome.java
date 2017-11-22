@@ -19,13 +19,21 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void setGene(int gate, int flightIdx, int flight) {
         setGene(gate * maxNoFlights + flightIdx, flight);
-        if(flightIdx > noOfFlights[gate]) {
+        if (flightIdx > noOfFlights[gate]) {
             noOfFlights[gate]++;
         }
     }
 
     public int getNoOfFlights(int gate) {
         return noOfFlights[gate];
+    }
+
+    public void addGene(int gate, int flight, int value) {
+        getGenes().add(gate * maxNoFlights + flight, value);
+    }
+
+    public void removeGene(int gate, int flight) {
+        getGenes().remove(gate * maxNoFlights + flight);
     }
 
     public int getMaxNoFlights() {
