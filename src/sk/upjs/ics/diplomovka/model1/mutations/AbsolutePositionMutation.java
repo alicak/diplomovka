@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.model1;
+package sk.upjs.ics.diplomovka.model1.mutations;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.MutationBase;
