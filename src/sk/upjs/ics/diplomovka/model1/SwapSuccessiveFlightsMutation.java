@@ -14,8 +14,8 @@ public class SwapSuccessiveFlightsMutation extends RelativePositionMutation
         }
 
         int gate = Utils.randomInt(chromosome.getGates());
-        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights());
-        int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights();
+        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate));
+        int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights(gate);
 
         int flight1 = chromosome.getGene(gate, flightIdx1);
         int flight2 = chromosome.getGene(gate, flightIdx2);
