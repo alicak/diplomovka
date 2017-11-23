@@ -2,9 +2,6 @@ package sk.upjs.ics.diplomovka.model1.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class AbsolutePositionChromosome extends Chromosome {
     private final int noOfGates;
     private int[] noOfFlights; // number of flights per gate
@@ -29,30 +26,6 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     protected void incrementNoOfFlights(int gate) {
         noOfFlights[gate]++;
-    }
-
-    public RelativePositionChromosome relativePositionChromosome() {
-        RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
-
-        Integer[] genesArray = new Integer[maxNoFlights*maxNoFlights + maxNoFlights];
-        Arrays.fill(genesArray, 0);
-        List<Integer> genesList = Arrays.asList(genesArray);
-
-        for (int g = 0; g < noOfGates; g++) {
-            int flightNo = getGene(g,1);
-            genesList.set(chromosome.getIndex(flightNo,flightNo), 1);
-            genesList.set(chromosome.getIndex(maxNoFlights + 1, flightNo), g);
-
-            for (int f = 0; f < noOfFlights[g] - 1; f++) {
-                int flight1 = getGene(g, f);
-                int flight2 = getGene(g, f+1);
-                genesList.set(chromosome.getIndex(flight1, flight2), 1);
-                genesList.set(chromosome.getIndex(maxNoFlights + 1, flight2), g);
-            }
-        }
-
-        chromosome.setGenes(genesList);
-        return chromosome;
     }
 
     public int getNoOfFlights(int gate) {
