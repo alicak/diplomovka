@@ -24,14 +24,13 @@ public abstract class AlgorithmBase {
     public abstract void evolveOneGeneration();
 
     public void evolveOneGenerationSimple() {
-        List<Chromosome> oldGeneration = population.get();
         List<Chromosome> newGeneration = new ArrayList<>();
 
         while (newGeneration.size() < population.getNewGenerationSize()) {
             List<Chromosome> pair = selection.select(2);
-            List<Chromosome> newPair = crossover.doCrossover(pair.get(0), pair.get(1));
-            mutation.doMutation(newPair);
-            newGeneration.addAll(newPair);
+            List<Chromosome> children = crossover.doCrossover(pair.get(0), pair.get(1));
+            mutation.doMutation(children);
+            newGeneration.addAll(children);
         }
 
         calculateAndSetFitness(newGeneration);

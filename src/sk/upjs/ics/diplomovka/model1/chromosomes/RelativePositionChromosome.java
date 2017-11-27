@@ -23,7 +23,7 @@ public class RelativePositionChromosome extends Chromosome {
         return noOfGates;
     }
 
-    protected int getIndex(int row, int column) {
+    public int getIndex(int row, int column) {
         return row * noOfFlights + column;
     }
 }
