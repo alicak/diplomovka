@@ -14,21 +14,21 @@ public class AbsoluteRelativeChromosomeConverter {
         Integer[] genesArray = new Integer[maxNoFlights*maxNoFlights + maxNoFlights];
         Arrays.fill(genesArray, 0);
         List<Integer> genesList = Arrays.asList(genesArray);
+        chromosome.setGenes(genesList);
 
         for (int g = 0; g < noOfGates; g++) {
             int flightNo = absChromosome.getGene(g,1);
-            genesList.set(chromosome.getIndex(flightNo,flightNo), 1);
-            genesList.set(chromosome.getIndex(maxNoFlights + 1, flightNo), g);
+            chromosome.setGene(flightNo,flightNo,1);
+            chromosome.setGene(maxNoFlights+1, flightNo, g);
 
             for (int f = 0; f < absChromosome.getNoOfFlights(g) - 1; f++) {
                 int flight1 = absChromosome.getGene(g, f);
                 int flight2 = absChromosome.getGene(g, f+1);
-                genesList.set(chromosome.getIndex(flight1, flight2), 1);
-                genesList.set(chromosome.getIndex(maxNoFlights + 1, flight2), g);
+                chromosome.setGene(flight1, flight2,1);
+                chromosome.setGene(maxNoFlights+1, flight2, g);
             }
         }
 
-        chromosome.setGenes(genesList);
         return chromosome;
     }
 

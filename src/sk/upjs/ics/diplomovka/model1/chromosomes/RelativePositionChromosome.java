@@ -15,6 +15,10 @@ public class RelativePositionChromosome extends Chromosome {
         return getGene(row * noOfFlights + column);
     }
 
+    public void setGene(int row, int column, int value) {
+        setGene(getIndex(row, column), value);
+    }
+
     public int getNoFlights() {
         return noOfFlights;
     }
