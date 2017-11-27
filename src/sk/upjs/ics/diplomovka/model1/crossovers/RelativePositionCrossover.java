@@ -21,8 +21,9 @@ public class RelativePositionCrossover extends CrossoverBase {
     private List<Chromosome> doRelativeCrossover(RelativePositionChromosome chromosome1, RelativePositionChromosome chromosome2) {
         RelativePositionChromosome newChromosome = locateCommonGenes(chromosome1, chromosome2);
         assignGates(chromosome1, chromosome2, newChromosome);
-        indicateInfeasibleGenes(newChromosome);
-        produceOffspring(newChromosome);
+        RelativePositionChromosome c4 = indicateInfeasibleGenes(newChromosome);
+        produceOffspring(chromosome1, chromosome2, newChromosome, c4);
+
         List<Chromosome> offspring = new ArrayList<>();
         offspring.add(newChromosome);
         return offspring;
@@ -75,19 +76,22 @@ public class RelativePositionCrossover extends CrossoverBase {
     }
 
     // step 3
-    private void indicateInfeasibleGenes(RelativePositionChromosome chromosome) {
-        int flights = chromosome.getNoFlights();
+    private RelativePositionChromosome indicateInfeasibleGenes(RelativePositionChromosome c3) {
+        RelativePositionChromosome c4 = new RelativePositionChromosome(c3.getNoOfGates(), c3.getNoFlights());
+        // TODO: copy c3 matrix to c4
+
+        int flights = c3.getNoFlights();
 
         for (int i = 0; i < flights; i++) {
-            int gene = chromosome.getGene(i, i);
+            int gene = c3.getGene(i, i);
 
             if (gene == 0) {
-                chromosome.setGene(i, i, -1);
+                c4.setGene(i, i, -1);
             } else if (gene == 1) {
 
                 for (int m = 0; m < flights; m++) {
-                    if (chromosome.getGene(m, i) == 0) {
-                        chromosome.setGene(m, i, -1);
+                    if (c3.getGene(m, i) == 0) {
+                        c4.setGene(m, i, -1);
                     }
                 }
 
@@ -101,26 +105,92 @@ public class RelativePositionCrossover extends CrossoverBase {
                 if (i == j)
                     continue;
 
-                if (chromosome.getGene(i, j) == 1) {
+                if (c3.getGene(i, j) == 1) {
 
                     for (int m = 0; m < flights; m++) {
 
-                        if (chromosome.getGene(m, j) == 0) {
-                            chromosome.setGene(m, j, -1);
+                        if (c3.getGene(m, j) == 0) {
+                            c4.setGene(m, j, -1);
                         }
 
-                        if (chromosome.getGene(i, m) == 0) {
-                            chromosome.setGene(i, m, -1);
+                        if (c3.getGene(i, m) == 0) {
+                            c4.setGene(i, m, -1);
                         }
                     }
 
                 }
             }
         }
+
+        return c4;
     }
 
     // step 4
-    private void produceOffspring(RelativePositionChromosome chromosome) {
+    private void produceOffspring(RelativePositionChromosome c1,
+                                  RelativePositionChromosome c2,
+                                  RelativePositionChromosome c3,
+                                  RelativePositionChromosome c4) {
+        int flights = c3.getNoFlights();
+
+        while (sumOfMatrix(c3) < flights) {
+            int j = chooseJ(c3);
+            int i3 = chooseI3(c1,c2,c3,c4, j);
+            setC3andC4(c3, c4, i3, j);
+        }
+    }
+
+    // step 4.1
+    private int chooseJ(RelativePositionChromosome c3) {
+        List<Integer> candidateColumns = new ArrayList<>();
+        for (int j = 0; j < c3.getNoFlights(); j++) {
+            if (sumOfColumn(c3, j) == 0)
+                candidateColumns.add(j);
+        }
+
+        int j = (int) (Math.random() * candidateColumns.size());
+        return candidateColumns.get(j);
+    }
+
+    // step 4.2
+    private int chooseI3(RelativePositionChromosome c1,
+                         RelativePositionChromosome c2,
+                         RelativePositionChromosome c3,
+                         RelativePositionChromosome c4,
+                         int j) {
+         throw new UnsupportedOperationException();
+         // TODO
+    }
+
+    // step 4.3
+    private void setC3andC4(RelativePositionChromosome c3, RelativePositionChromosome c4, int i3, int j) {
+        throw new UnsupportedOperationException();
         // TODO
+    }
+
+    private int sumOfMatrix(RelativePositionChromosome chromosome) {
+        int sum = 0;
+        int flights = chromosome.getNoFlights();
+
+        for (int i = 0; i < flights; i++) {
+            for (int j = 0; j < flights; j++) {
+                if (chromosome.getGene(i, j) == 1)
+                    sum++;
+            }
+
+        }
+
+        return sum;
+    }
+
+    private int sumOfColumn(RelativePositionChromosome chromosome, int column) {
+        int sum = 0;
+        int flights = chromosome.getNoFlights();
+
+        for (int i = 0; i < flights; i++) {
+            if (chromosome.getGene(i, column) == 1)
+                sum++;
+        }
+
+        return sum;
     }
 }
