@@ -4,11 +4,11 @@ import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.model1.chromosomes.RelativePositionChromosome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class RelativePositionCrossover extends CrossoverBase {
+    private int flights;
+
     public RelativePositionCrossover(double probability) {
         super(probability);
     }
@@ -19,6 +19,8 @@ public class RelativePositionCrossover extends CrossoverBase {
     }
 
     private List<Chromosome> doRelativeCrossover(RelativePositionChromosome chromosome1, RelativePositionChromosome chromosome2) {
+        flights = chromosome1.getNoFlights();
+
         RelativePositionChromosome newChromosome = locateCommonGenes(chromosome1, chromosome2);
         assignGates(chromosome1, chromosome2, newChromosome);
         RelativePositionChromosome c4 = indicateInfeasibleGenes(newChromosome);
@@ -31,7 +33,6 @@ public class RelativePositionCrossover extends CrossoverBase {
 
     // step 1
     private RelativePositionChromosome locateCommonGenes(RelativePositionChromosome chromosome1, RelativePositionChromosome chromosome2) {
-        int flights = chromosome1.getNoFlights();
         RelativePositionChromosome result = new RelativePositionChromosome(chromosome1.getNoOfGates(), flights);
 
         Integer[] genesArray = new Integer[flights * flights + flights];
@@ -58,10 +59,8 @@ public class RelativePositionCrossover extends CrossoverBase {
 
     // step 2
     private void assignGates(RelativePositionChromosome chromosome1, RelativePositionChromosome chromosome2, RelativePositionChromosome result) {
-        int flights = result.getNoFlights();
-
         for (int j = 0; j < flights; j++) {
-            if (result.getGene(flights, j) == 0) {
+            if (result.getGene(flights, j) != 0) {
                 continue;
             }
 
@@ -72,15 +71,29 @@ public class RelativePositionCrossover extends CrossoverBase {
             }
         }
 
-        // TODO: every gate must have first dwelling
+        // every gate must have first dwelling
+        Set<Integer> gatesWithStart = new HashSet<>();
+        for (int i = 0; i < flights; i++) {
+            if (result.getGene(i, i) == 1)
+                gatesWithStart.add(result.getGene(flights, i));
+        }
+
+        for (int i = 0; i < flights; i++) {
+            if (result.getGene(i, i) == 0 && (chromosome1.getGene(i, i) == 1 || chromosome2.getGene(i, i) == 1)) {
+                int gate = result.getGene(flights, i);
+                if (gatesWithStart.contains(gate))
+                    continue;
+                else {
+                    result.setGene(i, i, 1); // simplified version - we don't choose c1 or c2, just set it
+                    gatesWithStart.add(gate);
+                }
+            }
+        }
     }
 
     // step 3
     private RelativePositionChromosome indicateInfeasibleGenes(RelativePositionChromosome c3) {
-        RelativePositionChromosome c4 = new RelativePositionChromosome(c3.getNoOfGates(), c3.getNoFlights());
-        // TODO: copy c3 matrix to c4
-
-        int flights = c3.getNoFlights();
+        RelativePositionChromosome c4 = copyChromosome(c3);
 
         for (int i = 0; i < flights; i++) {
             int gene = c3.getGene(i, i);
@@ -130,11 +143,10 @@ public class RelativePositionCrossover extends CrossoverBase {
                                   RelativePositionChromosome c2,
                                   RelativePositionChromosome c3,
                                   RelativePositionChromosome c4) {
-        int flights = c3.getNoFlights();
 
         while (sumOfMatrix(c3) < flights) {
             int j = chooseJ(c3);
-            int i3 = chooseI3(c1,c2,c3,c4, j);
+            int i3 = chooseI3(c1, c2, c3, c4, j);
             setC3andC4(c3, c4, i3, j);
         }
     }
@@ -157,19 +169,73 @@ public class RelativePositionCrossover extends CrossoverBase {
                          RelativePositionChromosome c3,
                          RelativePositionChromosome c4,
                          int j) {
-         throw new UnsupportedOperationException();
-         // TODO
+
+        int i3 = -1;
+
+        for (int i1 = 0; i1 < flights; i1++) {
+            for (int i2 = 0; i2 < flights; i2++) {
+
+                if (c1.getGene(i1, j) == 1 && c2.getGene(i2, j) == 1) {
+
+                    boolean cond1 = c3.getGene(flights, i1) == c3.getGene(flights, i2);
+                    boolean cond2 = c3.getGene(flights, i1) == c3.getGene(flights, j);
+                    boolean cond3 = c3.getGene(flights, i2) == c3.getGene(flights, j);
+                    boolean cond4 = c4.getGene(i1, j) == 0;
+                    boolean cond5 = c4.getGene(i2, j) == 0;
+
+                    if (cond1 && cond2 && cond3 && cond4 && cond5) {
+                        i3 = (Math.random() < 0.5) ? i1 : i2;
+                    } else if (cond2 && cond4) {
+                        i3 = i1;
+                    } else if (cond3 && cond5) {
+                        i3 = i2;
+                    } else {
+                        List<Integer> candidates = new ArrayList<>();
+                        for (int i = 0; i < flights; i++) {
+                            if (i == j)
+                                continue;
+                            if (c3.getGene(flights, i) == c3.getGene(flights, j) && c4.getGene(i, j) == 0)
+                                candidates.add(i);
+                        }
+                        int idx = (int) (Math.random() * candidates.size());
+                        i3 = candidates.get(idx);
+                    }
+                }
+            }
+        }
+
+        if (i3 == -1)
+            throw new IllegalStateException("i3 must be set to 0 or 1.");
+
+        return i3;
     }
 
     // step 4.3
     private void setC3andC4(RelativePositionChromosome c3, RelativePositionChromosome c4, int i3, int j) {
-        throw new UnsupportedOperationException();
-        // TODO
+        c3.setGene(i3, j, 1);
+        c4.setGene(i3, j, 1);
+        for (int m = 0; m < c4.getNoFlights(); m++) {
+            c4.setGene(m, i3, -1);
+            c4.setGene(i3, m, -1);
+        }
+    }
+
+    private RelativePositionChromosome copyChromosome(RelativePositionChromosome chromosome) {
+        RelativePositionChromosome copy = new RelativePositionChromosome(chromosome.getNoOfGates(), chromosome.getNoFlights());
+        List<Integer> newGenes = new ArrayList<>();
+
+        List<Integer> genes = chromosome.getGenes();
+        for (int i = 0; i < genes.size(); i++) {
+            newGenes.add(genes.get(i));
+        }
+
+        copy.setGenes(newGenes);
+
+        return copy;
     }
 
     private int sumOfMatrix(RelativePositionChromosome chromosome) {
         int sum = 0;
-        int flights = chromosome.getNoFlights();
 
         for (int i = 0; i < flights; i++) {
             for (int j = 0; j < flights; j++) {
@@ -184,7 +250,6 @@ public class RelativePositionCrossover extends CrossoverBase {
 
     private int sumOfColumn(RelativePositionChromosome chromosome, int column) {
         int sum = 0;
-        int flights = chromosome.getNoFlights();
 
         for (int i = 0; i < flights; i++) {
             if (chromosome.getGene(i, column) == 1)
