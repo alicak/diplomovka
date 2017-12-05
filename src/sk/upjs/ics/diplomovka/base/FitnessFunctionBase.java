@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class FitnessFunctionBase {
 
-    private List<Flight> flights;
+    protected List<Flight> flights;
 
     public FitnessFunctionBase(List<Flight> flights) {
         this.flights = flights;

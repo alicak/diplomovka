@@ -5,7 +5,7 @@ import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.model1.crossovers.RelativePositionCrossover;
 import sk.upjs.ics.diplomovka.model1.mutations.AbsolutePositionMutation;
-import sk.upjs.ics.diplomovka.operators.fitness.TimeDiffFitness;
+import sk.upjs.ics.diplomovka.model1.fitness.TimeDiffFitness;
 import sk.upjs.ics.diplomovka.operators.selection.RouletteWheelSelection;
 import sk.upjs.ics.diplomovka.operators.termination.IterationsTermination;
 
@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         PopulationBase population = null; // TODO
         List<Flight> flights = null; // TODO
-        FitnessFunctionBase fitnessFunction = new TimeDiffFitness(flights);
+        TimeDiffFitness fitnessFunction = new TimeDiffFitness(flights);
         CrossoverBase crossover = new RelativePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RouletteWheelSelection();
@@ -26,7 +26,7 @@ public class Main {
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
         PopulationBase finalPopulation = algorithm.evolve();
-        Chromosome result = finalPopulation.bestChromosome(finalPopulation);
+        Chromosome result = finalPopulation.bestChromosome();
 
         System.out.println(result.toString());
         PrintWriter writer = new PrintWriter(new File("results.txt"));

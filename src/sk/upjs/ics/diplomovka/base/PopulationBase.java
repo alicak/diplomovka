@@ -45,8 +45,7 @@ public abstract class PopulationBase {
         this.newGenerationSize = newGenerationSize;
     }
 
-    public Chromosome bestChromosome(PopulationBase population) {
-        Collections.sort(generation);
-        return generation.get(0);
+    public Chromosome bestChromosome() {
+        return Collections.min(generation);
     }
 }
