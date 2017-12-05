@@ -7,7 +7,4 @@ public abstract class SelectionBase {
     public abstract List<Chromosome> select(PopulationBase population, int numberOfChromosomes);
 
     public abstract Chromosome select(PopulationBase population);
-
-    public abstract Chromosome bestChromosome(PopulationBase population);
-
 }

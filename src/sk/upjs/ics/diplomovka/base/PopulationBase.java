@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.base;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class PopulationBase {
@@ -42,5 +43,10 @@ public abstract class PopulationBase {
 
     public void setNewGenerationSize(int newGenerationSize) {
         this.newGenerationSize = newGenerationSize;
+    }
+
+    public Chromosome bestChromosome(PopulationBase population) {
+        Collections.sort(generation);
+        return generation.get(0);
     }
 }
