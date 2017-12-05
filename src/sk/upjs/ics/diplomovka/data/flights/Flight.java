@@ -10,6 +10,7 @@ public class Flight {
     private FlightType type;
     private FlightCategory category;
     private Aircraft aircraft;
+    private int turnaroundTime; // in minutes
 
     public enum FlightType {
         ARRIVAL,
@@ -21,13 +22,14 @@ public class Flight {
         NON_SCHENGEN
     }
 
-    public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft) {
+    public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft, int turnaroundTime) {
         this.id = id;
         this.start = start;
         this.end = end;
         this.type = type;
         this.category = category;
         this.aircraft = aircraft;
+        this.turnaroundTime = turnaroundTime;
     }
 
     public int getLength() {
@@ -65,4 +67,9 @@ public class Flight {
     public Aircraft getAircraft() {
         return aircraft;
     }
+
+    public int getTurnaroundTime() {
+        return turnaroundTime;
+    }
+
 }

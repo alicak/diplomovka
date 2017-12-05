@@ -46,4 +46,14 @@ public class AircraftStand {
     public boolean hasCategory(Flight.FlightCategory category) {
         return flightCategories.contains(category);
     }
+
+    public boolean checkFlight(Flight flight) {
+        if (!this.flightCategories.contains(flight.getCategory())) {
+            return false;
+        }
+        if (this.maxWingspan < flight.getAircraft().getWingspan()) {
+            return false;
+        }
+        return true;
+    }
 }
