@@ -29,6 +29,11 @@ public class RankingSelection extends SelectionBase {
         return null;
     }
 
+    @Override
+    public Chromosome bestChromosome(PopulationBase population) {
+        return null;
+    }
+
     public Chromosome select() {
         return select(population);
     }

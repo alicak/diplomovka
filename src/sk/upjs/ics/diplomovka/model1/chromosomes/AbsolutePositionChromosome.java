@@ -51,4 +51,17 @@ public class AbsolutePositionChromosome extends Chromosome {
     protected int getIndex(int gate, int flight) {
         return gate * maxNoFlights + flight;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int g = 0; g < noOfGates; g++) {
+            result.append(g + ": ");
+            for (int f = 0; f < maxNoFlights; f++) {
+                result.append(getGene(g,f) + ", ");
+            }
+            result.append("\n");
+        }
+        return result.toString();
+    }
 }
