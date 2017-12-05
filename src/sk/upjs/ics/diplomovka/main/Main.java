@@ -6,6 +6,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.model1.crossovers.RelativePositionCrossover;
 import sk.upjs.ics.diplomovka.model1.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.operators.fitness.TimeDiffFitness;
+import sk.upjs.ics.diplomovka.operators.selection.RouletteWheelSelection;
 import sk.upjs.ics.diplomovka.operators.termination.IterationsTermination;
 
 import java.io.File;
@@ -20,7 +21,7 @@ public class Main {
         FitnessFunctionBase fitnessFunction = new TimeDiffFitness(flights);
         CrossoverBase crossover = new RelativePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
-        SelectionBase selection = null; // TODO
+        SelectionBase selection = new RouletteWheelSelection();
         TerminationBase termination = new IterationsTermination(100);
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
