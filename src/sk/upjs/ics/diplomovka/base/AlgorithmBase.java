@@ -23,11 +23,11 @@ public abstract class AlgorithmBase {
 
     public abstract void evolveOneGeneration();
 
-    public void evolveOneGenerationSimple() {
+    protected void evolveOneGenerationSimple() {
         List<Chromosome> newGeneration = new ArrayList<>();
 
         while (newGeneration.size() < population.getNewGenerationSize()) {
-            List<Chromosome> pair = selection.select(2);
+            List<Chromosome> pair = selection.select(population,2);
             List<Chromosome> children = crossover.doCrossover(pair.get(0), pair.get(1));
             mutation.doMutation(children);
             newGeneration.addAll(children);
