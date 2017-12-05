@@ -53,7 +53,7 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public String toString() {
-        return genes.toString();
+        return "{genes=" + genes.toString() + ", fitness=" + fitness + "}";
     }
 
     @Override
@@ -62,8 +62,8 @@ public class Chromosome implements Comparable<Chromosome> {
             return 0;
 
         if (this.getFitness() < c.getFitness())
-            return 1;
+            return -1; // this object is better, thus earlier in order
 
-        return -1;
+        return 1;
     }
 }
