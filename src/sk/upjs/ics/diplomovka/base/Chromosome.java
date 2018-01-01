@@ -5,7 +5,7 @@ import java.util.List;
 public class Chromosome implements Comparable<Chromosome> {
 
     private List<Integer> genes;
-    private Double fitness = null;
+    private double fitness = -1;
 
     public Chromosome() {
     }
@@ -40,7 +40,7 @@ public class Chromosome implements Comparable<Chromosome> {
         return genes;
     }
 
-    public Double getFitness() {
+    public double getFitness() {
         return fitness;
     }
 
@@ -49,7 +49,7 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public boolean hasFitness() {
-        return fitness != null;
+        return fitness != -1;
     }
 
     public String toString() {
