@@ -27,14 +27,14 @@ public class FullDeparture extends FullFlight {
         this.gate = gate;
     }
 
-    public Flight toFlight(FullDeparture departure) {
+    public static Flight toFlight(FullDeparture departure) {
         Flight flight = new Flight();
 
         flight.setId(FlightId.getId());
         flight.setType(Flight.FlightType.DEPARTURE);
         flight.setStart(departure.getScheduled() - BEFORE_DEPARTURE_SLOT);
         flight.setEnd(departure.getScheduled() - AFTER_DEPARTURE_SLOT);
-        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN);
+        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN); // TODO
         flight.setAircraft(departure.getAircraft());
         flight.setTurnaroundTime(-1); // TODO
 

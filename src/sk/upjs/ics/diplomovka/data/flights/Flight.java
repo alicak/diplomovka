@@ -34,7 +34,13 @@ public class Flight implements Comparable<Flight> {
 
     @Override
     public int compareTo(Flight o) {
-        return 0;
+        if (this.getStart() == o.getStart())
+            return 0;
+
+        if (this.getStart() < o.getStart())
+            return -1; // the earlier, the better
+
+        return 1;
     }
 
     public int getLength() {

@@ -27,14 +27,14 @@ public class FullArrival extends FullFlight {
         this.baggageClaim = baggageClaim;
     }
 
-    public Flight toFlight(FullArrival arrival) {
+    public static Flight toFlight(FullArrival arrival) {
         Flight flight = new Flight();
 
         flight.setId(FlightId.getId());
         flight.setType(Flight.FlightType.ARRIVAL);
         flight.setStart(arrival.getScheduled() - BEFORE_ARRIVAL_SLOT);
         flight.setEnd(arrival.getScheduled() - AFTER_ARRIVAL_SLOT);
-        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN);
+        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN); // TODO
         flight.setAircraft(arrival.getAircraft());
         flight.setTurnaroundTime(-1); // TODO
 
