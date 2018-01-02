@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.data.flights;
 
 public class FullDeparture extends FullFlight {
 
+    // TODO: specific values for every flight
     private static int BEFORE_DEPARTURE_SLOT = 60;
     private static int AFTER_DEPARTURE_SLOT = 0;
 
@@ -27,7 +28,16 @@ public class FullDeparture extends FullFlight {
     }
 
     public Flight toFlight(FullDeparture departure) {
-        // TODO
-        return null;
+        Flight flight = new Flight();
+
+        flight.setId(FlightId.getId());
+        flight.setType(Flight.FlightType.DEPARTURE);
+        flight.setStart(departure.getScheduled() - BEFORE_DEPARTURE_SLOT);
+        flight.setEnd(departure.getScheduled() - AFTER_DEPARTURE_SLOT);
+        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN);
+        flight.setAircraft(departure.getAircraft());
+        flight.setTurnaroundTime(-1); // TODO
+
+        return flight;
     }
 }
