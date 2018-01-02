@@ -1,26 +1,20 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-public class FullFlight {
+public abstract class FullFlight {
 
-    private Flight flight;
+    private int scheduled;
     private int actual;
-    private String gate;
+    private int terminal;
+    private String status;
+    private String flightNo;
+    private Aircraft aircraft;
 
-    public FullFlight() {
+    public int getScheduled() {
+        return scheduled;
     }
 
-    public FullFlight(Flight flight, int actualTime, String gate) {
-        this.flight = flight;
-        this.actual = actualTime;
-        this.gate = gate;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
+    public void setScheduled(int scheduled) {
+        this.scheduled = scheduled;
     }
 
     public int getActual() {
@@ -31,11 +25,35 @@ public class FullFlight {
         this.actual = actual;
     }
 
-    public String getGate() {
-        return gate;
+    public int getTerminal() {
+        return terminal;
     }
 
-    public void setGate(String gate) {
-        this.gate = gate;
+    public void setTerminal(int terminal) {
+        this.terminal = terminal;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFlightNo() {
+        return flightNo;
+    }
+
+    public void setFlightNo(String flightNo) {
+        this.flightNo = flightNo;
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
     }
 }
