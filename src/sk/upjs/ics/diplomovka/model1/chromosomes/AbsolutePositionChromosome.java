@@ -2,6 +2,10 @@ package sk.upjs.ics.diplomovka.model1.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class AbsolutePositionChromosome extends Chromosome {
     private final int noOfGates;
     private int[] noOfFlights; // number of flights per gate
@@ -24,20 +28,20 @@ public class AbsolutePositionChromosome extends Chromosome {
         }
     }
 
-    protected void incrementNoOfFlights(int gate) {
-        noOfFlights[gate]++;
-    }
-
     public int getNoOfFlights(int gate) {
         return noOfFlights[gate];
     }
 
     public void addGene(int gate, int flight, int value) {
         getGenes().add(getIndex(gate, flight), value);
+        noOfFlights[gate]++;
+        resetFitness();
     }
 
     public void removeGene(int gate, int flight) {
         getGenes().remove(getIndex(gate, flight));
+        noOfFlights[gate]--;
+        resetFitness();
     }
 
     public int getMaxNoFlights() {
@@ -52,6 +56,10 @@ public class AbsolutePositionChromosome extends Chromosome {
         return gate * maxNoFlights + flight;
     }
 
+    private void setNoOfFlightsPerGate(int[] noOfFlights) {
+        this.noOfFlights = noOfFlights;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -63,5 +71,16 @@ public class AbsolutePositionChromosome extends Chromosome {
             result.append("\n");
         }
         return result.toString();
+    }
+
+    public AbsolutePositionChromosome copy() {
+        AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, maxNoFlights);
+
+        chromosome.setFitness(getFitness());
+        List<Integer> genes = new ArrayList<>(getGenes());
+        chromosome.setGenes(genes);
+        chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
+
+        return chromosome;
     }
 }

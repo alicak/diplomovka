@@ -24,16 +24,19 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public void setGene(int position, int gene) {
         genes.set(position, gene);
+        resetFitness();
     }
 
     public void setGenes(List<Integer> genes) {
         this.genes = genes;
+        resetFitness();
     }
 
     public void setGenes(int start, int[] genes) {
         for (int i = 0; i < genes.length; i++) {
             setGene(i + start, genes[i]);
         }
+        resetFitness();
     }
 
     public List<Integer> getGenes() {
@@ -50,6 +53,10 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public boolean hasFitness() {
         return fitness != -1;
+    }
+
+    public void resetFitness() {
+        fitness = -1;
     }
 
     public String toString() {
