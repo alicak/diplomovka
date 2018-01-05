@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.model1.chromosomes;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.ChromosomeGenerator;
 import sk.upjs.ics.diplomovka.model1.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -13,9 +11,9 @@ public class AbsolutePositionChromosomeGenerator {
     private int noOfGates;
     private AbsolutePositionMutation mutation;
 
-    public AbsolutePositionChromosomeGenerator(int noOfFlights, int noOfGates) {
-        this.noOfFlights = noOfFlights;
+    public AbsolutePositionChromosomeGenerator(int noOfGates, int noOfFlights) {
         this.noOfGates = noOfGates;
+        this.noOfFlights = noOfFlights;
         this.mutation = new AbsolutePositionMutation(1);
     }
 
