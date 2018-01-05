@@ -9,6 +9,9 @@ public abstract class PopulationBase {
 
     protected int newGenerationSize;
 
+    public PopulationBase(int size) {
+        newGenerationSize = size;
+    }
 
     public PopulationBase(List<Chromosome> generation) {
         this.generation = generation;
@@ -35,7 +38,7 @@ public abstract class PopulationBase {
         return generation.size();
     }
 
-    public abstract void generateRandom();
+    public abstract void generateAndSetRandom();
 
     public int getNewGenerationSize() {
         return newGenerationSize;
