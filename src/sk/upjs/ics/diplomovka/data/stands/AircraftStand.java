@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AircraftStand {
 
+    private int id;
     private double maxWingspan;
     private List<Flight.FlightCategory> flightCategories;
     private AircraftStandType type;
@@ -22,14 +23,16 @@ public class AircraftStand {
         RMT         // Remote parking position
     }
 
-    public AircraftStand(double maxWingspan, Flight.FlightCategory flightCategory, AircraftStandType type) {
+    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, AircraftStandType type) {
+        this.id = id;
         this.maxWingspan = maxWingspan;
         this.type = type;
         this.flightCategories = new ArrayList<>();
         this.flightCategories.add(flightCategory);
     }
 
-    public AircraftStand(double maxWingspan, List<Flight.FlightCategory> flightCategories, AircraftStandType type) {
+    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, AircraftStandType type) {
+        this.id = id;
         this.maxWingspan = maxWingspan;
         this.flightCategories = flightCategories;
         this.type = type;
@@ -55,5 +58,9 @@ public class AircraftStand {
             return false;
         }
         return true;
+    }
+
+    public int getId() {
+        return id;
     }
 }

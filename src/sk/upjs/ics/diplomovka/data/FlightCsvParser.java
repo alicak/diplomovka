@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.data.flights.*;
+import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,9 +13,36 @@ public class FlightCsvParser {
 
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
+    private Map<String, AircraftStand> stands = new HashMap<>();
 
-    public FlightCsvParser(File aircraftFile) throws IOException {
+    public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
         parseAircrafts(aircraftFile);
+        parseStands(standsFile);
+    }
+
+    private void parseStands(File standsFile) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(standsFile));
+        String line = "";
+
+        while ((line = reader.readLine()) != null) {
+            stands.putAll(parseStand(line));
+        }
+    }
+
+    private Map<String, AircraftStand> parseStand(String standString) {
+        String[] standArray = standString.split(SEPARATOR);
+        int id = Integer.parseInt(standArray[0]);
+        double maxWingspan = Integer.parseInt(standArray[2]);
+
+        AircraftStand stand = new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null); // TODO: Schengen & null
+
+        Map<String, AircraftStand> result = new HashMap<>();
+        String[] gateArray = standArray[1].split(", ");
+        for (String gate: gateArray) {
+            result.put(gate, stand);
+        }
+
+        return result;
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {

@@ -34,7 +34,7 @@ public class FullDeparture extends FullFlight {
         flight.setType(Flight.FlightType.DEPARTURE);
         flight.setStart(departure.getScheduled() - BEFORE_DEPARTURE_SLOT);
         flight.setEnd(departure.getScheduled() - AFTER_DEPARTURE_SLOT);
-        flight.setCategory(Flight.FlightCategory.NON_SCHENGEN); // TODO
+        flight.setCategory(Flight.FlightCategory.SCHENGEN); // TODO
         flight.setAircraft(departure.getAircraft());
         flight.setTurnaroundTime(-1); // TODO
 
