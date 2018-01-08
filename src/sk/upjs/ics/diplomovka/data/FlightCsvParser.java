@@ -152,9 +152,6 @@ public class FlightCsvParser {
     }
 
     public int getStandNo(String gate) {
-        if(stands.get(gate) == null) {
-            return 0;
-        }
         return stands.get(gate).getId();
     }
 
