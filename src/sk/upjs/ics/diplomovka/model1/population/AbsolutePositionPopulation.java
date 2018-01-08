@@ -10,15 +10,11 @@ import java.util.List;
 
 public class AbsolutePositionPopulation extends PopulationBase {
 
-    private int noOfGates;
-    private int noOfFlights;
     private AbsolutePositionChromosomeGenerator generator;
     private List<AbsolutePositionChromosome> generation;
 
     public AbsolutePositionPopulation(int size, int noOfGates, int noOfFlights) {
         super(size);
-        this.noOfGates = noOfGates;
-        this.noOfFlights = noOfFlights;
         generator = new AbsolutePositionChromosomeGenerator(noOfGates, noOfFlights);
     }
 

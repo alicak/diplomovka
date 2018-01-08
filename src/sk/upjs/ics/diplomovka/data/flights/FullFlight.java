@@ -5,6 +5,7 @@ public abstract class FullFlight {
     private int scheduled;
     private int actual;
     private int terminal;
+    private String gate;
     private String status;
     private String flightNo;
     private Aircraft aircraft;
@@ -31,6 +32,14 @@ public abstract class FullFlight {
 
     public void setTerminal(int terminal) {
         this.terminal = terminal;
+    }
+
+    public String getGate() {
+        return gate;
+    }
+
+    public void setGate(String gate) {
+        this.gate = gate;
     }
 
     public String getStatus() {

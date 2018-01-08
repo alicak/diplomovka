@@ -31,6 +31,10 @@ public class FlightCsvParser {
 
     private Map<String, AircraftStand> parseStand(String standString) {
         String[] standArray = standString.split(SEPARATOR);
+        for (String s : standArray) {
+            s.trim();
+        }
+
         int id = Integer.parseInt(standArray[0]);
         double maxWingspan = Integer.parseInt(standArray[2]);
 
@@ -57,9 +61,13 @@ public class FlightCsvParser {
 
     private Aircraft parseAircraft(String aircraftString) {
         String[] aircraftArray = aircraftString.split(SEPARATOR);
+        for (String s : aircraftArray) {
+            s.trim();
+        }
+
         String wingspan = aircraftArray[1];
-        wingspan.replace(",", ".");
-        return new Aircraft(aircraftArray[0], Double.parseDouble(wingspan));
+        wingspan = wingspan.replace(",", ".");
+        return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan));
     }
 
     public List<FullArrival> parseArrivals(File arrivalsFile) throws IOException {
@@ -93,6 +101,9 @@ public class FlightCsvParser {
 
     private FullArrival parseArrival(String arrivalString) {
         String[] flightArray = arrivalString.split(SEPARATOR);
+        for (String s : flightArray) {
+            s.trim();
+        }
 
         FullArrival arrival = new FullArrival();
 
@@ -100,16 +111,20 @@ public class FlightCsvParser {
         arrival.setActual(parseTime(flightArray[1]));
         arrival.setFrom(flightArray[2]);
         arrival.setTerminal(Integer.parseInt(flightArray[3]));
-        arrival.setBaggageClaim(Integer.parseInt(flightArray[4]));
-        arrival.setStatus(flightArray[5]);
-        arrival.setFlightNo(flightArray[6]);
-        arrival.setAircraft(aircrafts.get(flightArray[7]));
+        arrival.setGate(flightArray[4]);
+        arrival.setBaggageClaim(Integer.parseInt(flightArray[5]));
+        arrival.setStatus(flightArray[6]);
+        arrival.setFlightNo(flightArray[7]);
+        arrival.setAircraft(aircrafts.get(flightArray[8]));
 
         return arrival;
     }
 
     private FullDeparture parseDeparture(String departureString) {
         String[] flightArray = departureString.split(SEPARATOR);
+        for (String s : flightArray) {
+            s.trim();
+        }
 
         FullDeparture departure = new FullDeparture();
 
@@ -130,6 +145,17 @@ public class FlightCsvParser {
         int hours = Integer.parseInt(timeArray[0]);
         int minutes = Integer.parseInt(timeArray[1]);
         return hours * 60 + minutes;
+    }
+
+    public int getNoOfStands() {
+        return stands.size();
+    }
+
+    public int getStandNo(String gate) {
+        if(stands.get(gate) == null) {
+            return 0;
+        }
+        return stands.get(gate).getId();
     }
 
 }

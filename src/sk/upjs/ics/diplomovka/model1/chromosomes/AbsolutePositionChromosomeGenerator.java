@@ -28,7 +28,7 @@ public class AbsolutePositionChromosomeGenerator {
 
         for (int i = 1 ; i <= noOfFlights ; i++) {
             int gate = Utils.randomInt(0,noOfGates);
-            chromosome.addGene(gate, lastFlightIdx[gate]++, i);
+            chromosome.setGene(gate, lastFlightIdx[gate]++, i);
         }
 
         return chromosome;

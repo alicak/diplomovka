@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chromosome implements Comparable<Chromosome> {
@@ -8,6 +9,7 @@ public class Chromosome implements Comparable<Chromosome> {
     private double fitness = -1;
 
     public Chromosome() {
+        genes = new ArrayList<>();
     }
 
     public Chromosome(List<Integer> genes) {

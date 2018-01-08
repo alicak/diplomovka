@@ -4,9 +4,9 @@ public class FullArrival extends FullFlight {
 
     // TODO: specific values for every flight
     private static int BEFORE_ARRIVAL_SLOT = 30;
-    private static int AFTER_ARRIVAL_SLOT = 30;
+    private static int AFTER_ARRIVAL_SLOT = 10;
 
-    // column structure: Scheduled, Actual, From, Terminal, Baggage claim, Status, Flight No, Aircraft
+    // column structure: Scheduled, Actual, From, Terminal, Gate, Baggage claim, Status, Flight No, Aircraft
 
     private String from;
     private int baggageClaim;
