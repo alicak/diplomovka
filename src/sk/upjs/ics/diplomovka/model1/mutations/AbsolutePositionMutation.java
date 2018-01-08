@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.model1.mutations;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.MutationBase;
+import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
 
 public class AbsolutePositionMutation extends MutationBase {
     private SwapBetweenGatesMutation swapBetweenGatesMutation;
@@ -15,15 +16,19 @@ public class AbsolutePositionMutation extends MutationBase {
         moveBetweenGatesMutation = new MoveBetweenGatesMutation(probability);
     }
 
+    protected AbsolutePositionMutation() {
+    }
+
     @Override
     public void doMutation(Chromosome chromosome) {
+        AbsolutePositionChromosome absCh = (AbsolutePositionChromosome) (chromosome);
         double p = Math.random();
         if (p < 1/3.0) {
-            swapBetweenGatesMutation.doMutation(chromosome);
+            swapBetweenGatesMutation.doAbsoluteMutation(absCh);
         } else if (p < 2/3.0) {
-            swapSuccessiveFlightsMutation.doMutation(chromosome);
+            swapSuccessiveFlightsMutation.doAbsoluteMutation(absCh);
         } else {
-            moveBetweenGatesMutation.doMutation(chromosome);
+            moveBetweenGatesMutation.doAbsoluteMutation(absCh);
         }
     }
 }

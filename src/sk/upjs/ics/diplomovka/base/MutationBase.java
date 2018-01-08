@@ -16,6 +16,10 @@ public abstract class MutationBase {
         this.generator = generator;
     }
 
+    protected MutationBase() {
+
+    }
+
     public double getProbability(){
         return probability;
     }

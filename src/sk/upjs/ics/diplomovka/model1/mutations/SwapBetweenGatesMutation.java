@@ -5,10 +5,10 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
     public SwapBetweenGatesMutation(double probability) {
-        super(probability);
+        this.probability = probability;
     }
 
-    public void doMutation(AbsolutePositionChromosome chromosome) {
+    public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
         if(Math.random() > probability) {
             return;
         }
