@@ -14,6 +14,7 @@ public class FlightCsvParser {
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
     private Map<String, AircraftStand> stands = new HashMap<>();
+    private int noOfStands = 0;
 
     public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
         parseAircrafts(aircraftFile);
@@ -25,6 +26,7 @@ public class FlightCsvParser {
         String line = "";
 
         while ((line = reader.readLine()) != null) {
+            noOfStands++;
             stands.putAll(parseStand(line));
         }
     }
@@ -148,7 +150,7 @@ public class FlightCsvParser {
     }
 
     public int getNoOfStands() {
-        return stands.size();
+        return noOfStands;
     }
 
     public int getStandNo(String gate) {

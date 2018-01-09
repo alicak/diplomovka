@@ -23,7 +23,7 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void setGene(int gate, int flight, int flightValue) {
         setGene(getIndex(gate, flight), flightValue);
-        if (flight > noOfFlights[gate]) {
+        if (flight >= noOfFlights[gate]) {
             noOfFlights[gate]++;
         }
     }

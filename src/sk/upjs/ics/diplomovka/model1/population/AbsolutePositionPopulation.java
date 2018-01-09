@@ -11,23 +11,20 @@ import java.util.List;
 public class AbsolutePositionPopulation extends PopulationBase {
 
     private AbsolutePositionChromosomeGenerator generator;
-    private List<AbsolutePositionChromosome> generation;
 
     public AbsolutePositionPopulation(int size, int noOfGates, int noOfFlights) {
         super(size);
         generator = new AbsolutePositionChromosomeGenerator(noOfGates, noOfFlights);
     }
 
-    public AbsolutePositionPopulation(List<AbsolutePositionChromosome> generation) {
-        super(generation.size());
-        this.generation = generation;
-        AbsolutePositionChromosome firstChromosome = generation.get(0);
-        generator = new AbsolutePositionChromosomeGenerator(firstChromosome.getNoOfGates(), firstChromosome.getMaxNoFlights());
+    public AbsolutePositionPopulation(List<Chromosome> generation, AbsolutePositionChromosomeGenerator generator) {
+        super(generation);
+        this.generator = generator;
     }
 
     @Override
     public void generateAndSetRandom() {
-        List<AbsolutePositionChromosome> generation = new ArrayList<>();
+        List<Chromosome> generation = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
             generation.add(generator.generateChromosome());
         }

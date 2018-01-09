@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class PopulationBase {
 
-    private List<Chromosome> generation;
+    protected List<Chromosome> generation;
 
     protected int newGenerationSize;
 

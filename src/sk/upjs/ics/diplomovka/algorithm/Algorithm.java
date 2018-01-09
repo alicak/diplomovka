@@ -9,37 +9,37 @@ import java.util.List;
 
 public class Algorithm extends AlgorithmBase {
 
-    private static int NUMBER_OF_UNMUTATED;
-    private static final double PORTION_UNMUTATED = 0.1;
-
     public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection, TerminationBase termination) {
         super(population, fitnessFunction, crossover, mutation, selection, termination);
-        NUMBER_OF_UNMUTATED = (int) (population.size() * PORTION_UNMUTATED);
     }
 
     @Override
     public void evolveOneGeneration() {
         int size = population.size();
 
-        for (int i = 0; i < size / 2; i++) {
+        List<Chromosome> offspring = new ArrayList<>();
+        while(offspring.size() < size) {
             int c1 = Utils.randomInt(size);
             int c2 = Utils.randomInt(size);
-            crossover.doCrossover(population.get(c1), population.get(c2));
-            //population.add(newPair.getFirst());
-            //population.add(newPair.getSecond());
+            offspring.addAll(crossover.doCrossover(population.get(c1), population.get(c2)));
         }
 
-        Collections.sort(population.get());
-
-        for (int i = NUMBER_OF_UNMUTATED - 1; i < population.size(); i++) {
-            mutation.doMutation(population.get(i));
+        for (Chromosome c: offspring) {
+            mutation.doMutation(c);
         }
 
-        List<Chromosome> newPopulation = new ArrayList<>();
+        for(Chromosome c: population.get()) {
+            mutation.doMutation(c);
+        }
+
+        offspring.addAll(population.get());
+        Collections.sort(offspring);
+
+        List<Chromosome> newGeneration = new ArrayList<>();
         for (int c = 0; c < size; c++) {
-            newPopulation.add(population.get(c));
+            newGeneration.add(offspring.get(c));
         }
 
-        population.set(newPopulation);
+        population.set(newGeneration);
     }
 }

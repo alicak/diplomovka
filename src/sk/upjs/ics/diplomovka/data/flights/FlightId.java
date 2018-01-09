@@ -6,4 +6,7 @@ public class FlightId {
     public static int getId() {
         return ++id;
     }
+    public static void reset() {
+        id = 0;
+    }
 }

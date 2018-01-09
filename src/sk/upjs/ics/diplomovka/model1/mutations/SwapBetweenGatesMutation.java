@@ -16,6 +16,10 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         int gate1 = Utils.randomInt(chromosome.getNoOfGates());
         int gate2 = Utils.randomInt(chromosome.getNoOfGates());
 
+        if(chromosome.getNoOfFlights(gate1) == 0 || chromosome.getNoOfFlights(gate2) == 0) {
+            return;
+        }
+
         int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate1));
         int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights(gate2);
 
