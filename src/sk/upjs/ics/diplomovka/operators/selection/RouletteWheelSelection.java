@@ -11,11 +11,11 @@ import java.util.List;
 public class RouletteWheelSelection extends SelectionBase {
 
     @Override
-    public List<Chromosome> select(PopulationBase population, int numberOfChromosomes) {
+    public List<Chromosome> select(List<Chromosome> generation, int numberOfChromosomes) {
         List<Chromosome> selected = new ArrayList<>();
 
         for (int i = 0; i < numberOfChromosomes; i++) {
-            selected.add(select(population));
+            selected.add(select(generation));
         }
 
         return selected;
@@ -23,11 +23,11 @@ public class RouletteWheelSelection extends SelectionBase {
 
 
     @Override
-    public Chromosome select(PopulationBase population) {
-        double r = Math.random() * sumOfFitnesses(population);
+    public Chromosome select(List<Chromosome> generation) {
+        double r = Math.random() * sumOfFitnesses(generation);
         double current = 0;
 
-        for (Chromosome c : population.get()) {
+        for (Chromosome c : generation) {
             current += c.getFitness();
             if(r <= current)
                 return c;
@@ -36,9 +36,9 @@ public class RouletteWheelSelection extends SelectionBase {
         throw new IllegalStateException("roulette wheel has to choose something.");
     }
 
-    private double sumOfFitnesses(PopulationBase population) {
+    private double sumOfFitnesses(List<Chromosome> generation) {
         double result = 0;
-        for (Chromosome chromosome : population.get()) {
+        for (Chromosome chromosome : generation) {
             result += chromosome.getFitness();
         }
         return result;

@@ -33,12 +33,10 @@ public class Algorithm extends AlgorithmBase {
         }
 
         offspring.addAll(population.get());
+        calculateAndSetFitness(offspring);
         Collections.sort(offspring);
 
-        List<Chromosome> newGeneration = new ArrayList<>();
-        for (int c = 0; c < size; c++) {
-            newGeneration.add(offspring.get(c));
-        }
+        List<Chromosome> newGeneration = selection.select(offspring, size);
 
         population.set(newGeneration);
     }

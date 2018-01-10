@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class SelectionBase {
 
-    public abstract List<Chromosome> select(PopulationBase population, int numberOfChromosomes);
+    public abstract List<Chromosome> select(List<Chromosome> generation, int numberOfChromosomes);
 
-    public abstract Chromosome select(PopulationBase population);
+    public abstract Chromosome select(List<Chromosome> generation);
 }

@@ -27,7 +27,7 @@ public abstract class AlgorithmBase {
         List<Chromosome> newGeneration = new ArrayList<>();
 
         while (newGeneration.size() < population.getNewGenerationSize()) {
-            List<Chromosome> pair = selection.select(population,2);
+            List<Chromosome> pair = selection.select(population.get(),2);
             List<Chromosome> children = crossover.doCrossover(pair.get(0), pair.get(1));
             mutation.doMutation(children);
             newGeneration.addAll(children);

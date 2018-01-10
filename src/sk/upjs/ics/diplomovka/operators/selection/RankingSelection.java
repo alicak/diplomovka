@@ -10,18 +10,18 @@ import java.util.List;
 
 public class RankingSelection extends SelectionBase {
     @Override
-    public List<Chromosome> select(PopulationBase population, int numberOfChromosomes) {
-        Collections.sort(population.get());
+    public List<Chromosome> select(List<Chromosome> generation, int numberOfChromosomes) {
+        Collections.sort(generation);
         List<Chromosome> result = new ArrayList<>();
         for (int c = 0; c < numberOfChromosomes; c++) {
-            result.add(population.get(c));
+            result.add(generation.get(c));
         }
         return result;
     }
 
     @Override
-    public Chromosome select(PopulationBase population) { // returns only the best chromosome
-        Collections.sort(population.get());
-        return population.get(0);
+    public Chromosome select(List<Chromosome> generation) { // returns only the best chromosome
+        Collections.sort(generation);
+        return generation.get(0);
     }
 }
