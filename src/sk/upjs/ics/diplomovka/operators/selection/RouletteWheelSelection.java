@@ -33,7 +33,7 @@ public class RouletteWheelSelection extends SelectionBase {
                 return c;
         }
 
-        return null; // this should never happen
+        throw new IllegalStateException("roulette wheel has to choose something.");
     }
 
     private double sumOfFitnesses(PopulationBase population) {
