@@ -4,7 +4,7 @@ public class FlightId {
     private static int id = 0;
 
     public static int getId() {
-        return ++id;
+        return id++;
     }
     public static void reset() {
         id = 0;

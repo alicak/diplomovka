@@ -11,6 +11,6 @@ public class IterationsTermination extends TerminationBase {
 
     @Override
     public boolean isTerminated() {
-        return noOfIterations < maxNoOfIterations;
+        return noOfIterations >= maxNoOfIterations;
     }
 }

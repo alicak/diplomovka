@@ -23,7 +23,7 @@ public class MoveBetweenGatesMutation extends AbsolutePositionMutation {
 
         // remove flight, move next flights and add zero to the end
         chromosome.removeGene(gate1, flightIdx1);
-        chromosome.addGene(gate1, chromosome.getNoOfFlights(gate1), 0);
+        chromosome.addGene(gate1, chromosome.getNoOfFlights(gate1), AbsolutePositionChromosome.EMPTY_GENE);
 
         chromosome.setGene(gate2, flightIdx2, flight);
     }

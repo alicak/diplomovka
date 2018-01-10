@@ -41,7 +41,7 @@ public class Main {
         CrossoverBase crossover = new RelativePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RouletteWheelSelection();
-        TerminationBase termination = new IterationsTermination(100);
+        TerminationBase termination = new IterationsTermination(1);
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
         PopulationBase finalPopulation = algorithm.evolve();
@@ -103,7 +103,7 @@ public class Main {
 
         AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(noOfStands, noOfFlights);
         Integer[] genesArray = new Integer[noOfStands * noOfFlights];
-        Arrays.fill(genesArray, 0);
+        Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));
 
         List<FlightWithGate> flights = new ArrayList<>();

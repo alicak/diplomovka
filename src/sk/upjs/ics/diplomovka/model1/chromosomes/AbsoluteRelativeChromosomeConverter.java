@@ -11,21 +11,21 @@ public class AbsoluteRelativeChromosomeConverter {
         int maxNoFlights = absChromosome.getMaxNoFlights();
         RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
 
-        Integer[] genesArray = new Integer[maxNoFlights*maxNoFlights + maxNoFlights];
+        Integer[] genesArray = new Integer[maxNoFlights*maxNoFlights+ + maxNoFlights];
         Arrays.fill(genesArray, 0);
         List<Integer> genesList = Arrays.asList(genesArray);
         chromosome.setGenes(genesList);
 
         for (int g = 0; g < noOfGates; g++) {
-            int flightNo = absChromosome.getGene(g,1);
+            int flightNo = absChromosome.getGene(g,0);
             chromosome.setGene(flightNo,flightNo,1);
-            chromosome.setGene(maxNoFlights+1, flightNo, g);
+            chromosome.setGene(maxNoFlights, flightNo, g+1); // we number gates starting with 1
 
             for (int f = 0; f < absChromosome.getNoOfFlights(g) - 1; f++) {
                 int flight1 = absChromosome.getGene(g, f);
                 int flight2 = absChromosome.getGene(g, f+1);
                 chromosome.setGene(flight1, flight2,1);
-                chromosome.setGene(maxNoFlights+1, flight2, g);
+                chromosome.setGene(maxNoFlights, flight2, g+1);
             }
         }
 
@@ -38,7 +38,7 @@ public class AbsoluteRelativeChromosomeConverter {
         AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, noOfFlights);
 
         Integer[] genesArray = new Integer[noOfGates * noOfFlights];
-        Arrays.fill(genesArray, 0);
+        Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         List<Integer> genesList = Arrays.asList(genesArray);
 
         List<List<Integer>> flightsForGates = new ArrayList<>();
@@ -52,7 +52,7 @@ public class AbsoluteRelativeChromosomeConverter {
 
         // populate list for each gate
         for (int f = 0; f < noOfFlights; f++) {
-            int nextGate = relChromosome.getGene(noOfFlights + 1, f);
+            int nextGate = relChromosome.getGene(noOfFlights + 1, f) - 1;
             if (relChromosome.getGene(f, f) == 1) { // find first flight for gate
                 firstFlights[nextGate] = f;
             } else {
@@ -63,7 +63,7 @@ public class AbsoluteRelativeChromosomeConverter {
         for (int g = 0; g < noOfGates; g++) {
 
             int currentFlight = firstFlights[g];
-            int gate = relChromosome.getGene(currentFlight, noOfFlights + 1);
+            int gate = relChromosome.getGene(noOfFlights, currentFlight) - 1;
             int noOfFlightsOnGate = flightsForGates.get(gate).size();
 
             // loop through flight rank in queue

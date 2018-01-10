@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AbsolutePositionChromosome extends Chromosome {
+    public static int EMPTY_GENE = -1;
+
     private final int noOfGates;
     private int[] noOfFlights; // number of flights per gate
     private final int maxNoFlights;
@@ -23,7 +25,7 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void setGene(int gate, int flight, int flightValue) {
         setGene(getIndex(gate, flight), flightValue);
-        if (flight >= noOfFlights[gate]) {
+        if (flightValue != EMPTY_GENE && flight >= noOfFlights[gate]) {
             noOfFlights[gate]++;
         }
     }
@@ -34,13 +36,17 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void addGene(int gate, int flight, int value) {
         getGenes().add(getIndex(gate, flight), value);
-        noOfFlights[gate]++;
+        if(value != EMPTY_GENE) {
+            noOfFlights[gate]++;
+        }
         resetFitness();
     }
 
     public void removeGene(int gate, int flight) {
-        getGenes().remove(getIndex(gate, flight));
-        noOfFlights[gate]--;
+        int value = getGenes().remove(getIndex(gate, flight));
+        if(value != EMPTY_GENE) {
+            noOfFlights[gate]--;
+        }
         resetFitness();
     }
 

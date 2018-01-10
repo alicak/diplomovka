@@ -21,13 +21,13 @@ public class AbsolutePositionChromosomeGenerator {
         AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, noOfFlights);
 
         Integer[] genesArray = new Integer[noOfGates * noOfFlights];
-        Arrays.fill(genesArray, 0);
+        Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         chromosome.setGenes(Arrays.asList(genesArray));
 
         int[] lastFlightIdx = new int[noOfGates];
 
-        for (int i = 1 ; i <= noOfFlights ; i++) {
-            int gate = Utils.randomInt(0,noOfGates);
+        for (int i = 0; i < noOfFlights; i++) {
+            int gate = Utils.randomInt(0, noOfGates);
             chromosome.setGene(gate, lastFlightIdx[gate]++, i);
         }
 
