@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.model1.crossovers;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.model1.chromosomes.AbsoluteRelativeChromosomeConverter;
 import sk.upjs.ics.diplomovka.model1.chromosomes.RelativePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
@@ -94,7 +94,7 @@ public class RelativePositionCrossover extends CrossoverBase {
 //                    result.setGene(i, i, chromosome2.getGene(i, i));
 //                }
 
-                if(chromosome1.getGene(i, i) == 1 || chromosome2.getGene(i, i) == 1) {
+                if (chromosome1.getGene(i, i) == 1 || chromosome2.getGene(i, i) == 1) {
                     result.setGene(i, i, 1);
                     gatesWithoutStart.remove(result.getGate(i)); // we assigned first dwelling
                 }

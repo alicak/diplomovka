@@ -27,7 +27,7 @@ public class MultiplePointCrossover extends CrossoverBase {
     }
 
     public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2, List<Integer> positions) {
-        if(Math.random() > probability) {
+        if (Math.random() > probability) {
             return null;
         }
 

@@ -27,7 +27,7 @@ public class RouletteWheelSelection extends SelectionBase {
 
         for (Chromosome c : generation) {
             current += c.getFitness();
-            if(r <= current)
+            if (r <= current)
                 return c;
         }
 

@@ -20,7 +20,8 @@ public class Flight implements Comparable<Flight> {
         NON_SCHENGEN
     }
 
-    public Flight() { }
+    public Flight() {
+    }
 
     public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft, int turnaroundTime) {
         this.id = id;

@@ -27,7 +27,7 @@ public abstract class AlgorithmBase {
         List<Chromosome> newGeneration = new ArrayList<>();
 
         while (newGeneration.size() < population.getNewGenerationSize()) {
-            List<Chromosome> pair = selection.select(population.get(),2);
+            List<Chromosome> pair = selection.select(population.get(), 2);
             List<Chromosome> children = crossover.doCrossover(pair.get(0), pair.get(1));
             mutation.doMutation(children);
             newGeneration.addAll(children);
@@ -38,15 +38,15 @@ public abstract class AlgorithmBase {
     }
 
     protected void calculateAndSetFitness(List<Chromosome> chromosomes) {
-        for(Chromosome chromosome : chromosomes) {
-            if(!chromosome.hasFitness()) {
+        for (Chromosome chromosome : chromosomes) {
+            if (!chromosome.hasFitness()) {
                 chromosome.setFitness(fitnessFunction.calculateFitness(chromosome));
             }
         }
     }
 
     public PopulationBase evolve() {
-        while (!termination.isTerminated()){
+        while (!termination.isTerminated()) {
             evolveOneGeneration();
             termination.onStepPerformed();
         }

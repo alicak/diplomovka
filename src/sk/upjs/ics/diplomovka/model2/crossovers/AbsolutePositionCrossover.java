@@ -1,9 +1,9 @@
 package sk.upjs.ics.diplomovka.model2.crossovers;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
+import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.Arrays;

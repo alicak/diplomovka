@@ -37,8 +37,8 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public void removeFlight(int gate, int flight) {
-        for(int f = flight; f < noOfFlights[gate]; f++) {
-            setGene(gate, f, getGene(gate, f+1));
+        for (int f = flight; f < noOfFlights[gate]; f++) {
+            setGene(gate, f, getGene(gate, f + 1));
         }
         noOfFlights[gate]--;
         resetFitness();
@@ -59,11 +59,11 @@ public class AbsolutePositionChromosome extends Chromosome {
     public FlightPosition findPosition(int flightValue) {
         for (int g = 0; g < noOfGates; g++) {
             for (int f = 0; f < noOfFlights[g]; f++) {
-                if(getGene(g,f) == flightValue)
-                    return new FlightPosition(g,f);
+                if (getGene(g, f) == flightValue)
+                    return new FlightPosition(g, f);
             }
         }
-        return new FlightPosition(-1,-1);
+        return new FlightPosition(-1, -1);
     }
 
     protected int getIndex(int gate, int flight) {
@@ -80,7 +80,7 @@ public class AbsolutePositionChromosome extends Chromosome {
         for (int g = 0; g < noOfGates; g++) {
             result.append(g + ": ");
             for (int f = 0; f < maxNoFlights; f++) {
-                result.append(getGene(g,f) + ", ");
+                result.append(getGene(g, f) + ", ");
             }
             result.append("\n");
         }

@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.population;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.PopulationBase;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,14 +9,14 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
     }
 
     public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
-        if(Math.random() > probability) {
+        if (Math.random() > probability) {
             return;
         }
 
         int gate1 = Utils.randomInt(chromosome.getNoOfGates());
         int gate2 = Utils.randomInt(chromosome.getNoOfGates());
 
-        if(chromosome.getNoOfFlights(gate1) == 0 || chromosome.getNoOfFlights(gate2) == 0) {
+        if (chromosome.getNoOfFlights(gate1) == 0 || chromosome.getNoOfFlights(gate2) == 0) {
             return;
         }
 

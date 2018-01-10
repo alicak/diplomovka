@@ -1,9 +1,15 @@
 package sk.upjs.ics.diplomovka.data;
 
-import sk.upjs.ics.diplomovka.data.flights.*;
+import sk.upjs.ics.diplomovka.data.flights.Aircraft;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.FullArrival;
+import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
 import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +50,7 @@ public class FlightCsvParser {
 
         Map<String, AircraftStand> result = new HashMap<>();
         String[] gateArray = standArray[1].split(", ");
-        for (String gate: gateArray) {
+        for (String gate : gateArray) {
             result.put(gate, stand);
         }
 

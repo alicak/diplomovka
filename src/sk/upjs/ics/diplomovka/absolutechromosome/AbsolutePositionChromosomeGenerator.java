@@ -1,6 +1,5 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -25,7 +24,7 @@ public class AbsolutePositionChromosomeGenerator {
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         chromosome.setGenes(Arrays.asList(genesArray));
 
-        for (int i = 0 ; i < noOfFlights ; i++) {
+        for (int i = 0; i < noOfFlights; i++) {
             int gate = Utils.randomInt(noOfGates);
             chromosome.addNextFlight(gate, i);
         }

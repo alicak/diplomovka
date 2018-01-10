@@ -8,13 +8,13 @@ public class TimeTermination extends TerminationBase {
     private long start;
 
     public TimeTermination(int secondsToRun) {
-        this.start = System.currentTimeMillis()/1000;
+        this.start = System.currentTimeMillis() / 1000;
         this.secondsToRun = secondsToRun;
     }
 
     @Override
     public boolean isTerminated() {
-        return System.currentTimeMillis()/1000 - start < secondsToRun;
+        return System.currentTimeMillis() / 1000 - start < secondsToRun;
     }
 
 

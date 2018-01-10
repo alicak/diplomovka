@@ -1,9 +1,9 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.fitness;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
 
         for (int i = 0; i < flights.size(); i++) {
             int diff = actualStarts[i] - flights.get(i).getStart();
-            if(diff > 0) {
+            if (diff > 0) {
                 fitness += diff;
             }
         }

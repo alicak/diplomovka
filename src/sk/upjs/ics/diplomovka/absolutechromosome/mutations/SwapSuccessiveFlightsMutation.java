@@ -3,20 +3,19 @@ package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation
-{
+public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation {
     public SwapSuccessiveFlightsMutation(double probability) {
         this.probability = probability;
     }
 
     public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
-        if(Math.random() > probability) {
+        if (Math.random() > probability) {
             return;
         }
 
         int gate = Utils.randomInt(chromosome.getNoOfGates());
 
-        if(chromosome.getNoOfFlights(gate) <= 1) {
+        if (chromosome.getNoOfFlights(gate) <= 1) {
             return;
         }
 

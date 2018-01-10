@@ -7,7 +7,7 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnePointCrossover extends CrossoverBase{
+public class OnePointCrossover extends CrossoverBase {
     public OnePointCrossover(double probability) {
         super(probability);
     }
@@ -20,7 +20,7 @@ public class OnePointCrossover extends CrossoverBase{
     }
 
     public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2, int position, int length) {
-        if(Math.random() > probability) {
+        if (Math.random() > probability) {
             return null;
         }
 

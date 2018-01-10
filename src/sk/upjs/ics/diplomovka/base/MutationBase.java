@@ -20,7 +20,7 @@ public abstract class MutationBase {
 
     }
 
-    public double getProbability(){
+    public double getProbability() {
         return probability;
     }
 
@@ -31,7 +31,7 @@ public abstract class MutationBase {
     public abstract void doMutation(Chromosome chromosome);
 
     public void doMutation(List<Chromosome> chromosomes) {
-        for(Chromosome chromosome : chromosomes)
+        for (Chromosome chromosome : chromosomes)
             doMutation(chromosome);
     }
 }

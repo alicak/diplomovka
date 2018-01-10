@@ -18,17 +18,17 @@ public class Algorithm extends AlgorithmBase {
         int size = population.size();
 
         List<Chromosome> offspring = new ArrayList<>();
-        while(offspring.size() < size) {
+        while (offspring.size() < size) {
             int c1 = Utils.randomInt(size);
             int c2 = Utils.randomInt(size);
             offspring.addAll(crossover.doCrossover(population.get(c1), population.get(c2)));
         }
 
-        for (Chromosome c: offspring) {
+        for (Chromosome c : offspring) {
             mutation.doMutation(c);
         }
 
-        for(Chromosome c: population.get()) {
+        for (Chromosome c : population.get()) {
             mutation.doMutation(c);
         }
 

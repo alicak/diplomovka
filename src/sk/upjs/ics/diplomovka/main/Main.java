@@ -1,14 +1,17 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.algorithm.Algorithm;
-import sk.upjs.ics.diplomovka.base.*;
-import sk.upjs.ics.diplomovka.data.FlightCsvParser;
-import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.algorithm.Algorithm;
+import sk.upjs.ics.diplomovka.base.*;
+import sk.upjs.ics.diplomovka.data.FlightCsvParser;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.FlightId;
+import sk.upjs.ics.diplomovka.data.flights.FullArrival;
+import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -66,7 +69,7 @@ public class Main {
             flights.add(FullArrival.toFlight(a));
         }
 
-        for (FullDeparture d: departuresFull) {
+        for (FullDeparture d : departuresFull) {
             flights.add(FullDeparture.toFlight(d));
         }
 
@@ -80,12 +83,12 @@ public class Main {
 
         // first half are random assignments
         List<Chromosome> generation = new ArrayList<>();
-        for (int i = 0; i < generationSize/2; i++) {
+        for (int i = 0; i < generationSize / 2; i++) {
             generation.add(generator.generateChromosome());
         }
 
         // second half are mutations of original assignment
-        for (int i = generationSize/2; i < generationSize; i++) {
+        for (int i = generationSize / 2; i < generationSize; i++) {
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
 
@@ -112,14 +115,14 @@ public class Main {
             flights.add(new FlightWithGate(f, a.getGate()));
         }
 
-        for (FullDeparture d: departuresFull) {
+        for (FullDeparture d : departuresFull) {
             Flight f = FullDeparture.toFlight(d);
             flights.add(new FlightWithGate(f, d.getGate()));
         }
 
         Collections.sort(flights);
 
-        for (FlightWithGate f: flights) {
+        for (FlightWithGate f : flights) {
             int standNo = parser.getStandNo(f.gate);
             originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), f.flight.getId());
         }
