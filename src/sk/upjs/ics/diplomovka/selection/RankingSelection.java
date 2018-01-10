@@ -1,7 +1,6 @@
-package sk.upjs.ics.diplomovka.operators.selection;
+package sk.upjs.ics.diplomovka.selection;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.PopulationBase;
 import sk.upjs.ics.diplomovka.base.SelectionBase;
 
 import java.util.ArrayList;

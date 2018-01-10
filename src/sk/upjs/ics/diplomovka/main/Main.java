@@ -10,8 +10,8 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
-import sk.upjs.ics.diplomovka.operators.selection.RankingSelection;
-import sk.upjs.ics.diplomovka.operators.termination.IterationsTermination;
+import sk.upjs.ics.diplomovka.selection.RankingSelection;
+import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
 import java.io.IOException;

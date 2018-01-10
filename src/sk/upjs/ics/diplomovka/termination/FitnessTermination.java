@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.operators.termination;
+package sk.upjs.ics.diplomovka.termination;
 
 import sk.upjs.ics.diplomovka.base.PopulationBase;
 import sk.upjs.ics.diplomovka.base.TerminationBase;
