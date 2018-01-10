@@ -1,0 +1,94 @@
+Scheduled;Actual;To;Terminal;Gate;Status;Flight No;Aircraft
+06:00;05:49;Amsterdam;2;C4;on-time;1350;Boeing 737
+06:00;06:00;Bratislava;2;C18;on-time;960;ATR 42
+06:30;06:29;Reykjavik;2;C21;on-time;2723;A320
+06:40;06:42;Brussels;2;C6;on-time;2816;A319
+06:50;06:55;Frankfurt;2;C9;on-time;1403;A320
+06:55;06:57;Brussels;2;D2;on-time;630;Boeing 737-700
+06:55;06:55;Dusseldorf;2;C15;on-time;522;ATR 72
+07:00;07:03;Frankfurt;2;C19;on-time;534;ATR 72
+07:00;07:05;Amsterdam;2;C2;on-time;616;A319
+07:05;07:02;Warsaw;2;C14;on-time;776;ATR 42
+07:05;07:01;Rome;2;D3;on-time;8332;Boeing 737-800
+07:10;07:09;Paris;2;C3;on-time;758;A319
+07:20;07:19;Budapest;2;C17;;786;ATR 72
+08:15;08:18;Vienna;2;C13;on-time;704;Embraer 195
+08:50;08:52;Dusseldorf;2;D1;delayed;9773;A320
+08:55;08:58;Amsterdam;2;C19;on-time;1352;Avro RJ70 / RJ85 / RJ100
+09:05;09:03;Warsaw;2;C4;on-time;524;Embraer 175
+09:30;09:25;Munich;2;C12;on-time;1689;Bombardier RJ900
+09:50;09:59;Paris;2;C2;on-time;1383;A321
+10:00;10:11;Geneva;2;C7;on-time;1473;Bombardier CS300
+10:05;10:00;Eindhoven;2;C20;on-time;1827;Boeing 737-800
+10:05;10:15;Zurich;2;C6;on-time;1485;A320
+10:10;10:11;Copenhagen;2;D3;on-time;3581;Boeing 737-800
+10:30;10:32;Frankfurt;2;C9;on-time;1393;A320
+11:15;11:03;Zurich;2;D4;on-time;7979;A320
+11:20;11:20;Vienna;2;C13;on-time;706;Bombardier DHC-8
+11:25;12:29;Helsinki;2;D1;delayed;1222;A321
+11:25;11:25;Barcelona;2;C10;on-time;688;Boeing 737-800
+11:40;11:40;Brussels;2;C6;on-time;2810;A319
+11:50;11:54;Frankfurt;2;C9;on-time;1395;A320
+11:55;11:55;Warsaw;2;C15;on-time;782;ATR 42
+12:00;11:53;Budapest;2;C12;on-time;790;ATR 72
+12:00;12:00;Lanzarote;2;D2;on-time;2040;Boeing 737-800
+12:00;12:02;Oslo;2;C7;on-time;1503;Boeing 737-800
+12:05;12:10;Rome;2;C3;on-time;724;Boeing 737-700
+12:10;12:03;Stavanger;2;D6;on-time;1513;Boeing 737-800
+12:15;12:04;Ostrava;2;C20;on-time;24;ATR 42
+12:15;12:15;Kosice;2;C17;on-time;972;ATR 72
+12:20;12:22;Venice;2;C19;on-time;734;ATR 72
+12:20;12:19;Bologna;2;C14;on-time;730;ATR 72
+12:25;12:27;Paris;2;C2;on-time;760;A319
+12:30;12:21;Milan;2;D5;on-time;2582;A319
+12:45;12:38;Warsaw;2;C4;on-time;528;Embraer 195
+13:00;12:57;Amsterdam;2;C4;on-time;7906;A319
+13:05;12:53;Lyon;2;C18;on-time;4413;Bombardier RJ1000
+13:40;13:49;Munich;2;C11;on-time;1691;A320
+14:20;14:20;Milan;2;C20;on-time;5508;Boeing 737-800
+14:25;14:26;Stockholm;2;D1;on-time;1768;Boeing 737-700
+14:30;14:36;Amsterdam;2;C4;on-time;1356;Boeing 737
+14:40;15:00;Barcelona;2;D3;on-time;3040;Boeing 737-800
+14:45;14:41;Zurich;2;C6;on-time;1487;Fokker 100
+14:50;14:46;Stockholm;2;D6;on-time;4572;Boeing 737-800
+14:55;15:07;Frankfurt;2;C9;on-time;1397;A321
+15:10;15:28;Paris;2;C2;delayed;1083;A321
+15:25;15:25;Vienna;2;C13;on-time;708;Bombardier DHC-8
+15:25;15:28;Barcelona;2;D2;on-time;8659;A320
+15:40;15:36;Rome;2;D4;on-time;6161;A320
+15:45;15:56;Milan;2;C21;on-time;2681;A320
+16:15;16:08;Basel;2;D6;on-time;1218;A319
+16:20;16:15;Eindhoven;2;D5;on-time;5236;Boeing 737-700
+16:30;16:43;Munich;2;C11;on-time;1693;Embraer 195
+16:50;16:50;Warsaw;2;C4;on-time;522;Bombardier DHC-8
+16:55;16:51;Dusseldorf;2;D1;on-time;9775;A320
+17:20;17:29;Budapest;2;C19;on-time;4092;Boeing 737-800
+17:25;17:28;Amsterdam;2;C3;on-time;618;A319
+17:30;17:30;Hamburg;2;C15;on-time;544;ATR 72
+17:35;17:35;Bratislava;2;C14;on-time;966;ATR 42
+17:35;17:42;Paris;2;C2;on-time;766;A319
+17:35;17:40;Dusseldorf;2;C17;on-time;526;ATR 72
+17:35;18:39;Warsaw;2;C16;delayed;778;ATR 72
+17:40;17:43;Brussels;2;D2;on-time;636;A319
+17:50;17:49;Frankfurt;2;C18;on-time;536;ATR 72
+18:00;18:00;Brussels;2;D3;on-time;2122;Boeing 737-800
+18:05;18:33;Brussels;2;C6;delayed;2812;A320
+18:05;18:12;Copenhagen;2;C10;on-time;508;A319
+18:10;18:02;Budapest;2;C7;on-time;798;A319
+18:20;18:33;Amsterdam;2;C20;on-time;1358;Avro RJ70 / RJ85 / RJ100
+18:45;19:33;Frankfurt;2;C9;delayed;1401;A320
+18:50;18:50;Vienna;2;C13;on-time;710;Embraer 195
+19:35;19:48;Helsinki;2;D4;on-time;1224;A321
+19:35;19:55;Riga;2;C19;on-time;484;Bombardier DHC-8
+19:45;19:43;Zurich;2;C6;on-time;1499;A319
+19:50;19:42;Naples;2;D5;on-time;4856;A320
+20:20;20:25;Munich;2;C12;on-time;1695;Bombardier RJ900
+20:25;20:20;Dusseldorf;2;D1;on-time;9771;A319
+20:30;20:55;Paris;2;C2;on-time;1583;A319
+20:45;21:00;Warsaw;2;C4;on-time;526;Bombardier DHC-8
+20:50;20:54;Ljubljana;2;D2;delayed;569;Bombardier RJ700
+21:10;21:14;Barcelona;2;D4;delayed;8657;A320
+21:25;21:15;Milan;2;D5;on-time;2586;A319
+21:30;21:30;Vienna;2;C13;on-time;712;Bombardier DHC-8
+22:00;22:15;Ostrava;2;C14;on-time;20;ATR 42
+22:25;22:28;Kosice;2;C15;on-time;978;ATR 72
