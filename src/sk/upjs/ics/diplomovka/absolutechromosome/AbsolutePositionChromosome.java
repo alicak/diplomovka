@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.model1.chromosomes;
+package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 

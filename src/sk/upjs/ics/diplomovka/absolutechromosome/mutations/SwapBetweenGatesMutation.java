@@ -1,6 +1,6 @@
-package sk.upjs.ics.diplomovka.model1.mutations;
+package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 
-import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class SwapBetweenGatesMutation extends AbsolutePositionMutation {

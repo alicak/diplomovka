@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.model1.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
-import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.model1.chromosomes.AbsoluteRelativeChromosomeConverter;
 import sk.upjs.ics.diplomovka.model1.chromosomes.RelativePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;

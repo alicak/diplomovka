@@ -2,14 +2,14 @@ package sk.upjs.ics.diplomovka.model2.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
-import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
-import sk.upjs.ics.diplomovka.model1.chromosomes.FlightPosition;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome.EMPTY_GENE;
+import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
 
 public class AbsolutePositionCrossover extends CrossoverBase {
     public AbsolutePositionCrossover(double probability) {

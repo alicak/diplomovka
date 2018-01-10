@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.model1.chromosomes;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
