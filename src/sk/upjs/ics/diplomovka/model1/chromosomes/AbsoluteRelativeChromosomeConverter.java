@@ -11,21 +11,21 @@ public class AbsoluteRelativeChromosomeConverter {
         int maxNoFlights = absChromosome.getMaxNoFlights();
         RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
 
-        Integer[] genesArray = new Integer[maxNoFlights*maxNoFlights+ + maxNoFlights];
+        Integer[] genesArray = new Integer[maxNoFlights * maxNoFlights + +maxNoFlights];
         Arrays.fill(genesArray, 0);
         List<Integer> genesList = Arrays.asList(genesArray);
         chromosome.setGenes(genesList);
 
         for (int g = 0; g < noOfGates; g++) {
-            int flightNo = absChromosome.getGene(g,0);
-            chromosome.setGene(flightNo,flightNo,1);
-            chromosome.setGene(maxNoFlights, flightNo, g+1); // we number gates starting with 1
+            int flightNo = absChromosome.getGene(g, 0);
+            chromosome.setGene(flightNo, flightNo, 1);
+            chromosome.setGene(maxNoFlights, flightNo, g + 1); // we number gates starting with 1
 
             for (int f = 0; f < absChromosome.getNoOfFlights(g) - 1; f++) {
                 int flight1 = absChromosome.getGene(g, f);
-                int flight2 = absChromosome.getGene(g, f+1);
-                chromosome.setGene(flight1, flight2,1);
-                chromosome.setGene(maxNoFlights, flight2, g+1);
+                int flight2 = absChromosome.getGene(g, f + 1);
+                chromosome.setGene(flight1, flight2, 1);
+                chromosome.setGene(maxNoFlights, flight2, g + 1);
             }
         }
 
@@ -39,7 +39,7 @@ public class AbsoluteRelativeChromosomeConverter {
 
         Integer[] genesArray = new Integer[noOfGates * noOfFlights];
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
-        List<Integer> genesList = Arrays.asList(genesArray);
+        chromosome.setGenes(Arrays.asList(genesArray));
 
         List<List<Integer>> flightsForGates = new ArrayList<>();
         int[] firstFlights = new int[noOfGates];
@@ -70,18 +70,17 @@ public class AbsoluteRelativeChromosomeConverter {
             for (int f = 0; f < noOfFlightsOnGate; f++) {
 
                 // loop through potential successors
-                for (Integer flightNo: flightsForGates.get(g)) {
+                for (Integer flightNo : flightsForGates.get(g)) {
                     if (flightNo == currentFlight) // don't consider first flight
                         continue;
                     else if (relChromosome.getGene(currentFlight, flightNo) == 1) { // we found the successor
-                        genesList.set(chromosome.getIndex(g, f), flightNo);
+                        chromosome.addNextFlight(g, flightNo);
                         currentFlight = flightNo;
                     }
                 }
             }
         }
 
-        chromosome.setGenes(genesList);
         return chromosome;
     }
 }

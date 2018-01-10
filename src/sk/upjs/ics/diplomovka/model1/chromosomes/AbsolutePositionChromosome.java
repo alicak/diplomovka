@@ -30,24 +30,22 @@ public class AbsolutePositionChromosome extends Chromosome {
         }
     }
 
+    public void addNextFlight(int gate, int flightValue) {
+        setGene(getIndex(gate, noOfFlights[gate]), flightValue);
+        noOfFlights[gate]++;
+        resetFitness();
+    }
+
+    public void removeFlight(int gate, int flight) {
+        for(int f = flight; f < noOfFlights[gate]; f++) {
+            setGene(gate, f, getGene(gate, f+1));
+        }
+        noOfFlights[gate]--;
+        resetFitness();
+    }
+
     public int getNoOfFlights(int gate) {
         return noOfFlights[gate];
-    }
-
-    public void addGene(int gate, int flight, int value) {
-        getGenes().add(getIndex(gate, flight), value);
-        if(value != EMPTY_GENE) {
-            noOfFlights[gate]++;
-        }
-        resetFitness();
-    }
-
-    public void removeGene(int gate, int flight) {
-        int value = getGenes().remove(getIndex(gate, flight));
-        if(value != EMPTY_GENE) {
-            noOfFlights[gate]--;
-        }
-        resetFitness();
     }
 
     public int getMaxNoFlights() {

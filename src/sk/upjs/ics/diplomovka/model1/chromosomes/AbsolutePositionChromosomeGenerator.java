@@ -24,11 +24,9 @@ public class AbsolutePositionChromosomeGenerator {
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         chromosome.setGenes(Arrays.asList(genesArray));
 
-        int[] lastFlightIdx = new int[noOfGates];
-
-        for (int i = 0; i < noOfFlights; i++) {
-            int gate = Utils.randomInt(0, noOfGates);
-            chromosome.setGene(gate, lastFlightIdx[gate]++, i);
+        for (int i = 0 ; i < noOfFlights ; i++) {
+            int gate = Utils.randomInt(noOfGates);
+            chromosome.addNextFlight(gate, i);
         }
 
         return chromosome;
