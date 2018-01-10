@@ -6,11 +6,11 @@ import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosomeGenerator;
-import sk.upjs.ics.diplomovka.model1.crossovers.RelativePositionCrossover;
+import sk.upjs.ics.diplomovka.model1.fitness.AbsoluteTimeDiffFitness;
 import sk.upjs.ics.diplomovka.model1.mutations.AbsolutePositionMutation;
-import sk.upjs.ics.diplomovka.model1.fitness.TimeDiffFitness;
 import sk.upjs.ics.diplomovka.model1.population.AbsolutePositionPopulation;
-import sk.upjs.ics.diplomovka.operators.selection.RouletteWheelSelection;
+import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
+import sk.upjs.ics.diplomovka.operators.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.operators.termination.IterationsTermination;
 
 import java.io.File;
@@ -23,7 +23,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        // TODO: add files to folder
         File aircraftsFile = new File("aircrafts.csv");
         File arrivalsFile = new File("arrivals.csv");
         File departuresFile = new File("departures.csv");
@@ -37,10 +36,10 @@ public class Main {
         AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser);
         PopulationBase population = initialPopulation(generationSize, originalAssignment);
 
-        TimeDiffFitness fitnessFunction = new TimeDiffFitness(flights);
-        CrossoverBase crossover = new RelativePositionCrossover(0.8);
+        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flights);
+        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
-        SelectionBase selection = new RouletteWheelSelection();
+        SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(1);
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);

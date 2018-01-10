@@ -56,6 +56,16 @@ public class AbsolutePositionChromosome extends Chromosome {
         return noOfGates;
     }
 
+    public FlightPosition findPosition(int flightValue) {
+        for (int g = 0; g < noOfGates; g++) {
+            for (int f = 0; f < noOfFlights[g]; f++) {
+                if(getGene(g,f) == flightValue)
+                    return new FlightPosition(g,f);
+            }
+        }
+        return new FlightPosition(-1,-1);
+    }
+
     protected int getIndex(int gate, int flight) {
         return gate * maxNoFlights + flight;
     }

@@ -7,8 +7,8 @@ import sk.upjs.ics.diplomovka.model1.chromosomes.AbsolutePositionChromosome;
 
 import java.util.List;
 
-public class TimeDiffFitness extends FitnessFunctionBase {
-    public TimeDiffFitness(List<Flight> flights) {
+public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
+    public AbsoluteTimeDiffFitness(List<Flight> flights) {
         super(flights);
     }
 
