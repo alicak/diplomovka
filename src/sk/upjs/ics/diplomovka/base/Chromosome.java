@@ -1,5 +1,9 @@
 package sk.upjs.ics.diplomovka.base;
 
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +69,8 @@ public abstract class Chromosome implements Comparable<Chromosome> {
     public abstract void removeFlight(int flight);
 
     public abstract void removeGate(int gate);
+
+    public abstract boolean checkFeasibility(StandsStorage standsStorage, FlightStorage flightStorage);
 
     public String toString() {
         return "{genes=" + genes.toString() + ", fitness=" + fitness + "}";

@@ -1,6 +1,8 @@
 package sk.upjs.ics.diplomovka.model1.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -60,6 +62,11 @@ public class RelativePositionChromosome extends Chromosome {
 
     @Override
     public void removeGate(int gate) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean checkFeasibility(StandsStorage standsStorage, FlightStorage flightStorage) {
         throw new NotImplementedException();
     }
 }

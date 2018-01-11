@@ -1,6 +1,11 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.data.flights.Aircraft;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +82,20 @@ public class AbsolutePositionChromosome extends Chromosome {
         noOfGates--;
     }
 
+    @Override
+    public boolean checkFeasibility(StandsStorage standsStorage, FlightStorage flightStorage) {
+        for (int g = 0; g < noOfGates; g++) {
+            for (int f = 0; f < noOfFlights[g]; f++) {
+                AircraftStand stand = standsStorage.getStandByNumber(g);
+                Flight flight = flightStorage.getFlightById(getGene(g,f));
+                if(!stand.checkFlight(flight)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public int getNoOfFlights(int gate) {
         return noOfFlights[gate];
     }
@@ -96,7 +115,7 @@ public class AbsolutePositionChromosome extends Chromosome {
                     return new FlightPosition(g, f);
             }
         }
-        return new FlightPosition(-1, -1);
+        return new FlightPosition(-1, -1); // flight was not found
     }
 
     protected int getIndex(int gate, int flight) {
