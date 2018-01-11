@@ -12,7 +12,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightId;
 import sk.upjs.ics.diplomovka.data.flights.FullArrival;
 import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -33,13 +33,12 @@ public class Main {
         File standsFile = new File("stands.csv");
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
-        List<AircraftStand> stands = parser.parseStands(standsFile);
-        int[] standIds = initializeStands(stands.size());
+        StandsStorage standsStorage = parser.parseStands(standsFile);
         List<Flight> flights = processFlights(arrivalsFile, departuresFile, parser);
 
         int generationSize = 20; // TODO
 
-        AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser);
+        AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage);
         PopulationBase population = initialPopulation(generationSize, originalAssignment);
 
         AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flights);
@@ -61,15 +60,7 @@ public class Main {
         writer.close();
     }
 
-    private static int[] initializeStands(int noOfStands) {
-        int[] result = new int[noOfStands];
 
-        for (int i = 0; i < noOfStands; i++) {
-            result[i] = i;
-        }
-
-        return result;
-    }
 
     private static List<Flight> processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {
         List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
@@ -108,16 +99,15 @@ public class Main {
         return new AbsolutePositionPopulation(generation, generator);
     }
 
-    private static AbsolutePositionChromosome createOriginalAssignment(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {
+    private static AbsolutePositionChromosome createOriginalAssignment(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
         List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
 
-        int noOfStands = parser.getNoOfStands();
         int noOfFlights = arrivalsFull.size() + departuresFull.size();
 
-        AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(noOfStands, noOfFlights);
-        Integer[] genesArray = new Integer[noOfStands * noOfFlights];
+        AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(standsStorage.getNoOfStands(), noOfFlights);
+        Integer[] genesArray = new Integer[standsStorage.getNoOfStands() * noOfFlights];
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));
 
@@ -136,7 +126,7 @@ public class Main {
         Collections.sort(flights);
 
         for (FlightWithGate f : flights) {
-            int standNo = parser.getStandNo(f.gate);
+            int standNo = standsStorage.getStandNoByGate(f.gate);
             originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), f.flight.getId());
         }
 

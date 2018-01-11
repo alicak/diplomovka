@@ -5,6 +5,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FullArrival;
 import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
 import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,16 +17,17 @@ public class FlightCsvParser {
 
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
-    private Map<String, AircraftStand> gatesToStands = new HashMap<>();
-    private List<AircraftStand> stands = new ArrayList<>();
 
     public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
         parseAircrafts(aircraftFile);
     }
 
-    public List<AircraftStand> parseStands(File standsFile) throws IOException {
+    public StandsStorage parseStands(File standsFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(standsFile));
         String line = "";
+
+        List<AircraftStand> stands = new ArrayList<>();
+        Map<String, AircraftStand> gatesToStands = new HashMap<>();
 
         while ((line = reader.readLine()) != null) {
             AircraftStand stand = parseStand(line);
@@ -35,7 +37,7 @@ public class FlightCsvParser {
             }
         }
 
-        return stands;
+        return new StandsStorage(stands, initializeStands(stands.size()), gatesToStands);
     }
 
     private AircraftStand parseStand(String standString) {
@@ -49,6 +51,16 @@ public class FlightCsvParser {
         String[] gateArray = standArray[1].split(", ");
 
         return new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null, Arrays.asList(gateArray)); // TODO: Schengen & null
+    }
+
+    private int[] initializeStands(int noOfStands) {
+        int[] result = new int[noOfStands];
+
+        for (int i = 0; i < noOfStands; i++) {
+            result[i] = i;
+        }
+
+        return result;
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {
@@ -147,13 +159,5 @@ public class FlightCsvParser {
         int hours = Integer.parseInt(timeArray[0]);
         int minutes = Integer.parseInt(timeArray[1]);
         return hours * 60 + minutes;
-    }
-
-    public int getNoOfStands() {
-        return stands.size();
-    }
-
-    public int getStandNo(String gate) {
-        return gatesToStands.get(gate).getId();
     }
 }
