@@ -35,7 +35,7 @@ public class Main {
         AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage);
         PopulationBase population = initialPopulation(generationSize, originalAssignment);
 
-        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage.getFlights());
+        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
         CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RankingSelection();

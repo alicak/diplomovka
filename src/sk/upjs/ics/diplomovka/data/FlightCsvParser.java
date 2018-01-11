@@ -47,7 +47,9 @@ public class FlightCsvParser {
         }
 
         int id = Integer.parseInt(standArray[0]);
-        double maxWingspan = Integer.parseInt(standArray[2]);
+        String wingspan = standArray[2];
+        wingspan = wingspan.replace(",", ".");
+        double maxWingspan = Double.parseDouble(wingspan);
         String[] gateArray = standArray[1].split(", ");
 
         return new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null, Arrays.asList(gateArray)); // TODO: Schengen & null
