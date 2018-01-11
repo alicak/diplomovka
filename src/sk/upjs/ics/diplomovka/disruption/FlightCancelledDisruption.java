@@ -1,22 +1,20 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-
-import java.util.List;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public class FlightCancelledDisruption implements Disruption {
     private int flight;
-    private List<Flight> flights;
+    private FlightStorage flightStorage;
 
-    public FlightCancelledDisruption(int flight, List<Flight> flights) {
+    public FlightCancelledDisruption(int flight, FlightStorage flightStorage) {
         this.flight = flight;
-        this.flights = flights;
+        this.flightStorage = flightStorage;
     }
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
-        flights.remove(flight);
+        flightStorage.removeFlight(flight);
         chromosome.removeFlight(flight);
     }
 }

@@ -1,18 +1,19 @@
 package sk.upjs.ics.diplomovka.data.stands;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 
 public class StandsStorage {
 
-    private List<AircraftStand> stands; // TODO: we assume stands are numbered from 0
+    private Map<Integer, AircraftStand> stands;
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
+    public static final int FORBIDDEN_STAND = -1;
 
-    public StandsStorage(List<AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands) {
+    public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
-        this.standsIds = standsIds;
         this.gatesToStands = gatesToStands;
+        initializeStands(stands);
     }
 
     public AircraftStand getStandById(int id) {
@@ -27,12 +28,40 @@ public class StandsStorage {
         return gatesToStands.get(gate);
     }
 
-    public int getStandNoByGate(String gate) {
-        return stands.indexOf(getStandByGate(gate));
+    public int getStandIdByGate(String gate) {
+        return getStandByGate(gate).getId();
     }
 
+    public void removeStand(int standId) {
+        stands.remove(standId);
+        int length = standsIds.length;
+
+        for (int i = 0; i < length; i++) {
+            if (standsIds[i] == standId) {
+
+                for (int j = i; j < length - 1; j++) {
+                    standsIds[j] = standsIds[j + 1];
+                }
+
+                standsIds[length - 1] = FORBIDDEN_STAND;
+                standsIds = Arrays.copyOf(standsIds, length - 1);
+                return;
+            }
+        }
+    }
 
     public int getNoOfStands() {
         return stands.size();
+    }
+
+    private int[] initializeStands(Map<Integer, AircraftStand> stands) {
+        standsIds = new int[stands.size()];
+
+        int i = 0;
+        for (Map.Entry<Integer, AircraftStand> entry : stands.entrySet()) {
+            standsIds[i++] = entry.getKey();
+        }
+
+        return standsIds;
     }
 }

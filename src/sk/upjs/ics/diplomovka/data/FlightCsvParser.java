@@ -26,18 +26,18 @@ public class FlightCsvParser {
         BufferedReader reader = new BufferedReader(new FileReader(standsFile));
         String line = "";
 
-        List<AircraftStand> stands = new ArrayList<>();
+        Map<Integer, AircraftStand> stands = new HashMap<>();
         Map<String, AircraftStand> gatesToStands = new HashMap<>();
 
         while ((line = reader.readLine()) != null) {
             AircraftStand stand = parseStand(line);
-            stands.add(stand);
+            stands.put(stand.getId(), stand);
             for (String gate : stand.getGates()) {
                 gatesToStands.put(gate, stand);
             }
         }
 
-        return new StandsStorage(stands, initializeStands(stands.size()), gatesToStands);
+        return new StandsStorage(stands, gatesToStands);
     }
 
     private AircraftStand parseStand(String standString) {
@@ -53,16 +53,6 @@ public class FlightCsvParser {
         String[] gateArray = standArray[1].split(", ");
 
         return new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null, Arrays.asList(gateArray)); // TODO: Schengen & null
-    }
-
-    private int[] initializeStands(int noOfStands) {
-        int[] result = new int[noOfStands];
-
-        for (int i = 0; i < noOfStands; i++) {
-            result[i] = i;
-        }
-
-        return result;
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {
