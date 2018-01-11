@@ -1,1 +1,24 @@
-A319;35,8;35,8A320;35,8;35,8A321;35,8;35,8A330;60,3;60,3A380;80;80ATR 42 / ATR 72;27;25/27ATR 42-300 / 320;25;25ATR 72;27;27Avro RJ70 / RJ85 / RJ100;26,34;26,34Boeing 737 Freighter;34,32;Boeing 737 Passenger;34,32;Boeing 737-500;28,88;28,88Boeing 737-700;34,32;34,32Boeing 737-800;34,32;34,32Boeing 737-900;34,32;34,32Boeing 777-200 / 200ER;60,93;60,93Bombardier CS300;35,1;35,1Canadair (Bombardier) Regional Jet 1000;26,2;26,2Canadair (Bombardier) Regional Jet 700 and Challenger 870;23,2;23,2Canadair (Bombardier) Regional Jet 900 and Challenger 890;24,9;24,9De Havilland (Bombardier) DHC-8-400 Dash 8Q;28,4;28,4Embraer 175;26;26Embraer 190;29;29Embraer 195 and Legacy 1000;29;29Fokker 100;28;28Sukhoi Superjet 100-95;27,8;27,8
+A319;35,8;35,8
+A320;35,8;35,8
+A321;35,8;35,8
+A330;60,3;60,3
+A380;80;80
+ATR 42;25;25
+ATR 72;27;27
+Avro RJ70 / RJ85 / RJ100;26,34;26,34
+Boeing 737;34,32;
+Boeing 737-500;28,88;28,88
+Boeing 737-700;34,32;34,32
+Boeing 737-800;34,32;34,32
+Boeing 737-900;34,32;34,32
+Boeing 777-200 / 200ER;60,93;60,93
+Bombardier CS300;35,1;35,1
+Bombardier RJ1000;26,2;26,2
+Bombardier RJ700;23,2;23,2
+Bombardier RJ900;24,9;24,9
+Bombardier DHC-8;28,4;28,4
+Embraer 175;26;26
+Embraer 190;29;29
+Embraer 195;29;29
+Fokker 100;28;28
+Sukhoi Superjet 100-95;27,8;27,8
