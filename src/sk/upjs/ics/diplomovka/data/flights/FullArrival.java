@@ -33,7 +33,7 @@ public class FullArrival extends FullFlight {
         flight.setId(FlightId.getId());
         flight.setType(Flight.FlightType.ARRIVAL);
         flight.setStart(arrival.getScheduled() - BEFORE_ARRIVAL_SLOT);
-        flight.setEnd(arrival.getScheduled() - AFTER_ARRIVAL_SLOT);
+        flight.setEnd(arrival.getScheduled() + AFTER_ARRIVAL_SLOT);
         flight.setCategory(Flight.FlightCategory.SCHENGEN); // TODO
         flight.setAircraft(arrival.getAircraft());
         flight.setTurnaroundTime(-1); // TODO
