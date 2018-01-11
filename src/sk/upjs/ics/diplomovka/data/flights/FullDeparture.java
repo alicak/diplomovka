@@ -4,7 +4,7 @@ public class FullDeparture extends FullFlight {
 
     // TODO: specific values for every flight
     private static int BEFORE_DEPARTURE_SLOT = 15;
-    private static int AFTER_DEPARTURE_SLOT = 0;
+    private static int AFTER_DEPARTURE_SLOT = 5;
 
     // column structure: Scheduled, Actual, To, Terminal, Gate, Status, Flight No, Aircraft
 
