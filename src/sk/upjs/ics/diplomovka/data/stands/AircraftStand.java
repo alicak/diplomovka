@@ -11,6 +11,7 @@ public class AircraftStand {
     private double maxWingspan;
     private List<Flight.FlightCategory> flightCategories;
     private AircraftStandType type;
+    private List<String> gates;
 
     // http://www.aixm.aero/sites/aixm.aero/files/imce/AIXM511HTML/AIXM/DataType_CodeAircraftStandType.html
     public enum AircraftStandType {
@@ -23,19 +24,21 @@ public class AircraftStand {
         RMT         // Remote parking position
     }
 
-    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, AircraftStandType type) {
+    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, AircraftStandType type, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.type = type;
         this.flightCategories = new ArrayList<>();
         this.flightCategories.add(flightCategory);
+        this.gates = gates;
     }
 
-    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, AircraftStandType type) {
+    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, AircraftStandType type, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.flightCategories = flightCategories;
         this.type = type;
+        this.gates = gates;
     }
 
     public double getMaxWingspan() {
@@ -62,5 +65,9 @@ public class AircraftStand {
 
     public int getId() {
         return id;
+    }
+
+    public List<String> getGates() {
+        return gates;
     }
 }

@@ -17,25 +17,28 @@ public class FlightCsvParser {
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
     private Map<String, AircraftStand> gatesToStands = new HashMap<>();
-    private List<List<String>> standsToGates = new ArrayList<>(); // TODO: Do we need that?
-    private int noOfStands = 0;
+    private List<AircraftStand> stands = new ArrayList<>();
 
     public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
         parseAircrafts(aircraftFile);
-        parseStands(standsFile);
     }
 
-    private void parseStands(File standsFile) throws IOException {
+    public List<AircraftStand> parseStands(File standsFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(standsFile));
         String line = "";
 
         while ((line = reader.readLine()) != null) {
-            noOfStands++;
-            gatesToStands.putAll(parseStand(line));
+            AircraftStand stand = parseStand(line);
+            stands.add(stand);
+            for (String gate : stand.getGates()) {
+                gatesToStands.put(gate, stand);
+            }
         }
+
+        return stands;
     }
 
-    private Map<String, AircraftStand> parseStand(String standString) {
+    private AircraftStand parseStand(String standString) {
         String[] standArray = standString.split(SEPARATOR);
         for (String s : standArray) {
             s.trim();
@@ -43,17 +46,9 @@ public class FlightCsvParser {
 
         int id = Integer.parseInt(standArray[0]);
         double maxWingspan = Integer.parseInt(standArray[2]);
-
-        AircraftStand stand = new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null); // TODO: Schengen & null
-
-        Map<String, AircraftStand> result = new HashMap<>();
         String[] gateArray = standArray[1].split(", ");
-        standsToGates.add(Arrays.asList(gateArray));
-        for (String gate : gateArray) {
-            result.put(gate, stand);
-        }
 
-        return result;
+        return new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null, Arrays.asList(gateArray)); // TODO: Schengen & null
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {
@@ -155,11 +150,10 @@ public class FlightCsvParser {
     }
 
     public int getNoOfStands() {
-        return noOfStands;
+        return stands.size();
     }
 
     public int getStandNo(String gate) {
         return gatesToStands.get(gate).getId();
     }
-
 }

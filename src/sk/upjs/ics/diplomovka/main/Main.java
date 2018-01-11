@@ -12,6 +12,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightId;
 import sk.upjs.ics.diplomovka.data.flights.FullArrival;
 import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
+import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -32,8 +33,9 @@ public class Main {
         File standsFile = new File("stands.csv");
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
+        List<AircraftStand> stands = parser.parseStands(standsFile);
+        int[] standIds = initializeStands(stands.size());
         List<Flight> flights = processFlights(arrivalsFile, departuresFile, parser);
-        int[] standIds = initializeStands(parser.getNoOfStands());
 
         int generationSize = 20; // TODO
 
