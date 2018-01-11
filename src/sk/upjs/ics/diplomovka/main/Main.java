@@ -8,10 +8,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopu
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.FlightCsvParser;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightId;
-import sk.upjs.ics.diplomovka.data.flights.FullArrival;
-import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
+import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
@@ -20,10 +17,7 @@ import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -34,14 +28,14 @@ public class Main {
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
-        List<Flight> flights = processFlights(arrivalsFile, departuresFile, parser);
+        FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser);
 
         int generationSize = 20; // TODO
 
         AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage);
         PopulationBase population = initialPopulation(generationSize, originalAssignment);
 
-        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flights);
+        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage.getFlights());
         CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RankingSelection();
@@ -62,24 +56,29 @@ public class Main {
 
 
 
-    private static List<Flight> processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {
+    private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {
         List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
 
         List<Flight> flights = new ArrayList<>();
+        Map<Integer, Flight> flightsMap = new HashMap<>();
 
         for (FullArrival a : arrivalsFull) {
-            flights.add(FullArrival.toFlight(a));
+            Flight f = FullArrival.toFlight(a);
+            flights.add(f);
+            flightsMap.put(f.getId(), f);
         }
 
         for (FullDeparture d : departuresFull) {
-            flights.add(FullDeparture.toFlight(d));
+            Flight f = FullDeparture.toFlight(d);
+            flights.add(f);
+            flightsMap.put(f.getId(), f);
         }
 
         Collections.sort(flights);
 
-        return flights;
+        return new FlightStorage(flights, flightsMap);
     }
 
     private static AbsolutePositionPopulation initialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment) {
