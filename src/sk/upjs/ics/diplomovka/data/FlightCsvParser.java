@@ -10,16 +10,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FlightCsvParser {
 
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
-    private Map<String, AircraftStand> stands = new HashMap<>();
+    private Map<String, AircraftStand> gatesToStands = new HashMap<>();
+    private List<List<String>> standsToGates = new ArrayList<>(); // TODO: Do we need that?
     private int noOfStands = 0;
 
     public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
@@ -33,7 +31,7 @@ public class FlightCsvParser {
 
         while ((line = reader.readLine()) != null) {
             noOfStands++;
-            stands.putAll(parseStand(line));
+            gatesToStands.putAll(parseStand(line));
         }
     }
 
@@ -50,6 +48,7 @@ public class FlightCsvParser {
 
         Map<String, AircraftStand> result = new HashMap<>();
         String[] gateArray = standArray[1].split(", ");
+        standsToGates.add(Arrays.asList(gateArray));
         for (String gate : gateArray) {
             result.put(gate, stand);
         }
@@ -160,7 +159,7 @@ public class FlightCsvParser {
     }
 
     public int getStandNo(String gate) {
-        return stands.get(gate).getId();
+        return gatesToStands.get(gate).getId();
     }
 
 }

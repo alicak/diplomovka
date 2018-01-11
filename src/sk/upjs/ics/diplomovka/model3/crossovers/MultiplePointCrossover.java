@@ -49,8 +49,8 @@ public class MultiplePointCrossover extends CrossoverBase {
         }
 
         List<Chromosome> result = new ArrayList<>();
-        result.add(new Chromosome(new1));
-        result.add(new Chromosome(new2));
+        // result.add(new Chromosome(new1)); // TODO: instances of concrete class
+        // result.add(new Chromosome(new2));
         return result;
     }
 }

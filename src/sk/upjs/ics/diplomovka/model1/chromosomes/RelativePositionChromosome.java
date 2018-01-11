@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.model1.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +51,15 @@ public class RelativePositionChromosome extends Chromosome {
         chromosome.setGenes(genes);
 
         return chromosome;
+    }
+
+    @Override
+    public void removeFlight(int flight) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void removeGate(int gate) {
+        throw new NotImplementedException();
     }
 }

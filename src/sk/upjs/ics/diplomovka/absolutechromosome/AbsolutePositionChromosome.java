@@ -9,9 +9,9 @@ import java.util.List;
 public class AbsolutePositionChromosome extends Chromosome {
     public static int EMPTY_GENE = -1;
 
-    private final int noOfGates;
+    private int noOfGates;
     private int[] noOfFlights; // number of flights per gate
-    private final int maxNoFlights;
+    private int maxNoFlights;
 
     public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
         this.noOfGates = noOfGates;
@@ -36,12 +36,45 @@ public class AbsolutePositionChromosome extends Chromosome {
         resetFitness();
     }
 
-    public void removeFlight(int gate, int flight) {
+    @Override
+    public void removeFlight(int flightValue) {
+        FlightPosition position = findPosition(flightValue);
+        removeFlightFromGenes(position.getGate(), position.getFlight());
+        for (int g = noOfGates - 1; g >= 0; g--) {
+            getGenes().remove(g * (maxNoFlights - 1));
+        }
+        maxNoFlights--;
+    }
+
+    public void removeFlightFromGenes(int gate, int flight) {
         for (int f = flight; f < noOfFlights[gate]; f++) {
             setGene(gate, f, getGene(gate, f + 1));
         }
         noOfFlights[gate]--;
         resetFitness();
+    }
+
+    public void removeGate(int gate) {
+        int nextGate = (gate + 1) % noOfGates;
+
+        for (int i = 0; i < noOfFlights[gate]; i++) { // assign flights to remaining gates
+            int flightIdx = getIndex(gate, i);
+            addNextFlight(nextGate, getGene(gate, flightIdx));
+            nextGate = (nextGate + 1) % noOfGates;
+            if (nextGate == gate) {
+                nextGate = (nextGate + 1) % noOfGates;
+            }
+        }
+
+        for (int i = getIndex(gate, 0); i < (noOfGates - 1) * maxNoFlights; i++) {
+            setGene(i, getGene(i + maxNoFlights));
+        }
+
+        for (int i = gate; i < noOfGates - 1; i++) {
+            noOfFlights[i] = noOfFlights[i + 1];
+        }
+
+        noOfGates--;
     }
 
     public int getNoOfFlights(int gate) {

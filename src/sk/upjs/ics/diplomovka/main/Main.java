@@ -33,6 +33,7 @@ public class Main {
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         List<Flight> flights = processFlights(arrivalsFile, departuresFile, parser);
+        int[] standIds = initializeStands(parser.getNoOfStands());
 
         int generationSize = 20; // TODO
 
@@ -56,6 +57,16 @@ public class Main {
         writer.append(result.toString());
         writer.append("No of iterations: " + Integer.toString(termination.getNoOfIterations()) + "\n\n");
         writer.close();
+    }
+
+    private static int[] initializeStands(int noOfStands) {
+        int[] result = new int[noOfStands];
+
+        for (int i = 0; i < noOfStands; i++) {
+            result[i] = i;
+        }
+
+        return result;
     }
 
     private static List<Flight> processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {

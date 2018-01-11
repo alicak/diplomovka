@@ -48,12 +48,12 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             }
 
             if (comingFlight == EMPTY_GENE) { // we are removing flight and must add it somewhere else - to the next gate
-                updatedChromosome.removeFlight(gate, f);
+                updatedChromosome.removeFlightFromGenes(gate, f);
                 updatedChromosome.addNextFlight((gate + 1) % updatedChromosome.getNoOfGates(), leavingFlight);
             } else if (leavingFlight == EMPTY_GENE) { // we are getting new flight
                 updatedChromosome.addNextFlight(gate, comingFlight);
                 FlightPosition comingFlightPosition = updatedChromosome.findPosition(comingFlight);
-                updatedChromosome.removeFlight(comingFlightPosition.getGate(), comingFlightPosition.getFlight());
+                updatedChromosome.removeFlightFromGenes(comingFlightPosition.getGate(), comingFlightPosition.getFlight());
             } else { // we are exchanging coming and leaving flight
                 FlightPosition comingFlightPosition = updatedChromosome.findPosition(comingFlight);
                 updatedChromosome.setGene(comingFlightPosition.getGate(), comingFlightPosition.getFlight(), leavingFlight); // TODO replace chronologically

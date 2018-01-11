@@ -19,7 +19,7 @@ public class MoveBetweenGatesMutation extends AbsolutePositionMutation {
         int flightIdx = Utils.randomInt(chromosome.getNoOfFlights(gate1));
         int flight = chromosome.getGene(gate1, flightIdx);
 
-        chromosome.removeFlight(gate1, flightIdx);
+        chromosome.removeFlightFromGenes(gate1, flightIdx);
         chromosome.addNextFlight(gate2, flight);
     }
 }

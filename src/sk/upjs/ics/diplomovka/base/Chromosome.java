@@ -3,10 +3,11 @@ package sk.upjs.ics.diplomovka.base;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chromosome implements Comparable<Chromosome> {
+public abstract class Chromosome implements Comparable<Chromosome> {
 
     private List<Integer> genes;
     private double fitness = -1;
+    private static final int FITNESS_NOT_SET = -1;
 
     public Chromosome() {
         genes = new ArrayList<>();
@@ -54,12 +55,16 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public boolean hasFitness() {
-        return fitness != -1;
+        return fitness != FITNESS_NOT_SET;
     }
 
     public void resetFitness() {
-        fitness = -1;
+        fitness = FITNESS_NOT_SET;
     }
+
+    public abstract void removeFlight(int flight);
+
+    public abstract void removeGate(int gate);
 
     public String toString() {
         return "{genes=" + genes.toString() + ", fitness=" + fitness + "}";
