@@ -32,31 +32,32 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         AbsolutePositionChromosome c1 = chromosome1.copy();
         AbsolutePositionChromosome c2 = chromosome2.copy();
 
-        updateChromosome(c1, c2, queueStart, queueLength, gate);
-        updateChromosome(c2, c1, queueStart, queueLength, gate);
+        updateChromosome(c1, chromosome2, queueStart, queueLength, gate);
+        updateChromosome(c2, chromosome1, queueStart, queueLength, gate);
 
         return Arrays.asList(c1, c2);
     }
 
     private void updateChromosome(AbsolutePositionChromosome updatedChromosome, AbsolutePositionChromosome secondChromosome, int queueStart, int queueLength, int gate) {
-        for (int f = queueStart; f < queueStart + queueLength; f++) {
-            int comingFlight = updatedChromosome.getGene(gate, f);
-            int leavingFlight = secondChromosome.getGene(gate, f);
+        for (int f = queueStart + queueLength - 1; f >= queueStart; f--) {
+            int flightU = updatedChromosome.getGene(gate, f);
+            int flightS = secondChromosome.getGene(gate, f);
 
-            if (comingFlight == EMPTY_GENE && leavingFlight == EMPTY_GENE) {
+            if (flightU == EMPTY_GENE && flightS == EMPTY_GENE) {
                 throw new IllegalStateException("at least one flight must be 0 or positive");
             }
 
-            if (comingFlight == EMPTY_GENE) { // we are removing flight and must add it somewhere else - to the next gate
-                updatedChromosome.removeFlightFromGenes(gate, f);
-                updatedChromosome.addNextFlight((gate + 1) % updatedChromosome.getNoOfGates(), leavingFlight);
-            } else if (leavingFlight == EMPTY_GENE) { // we are getting new flight
-                updatedChromosome.addNextFlight(gate, comingFlight);
-                FlightPosition comingFlightPosition = updatedChromosome.findPosition(comingFlight);
-                updatedChromosome.removeFlightFromGenes(comingFlightPosition.getGate(), comingFlightPosition.getFlight());
-            } else { // we are exchanging coming and leaving flight
-                FlightPosition comingFlightPosition = updatedChromosome.findPosition(comingFlight);
-                updatedChromosome.setGene(comingFlightPosition.getGate(), comingFlightPosition.getFlight(), leavingFlight); // TODO replace chronologically
+            if (flightU == EMPTY_GENE) { // we'll be getting new flight for empty position
+                FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+                updatedChromosome.removeFlightFromGenes(flightSPosition.getGate(), flightSPosition.getFlight()); // we remove new flight from where it is now
+                updatedChromosome.addNextFlight(gate, flightS); // we add new flight to the position that is being updated
+            } else if (flightS == EMPTY_GENE) { // we'll be removing flight on the position and must add it somewhere else - to the next gate
+                updatedChromosome.removeFlightFromGenes(gate, f); // we remove the flight
+                updatedChromosome.addNextFlight((gate + 1) % updatedChromosome.getNoOfGates(), flightU); // we add removed flight to the next gate
+            } else { // we'll be getting new flight for the position, so we must put old flight to the old position of new flight
+                FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+                updatedChromosome.setGene(gate, f, flightS);
+                updatedChromosome.setGene(flightSPosition.getGate(), flightSPosition.getFlight(), flightU); // TODO replace chronologically
             }
         }
     }

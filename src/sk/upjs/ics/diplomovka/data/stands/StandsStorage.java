@@ -8,7 +8,6 @@ public class StandsStorage {
     private Map<Integer, AircraftStand> stands;
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
-    public static final int FORBIDDEN_STAND = -1;
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
@@ -43,7 +42,6 @@ public class StandsStorage {
                     standsIds[j] = standsIds[j + 1];
                 }
 
-                standsIds[length - 1] = FORBIDDEN_STAND;
                 standsIds = Arrays.copyOf(standsIds, length - 1);
                 return;
             }

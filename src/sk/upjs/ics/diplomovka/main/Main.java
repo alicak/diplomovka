@@ -10,6 +10,8 @@ import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.disruption.StandClosedDisruption;
 import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -33,20 +35,27 @@ public class Main {
         int generationSize = 20; // TODO
 
         AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage);
+
+        Disruption gate3closed = new StandClosedDisruption(5, standsStorage);
+        gate3closed.disruptAssignment(originalAssignment);
+
         PopulationBase population = initialPopulation(generationSize, originalAssignment);
 
         AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
         CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
         MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RankingSelection();
-        TerminationBase termination = new IterationsTermination(1);
+        TerminationBase termination = new IterationsTermination(100);
+
+        originalAssignment.setFitness(fitnessFunction.calculateFitness(originalAssignment));
+        System.out.println("original fitness: " + originalAssignment.getFitness());
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
         PopulationBase finalPopulation = algorithm.evolve();
         Chromosome result = finalPopulation.bestChromosome();
 
-        System.out.println(result.toString());
-        System.out.println(termination.getNoOfIterations());
+        System.out.println("no of iterations: " + termination.getNoOfIterations());
+        System.out.println("fitness: " + result.getFitness());
 
         PrintWriter writer = new PrintWriter(new File("results.txt"));
         writer.append(result.toString());
@@ -91,9 +100,11 @@ public class Main {
         }
 
         // second half are mutations of original assignment
-        for (int i = generationSize / 2; i < generationSize; i++) {
+        for (int i = generationSize / 2; i < generationSize - 1; i++) {
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
+
+        generation.add(originalAssignment);
 
         return new AbsolutePositionPopulation(generation, generator);
     }
@@ -125,7 +136,7 @@ public class Main {
         Collections.sort(flights);
 
         for (FlightWithGate f : flights) {
-            int standNo = standsStorage.getStandNoByGate(f.gate);
+            int standNo = standsStorage.getStandIdByGate(f.gate);
             originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), f.flight.getId());
         }
 

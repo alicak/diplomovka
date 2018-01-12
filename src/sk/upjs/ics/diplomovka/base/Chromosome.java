@@ -39,13 +39,6 @@ public abstract class Chromosome implements Comparable<Chromosome> {
         resetFitness();
     }
 
-    public void setGenes(int start, int[] genes) {
-        for (int i = 0; i < genes.length; i++) {
-            setGene(i + start, genes[i]);
-        }
-        resetFitness();
-    }
-
     public List<Integer> getGenes() {
         return genes;
     }
