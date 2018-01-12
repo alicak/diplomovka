@@ -31,6 +31,14 @@ public class StandsStorage {
         return getStandByGate(gate).getId();
     }
 
+    public int getNumberById(int id) {
+        for (int i = 0; i < standsIds.length; i++) {
+            if(standsIds[i] == id)
+                return i;
+        }
+        return -1; // stand not found
+    }
+
     public void removeStand(int standId) {
         stands.remove(standId);
         int length = standsIds.length;
@@ -55,9 +63,8 @@ public class StandsStorage {
     private int[] initializeStands(Map<Integer, AircraftStand> stands) {
         standsIds = new int[stands.size()];
 
-        int i = 0;
-        for (Map.Entry<Integer, AircraftStand> entry : stands.entrySet()) {
-            standsIds[i++] = entry.getKey();
+        for (int j = 0; j < standsIds.length; j++) {
+            standsIds[j] = j;
         }
 
         return standsIds;

@@ -14,7 +14,7 @@ public class StandClosedDisruption implements Disruption {
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
-        chromosome.removeGate(stand);
+        chromosome.removeGate(standsStorage.getNumberById(stand));
         standsStorage.removeStand(stand);
     }
 }
