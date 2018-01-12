@@ -3,7 +3,7 @@ package sk.upjs.ics.diplomovka.main;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 
 import java.util.ArrayList;

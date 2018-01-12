@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.absolutechromosome.population;
+package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.base.Chromosome;
