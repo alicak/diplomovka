@@ -11,11 +11,14 @@ public class UniformFlipMutation extends MutationBase {
     }
 
     @Override
-    public void doMutation(Chromosome chromosome) {
+    public boolean doMutation(Chromosome chromosome) {
+        boolean mutated = false;
         for (int i = 0; i < chromosome.getLength(); i++) {
             if (Math.random() < probability) {
                 generator.generateGene(chromosome, i);
+                mutated = true;
             }
         }
+        return mutated;
     }
 }

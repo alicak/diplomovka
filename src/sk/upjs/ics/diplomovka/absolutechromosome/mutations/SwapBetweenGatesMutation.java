@@ -8,16 +8,16 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         this.probability = probability;
     }
 
-    public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
+    public boolean doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
         if (Math.random() > probability) {
-            return;
+            return false;
         }
 
         int gate1 = Utils.randomInt(chromosome.getNoOfGates());
         int gate2 = Utils.randomInt(chromosome.getNoOfGates());
 
         if (chromosome.getNoOfFlights(gate1) == 0 || chromosome.getNoOfFlights(gate2) == 0) {
-            return;
+            return false;
         }
 
         int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate1));
@@ -27,9 +27,11 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         int flight2 = chromosome.getGene(gate2, flightIdx2);
 
         if(!chromosome.checkFlightFeasibility(flight1, gate2) || !chromosome.checkFlightFeasibility(flight2, gate1))
-            return;
+            return false;
 
         chromosome.setGene(gate1, flightIdx1, flight2);
         chromosome.setGene(gate2, flightIdx2, flight1);
+
+        return true;
     }
 }

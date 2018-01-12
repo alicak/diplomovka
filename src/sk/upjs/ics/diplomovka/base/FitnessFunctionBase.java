@@ -11,4 +11,7 @@ public abstract class FitnessFunctionBase {
     }
 
     public abstract double calculateFitness(Chromosome chromosome);
+
+    public abstract double calculateAndSetFitness(Chromosome chromosome);
+
 }

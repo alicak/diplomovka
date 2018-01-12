@@ -28,7 +28,8 @@ public abstract class MutationBase {
         this.probability = probability;
     }
 
-    public abstract void doMutation(Chromosome chromosome);
+    // true if mutation was performed
+    public abstract boolean doMutation(Chromosome chromosome);
 
     public void doMutation(List<Chromosome> chromosomes) {
         for (Chromosome chromosome : chromosomes)

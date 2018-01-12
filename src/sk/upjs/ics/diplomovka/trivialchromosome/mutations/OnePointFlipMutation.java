@@ -12,14 +12,16 @@ public class OnePointFlipMutation extends MutationBase {
     }
 
     @Override
-    public void doMutation(Chromosome chromosome) {
+    public boolean doMutation(Chromosome chromosome) {
         int position = Utils.randomInt(0, chromosome.getLength());
-        doMutation(chromosome, position);
+        return doMutation(chromosome, position);
     }
 
-    public void doMutation(Chromosome chromosome, int position) {
+    public boolean doMutation(Chromosome chromosome, int position) {
         if (Math.random() < probability) {
             generator.generateGene(chromosome, position);
+            return true;
         }
+        return false;
     }
 }

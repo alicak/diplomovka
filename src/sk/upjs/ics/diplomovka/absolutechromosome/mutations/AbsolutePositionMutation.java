@@ -20,15 +20,15 @@ public class AbsolutePositionMutation extends MutationBase {
     }
 
     @Override
-    public void doMutation(Chromosome chromosome) {
+    public boolean doMutation(Chromosome chromosome) {
         AbsolutePositionChromosome absCh = (AbsolutePositionChromosome) (chromosome);
         double p = Math.random();
         if (p < 1 / 3.0) {
-            swapBetweenGatesMutation.doAbsoluteMutation(absCh);
+           return swapBetweenGatesMutation.doAbsoluteMutation(absCh);
         } else if (p < 2 / 3.0) {
-            swapSuccessiveFlightsMutation.doAbsoluteMutation(absCh);
+            return swapSuccessiveFlightsMutation.doAbsoluteMutation(absCh);
         } else {
-            moveBetweenGatesMutation.doAbsoluteMutation(absCh);
+            return moveBetweenGatesMutation.doAbsoluteMutation(absCh);
         }
     }
 }

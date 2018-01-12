@@ -40,7 +40,7 @@ public abstract class AlgorithmBase {
     protected void calculateAndSetFitness(List<Chromosome> chromosomes) {
         for (Chromosome chromosome : chromosomes) {
             if (!chromosome.hasFitness()) {
-                chromosome.setFitness(fitnessFunction.calculateFitness(chromosome));
+                fitnessFunction.calculateAndSetFitness(chromosome);
             }
         }
     }

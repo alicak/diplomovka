@@ -8,15 +8,15 @@ public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation {
         this.probability = probability;
     }
 
-    public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
+    public boolean doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
         if (Math.random() > probability) {
-            return;
+            return false;
         }
 
         int gate = Utils.randomInt(chromosome.getNoOfGates());
 
         if (chromosome.getNoOfFlights(gate) <= 1) {
-            return;
+            return false;
         }
 
         int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate));
@@ -27,5 +27,7 @@ public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation {
 
         chromosome.setGene(gate, flightIdx1, flight2);
         chromosome.setGene(gate, flightIdx2, flight1);
+
+        return true;
     }
 }

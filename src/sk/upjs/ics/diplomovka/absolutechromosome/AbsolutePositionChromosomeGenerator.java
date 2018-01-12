@@ -20,16 +20,22 @@ public class AbsolutePositionChromosomeGenerator {
     }
 
     public AbsolutePositionChromosome generateChromosome() {
-        AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, noOfFlights);
-        chromosome.setFeasibilityChecker(feasibilityChecker);
+        AbsolutePositionChromosome chromosome = null;
 
-        Integer[] genesArray = new Integer[noOfGates * noOfFlights];
-        Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
-        chromosome.setGenes(Arrays.asList(genesArray));
+        boolean feasible = false;
+        while (!feasible) {
+            chromosome = new AbsolutePositionChromosome(noOfGates, noOfFlights);
+            chromosome.setFeasibilityChecker(feasibilityChecker);
+            Integer[] genesArray = new Integer[noOfGates * noOfFlights];
+            chromosome.setGenes(Arrays.asList(genesArray));
+            Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
 
-        for (int i = 0; i < noOfFlights; i++) {
-            int gate = Utils.randomInt(noOfGates);
-            chromosome.addNextFlight(gate, i);
+            for (int i = 0; i < noOfFlights; i++) {
+                int gate = Utils.randomInt(noOfGates);
+                chromosome.addNextFlight(gate, i);
+            }
+
+            feasible = chromosome.checkFeasibility();
         }
 
         return chromosome;
@@ -37,7 +43,10 @@ public class AbsolutePositionChromosomeGenerator {
 
     public AbsolutePositionChromosome generateChromosomeFromExisting(AbsolutePositionChromosome existingChromosome) {
         AbsolutePositionChromosome chromosome = existingChromosome.copy();
-        mutation.doMutation(chromosome);
+        boolean mutated = false;
+        while (!mutated) {
+            mutated = mutation.doMutation(chromosome);
+        }
         return chromosome;
     }
 }

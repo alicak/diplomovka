@@ -21,7 +21,7 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public int getGene(int gate, int flight) {
-        return getGene(gate * maxNoFlights + flight);
+        return getGene(getIndex(gate,flight));
     }
 
     public void setGene(int gate, int flight, int flightValue) {
