@@ -4,18 +4,16 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
 
 public class AbsolutePositionCrossover extends CrossoverBase {
-    public AbsolutePositionCrossover(double probability, FeasibilityCheckerBase feasibilityChecker) {
-        super(probability, feasibilityChecker);
+    public AbsolutePositionCrossover(double probability) {
+        super(probability);
     }
 
     @Override
@@ -55,7 +53,7 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             if (flightU == EMPTY_GENE) { // we'll be getting new flight for empty position
                 FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
 
-                if (!checkFeasibility(flightS, gate))
+                if (!updatedChromosome.checkFlightFeasibility(flightS, gate))
                     return false;
 
                 updatedChromosome.removeFlightFromGenes(flightSPosition.getGate(), flightSPosition.getFlight()); // we remove new flight from where it is now
@@ -64,7 +62,7 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             } else if (flightS == EMPTY_GENE) { // we'll be removing flight on the position and must add it somewhere else - to the next gate
                 int newGate = (gate + 1) % updatedChromosome.getNoOfGates();
 
-                if (!checkFeasibility(flightU, newGate))
+                if (!updatedChromosome.checkFlightFeasibility(flightU, newGate))
                     return false;
 
                 updatedChromosome.removeFlightFromGenes(gate, f); // we remove the flight
@@ -73,7 +71,7 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             } else { // we'll be getting new flight for the position, so we must put old flight to the old position of new flight
                 FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
 
-                if (!checkFeasibility(flightS, gate) || !checkFeasibility(flightU, flightSPosition.getGate()))
+                if (!updatedChromosome.checkFlightFeasibility(flightS, gate) || !updatedChromosome.checkFlightFeasibility(flightU, flightSPosition.getGate()))
                     return false;
 
                 updatedChromosome.setGene(gate, f, flightS);
@@ -81,9 +79,5 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             }
         }
         return true;
-    }
-
-    private boolean checkFeasibility(int flight, int gate) {
-        return feasibilityChecker.checkFlightFeasibility(flight, gate);
     }
 }

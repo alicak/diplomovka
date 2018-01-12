@@ -1,11 +1,8 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.data.flights.Aircraft;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +14,7 @@ public class AbsolutePositionChromosome extends Chromosome {
     private int noOfGates;
     private int[] noOfFlights; // number of flights per gate
     private int maxNoFlights;
+    private AbsolutePositionFeasibilityChecker feasibilityChecker;
 
     public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
         this.noOfGates = noOfGates;
@@ -115,6 +113,18 @@ public class AbsolutePositionChromosome extends Chromosome {
         this.noOfFlights = noOfFlights;
     }
 
+    public void setFeasibilityChecker(AbsolutePositionFeasibilityChecker feasibilityChecker) {
+        this.feasibilityChecker = feasibilityChecker;
+    }
+
+    public boolean checkFlightFeasibility(int flightValue, int gate) {
+        return feasibilityChecker.checkFlightFeasibility(flightValue, gate);
+    }
+
+    public boolean checkFeasibility() {
+        return feasibilityChecker.checkChromosomeFeasibility(this);
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -135,6 +145,7 @@ public class AbsolutePositionChromosome extends Chromosome {
         List<Integer> genes = new ArrayList<>(getGenes());
         chromosome.setGenes(genes);
         chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
+        chromosome.setFeasibilityChecker(feasibilityChecker);
 
         return chromosome;
     }

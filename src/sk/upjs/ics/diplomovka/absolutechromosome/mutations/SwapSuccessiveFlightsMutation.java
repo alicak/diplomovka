@@ -1,13 +1,11 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation {
-    public SwapSuccessiveFlightsMutation(double probability, FeasibilityCheckerBase feasibilityChecker) {
+    public SwapSuccessiveFlightsMutation(double probability) {
         this.probability = probability;
-        this.feasibilityChecker = feasibilityChecker; // but we don't need to check feasibility yet
     }
 
     public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {

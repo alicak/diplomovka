@@ -1,13 +1,11 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
-    public SwapBetweenGatesMutation(double probability, FeasibilityCheckerBase feasibilityChecker) {
+    public SwapBetweenGatesMutation(double probability) {
         this.probability = probability;
-        this.feasibilityChecker = feasibilityChecker;
     }
 
     public void doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
@@ -28,7 +26,7 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         int flight1 = chromosome.getGene(gate1, flightIdx1);
         int flight2 = chromosome.getGene(gate2, flightIdx2);
 
-        if(!feasibilityChecker.checkFlightFeasibility(flight1, gate2) || !feasibilityChecker.checkFlightFeasibility(flight2, gate1))
+        if(!chromosome.checkFlightFeasibility(flight1, gate2) || !chromosome.checkFlightFeasibility(flight2, gate1))
             return;
 
         chromosome.setGene(gate1, flightIdx1, flight2);

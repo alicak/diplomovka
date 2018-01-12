@@ -1,8 +1,7 @@
 package sk.upjs.ics.diplomovka.model1.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;

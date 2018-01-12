@@ -32,21 +32,20 @@ public class Main {
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
         FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser);
+        AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
 
         int generationSize = 20; // TODO
 
-        AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage);
+        AbsolutePositionChromosome originalAssignment = createOriginalAssignment(arrivalsFile, departuresFile, parser, standsStorage, feasibilityChecker);
 
         Disruption gate3closed = new StandClosedDisruption(5, standsStorage);
         gate3closed.disruptAssignment(originalAssignment);
 
-        FeasibilityCheckerBase feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
-
         PopulationBase population = initialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
         AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
-        CrossoverBase crossover = new AbsolutePositionCrossover(0.8, feasibilityChecker);
-        MutationBase mutation = new AbsolutePositionMutation(0.05, feasibilityChecker);
+        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
+        MutationBase mutation = new AbsolutePositionMutation(0.05);
         SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(10000);
 
@@ -93,7 +92,7 @@ public class Main {
         return new FlightStorage(flights, flightsMap);
     }
 
-    private static AbsolutePositionPopulation initialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, FeasibilityCheckerBase feasibilityChecker) {
+    private static AbsolutePositionPopulation initialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker) {
         AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getMaxNoFlights(), feasibilityChecker);
 
         // first half are random assignments
@@ -112,7 +111,7 @@ public class Main {
         return new AbsolutePositionPopulation(generation, generator);
     }
 
-    private static AbsolutePositionChromosome createOriginalAssignment(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
+    private static AbsolutePositionChromosome createOriginalAssignment(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage, AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
         List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
@@ -120,6 +119,7 @@ public class Main {
         int noOfFlights = arrivalsFull.size() + departuresFull.size();
 
         AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(standsStorage.getNoOfStands(), noOfFlights);
+        originalAssignment.setFeasibilityChecker(feasibilityChecker);
         Integer[] genesArray = new Integer[standsStorage.getNoOfStands() * noOfFlights];
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));

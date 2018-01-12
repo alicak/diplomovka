@@ -6,8 +6,6 @@ import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
-import java.util.List;
-
 public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
     public AbsoluteTimeDiffFitness(FlightStorage flightStorage) {
         super(flightStorage);

@@ -6,17 +6,14 @@ public abstract class MutationBase {
 
     protected double probability;
     protected ChromosomeGenerator generator;
-    protected FeasibilityCheckerBase feasibilityChecker;
 
-    public MutationBase(double probability, FeasibilityCheckerBase feasibilityChecker) {
+    public MutationBase(double probability) {
         this.probability = probability;
-        this.feasibilityChecker = feasibilityChecker;
     }
 
-    public MutationBase(double probability, ChromosomeGenerator generator, FeasibilityCheckerBase feasibilityChecker) {
+    public MutationBase(double probability, ChromosomeGenerator generator) {
         this.probability = probability;
         this.generator = generator;
-        this.feasibilityChecker = feasibilityChecker;
     }
 
     protected MutationBase() {

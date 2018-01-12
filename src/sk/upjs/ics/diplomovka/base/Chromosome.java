@@ -1,11 +1,5 @@
 package sk.upjs.ics.diplomovka.base;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-
 import java.util.ArrayList;
 import java.util.List;
 

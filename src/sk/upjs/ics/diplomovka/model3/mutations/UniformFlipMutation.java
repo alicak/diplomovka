@@ -2,13 +2,12 @@ package sk.upjs.ics.diplomovka.model3.mutations;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.ChromosomeGenerator;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.base.MutationBase;
 
 public class UniformFlipMutation extends MutationBase {
 
-    public UniformFlipMutation(double probability, ChromosomeGenerator generator, FeasibilityCheckerBase feasibilityChecker) {
-        super(probability, generator, feasibilityChecker);
+    public UniformFlipMutation(double probability, ChromosomeGenerator generator) {
+        super(probability, generator);
     }
 
     @Override
