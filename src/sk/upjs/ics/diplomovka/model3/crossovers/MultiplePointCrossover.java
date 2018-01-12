@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.model3.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class MultiplePointCrossover extends CrossoverBase {
 
     private int numberOfPoints;
 
-    public MultiplePointCrossover(int numberOfPoints, double probability) {
-        super(probability);
+    public MultiplePointCrossover(int numberOfPoints, double probability, FeasibilityCheckerBase feasibilityChecker) {
+        super(probability, feasibilityChecker);
         this.numberOfPoints = numberOfPoints;
     }
 

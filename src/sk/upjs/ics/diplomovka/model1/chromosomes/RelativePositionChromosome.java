@@ -64,9 +64,4 @@ public class RelativePositionChromosome extends Chromosome {
     public void removeGate(int gate) {
         throw new NotImplementedException();
     }
-
-    @Override
-    public boolean checkFeasibility(StandsStorage standsStorage, FlightStorage flightStorage) {
-        throw new NotImplementedException();
-    }
 }

@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.Arrays;
@@ -11,10 +12,10 @@ public class AbsolutePositionChromosomeGenerator {
     private int noOfGates;
     private AbsolutePositionMutation mutation;
 
-    public AbsolutePositionChromosomeGenerator(int noOfGates, int noOfFlights) {
+    public AbsolutePositionChromosomeGenerator(int noOfGates, int noOfFlights, FeasibilityCheckerBase feasibilityChecker) {
         this.noOfGates = noOfGates;
         this.noOfFlights = noOfFlights;
-        this.mutation = new AbsolutePositionMutation(1);
+        this.mutation = new AbsolutePositionMutation(1, feasibilityChecker);
     }
 
     public AbsolutePositionChromosome generateChromosome() {

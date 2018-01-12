@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.model1.crossovers;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.model1.chromosomes.AbsoluteRelativeChromosomeConverter;
 import sk.upjs.ics.diplomovka.model1.chromosomes.RelativePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
@@ -12,8 +13,8 @@ import java.util.*;
 public class RelativePositionCrossover extends CrossoverBase {
     private int flights;
 
-    public RelativePositionCrossover(double probability) {
-        super(probability);
+    public RelativePositionCrossover(double probability, FeasibilityCheckerBase feasibilityChecker) {
+        super(probability, feasibilityChecker);
     }
 
     @Override

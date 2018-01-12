@@ -2,14 +2,15 @@ package sk.upjs.ics.diplomovka.model3.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OnePointCrossover extends CrossoverBase {
-    public OnePointCrossover(double probability) {
-        super(probability);
+    public OnePointCrossover(double probability, FeasibilityCheckerBase feasibilityChecker) {
+        super(probability, feasibilityChecker);
     }
 
     @Override

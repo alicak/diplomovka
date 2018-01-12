@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.main;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
@@ -39,13 +40,15 @@ public class Main {
         Disruption gate3closed = new StandClosedDisruption(5, standsStorage);
         gate3closed.disruptAssignment(originalAssignment);
 
-        PopulationBase population = initialPopulation(generationSize, originalAssignment);
+        FeasibilityCheckerBase feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
+
+        PopulationBase population = initialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
         AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
-        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
-        MutationBase mutation = new AbsolutePositionMutation(0.05);
+        CrossoverBase crossover = new AbsolutePositionCrossover(0.8, feasibilityChecker);
+        MutationBase mutation = new AbsolutePositionMutation(0.05, feasibilityChecker);
         SelectionBase selection = new RankingSelection();
-        TerminationBase termination = new IterationsTermination(100);
+        TerminationBase termination = new IterationsTermination(10000);
 
         originalAssignment.setFitness(fitnessFunction.calculateFitness(originalAssignment));
         System.out.println("original fitness: " + originalAssignment.getFitness());
@@ -90,8 +93,8 @@ public class Main {
         return new FlightStorage(flights, flightsMap);
     }
 
-    private static AbsolutePositionPopulation initialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment) {
-        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getMaxNoFlights());
+    private static AbsolutePositionPopulation initialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, FeasibilityCheckerBase feasibilityChecker) {
+        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getMaxNoFlights(), feasibilityChecker);
 
         // first half are random assignments
         List<Chromosome> generation = new ArrayList<>();

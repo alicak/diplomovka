@@ -85,20 +85,6 @@ public class AbsolutePositionChromosome extends Chromosome {
         resetFitness();
     }
 
-    @Override
-    public boolean checkFeasibility(StandsStorage standsStorage, FlightStorage flightStorage) {
-        for (int g = 0; g < noOfGates; g++) {
-            for (int f = 0; f < noOfFlights[g]; f++) {
-                AircraftStand stand = standsStorage.getStandByNumber(g);
-                Flight flight = flightStorage.getFlightById(getGene(g, f));
-                if (!stand.checkFlight(flight)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public int getNoOfFlights(int gate) {
         return noOfFlights[gate];
     }

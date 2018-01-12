@@ -4,16 +4,18 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
+import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
 
 public class AbsolutePositionCrossover extends CrossoverBase {
-    public AbsolutePositionCrossover(double probability) {
-        super(probability);
+    public AbsolutePositionCrossover(double probability, FeasibilityCheckerBase feasibilityChecker) {
+        super(probability, feasibilityChecker);
     }
 
     @Override
@@ -32,13 +34,16 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         AbsolutePositionChromosome c1 = chromosome1.copy();
         AbsolutePositionChromosome c2 = chromosome2.copy();
 
-        updateChromosome(c1, chromosome2, queueStart, queueLength, gate);
-        updateChromosome(c2, chromosome1, queueStart, queueLength, gate);
+        List<Chromosome> result = new ArrayList<>();
+        if (updateChromosome(c1, chromosome2, queueStart, queueLength, gate))
+            result.add(c1);
+        if (updateChromosome(c2, chromosome1, queueStart, queueLength, gate))
+            result.add(c2);
 
-        return Arrays.asList(c1, c2);
+        return result;
     }
 
-    private void updateChromosome(AbsolutePositionChromosome updatedChromosome, AbsolutePositionChromosome secondChromosome, int queueStart, int queueLength, int gate) {
+    private boolean updateChromosome(AbsolutePositionChromosome updatedChromosome, AbsolutePositionChromosome secondChromosome, int queueStart, int queueLength, int gate) {
         for (int f = queueStart + queueLength - 1; f >= queueStart; f--) {
             int flightU = updatedChromosome.getGene(gate, f);
             int flightS = secondChromosome.getGene(gate, f);
@@ -49,16 +54,36 @@ public class AbsolutePositionCrossover extends CrossoverBase {
 
             if (flightU == EMPTY_GENE) { // we'll be getting new flight for empty position
                 FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+
+                if (!checkFeasibility(flightS, gate))
+                    return false;
+
                 updatedChromosome.removeFlightFromGenes(flightSPosition.getGate(), flightSPosition.getFlight()); // we remove new flight from where it is now
                 updatedChromosome.addNextFlight(gate, flightS); // we add new flight to the position that is being updated
+
             } else if (flightS == EMPTY_GENE) { // we'll be removing flight on the position and must add it somewhere else - to the next gate
+                int newGate = (gate + 1) % updatedChromosome.getNoOfGates();
+
+                if (!checkFeasibility(flightU, newGate))
+                    return false;
+
                 updatedChromosome.removeFlightFromGenes(gate, f); // we remove the flight
-                updatedChromosome.addNextFlight((gate + 1) % updatedChromosome.getNoOfGates(), flightU); // we add removed flight to the next gate
+                updatedChromosome.addNextFlight(newGate, flightU); // we add removed flight to the next gate
+
             } else { // we'll be getting new flight for the position, so we must put old flight to the old position of new flight
                 FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+
+                if (!checkFeasibility(flightS, gate) || !checkFeasibility(flightU, flightSPosition.getGate()))
+                    return false;
+
                 updatedChromosome.setGene(gate, f, flightS);
                 updatedChromosome.setGene(flightSPosition.getGate(), flightSPosition.getFlight(), flightU); // TODO replace chronologically
             }
         }
+        return true;
+    }
+
+    private boolean checkFeasibility(int flight, int gate) {
+        return feasibilityChecker.checkFlightFeasibility(flight, gate);
     }
 }

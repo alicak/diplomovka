@@ -20,7 +20,7 @@ public class FlightStorage {
         return flightsList;
     }
 
-    public void removeFlight(int id) {
+    public void removeFlight(int id) { // TODO!!!
         flightsMap.remove(id);
         for (int f = 0; f < flightsList.size(); f++) {
             if(flightsList.get(f).getId() == id) {
