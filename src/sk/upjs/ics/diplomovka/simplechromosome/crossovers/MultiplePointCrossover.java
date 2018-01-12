@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.trivialchromosome.crossovers;
+package sk.upjs.ics.diplomovka.simplechromosome.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;

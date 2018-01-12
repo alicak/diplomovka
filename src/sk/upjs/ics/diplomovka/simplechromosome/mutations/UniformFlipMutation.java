@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.trivialchromosome.mutations;
+package sk.upjs.ics.diplomovka.simplechromosome.mutations;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.ChromosomeGenerator;
