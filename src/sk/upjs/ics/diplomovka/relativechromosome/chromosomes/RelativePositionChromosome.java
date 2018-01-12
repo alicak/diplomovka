@@ -1,7 +1,6 @@
-package sk.upjs.ics.diplomovka.model1.chromosomes;
+package sk.upjs.ics.diplomovka.relativechromosome.chromosomes;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;

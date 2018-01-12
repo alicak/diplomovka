@@ -1,8 +1,6 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;

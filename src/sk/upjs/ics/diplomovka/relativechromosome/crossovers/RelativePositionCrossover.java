@@ -1,10 +1,10 @@
-package sk.upjs.ics.diplomovka.model1.crossovers;
+package sk.upjs.ics.diplomovka.relativechromosome.crossovers;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
-import sk.upjs.ics.diplomovka.model1.chromosomes.AbsoluteRelativeChromosomeConverter;
-import sk.upjs.ics.diplomovka.model1.chromosomes.RelativePositionChromosome;
+import sk.upjs.ics.diplomovka.relativechromosome.chromosomes.AbsoluteRelativeChromosomeConverter;
+import sk.upjs.ics.diplomovka.relativechromosome.chromosomes.RelativePositionChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.*;

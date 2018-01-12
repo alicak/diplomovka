@@ -2,8 +2,9 @@ package sk.upjs.ics.diplomovka.main;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
+import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.absolutechromosome.population.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
@@ -13,7 +14,6 @@ import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.disruption.StandClosedDisruption;
-import sk.upjs.ics.diplomovka.model2.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 

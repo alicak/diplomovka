@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.model2.crossovers;
+package sk.upjs.ics.diplomovka.absolutechromosome.crossovers;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
