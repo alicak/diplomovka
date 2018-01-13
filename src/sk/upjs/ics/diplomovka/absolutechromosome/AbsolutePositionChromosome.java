@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,17 +69,22 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public void removeGate(int gate) {
-        int nextGate = (gate + 1) % noOfGates;
-
         for (int i = 0; i < noOfFlights[gate]; i++) { // assign flights to remaining gates
-            addNextFlight(nextGate, getGene(gate, i));
-            nextGate = (nextGate + 1) % noOfGates;
-            if (nextGate == gate) {
-                nextGate = (nextGate + 1) % noOfGates;
+            int gene = getGene(gate, i);
+            int newGate = -1;
+            boolean feasible = false;
+
+            while (!feasible) {
+                newGate = Utils.randomInt(noOfGates);
+                if (newGate == gate)
+                    continue;
+                feasible = checkFlightFeasibility(gene, gate);
             }
+
+            addNextFlight(newGate, getGene(gate, i));
         }
 
-        for (int i = getIndex(gate, 0); i < (noOfGates - 1) * maxNoFlights; i++) {
+        for (int i = getIndex(gate, 0); i < (noOfGates - 1) * maxNoFlights; i++) { // we remove all positions for that gate
             setGene(i, getGene(i + maxNoFlights));
         }
 
