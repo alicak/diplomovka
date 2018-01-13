@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.simplechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +25,45 @@ public class SimpleChromosome extends Chromosome {
 
     @Override
     public void removeFlight(int flight) {
-        throw new UnsupportedOperationException(); // TODO
+        List<Integer> newGenes = new ArrayList<>();
+        for (int g = 0; g < getGenes().size(); g++) {
+            if (g == flight)
+                continue;
+            newGenes.add(getGene(g));
+        }
+        setGenes(newGenes);
     }
 
     @Override
     public void removeGate(int gate) {
-        throw new UnsupportedOperationException(); // TODO
+        for (int f = 0; f < getGenes().size(); f++) {
+            if (getGene(f) == gate) {
+                boolean feasible = false;
+                int newGate = -1;
+
+                while (!feasible) {
+                    newGate = Utils.randomInt(noOfGates);
+                    if (newGate == gate)
+                        continue;
+                    feasible = checkFlightFeasibility(f, newGate);
+                }
+
+                setGene(f, newGate);
+            }
+
+            if (getGene(f) > gate)
+                setGene(f, getGene(f) - 1);
+        }
     }
 
+    @Override
     public boolean checkFlightFeasibility(int flight, int gate) {
-        throw new UnsupportedOperationException(); // TODO
+        return feasibilityChecker.checkFlightFeasibility(flight, gate);
     }
 
+    @Override
     public boolean checkFeasibility() {
-        throw new UnsupportedOperationException(); // TODO
+        return feasibilityChecker.checkChromosomeFeasibility(this);
     }
 
     public int getNoOfGates() {
