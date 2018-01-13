@@ -28,13 +28,6 @@ public class SimpleTimeDiffFitness extends FitnessFunctionBase {
         return fitness;
     }
 
-    @Override
-    public double calculateAndSetFitness(Chromosome chromosome) {
-        double fitness = calculateFitness(chromosome);
-        chromosome.setFitness(fitness);
-        return fitness;
-    }
-
     private int[] scheduleFlights(SimpleChromosome chromosome) {
         int[] actualStarts = new int[chromosome.getNoOfFlights()];
         int[] gateAvailabilityTimes = new int[chromosome.getNoOfGates()];

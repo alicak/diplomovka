@@ -12,6 +12,10 @@ public abstract class FitnessFunctionBase {
 
     public abstract double calculateFitness(Chromosome chromosome);
 
-    public abstract double calculateAndSetFitness(Chromosome chromosome);
+    public double calculateAndSetFitness(Chromosome chromosome) {
+        double fitness = calculateFitness(chromosome);
+        chromosome.setFitness(fitness);
+        return fitness;
+    }
 
 }

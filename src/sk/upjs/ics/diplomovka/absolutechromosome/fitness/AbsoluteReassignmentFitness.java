@@ -18,8 +18,4 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
         return 0;
     }
 
-    @Override
-    public double calculateAndSetFitness(Chromosome chromosome) {
-        return 0;
-    }
 }
