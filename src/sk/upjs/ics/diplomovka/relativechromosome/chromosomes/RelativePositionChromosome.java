@@ -31,7 +31,8 @@ public class RelativePositionChromosome extends Chromosome {
         setGene(getIndex(noOfFlights, flight), value);
     }
 
-    public int getNoFlights() {
+    @Override
+    public int getNoOfFlights() {
         return noOfFlights;
     }
 

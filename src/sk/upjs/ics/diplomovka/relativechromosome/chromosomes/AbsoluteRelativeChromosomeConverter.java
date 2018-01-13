@@ -10,7 +10,7 @@ public class AbsoluteRelativeChromosomeConverter {
 
     public static RelativePositionChromosome toRelativePositionChromosome(AbsolutePositionChromosome absChromosome) {
         int noOfGates = absChromosome.getNoOfGates();
-        int maxNoFlights = absChromosome.getMaxNoFlights();
+        int maxNoFlights = absChromosome.getNoOfFlights();
         RelativePositionChromosome chromosome = new RelativePositionChromosome(noOfGates, maxNoFlights);
 
         Integer[] genesArray = new Integer[maxNoFlights * maxNoFlights + +maxNoFlights];
@@ -36,7 +36,7 @@ public class AbsoluteRelativeChromosomeConverter {
 
     public static AbsolutePositionChromosome toAbsolutePositionChromosome(RelativePositionChromosome relChromosome) {
         int noOfGates = relChromosome.getNoOfGates();
-        int noOfFlights = relChromosome.getNoFlights();
+        int noOfFlights = relChromosome.getNoOfFlights();
         AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, noOfFlights);
 
         Integer[] genesArray = new Integer[noOfGates * noOfFlights];

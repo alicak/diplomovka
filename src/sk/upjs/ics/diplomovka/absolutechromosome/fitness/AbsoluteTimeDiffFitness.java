@@ -18,7 +18,7 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
         int[] actualStarts = scheduleFlights(absChromosome);
         double fitness = 0;
 
-        for (int i = 0; i < flightStorage.getNoOfFlights(); i++) {
+        for (int i = 0; i < chromosome.getNoOfFlights(); i++) {
             int diff = actualStarts[i] - flightStorage.getFlightByNumber(i).getStart();
             if (diff > 0) {
                 fitness += diff;
@@ -36,7 +36,7 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
     }
 
     private int[] scheduleFlights(AbsolutePositionChromosome chromosome) {
-        int[] actualStarts = new int[chromosome.getMaxNoFlights()];
+        int[] actualStarts = new int[chromosome.getNoOfFlights()];
         int[] gateAvailabilityTimes = new int[chromosome.getNoOfGates()];
 
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {

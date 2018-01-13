@@ -101,10 +101,12 @@ public class AbsolutePositionChromosome extends Chromosome {
         return noOfFlights[gate];
     }
 
-    public int getMaxNoFlights() {
+    @Override
+    public int getNoOfFlights() {
         return maxNoFlights;
     }
 
+    @Override
     public int getNoOfGates() {
         return noOfGates;
     }

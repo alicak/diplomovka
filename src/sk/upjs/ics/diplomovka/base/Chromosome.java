@@ -63,6 +63,10 @@ public abstract class Chromosome implements Comparable<Chromosome> {
 
     public abstract boolean checkFeasibility();
 
+    public abstract int getNoOfGates();
+
+    public abstract int getNoOfFlights();
+
     public String toString() {
         return "{genes=" + genes.toString() + ", fitness=" + fitness + "}";
     }

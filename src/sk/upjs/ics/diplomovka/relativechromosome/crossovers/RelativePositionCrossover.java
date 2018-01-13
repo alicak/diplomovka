@@ -25,7 +25,7 @@ public class RelativePositionCrossover extends CrossoverBase {
     }
 
     private List<Chromosome> doRelativeCrossover(RelativePositionChromosome chromosome1, RelativePositionChromosome chromosome2) {
-        flights = chromosome1.getNoFlights();
+        flights = chromosome1.getNoOfFlights();
 
         RelativePositionChromosome newChromosome = locateCommonGenes(chromosome1, chromosome2);
         assignGates(chromosome1, chromosome2, newChromosome);
@@ -149,7 +149,7 @@ public class RelativePositionCrossover extends CrossoverBase {
     // step 4.1
     private int chooseJ(RelativePositionChromosome c3) {
         List<Integer> candidates = new ArrayList<>();
-        for (int j = 0; j < c3.getNoFlights(); j++) {
+        for (int j = 0; j < c3.getNoOfFlights(); j++) {
             if (sumOfColumn(c3, j) == 0)
                 candidates.add(j);
         }
@@ -210,7 +210,7 @@ public class RelativePositionCrossover extends CrossoverBase {
     private void setC3andC4(RelativePositionChromosome c3, RelativePositionChromosome c4, int i3, int j) {
         c3.setGene(i3, j, 1);
         c4.setGene(i3, j, 1);
-        for (int m = 0; m < c4.getNoFlights(); m++) {
+        for (int m = 0; m < c4.getNoOfFlights(); m++) {
             c4.setGene(m, i3, -1);
             c4.setGene(i3, m, -1);
         }

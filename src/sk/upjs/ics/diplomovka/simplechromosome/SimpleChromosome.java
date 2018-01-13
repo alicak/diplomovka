@@ -66,8 +66,14 @@ public class SimpleChromosome extends Chromosome {
         return feasibilityChecker.checkChromosomeFeasibility(this);
     }
 
+    @Override
     public int getNoOfGates() {
         return noOfGates;
+    }
+
+    @Override
+    public int getNoOfFlights() {
+        return getLength();
     }
 
     public SimpleChromosome copy() {
