@@ -15,6 +15,11 @@ import sk.upjs.ics.diplomovka.disruption.FlightCancelledDisruption;
 import sk.upjs.ics.diplomovka.disruption.FlightDelayedDisruption;
 import sk.upjs.ics.diplomovka.disruption.StandClosedDisruption;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosome;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleFeasibilityChecker;
+import sk.upjs.ics.diplomovka.simplechromosome.crossovers.MultiplePointCrossover;
+import sk.upjs.ics.diplomovka.simplechromosome.fitness.SimpleTimeDiffFitness;
+import sk.upjs.ics.diplomovka.simplechromosome.mutations.SimpleChromosomeMutation;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -38,7 +43,7 @@ public class Main {
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
-        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage); // TODO: Why is fitness higher?
+        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
         Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage);
 
         SelectionBase selection = new RankingSelection();
@@ -47,30 +52,42 @@ public class Main {
         AssignmentCreator assignmentCreator = new AssignmentCreator(arrivalsFile, departuresFile, parser, standsStorage, flightStorage);
         PopulationCreator populationCreator = new PopulationCreator();
 
-        // chromosome-specific part
-        AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
-        AbsolutePositionChromosome originalAssignment = assignmentCreator.createOriginalAssignment(feasibilityChecker);
+//        // absolute position chromosome
+//        AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
+//        AbsolutePositionChromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
+//
+//        //gate5closed.disruptAssignment(originalAssignment);
+//        //gate6closed.disruptAssignment(originalAssignment);
+//        //flight13cancelled.disruptAssignment(originalAssignment);
+//        //flight0delayed.disruptAssignment(originalAssignment);
+//
+//        PopulationBase population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
+//
+//        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
+//        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
+//        MutationBase mutation = new AbsolutePositionMutation(0.05);
+
+        // simple chromosome
+        SimpleFeasibilityChecker feasibilityChecker = new SimpleFeasibilityChecker(standsStorage, flightStorage);
+        SimpleChromosome originalAssignment = assignmentCreator.createSimpleOriginalAssignment(feasibilityChecker);
 
         //gate5closed.disruptAssignment(originalAssignment);
         //gate6closed.disruptAssignment(originalAssignment);
-        flight13cancelled.disruptAssignment(originalAssignment);
+        //flight13cancelled.disruptAssignment(originalAssignment);
         //flight0delayed.disruptAssignment(originalAssignment);
 
-        PopulationBase population = populationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
+        PopulationBase population = populationCreator.createSimpleInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
-        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
-        fitnessFunction.calculateAndSetFitness(originalAssignment);
-        double originalFitness = originalAssignment.getFitness();
-
-        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
-        MutationBase mutation = new AbsolutePositionMutation(0.05);
+        SimpleTimeDiffFitness fitnessFunction = new SimpleTimeDiffFitness(flightStorage);
+        CrossoverBase crossover = new MultiplePointCrossover(3, 0.8);
+        MutationBase mutation = new SimpleChromosomeMutation(0.05);
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
         PopulationBase finalPopulation = algorithm.evolve();
         Chromosome result = finalPopulation.bestChromosome();
 
-        System.out.println("original fitness: " + originalFitness);
+        System.out.println("original fitness: " + fitnessFunction.calculateFitness(originalAssignment));
         System.out.println("no of iterations: " + termination.getNoOfIterations());
         System.out.println("fitness: " + result.getFitness());
 

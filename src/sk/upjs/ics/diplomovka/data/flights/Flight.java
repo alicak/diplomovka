@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
+import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+
 public class Flight implements Comparable<Flight> {
 
     private int id;
@@ -9,6 +11,7 @@ public class Flight implements Comparable<Flight> {
     private FlightCategory category;
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
+    private int originalStandId; // TODO
 
     public enum FlightType {
         ARRIVAL,
@@ -23,7 +26,7 @@ public class Flight implements Comparable<Flight> {
     public Flight() {
     }
 
-    public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft, int turnaroundTime) {
+    public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft, int turnaroundTime, int originalStandId) {
         this.id = id;
         this.start = start;
         this.end = end;
@@ -31,6 +34,7 @@ public class Flight implements Comparable<Flight> {
         this.category = category;
         this.aircraft = aircraft;
         this.turnaroundTime = turnaroundTime;
+        this.originalStandId = originalStandId;
     }
 
     @Override
@@ -102,5 +106,13 @@ public class Flight implements Comparable<Flight> {
 
     public void setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
+    }
+
+    public void setOriginalStandId(int originalStandId) {
+        this.originalStandId = originalStandId;
+    }
+
+    public int getOriginalStandId() {
+        return originalStandId;
     }
 }

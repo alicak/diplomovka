@@ -5,14 +5,18 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGener
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosome;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosomeGenerator;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleFeasibilityChecker;
+import sk.upjs.ics.diplomovka.simplechromosome.SimplePopulation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PopulationCreator {
 
-    public static AbsolutePositionPopulation createInitialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker) {
-        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getMaxNoFlights(), feasibilityChecker);
+    public static AbsolutePositionPopulation createAbsoluteInitialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker) {
+        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getNoOfFlights(), feasibilityChecker);
 
         // first half are random assignments
         List<Chromosome> generation = new ArrayList<>();
@@ -25,8 +29,27 @@ public class PopulationCreator {
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
 
-        generation.add(originalAssignment);
+        generation.add(originalAssignment.copy()); // we also add original assignment
 
         return new AbsolutePositionPopulation(generation);
+    }
+
+    public static SimplePopulation createSimpleInitialPopulation(int generationSize, SimpleChromosome originalAssignment, SimpleFeasibilityChecker feasibilityChecker) {
+        SimpleChromosomeGenerator generator = new SimpleChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getNoOfFlights(), feasibilityChecker);
+
+        // first half are random assignments
+        List<Chromosome> generation = new ArrayList<>();
+        for (int i = 0; i < generationSize / 2; i++) {
+            generation.add(generator.generateChromosome());
+        }
+
+        // second half are mutations of original assignment
+        for (int i = generationSize / 2; i < generationSize - 1; i++) {
+            generation.add(generator.generateFromExisting(originalAssignment));
+        }
+
+        generation.add(originalAssignment.copy()); // we also add original assignment
+
+        return new SimplePopulation(generation);
     }
 }

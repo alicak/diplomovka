@@ -6,6 +6,7 @@ import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MultiplePointCrossover extends CrossoverBase {
@@ -28,30 +29,24 @@ public class MultiplePointCrossover extends CrossoverBase {
     }
 
     public List<Chromosome> doSimpleCrossover(SimpleChromosome chromosome1, SimpleChromosome chromosome2, List<Integer> positions) {
-        if (Math.random() > probability) {
-            return null;
-        }
+        if (Math.random() > probability)
+            return Collections.emptyList();
 
-        List<Integer> new1 = new ArrayList<>();
-        List<Integer> new2 = new ArrayList<>();
+        SimpleChromosome new1 = chromosome1.copy();
+        SimpleChromosome new2 = chromosome2.copy();
 
         for (int p = 1; p < positions.size(); p++) {
-            if (p % 2 == 0) {
-                for (int g = positions.get(p - 1); g < positions.get(p); g++) {
-                    new1.set(g, chromosome1.getGene(g));
-                    new2.set(g, chromosome2.getGene(g));
-                }
-            } else {
-                for (int g = positions.get(p - 1); g < positions.get(p); g++) {
-                    new1.set(g, chromosome2.getGene(g));
-                    new2.set(g, chromosome1.getGene(g));
+            if (p % 2 == 1) {
+                for (int f = positions.get(p - 1); f < positions.get(p); f++) {
+                    new1.setGene(f, chromosome2.getGene(f));
+                    new2.setGene(f, chromosome1.getGene(f));
                 }
             }
         }
 
         List<Chromosome> result = new ArrayList<>();
-        result.add(new SimpleChromosome(new1, chromosome1.getNoOfGates()));
-        result.add(new SimpleChromosome(new2, chromosome2.getNoOfGates()));
+        result.add(new1);
+        result.add(new2);
         return result;
     }
 }

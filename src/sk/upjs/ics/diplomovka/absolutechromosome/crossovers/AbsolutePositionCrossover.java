@@ -7,6 +7,7 @@ import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
@@ -18,6 +19,9 @@ public class AbsolutePositionCrossover extends CrossoverBase {
 
     @Override
     public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2) {
+        if (Math.random() > probability)
+            return Collections.emptyList();
+
         AbsolutePositionChromosome c1 = (AbsolutePositionChromosome) chromosome1;
         AbsolutePositionChromosome c2 = (AbsolutePositionChromosome) chromosome2;
         return doAbsoluteCrossover(c1, c2);

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleChromosome extends Chromosome {
+    public static int EMPTY_GENE = -1;
+
     private int noOfGates;
     private SimpleFeasibilityChecker feasibilityChecker;
 
@@ -54,6 +56,7 @@ public class SimpleChromosome extends Chromosome {
             if (getGene(f) > gate)
                 setGene(f, getGene(f) - 1);
         }
+        noOfGates--;
     }
 
     @Override
