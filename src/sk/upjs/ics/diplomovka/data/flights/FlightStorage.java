@@ -48,8 +48,10 @@ public class FlightStorage {
         }
     }
 
-    public Collection<Flight> getFlights() {
-        return flightsMap.values();
+    public List<Flight> getSortedFlights() {
+        List<Flight> flights = new ArrayList<>(flightsMap.values());
+        Collections.sort(flights);
+        return flights;
     }
 
     private int[] initializeIds(List<Flight> flights) {
