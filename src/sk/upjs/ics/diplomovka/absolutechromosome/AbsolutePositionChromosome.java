@@ -35,9 +35,15 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public void addNextFlight(int gate, int flightValue) {
-        setGene(getIndex(gate, noOfFlights[gate]), flightValue);
+        setGene(gate, noOfFlights[gate], flightValue);
+    }
+
+    public void insertFlight(int gate, int flight, int flightValue) {
+        for (int f = noOfFlights[gate] - 1; f >= flight; f--) {
+            setGene(getIndex(gate, f + 1), getGene(gate, f));
+        }
+        setGene(gate, flight, flightValue);
         noOfFlights[gate]++;
-        resetFitness();
     }
 
     @Override
@@ -80,8 +86,8 @@ public class AbsolutePositionChromosome extends Chromosome {
                     continue;
                 feasible = checkFlightFeasibility(gene, gate);
             }
-
-            addNextFlight(newGate, getGene(gate, i));
+            int position = Utils.randomInt(noOfFlights[newGate]);
+            insertFlight(newGate, position, gene);
         }
 
         for (int i = getIndex(gate, 0); i < (noOfGates - 1) * maxNoFlights; i++) { // we remove all positions for that gate
