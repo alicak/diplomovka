@@ -33,7 +33,7 @@ public class StandsStorage {
 
     public int getNumberById(int id) {
         for (int i = 0; i < standsIds.length; i++) {
-            if(standsIds[i] == id)
+            if (standsIds[i] == id)
                 return i;
         }
         return -1; // stand not found

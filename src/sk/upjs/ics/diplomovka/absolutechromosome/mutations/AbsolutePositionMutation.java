@@ -24,7 +24,7 @@ public class AbsolutePositionMutation extends MutationBase {
         AbsolutePositionChromosome absCh = (AbsolutePositionChromosome) (chromosome);
         double p = Math.random();
         if (p < 1 / 3.0) {
-           return swapBetweenGatesMutation.doAbsoluteMutation(absCh);
+            return swapBetweenGatesMutation.doAbsoluteMutation(absCh);
         } else if (p < 2 / 3.0) {
             return swapSuccessiveFlightsMutation.doAbsoluteMutation(absCh);
         } else {

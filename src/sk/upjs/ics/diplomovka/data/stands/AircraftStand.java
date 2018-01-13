@@ -54,7 +54,7 @@ public class AircraftStand {
     }
 
     public boolean checkFlight(Flight flight) {
-        if(flight == null) {
+        if (flight == null) {
             return false;
         }
         if (!this.flightCategories.contains(flight.getCategory())) {

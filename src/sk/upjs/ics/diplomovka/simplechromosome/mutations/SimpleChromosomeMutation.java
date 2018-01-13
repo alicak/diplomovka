@@ -32,7 +32,7 @@ public class SimpleChromosomeMutation extends MutationBase {
     protected int generateRandomGene(SimpleChromosome chromosome, int position) {
         boolean feasible = false;
         int gene = -1;
-        while(!feasible) {
+        while (!feasible) {
             gene = Utils.randomInt(chromosome.getNoOfGates());
             feasible = chromosome.checkFlightFeasibility(position, gene);
         }

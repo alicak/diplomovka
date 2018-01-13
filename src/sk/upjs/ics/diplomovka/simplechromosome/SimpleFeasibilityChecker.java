@@ -15,7 +15,7 @@ public class SimpleFeasibilityChecker extends FeasibilityCheckerBase {
     public boolean checkChromosomeFeasibility(Chromosome chromosome) {
         SimpleChromosome c = (SimpleChromosome) chromosome;
         for (int f = 0; f < c.getLength(); f++) {
-            if(!checkFlightFeasibility(f, c.getGene(f)))
+            if (!checkFlightFeasibility(f, c.getGene(f)))
                 return false;
         }
         return true;

@@ -26,7 +26,7 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         int flight1 = chromosome.getGene(gate1, flightIdx1);
         int flight2 = chromosome.getGene(gate2, flightIdx2);
 
-        if(!chromosome.checkFlightFeasibility(flight1, gate2) || !chromosome.checkFlightFeasibility(flight2, gate1))
+        if (!chromosome.checkFlightFeasibility(flight1, gate2) || !chromosome.checkFlightFeasibility(flight2, gate1))
             return false;
 
         chromosome.setGene(gate1, flightIdx1, flight2);

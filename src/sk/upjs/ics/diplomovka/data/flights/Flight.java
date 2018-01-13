@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
-
 public class Flight implements Comparable<Flight> {
 
     private int id;

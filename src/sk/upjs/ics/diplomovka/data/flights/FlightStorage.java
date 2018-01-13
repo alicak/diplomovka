@@ -23,7 +23,7 @@ public class FlightStorage {
 
     public int getNumberById(int id) {
         for (int i = 0; i < flightIds.length; i++) {
-            if(flightIds[i] == id)
+            if (flightIds[i] == id)
                 return i;
         }
         return -1; // flight not found
