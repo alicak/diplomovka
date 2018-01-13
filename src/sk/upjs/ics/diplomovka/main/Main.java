@@ -11,6 +11,8 @@ import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.disruption.FlightCancelledDisruption;
+import sk.upjs.ics.diplomovka.disruption.FlightDelayedDisruption;
 import sk.upjs.ics.diplomovka.disruption.StandClosedDisruption;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -34,19 +36,25 @@ public class Main {
         StandsStorage standsStorage = parser.parseStands(standsFile);
         FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser);
 
-        Disruption gate3closed = new StandClosedDisruption(5, standsStorage);
+        Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
+        Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
+        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage); // TODO: Why is fitness higher?
+        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage);
 
         SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(10000);
 
-        AssignmentCreator assignmentCreator = new AssignmentCreator(arrivalsFile, departuresFile, parser, standsStorage);
+        AssignmentCreator assignmentCreator = new AssignmentCreator(arrivalsFile, departuresFile, parser, standsStorage, flightStorage);
         PopulationCreator populationCreator = new PopulationCreator();
 
         // chromosome-specific part
         AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
         AbsolutePositionChromosome originalAssignment = assignmentCreator.createOriginalAssignment(feasibilityChecker);
 
-        gate3closed.disruptAssignment(originalAssignment);
+        //gate5closed.disruptAssignment(originalAssignment);
+        //gate6closed.disruptAssignment(originalAssignment);
+        flight13cancelled.disruptAssignment(originalAssignment);
+        //flight0delayed.disruptAssignment(originalAssignment);
 
         PopulationBase population = populationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 

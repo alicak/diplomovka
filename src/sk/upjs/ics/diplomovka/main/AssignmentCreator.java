@@ -3,10 +3,7 @@ package sk.upjs.ics.diplomovka.main;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.data.FlightCsvParser;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightId;
-import sk.upjs.ics.diplomovka.data.flights.FullArrival;
-import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
+import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 import java.io.File;
@@ -22,12 +19,14 @@ public class AssignmentCreator {
     private File departuresFile;
     private FlightCsvParser parser;
     private StandsStorage standsStorage;
+    private FlightStorage flightStorage;
 
-    public AssignmentCreator(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) {
+    public AssignmentCreator(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage, FlightStorage flightStorage) {
         this.arrivalsFile = arrivalsFile;
         this.departuresFile = departuresFile;
         this.parser = parser;
         this.standsStorage = standsStorage;
+        this.flightStorage = flightStorage;
     }
 
     public AbsolutePositionChromosome createOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
@@ -58,8 +57,9 @@ public class AssignmentCreator {
         Collections.sort(flights);
 
         for (FlightWithGate f : flights) {
-            int standNo = standsStorage.getStandIdByGate(f.gate);
-            originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), f.flight.getId());
+            int standNo = standsStorage.getNumberById(standsStorage.getStandIdByGate(f.gate));
+            int flightNo = flightStorage.getNumberById(f.flight.getId());
+            originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), flightNo);
         }
 
         return originalAssignment;

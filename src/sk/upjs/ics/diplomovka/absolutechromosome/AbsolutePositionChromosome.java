@@ -21,7 +21,7 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public int getGene(int gate, int flight) {
-        return getGene(getIndex(gate,flight));
+        return getGene(getIndex(gate, flight));
     }
 
     public void setGene(int gate, int flight, int flightValue) {
@@ -43,9 +43,19 @@ public class AbsolutePositionChromosome extends Chromosome {
     public void removeFlight(int flightValue) {
         FlightPosition position = findPosition(flightValue);
         removeFlightFromGenes(position.getGate(), position.getFlight());
-        for (int g = noOfGates - 1; g >= 0; g--) {
-            getGenes().remove(g * (maxNoFlights - 1));
+
+        Integer[] newGenes = new Integer[(maxNoFlights - 1) * noOfGates];
+        for (int g = 0; g < noOfGates; g++) {
+            for (int f = 0; f < maxNoFlights - 1; f++) {
+                int idx = g * (maxNoFlights - 1) + f;
+                int oldGene = getGene(g, f);
+                if (oldGene > flightValue)
+                    oldGene--;
+                newGenes[idx] = oldGene;
+            }
         }
+        setGenes(Arrays.asList(newGenes));
+
         maxNoFlights--;
     }
 

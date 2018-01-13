@@ -17,8 +17,8 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
 
         for (int g = 0; g < c.getNoOfGates(); g++) {
             for (int f = 0; f < c.getNoOfFlights(g); f++) {
-                int flightId = c.getGene(g, f);
-                if (!checkFlightFeasibility(flightId, g)) {
+                int flightNo = c.getGene(g, f);
+                if (!checkFlightFeasibility(flightNo, g)) {
                     return false;
                 }
             }
@@ -29,6 +29,6 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
     @Override
     public boolean checkFlightFeasibility(int flightValue, int gate) {
         AircraftStand stand = standsStorage.getStandByNumber(gate);
-        return stand.checkFlight(flightStorage.getFlightById(flightValue));
+        return stand.checkFlight(flightStorage.getFlightByNumber(flightValue));
     }
 }
