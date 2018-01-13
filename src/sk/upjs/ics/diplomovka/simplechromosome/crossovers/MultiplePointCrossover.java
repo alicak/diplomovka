@@ -24,10 +24,10 @@ public class MultiplePointCrossover extends CrossoverBase {
         for (int p = 1; p < numberOfPoints; p++) {
             positions.add(Utils.randomInt(space * (p - 1), space * p));
         }
-        return doCrossover(chromosome1, chromosome2, positions);
+        return doSimpleCrossover((SimpleChromosome) chromosome1, (SimpleChromosome) chromosome2, positions);
     }
 
-    public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2, List<Integer> positions) {
+    public List<Chromosome> doSimpleCrossover(SimpleChromosome chromosome1, SimpleChromosome chromosome2, List<Integer> positions) {
         if (Math.random() > probability) {
             return null;
         }
@@ -50,8 +50,8 @@ public class MultiplePointCrossover extends CrossoverBase {
         }
 
         List<Chromosome> result = new ArrayList<>();
-        result.add(new SimpleChromosome(new1));
-        result.add(new SimpleChromosome(new2));
+        result.add(new SimpleChromosome(new1, chromosome1.getNoOfGates()));
+        result.add(new SimpleChromosome(new2, chromosome2.getNoOfGates()));
         return result;
     }
 }

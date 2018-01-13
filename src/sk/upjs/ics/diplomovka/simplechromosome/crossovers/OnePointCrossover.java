@@ -17,10 +17,10 @@ public class OnePointCrossover extends CrossoverBase {
     public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2) {
         int length = chromosome1.getLength();
         int position = Utils.randomInt(0, length);
-        return doCrossover(chromosome1, chromosome2, position, length);
+        return doSimpleCrossover((SimpleChromosome) chromosome1, (SimpleChromosome) chromosome2, position, length);
     }
 
-    public List<Chromosome> doCrossover(Chromosome chromosome1, Chromosome chromosome2, int position, int length) {
+    public List<Chromosome> doSimpleCrossover(SimpleChromosome chromosome1, SimpleChromosome chromosome2, int position, int length) {
         if (Math.random() > probability) {
             return null;
         }
@@ -39,8 +39,8 @@ public class OnePointCrossover extends CrossoverBase {
         }
 
         List<Chromosome> result = new ArrayList<>();
-        result.add(new SimpleChromosome(new1));
-        result.add(new SimpleChromosome(new2));
+        result.add(new SimpleChromosome(new1, chromosome1.getNoOfGates()));
+        result.add(new SimpleChromosome(new2, chromosome2.getNoOfGates()));
         return result;
     }
 }
