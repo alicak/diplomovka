@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.simplechromosome.crossovers;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
+import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ public class MultiplePointCrossover extends CrossoverBase {
         }
 
         List<Chromosome> result = new ArrayList<>();
-        // result.add(new Chromosome(new1)); // TODO: instances of concrete class
-        // result.add(new Chromosome(new2));
+        result.add(new SimpleChromosome(new1));
+        result.add(new SimpleChromosome(new2));
         return result;
     }
 }

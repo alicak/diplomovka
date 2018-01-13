@@ -13,9 +13,4 @@ public class SimplePopulation extends PopulationBase {
     public SimplePopulation(List<Chromosome> generation) {
         super(generation);
     }
-
-    @Override
-    public void generateAndSetRandom() {
-        throw new UnsupportedOperationException(); // TODO
-    }
 }

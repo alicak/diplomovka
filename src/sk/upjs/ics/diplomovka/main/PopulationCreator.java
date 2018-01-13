@@ -27,6 +27,6 @@ public class PopulationCreator {
 
         generation.add(originalAssignment);
 
-        return new AbsolutePositionPopulation(generation, generator);
+        return new AbsolutePositionPopulation(generation);
     }
 }

@@ -38,8 +38,6 @@ public abstract class PopulationBase {
         return generation.size();
     }
 
-    public abstract void generateAndSetRandom();
-
     public int getNewGenerationSize() {
         return newGenerationSize;
     }
