@@ -125,10 +125,12 @@ public class AbsolutePositionChromosome extends Chromosome {
         this.feasibilityChecker = feasibilityChecker;
     }
 
+    @Override
     public boolean checkFlightFeasibility(int flightValue, int gate) {
         return feasibilityChecker.checkFlightFeasibility(flightValue, gate);
     }
 
+    @Override
     public boolean checkFeasibility() {
         return feasibilityChecker.checkChromosomeFeasibility(this);
     }
