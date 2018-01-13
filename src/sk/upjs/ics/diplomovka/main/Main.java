@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.main;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
@@ -18,6 +19,7 @@ import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.simplechromosome.SimpleChromosome;
 import sk.upjs.ics.diplomovka.simplechromosome.SimpleFeasibilityChecker;
 import sk.upjs.ics.diplomovka.simplechromosome.crossovers.MultiplePointCrossover;
+import sk.upjs.ics.diplomovka.simplechromosome.fitness.SimpleReassignmentFitness;
 import sk.upjs.ics.diplomovka.simplechromosome.fitness.SimpleTimeDiffFitness;
 import sk.upjs.ics.diplomovka.simplechromosome.mutations.SimpleChromosomeMutation;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -39,7 +41,7 @@ public class Main {
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
-        FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser);
+        FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser, standsStorage);
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
@@ -63,7 +65,8 @@ public class Main {
 //
 //        PopulationBase population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 //
-//        AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
+//        //AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
+//        AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
 //        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
 //        MutationBase mutation = new AbsolutePositionMutation(0.05);
 
@@ -78,7 +81,8 @@ public class Main {
 
         PopulationBase population = populationCreator.createSimpleInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
-        SimpleTimeDiffFitness fitnessFunction = new SimpleTimeDiffFitness(flightStorage);
+//        SimpleTimeDiffFitness fitnessFunction = new SimpleTimeDiffFitness(flightStorage);
+        SimpleReassignmentFitness fitnessFunction = new SimpleReassignmentFitness(flightStorage, standsStorage);
         CrossoverBase crossover = new MultiplePointCrossover(3, 0.8);
         MutationBase mutation = new SimpleChromosomeMutation(0.05);
 
@@ -97,7 +101,7 @@ public class Main {
         writer.close();
     }
 
-    private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser) throws IOException {
+    private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
         List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
@@ -107,12 +111,14 @@ public class Main {
 
         for (FullArrival a : arrivalsFull) {
             Flight f = FullArrival.toFlight(a);
+            f.setOriginalStandId(standsStorage.getStandIdByGate(a.getGate()));
             flights.add(f);
             flightsMap.put(f.getId(), f);
         }
 
         for (FullDeparture d : departuresFull) {
             Flight f = FullDeparture.toFlight(d);
+            f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
             flights.add(f);
             flightsMap.put(f.getId(), f);
         }

@@ -22,7 +22,6 @@ public class AssignmentCreator {
     private FlightCsvParser parser;
     private StandsStorage standsStorage;
     private FlightStorage flightStorage;
-    private List<Flight> flights;
 
     public AssignmentCreator(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage, FlightStorage flightStorage) throws IOException {
         this.arrivalsFile = arrivalsFile;
@@ -30,11 +29,10 @@ public class AssignmentCreator {
         this.parser = parser;
         this.standsStorage = standsStorage;
         this.flightStorage = flightStorage;
-        this.flights = createListOfFlights();
     }
 
     public AbsolutePositionChromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
-        int noOfFlights = flights.size();
+        int noOfFlights = flightStorage.getNoOfFlights();
 
         AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(standsStorage.getNoOfStands(), noOfFlights);
         originalAssignment.setFeasibilityChecker(feasibilityChecker);
@@ -43,7 +41,7 @@ public class AssignmentCreator {
         Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));
 
-        for (Flight f : flights) {
+        for (Flight f : flightStorage.getFlights()) {
             int standNo = standsStorage.getNumberById(f.getOriginalStandId());
             int flightNo = flightStorage.getNumberById(f.getId());
             originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), flightNo);
@@ -56,41 +54,17 @@ public class AssignmentCreator {
         SimpleChromosome originalAssignment = new SimpleChromosome(standsStorage.getNoOfStands());
         originalAssignment.setFeasibilityChecker(feasibilityChecker);
 
-        Integer[] genesArray = new Integer[flights.size()];
+        Integer[] genesArray = new Integer[flightStorage.getNoOfFlights()];
         Arrays.fill(genesArray, SimpleChromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));
 
-        for (Flight f : flights) {
+        for (Flight f : flightStorage.getFlights()) {
             int standNo = standsStorage.getNumberById(f.getOriginalStandId());
             int flightNo = flightStorage.getNumberById(f.getId());
             originalAssignment.setGene(flightNo, standNo);
         }
 
         return originalAssignment;
-    }
-
-    private List<Flight> createListOfFlights() throws IOException {
-        List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
-        List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
-        FlightId.reset();
-
-        List<Flight> flights = new ArrayList<>();
-
-        for (FullArrival a : arrivalsFull) {
-            Flight f = FullArrival.toFlight(a);
-            f.setOriginalStandId(standsStorage.getStandIdByGate(a.getGate()));
-            flights.add(f);
-        }
-
-        for (FullDeparture d : departuresFull) {
-            Flight f = FullDeparture.toFlight(d);
-            f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
-            flights.add(f);
-        }
-
-        Collections.sort(flights);
-
-        return flights;
     }
 
 }

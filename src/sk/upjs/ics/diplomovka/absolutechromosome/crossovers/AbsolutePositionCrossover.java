@@ -30,6 +30,10 @@ public class AbsolutePositionCrossover extends CrossoverBase {
     private List<Chromosome> doAbsoluteCrossover(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
         int gate = Utils.randomInt(chromosome1.getNoOfGates());
         int maxLength = Math.max(chromosome1.getNoOfFlights(gate), chromosome2.getNoOfFlights(gate));
+
+        if(maxLength < 2) // there aren't enough flights at the gate
+            return Collections.emptyList();
+
         int queueStart = Utils.randomInt(maxLength - 1); // -1 so there is at least one flight after the start
         int queueLength = Utils.randomInt(1, maxLength - queueStart); // 1 would mean SwapBetweenGates mutations
 

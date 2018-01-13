@@ -1,8 +1,6 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FlightStorage {
     private Map<Integer, Flight> flightsMap;
@@ -48,6 +46,10 @@ public class FlightStorage {
                 return;
             }
         }
+    }
+
+    public Collection<Flight> getFlights() {
+        return flightsMap.values();
     }
 
     private int[] initializeIds(List<Flight> flights) {
