@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.base;
 
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,11 @@ public abstract class Chromosome implements Comparable<Chromosome> {
         fitness = FITNESS_NOT_SET;
     }
 
+    public abstract int addFlight();
+
     public abstract void removeFlight(int flight);
+
+    public abstract int addGate();
 
     public abstract void removeGate(int gate);
 

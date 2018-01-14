@@ -55,22 +55,32 @@ public class RelativePositionChromosome extends Chromosome {
     }
 
     @Override
+    public int addFlight() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void removeFlight(int flight) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int addGate() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void removeGate(int gate) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean checkFlightFeasibility(int flightNo, int gate) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean checkFeasibility() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 }

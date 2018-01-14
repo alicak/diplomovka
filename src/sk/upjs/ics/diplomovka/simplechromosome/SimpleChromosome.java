@@ -26,6 +26,11 @@ public class SimpleChromosome extends Chromosome {
     }
 
     @Override
+    public int addFlight() {
+        return 0; // TODO
+    }
+
+    @Override
     public void removeFlight(int flight) {
         List<Integer> newGenes = new ArrayList<>();
         for (int g = 0; g < getGenes().size(); g++) {
@@ -34,6 +39,11 @@ public class SimpleChromosome extends Chromosome {
             newGenes.add(getGene(g));
         }
         setGenes(newGenes);
+    }
+
+    @Override
+    public int addGate() {
+        return 0; // TODO
     }
 
     @Override

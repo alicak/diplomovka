@@ -31,6 +31,10 @@ public class FlightStorage {
         return flightsMap.size();
     }
 
+    public int addFlight(Flight flight) {
+        return 0;  // TODO
+    }
+
     public void removeFlight(int id) {
         flightsMap.remove(id);
 

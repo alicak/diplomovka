@@ -47,6 +47,11 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     @Override
+    public int addFlight() {
+        return 0; // TODO
+    }
+
+    @Override
     public void removeFlight(int flightValue) {
         FlightPosition position = findPosition(flightValue);
         removeFlightFromGenes(position.getGate(), position.getFlight());
@@ -64,6 +69,11 @@ public class AbsolutePositionChromosome extends Chromosome {
         setGenes(Arrays.asList(newGenes));
 
         maxNoFlights--;
+    }
+
+    @Override
+    public int addGate() {
+        return 0; // TODO
     }
 
     public void removeFlightFromGenes(int gate, int flight) {

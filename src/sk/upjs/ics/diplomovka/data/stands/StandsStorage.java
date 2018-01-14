@@ -39,6 +39,10 @@ public class StandsStorage {
         return -1; // stand not found
     }
 
+    public int addStand(AircraftStand stand) {
+        return 0; // TODO
+    }
+
     public void removeStand(int standId) {
         stands.remove(standId);
         int length = standsIds.length;
