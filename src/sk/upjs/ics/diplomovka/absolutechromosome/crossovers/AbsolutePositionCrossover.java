@@ -13,6 +13,8 @@ import java.util.List;
 import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
 
 public class AbsolutePositionCrossover extends CrossoverBase {
+    public static final int MIN_QUEUE_LENGTH = 2;
+
     public AbsolutePositionCrossover(double probability) {
         super(probability);
     }
@@ -28,10 +30,17 @@ public class AbsolutePositionCrossover extends CrossoverBase {
     }
 
     private List<Chromosome> doAbsoluteCrossover(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
+        if (Math.random() > 0.5)
+            return crossWithSameStart(chromosome1, chromosome2);
+        else
+            return crossWithDifferentStart(chromosome1, chromosome2);
+    }
+
+    private List<Chromosome> crossWithSameStart(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
         int gate = Utils.randomInt(chromosome1.getNoOfGates());
         int maxLength = Math.max(chromosome1.getNoOfFlights(gate), chromosome2.getNoOfFlights(gate));
 
-        if(maxLength < 2) // there aren't enough flights at the gate
+        if (maxLength < MIN_QUEUE_LENGTH) // there aren't enough flights at the gate
             return Collections.emptyList();
 
         int queueStart = Utils.randomInt(maxLength - 1); // -1 so there is at least one flight after the start
@@ -44,6 +53,32 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         if (updateChromosome(c1, chromosome2, queueStart, queueLength, gate))
             result.add(c1);
         if (updateChromosome(c2, chromosome1, queueStart, queueLength, gate))
+            result.add(c2);
+
+        return result;
+    }
+
+    private List<Chromosome> crossWithDifferentStart(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
+        int gate = Utils.randomInt(chromosome1.getNoOfGates());
+        int length1 = chromosome1.getNoOfFlights(gate);
+        int length2 = chromosome2.getNoOfFlights(gate);
+
+        if (length1 < MIN_QUEUE_LENGTH || length2 < MIN_QUEUE_LENGTH) // there aren't enough flights at the gate
+            return Collections.emptyList();
+
+        int start1 = Utils.randomInt(length1 - MIN_QUEUE_LENGTH);
+        int start2 = Utils.randomInt(length2 - MIN_QUEUE_LENGTH);
+        int maxLength = Math.min(length1 - start1, length2 - start2);
+
+        int queueLength = Utils.randomInt(1, maxLength); // 1 would mean SwapBetweenGates mutations
+
+        AbsolutePositionChromosome c1 = chromosome1.copy();
+        AbsolutePositionChromosome c2 = chromosome2.copy();
+
+        List<Chromosome> result = new ArrayList<>();
+        if (updateChromosome(c1, chromosome2, start1, queueLength, gate))
+            result.add(c1);
+        if (updateChromosome(c2, chromosome1, start2, queueLength, gate))
             result.add(c2);
 
         return result;
