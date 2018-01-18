@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.algorithm;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,14 @@ public class Algorithm extends AlgorithmBase {
         Collections.sort(offspring);
 
         List<Chromosome> newGeneration = selection.select(offspring, size);
+
+//        try {
+//            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("absolute_fitness.txt", true)));
+//            out.println(newGeneration.get(0).getFitness());
+//            out.close();
+//        } catch (IOException e) {
+//            //exception handling left as an exercise for the reader
+//        }
 
         population.set(newGeneration);
     }

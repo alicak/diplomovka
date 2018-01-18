@@ -17,6 +17,7 @@ import sk.upjs.ics.diplomovka.disruption.FlightCancelledDisruption;
 import sk.upjs.ics.diplomovka.disruption.FlightDelayedDisruption;
 import sk.upjs.ics.diplomovka.disruption.StandClosedDisruption;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
+import sk.upjs.ics.diplomovka.termination.FitnessTermination;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class AbsoluteMain {
         File departuresFile = new File("departures.csv");
         File standsFile = new File("stands.csv");
 
-        int generationSize = 20; // TODO
+        int generationSize = 30; // TODO
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
@@ -41,10 +42,11 @@ public class AbsoluteMain {
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
-        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage);
+        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage); // no 2
+        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage); // no 75
 
         SelectionBase selection = new RankingSelection();
-        TerminationBase termination = new IterationsTermination(10000);
+        TerminationBase termination = new IterationsTermination(1000);
 
         AssignmentCreator assignmentCreator = new AssignmentCreator(standsStorage, flightStorage);
         PopulationCreator populationCreator = new PopulationCreator();
@@ -53,18 +55,29 @@ public class AbsoluteMain {
         AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(standsStorage, flightStorage);
         AbsolutePositionChromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
 
-        //gate5closed.disruptAssignment(originalAssignment);
         //gate6closed.disruptAssignment(originalAssignment);
         //flight13cancelled.disruptAssignment(originalAssignment);
-        flight0delayed.disruptAssignment(originalAssignment);
+//        flight0delayed.disruptAssignment(originalAssignment);
+        flight34delayed.disruptAssignment(originalAssignment);
+        gate5closed.disruptAssignment(originalAssignment);
 
         PopulationBase population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
+        for (Chromosome c : population.get()) {
+            gate5closed.disruptAssignment(c);
+        }
 
         //AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
         //AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
         AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(flightStorage, standsStorage);
-        CrossoverBase crossover = new AbsolutePositionCrossover(0.8);
-        MutationBase mutation = new AbsolutePositionMutation(0.05);
+
+        for (Chromosome c : population.get()) {
+            fitnessFunction.calculateAndSetFitness(c);
+        }
+
+        CrossoverBase crossover = new AbsolutePositionCrossover(1);
+        MutationBase mutation = new AbsolutePositionMutation(0.5);
+
+        //TerminationBase termination = new FitnessTermination(2000, population, fitnessFunction);
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);

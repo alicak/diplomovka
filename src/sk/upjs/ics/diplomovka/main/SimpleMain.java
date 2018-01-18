@@ -21,6 +21,7 @@ import sk.upjs.ics.diplomovka.simplechromosome.crossovers.MultiplePointCrossover
 import sk.upjs.ics.diplomovka.simplechromosome.fitness.SimpleTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.simplechromosome.fitness.SimpleTimeDiffFitness;
 import sk.upjs.ics.diplomovka.simplechromosome.mutations.SimpleChromosomeMutation;
+import sk.upjs.ics.diplomovka.termination.FitnessTermination;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -46,9 +47,10 @@ public class SimpleMain {
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
         Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage);
+        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage);
 
         SelectionBase selection = new RankingSelection();
-        TerminationBase termination = new IterationsTermination(10000);
+        TerminationBase termination = new IterationsTermination(1000);
 
         AssignmentCreator assignmentCreator = new AssignmentCreator(standsStorage, flightStorage);
         PopulationCreator populationCreator = new PopulationCreator();
@@ -57,18 +59,26 @@ public class SimpleMain {
         SimpleFeasibilityChecker feasibilityChecker = new SimpleFeasibilityChecker(standsStorage, flightStorage);
         SimpleChromosome originalAssignment = assignmentCreator.createSimpleOriginalAssignment(feasibilityChecker);
 
-        //gate5closed.disruptAssignment(originalAssignment);
-        //gate6closed.disruptAssignment(originalAssignment);
+        gate6closed.disruptAssignment(originalAssignment);
         //flight13cancelled.disruptAssignment(originalAssignment);
         flight0delayed.disruptAssignment(originalAssignment);
+        flight34delayed.disruptAssignment(originalAssignment);
+        gate5closed.disruptAssignment(originalAssignment);
 
         PopulationBase population = populationCreator.createSimpleInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
         // SimpleTimeDiffFitness fitnessFunction = new SimpleTimeDiffFitness(flightStorage);
 //        SimpleReassignmentFitness fitnessFunction = new SimpleReassignmentFitness(flightStorage, standsStorage);
         SimpleTimeDiffAndReassignmentFitness fitnessFunction = new SimpleTimeDiffAndReassignmentFitness(flightStorage, standsStorage);
-        CrossoverBase crossover = new MultiplePointCrossover(3, 0.8);
+
+        for (Chromosome c: population.get()) {
+            fitnessFunction.calculateAndSetFitness(c);
+        }
+
+        CrossoverBase crossover = new MultiplePointCrossover(3, 1);
         MutationBase mutation = new SimpleChromosomeMutation(0.05);
+
+        //TerminationBase termination = new FitnessTermination(1000, population, fitnessFunction);
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination);
