@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class StandsStorage {
 
+    public static final int STAND_NOT_FOUND = -1;
+
     private Map<Integer, AircraftStand> stands;
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
@@ -36,7 +38,7 @@ public class StandsStorage {
             if (standsIds[i] == id)
                 return i;
         }
-        return -1; // stand not found
+        return STAND_NOT_FOUND;
     }
 
     public int addStand(AircraftStand stand) {
@@ -44,6 +46,9 @@ public class StandsStorage {
     }
 
     public void removeStand(int standId) {
+        if(!stands.containsKey(standId))
+            return;
+
         stands.remove(standId);
         int length = standsIds.length;
 

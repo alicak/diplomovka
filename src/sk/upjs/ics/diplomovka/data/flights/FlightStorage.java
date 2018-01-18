@@ -36,6 +36,9 @@ public class FlightStorage {
     }
 
     public void removeFlight(int id) {
+        if(!flightsMap.containsKey(id))
+            return;
+
         flightsMap.remove(id);
 
         int length = flightIds.length;
