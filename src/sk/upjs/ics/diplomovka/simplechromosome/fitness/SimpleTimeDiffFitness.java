@@ -15,7 +15,7 @@ public class SimpleTimeDiffFitness extends FitnessFunctionBase {
     public double calculateFitness(Chromosome chromosome) {
         SimpleChromosome simpleChromosome = (SimpleChromosome) chromosome;
 
-        int[] actualStarts = scheduleFlights(simpleChromosome);
+        int[] actualStarts = scheduleFlights(simpleChromosome, flightStorage);
         double fitness = 0;
 
         for (int i = 0; i < chromosome.getNoOfFlights(); i++) {
@@ -28,7 +28,7 @@ public class SimpleTimeDiffFitness extends FitnessFunctionBase {
         return fitness;
     }
 
-    private int[] scheduleFlights(SimpleChromosome chromosome) {
+    protected static int[] scheduleFlights(SimpleChromosome chromosome, FlightStorage flightStorage) {
         int[] actualStarts = new int[chromosome.getNoOfFlights()];
         int[] gateAvailabilityTimes = new int[chromosome.getNoOfGates()];
 
