@@ -15,7 +15,11 @@ public class StandAddedDisruption implements Disruption {
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
-        standsStorage.addStand(stand);
         chromosome.addGate();
+    }
+
+    @Override
+    public void disruptStorage() {
+        standsStorage.addStand(stand);
     }
 }

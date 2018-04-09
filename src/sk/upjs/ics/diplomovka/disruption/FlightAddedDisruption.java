@@ -15,7 +15,11 @@ public class FlightAddedDisruption implements Disruption {
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
-        flightStorage.addFlight(flight);
         chromosome.addFlight();
+    }
+
+    @Override
+    public void disruptStorage() {
+        flightStorage.addFlight(flight);
     }
 }

@@ -16,6 +16,11 @@ public class FlightDelayedDisruption implements Disruption {
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
+        return;
+    }
+
+    @Override
+    public void disruptStorage() {
         int start = flightStorage.getFlightById(flight).getStart();
         flightStorage.getFlightById(flight).setStart(start + delay);
         int end = flightStorage.getFlightById(flight).getEnd();

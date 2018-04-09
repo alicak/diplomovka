@@ -46,10 +46,9 @@ public class StandsStorage {
     }
 
     public void removeStand(int standId) {
-        if(!stands.containsKey(standId))
+        if (stands.remove(standId) == null)
             return;
 
-        stands.remove(standId);
         int length = standsIds.length;
 
         for (int i = 0; i < length; i++) {
