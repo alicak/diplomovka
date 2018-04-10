@@ -1,11 +1,14 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class AbsolutePositionChromosome extends Chromosome {
     public static int EMPTY_GENE = -1;
@@ -14,6 +17,7 @@ public class AbsolutePositionChromosome extends Chromosome {
     private int[] noOfFlights; // number of flights per gate
     private int maxNoFlights;
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
+    private Map<Integer, Integer> currentFlightStarts;
 
     public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
         this.noOfGates = noOfGates;
@@ -39,11 +43,15 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     public void insertFlight(int gate, int flight, int flightValue) {
+        boolean append = true;
         for (int f = noOfFlights[gate] - 1; f >= flight; f--) {
             setGene(getIndex(gate, f + 1), getGene(gate, f));
+            append = false;
         }
+
         setGene(gate, flight, flightValue);
-        noOfFlights[gate]++;
+        if (!append) // if the flight was appended, the count was already incremented in previous line
+            noOfFlights[gate]++;
     }
 
     @Override
@@ -182,5 +190,40 @@ public class AbsolutePositionChromosome extends Chromosome {
         chromosome.setFeasibilityChecker(feasibilityChecker);
 
         return chromosome;
+    }
+
+    // we save current start time for that particular flight on that particular stand in this assignment
+    public void setCurrentFlightStart(int gate, int flightIdx, int currentStart) {
+        currentFlightStarts.put(getGene(gate, flightIdx), currentStart);
+    }
+
+    public int getCurrentFlightStart(int gate, int flightIdx) {
+        return currentFlightStarts.get(getGene(gate, flightIdx));
+    }
+
+    public void calculateCurrentFlightStarts(FlightStorage flightStorage) {
+        int previousNo = -1;
+        for (int gate = 0; gate < noOfGates; gate++) {
+            for (int flightIdx = 0; flightIdx < noOfFlights[gate]; flightIdx++) {
+                int flightNo = getGene(gate, flightIdx);
+                Flight f = flightStorage.getFlightByNumber(flightNo);
+
+                if (flightIdx == 0) {
+                    currentFlightStarts.put(flightNo, f.getStart());
+                    previousNo = flightNo;
+                } else {
+                    Flight previous = flightStorage.getFlightByNumber(getGene(gate, previousNo));
+                    int availableTime = currentFlightStarts.get(previousNo) + previous.getLength();
+                    int start = f.getStart();
+
+                    if (availableTime > start) {
+                        currentFlightStarts.put(flightNo, availableTime);
+                    } else {
+                        currentFlightStarts.put(flightNo, start);
+                    }
+                    previousNo = flightNo;
+                }
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome.fitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
@@ -13,14 +14,15 @@ public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
     @Override
     public double calculateFitness(Chromosome chromosome) {
         AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
-
-        int[] actualStarts = AbsoluteTimeDiffFitness.scheduleFlights(absChromosome, flightStorage);
         double fitness = 0;
 
-        for (int i = 0; i < chromosome.getNoOfFlights(); i++) {
-            int diff = actualStarts[i] - flightStorage.getFlightByNumber(i).getStart();
-            if (diff > 0) {
-                fitness++;
+        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
+            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g,f));
+                int diff = absChromosome.getCurrentFlightStart(g,f) - flight.getStart();
+                if (diff > 0) {
+                    fitness++;
+                }
             }
         }
 

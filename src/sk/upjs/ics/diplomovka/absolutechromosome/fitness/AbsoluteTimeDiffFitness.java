@@ -14,40 +14,18 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
     @Override
     public double calculateFitness(Chromosome chromosome) {
         AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
-
-        int[] actualStarts = scheduleFlights(absChromosome, flightStorage);
         double fitness = 0;
 
-        for (int i = 0; i < chromosome.getNoOfFlights(); i++) {
-            int diff = actualStarts[i] - flightStorage.getFlightByNumber(i).getStart();
-            if (diff > 0) {
-                fitness += diff;
-            }
-        }
-
-        return fitness;
-    }
-
-
-    protected static int[] scheduleFlights(AbsolutePositionChromosome chromosome, FlightStorage flightStorage) {
-        int[] actualStarts = new int[chromosome.getNoOfFlights()];
-        int[] gateAvailabilityTimes = new int[chromosome.getNoOfGates()];
-
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                int flightIdx = chromosome.getGene(g, f);
-                Flight flight = flightStorage.getFlightByNumber(flightIdx);
-
-                if (gateAvailabilityTimes[g] <= flight.getStart()) { // gate is available sooner than needed
-                    actualStarts[flightIdx] = flight.getStart();
-                    gateAvailabilityTimes[g] = flight.getEnd();
-                } else {
-                    actualStarts[flightIdx] = gateAvailabilityTimes[g];
-                    gateAvailabilityTimes[g] += flight.getLength();
+        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
+            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g,f));
+                int diff = absChromosome.getCurrentFlightStart(g,f) - flight.getStart();
+                if (diff > 0) {
+                    fitness += diff;
                 }
             }
         }
 
-        return actualStarts;
+        return fitness;
     }
 }

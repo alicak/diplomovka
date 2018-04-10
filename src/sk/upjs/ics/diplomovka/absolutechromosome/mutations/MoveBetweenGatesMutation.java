@@ -16,8 +16,8 @@ public class MoveBetweenGatesMutation extends AbsolutePositionMutation {
         int gate1 = Utils.randomInt(chromosome.getNoOfGates());
         int gate2 = Utils.randomInt(chromosome.getNoOfGates());
 
-        int noOfFlights1 = chromosome.getNoOfFlights(gate1); // there are no flights at the gate
-        if (noOfFlights1 == 0)
+        int noOfFlights1 = chromosome.getNoOfFlights(gate1);
+        if (noOfFlights1 == 0) // there are no flights at the gate
             return false;
 
         int flightIdx = Utils.randomInt(noOfFlights1);

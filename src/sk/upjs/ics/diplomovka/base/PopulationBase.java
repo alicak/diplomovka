@@ -49,4 +49,6 @@ public abstract class PopulationBase {
     public Chromosome bestChromosome() {
         return Collections.min(generation);
     }
+
+    public abstract void prepareForFitnessCalculation(List<Chromosome> chromosomes);
 }

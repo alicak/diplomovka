@@ -33,6 +33,7 @@ public class Algorithm extends AlgorithmBase {
             mutation.doMutation(c);
         }
 
+        population.prepareForFitnessCalculation(offspring); // population is not the best place to have such a method, but whatever...
         offspring.addAll(population.get());
         calculateAndSetFitness(offspring);
         Collections.sort(offspring);
