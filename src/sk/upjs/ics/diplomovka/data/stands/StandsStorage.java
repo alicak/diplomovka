@@ -1,7 +1,6 @@
 package sk.upjs.ics.diplomovka.data.stands;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public class StandsStorage {
 
@@ -10,11 +9,13 @@ public class StandsStorage {
     private Map<Integer, AircraftStand> stands;
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
+    private Map<Integer, List<StandClosure>> closures; // ids to closures
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
         this.gatesToStands = gatesToStands;
         initializeStands(stands);
+        initializeClosures();
     }
 
     public AircraftStand getStandById(int id) {
@@ -76,5 +77,20 @@ public class StandsStorage {
         }
 
         return standsIds;
+    }
+
+    private void initializeClosures() {
+        closures = new HashMap<>();
+        for (int i = 0; i < standsIds.length; i++) {
+            closures.put(standsIds[i], new LinkedList<>());
+        }
+    }
+
+    public List<StandClosure> getClosuresForStand(int standNo) {
+        return closures.get(getStandByNumber(standNo).getId());
+    }
+
+    public void addClosure(StandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
+        closures.get(closure.getStandId()).add(closure);
     }
 }

@@ -5,10 +5,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AbsolutePositionChromosome extends Chromosome {
     public static int EMPTY_GENE = -1;
@@ -17,7 +14,8 @@ public class AbsolutePositionChromosome extends Chromosome {
     private int[] noOfFlights; // number of flights per gate
     private int maxNoFlights;
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
-    private Map<Integer, Integer> currentFlightStarts;
+    private Map<Integer, Integer> currentFlightStarts = new HashMap<>();
+    private Map<Integer, Integer> currentFlightEnds = new HashMap<>();
 
     public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
         this.noOfGates = noOfGates;
@@ -193,12 +191,20 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     // we save current start time for that particular flight on that particular stand in this assignment
-    public void setCurrentFlightStart(int gate, int flightIdx, int currentStart) {
-        currentFlightStarts.put(getGene(gate, flightIdx), currentStart);
+    public void incrementCurrentStartAndEnd(int gate, int flightIdx, int amount) {
+        int flightNo = getGene(gate, flightIdx);
+        int newStart = currentFlightStarts.get(flightNo) + amount;
+        currentFlightStarts.put(flightNo, newStart);
+        int newEnd = currentFlightEnds.get(flightNo) + amount;
+        currentFlightEnds.put(flightNo, newEnd);
     }
 
     public int getCurrentFlightStart(int gate, int flightIdx) {
         return currentFlightStarts.get(getGene(gate, flightIdx));
+    }
+
+    public int getCurrentFlightEnd(int gate, int flightIdx) {
+        return currentFlightEnds.get(getGene(gate, flightIdx));
     }
 
     public void calculateCurrentFlightStarts(FlightStorage flightStorage) {
@@ -210,6 +216,7 @@ public class AbsolutePositionChromosome extends Chromosome {
 
                 if (flightIdx == 0) {
                     currentFlightStarts.put(flightNo, f.getStart());
+                    currentFlightEnds.put(flightNo, f.getEnd());
                     previousNo = flightNo;
                 } else {
                     Flight previous = flightStorage.getFlightByNumber(getGene(gate, previousNo));
@@ -218,8 +225,10 @@ public class AbsolutePositionChromosome extends Chromosome {
 
                     if (availableTime > start) {
                         currentFlightStarts.put(flightNo, availableTime);
+                        currentFlightEnds.put(flightNo, availableTime + f.getLength());
                     } else {
                         currentFlightStarts.put(flightNo, start);
+                        currentFlightEnds.put(flightNo, start + f.getLength());
                     }
                     previousNo = flightNo;
                 }
