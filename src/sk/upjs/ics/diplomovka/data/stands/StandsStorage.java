@@ -1,5 +1,8 @@
 package sk.upjs.ics.diplomovka.data.stands;
 
+import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
+
 import java.util.*;
 
 public class StandsStorage {
@@ -10,6 +13,7 @@ public class StandsStorage {
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
     private Map<Integer, List<StandClosure>> closures; // ids to closures
+    private Map<Integer, List<ConditionalStandClosure>> conditionalClosures;
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
@@ -81,8 +85,10 @@ public class StandsStorage {
 
     private void initializeClosures() {
         closures = new HashMap<>();
+        conditionalClosures = new HashMap<>();
         for (int i = 0; i < standsIds.length; i++) {
             closures.put(standsIds[i], new LinkedList<>());
+            conditionalClosures.put(standsIds[i], new LinkedList<>());
         }
     }
 
@@ -90,7 +96,15 @@ public class StandsStorage {
         return closures.get(getStandByNumber(standNo).getId());
     }
 
+    public List<ConditionalStandClosure> getConditionalClosuresForStand(int standNo) {
+        return conditionalClosures.get(getStandByNumber(standNo).getId());
+    }
+
     public void addClosure(StandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
         closures.get(closure.getStandId()).add(closure);
+    }
+
+    public void addConditionalClosure(ConditionalStandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
+        conditionalClosures.get(closure.getStandId()).add(closure);
     }
 }

@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
-import sk.upjs.ics.diplomovka.data.stands.StandClosure;
+import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 public class StandTemporarilyClosedDisruption implements Disruption {
