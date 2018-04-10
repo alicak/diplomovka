@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -266,5 +267,10 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
         this.currentFlightEnds = currentFlightEnds;
+    }
+
+    public void applyConditionalStandClosure(ConditionalStandClosure conditionalClosure, int standNo) {
+        StandClosure closure = new StandClosure(conditionalClosure.getStandId(), conditionalClosure.getStart(), conditionalClosure.getEnd());
+        applyStandClosure(closure, standNo);
     }
 }

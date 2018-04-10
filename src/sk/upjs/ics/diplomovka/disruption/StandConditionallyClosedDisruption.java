@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.disruption;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.data.stands.closures.ClosureCondition;
 import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
@@ -17,10 +18,12 @@ public class StandConditionallyClosedDisruption implements Disruption {
 
     @Override
     public void disruptAssignment(Chromosome chromosome) {
-
+        AbsolutePositionChromosome absCh = (AbsolutePositionChromosome) (chromosome); // TODO: somehow remove casting
+        absCh.applyConditionalStandClosure(closure, standsStorage.getNumberById(closure.getStandId()));
     }
 
     @Override
     public void disruptStorage() {
+        standsStorage.addConditionalClosure(closure);
     }
 }
