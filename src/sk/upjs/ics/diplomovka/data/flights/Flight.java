@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
+import java.util.Random;
+
 public class Flight implements Comparable<Flight> {
 
     private int id;
@@ -10,6 +12,12 @@ public class Flight implements Comparable<Flight> {
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
     private int originalStandId; // TODO
+
+    private int currentStart;
+
+    private static Random random = new Random();
+    private static final double TURNAROUND_TIME_MEAN = 38.65;
+    private static final double TURNAROUND_TIME_DEVIATION = 10.44;
 
     public enum FlightType {
         ARRIVAL,
@@ -33,6 +41,7 @@ public class Flight implements Comparable<Flight> {
         this.aircraft = aircraft;
         this.turnaroundTime = turnaroundTime;
         this.originalStandId = originalStandId;
+        this.turnaroundTime = generateTurnaroundTime();
     }
 
     @Override
@@ -112,5 +121,9 @@ public class Flight implements Comparable<Flight> {
 
     public int getOriginalStandId() {
         return originalStandId;
+    }
+
+    public static int generateTurnaroundTime() {
+        return (int) (random.nextGaussian() * TURNAROUND_TIME_DEVIATION + TURNAROUND_TIME_MEAN);
     }
 }
