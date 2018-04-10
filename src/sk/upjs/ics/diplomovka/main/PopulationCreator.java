@@ -32,6 +32,7 @@ public class PopulationCreator {
         }
 
         generation.add(originalAssignment.copy()); // we also add original assignment
+        originalAssignment.calculateCurrentFlightStarts(flightStorage);
 
         AbsolutePositionPopulation population = new AbsolutePositionPopulation(generation, flightStorage, standsStorage);
         population.prepareForFitnessCalculation(generation);

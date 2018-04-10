@@ -3,6 +3,8 @@ package sk.upjs.ics.diplomovka.absolutechromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.StandClosure;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.*;
@@ -187,6 +189,9 @@ public class AbsolutePositionChromosome extends Chromosome {
         chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
         chromosome.setFeasibilityChecker(feasibilityChecker);
 
+        chromosome.setCurrentFlightStarts(new HashMap<>(currentFlightStarts));
+        chromosome.setCurrentFlightEnds(new HashMap<>(currentFlightEnds));
+
         return chromosome;
     }
 
@@ -209,6 +214,7 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     public void calculateCurrentFlightStarts(FlightStorage flightStorage) {
         int previousNo = -1;
+        Flight previousFlight = null;
         for (int gate = 0; gate < noOfGates; gate++) {
             for (int flightIdx = 0; flightIdx < noOfFlights[gate]; flightIdx++) {
                 int flightNo = getGene(gate, flightIdx);
@@ -218,9 +224,9 @@ public class AbsolutePositionChromosome extends Chromosome {
                     currentFlightStarts.put(flightNo, f.getStart());
                     currentFlightEnds.put(flightNo, f.getEnd());
                     previousNo = flightNo;
+                    previousFlight = f;
                 } else {
-                    Flight previous = flightStorage.getFlightByNumber(getGene(gate, previousNo));
-                    int availableTime = currentFlightStarts.get(previousNo) + previous.getLength();
+                    int availableTime = currentFlightStarts.get(previousNo) + previousFlight.getLength();
                     int start = f.getStart();
 
                     if (availableTime > start) {
@@ -234,5 +240,32 @@ public class AbsolutePositionChromosome extends Chromosome {
                 }
             }
         }
+    }
+
+    public void applyStandClosure(StandClosure closure, int standNo) {
+        for (int f = 0; f < getNoOfFlights(standNo); f++) {
+            int currentEnd = getCurrentFlightEnd(standNo, f);
+
+            if (currentEnd >= closure.getStart()) {
+                int currentStart = getCurrentFlightStart(standNo, f);
+                int delay = closure.getLength();
+
+                if (currentStart < closure.getStart())
+                    delay = delay + (closure.getStart() - currentStart); // we also have to consider the gap between planned start and closure
+
+                for (int lateFlight = f; lateFlight < getNoOfFlights(standNo); lateFlight++) {
+                    incrementCurrentStartAndEnd(standNo, lateFlight, delay);
+                }
+                break;
+            }
+        }
+    }
+
+    public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
+        this.currentFlightStarts = currentFlightStarts;
+    }
+
+    public void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
+        this.currentFlightEnds = currentFlightEnds;
     }
 }

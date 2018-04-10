@@ -29,36 +29,21 @@ public class AbsolutePositionPopulation extends PopulationBase {
     }
 
     private void applyStandClosures(List<Chromosome> chromosomes) {
-        if (chromosomes.isEmpty())
-            return;
-
         List<AbsolutePositionChromosome> absChromosomes = new ArrayList<>();
-        for(Chromosome ch: chromosomes) {
-            absChromosomes.add((AbsolutePositionChromosome) (ch));
+        for (Chromosome ch : chromosomes) {
+            absChromosomes.add((AbsolutePositionChromosome) (ch)); // TODO: somehow remove casting
         }
 
-        for (int g = 0; g < chromosomes.get(0).getNoOfGates(); g++) {
-            for (AbsolutePositionChromosome ch : absChromosomes) {
-                List<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
-
-                for (StandClosure closure : closuresForStand) {
-
-                    for (int f = 0; f < ch.getNoOfFlights(g); f++) {
-                        int currentEnd = ch.getCurrentFlightEnd(g,f);
-
-                        if (currentEnd >= closure.getStart()) {
-                            int currentStart = ch.getCurrentFlightStart(g,f);
-                            int delay = closure.getLength() + (closure.getStart() - currentStart); // we also have to consider the gap between planned start and closure
-
-                            for(int lateFlight = f; lateFlight < ch.getNoOfFlights(g); lateFlight++){
-                                ch.incrementCurrentStartAndEnd(g,lateFlight,delay);
-                            }
-                            break;
-                        }
-                    }
+        for (int g = 0; g < standsStorage.getNoOfStands(); g++) {
+            List<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
+            for (StandClosure closure : closuresForStand) {
+                for (AbsolutePositionChromosome ch : absChromosomes) {
+                    ch.applyStandClosure(closure, g);
                 }
             }
         }
+
+
     }
 
 }
