@@ -142,6 +142,7 @@ public class FlightCsvParser {
         departure.setStatus(flightArray[5]);
         departure.setFlightNo(flightArray[6]);
         departure.setAircraft(aircrafts.get(flightArray[7]));
+        departure.setTurnaroundTime(Integer.parseInt(flightArray[8]));
 
         return departure;
     }

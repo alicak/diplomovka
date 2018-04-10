@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
 public class FullDeparture extends FullFlight {
-    // column structure: Scheduled, Actual, To, Terminal, Gate, Status, Flight No, Aircraft
+    // column structure: Scheduled, Actual, To, Terminal, Gate, Status, Flight No, Aircraft, Turnaround time
 
     private String to;
 
@@ -20,10 +20,8 @@ public class FullDeparture extends FullFlight {
         flight.setType(Flight.FlightType.DEPARTURE);
         flight.setCategory(Flight.FlightCategory.SCHENGEN); // TODO
         flight.setAircraft(departure.getAircraft());
-
-        int turnaroundTime = Flight.generateTurnaroundTime();
-        flight.setTurnaroundTime(turnaroundTime); // TODO from data?
-        flight.setStart(departure.getScheduled() - turnaroundTime); // TODO consider something else than turnaround time?
+        flight.setTurnaroundTime(departure.getTurnaroundTime());
+        flight.setStart(departure.getScheduled() - departure.getTurnaroundTime()); // TODO consider something else than turnaround time?
         flight.setEnd(departure.getScheduled());
 
         return flight;

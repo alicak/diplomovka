@@ -9,6 +9,7 @@ public abstract class FullFlight {
     private String status;
     private String flightNo;
     private Aircraft aircraft;
+    private int turnaroundTime;
 
     public int getScheduled() {
         return scheduled;
@@ -64,5 +65,13 @@ public abstract class FullFlight {
 
     public void setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;
+    }
+
+    public int getTurnaroundTime() {
+        return turnaroundTime;
+    }
+
+    public void setTurnaroundTime(int turnaroundTime) {
+        this.turnaroundTime = turnaroundTime;
     }
 }
