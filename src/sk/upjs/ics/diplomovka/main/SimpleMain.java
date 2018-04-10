@@ -45,6 +45,7 @@ public class SimpleMain {
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
+        Disruption gate9closed = new StandClosedDisruption(9, standsStorage);
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
         Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage);
         Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage);
@@ -60,10 +61,11 @@ public class SimpleMain {
         SimpleChromosome originalAssignment = assignmentCreator.createSimpleOriginalAssignment(feasibilityChecker);
 
         gate6closed.disruptAssignment(originalAssignment);
+        gate9closed.disruptAssignment(originalAssignment);
         //flight13cancelled.disruptAssignment(originalAssignment);
-        flight0delayed.disruptAssignment(originalAssignment);
-        flight34delayed.disruptAssignment(originalAssignment);
-        gate5closed.disruptAssignment(originalAssignment);
+//        flight0delayed.disruptAssignment(originalAssignment);
+//        flight34delayed.disruptAssignment(originalAssignment);
+//        gate5closed.disruptAssignment(originalAssignment);
 
         PopulationBase population = populationCreator.createSimpleInitialPopulation(generationSize, originalAssignment, feasibilityChecker);
 
@@ -96,19 +98,19 @@ public class SimpleMain {
     }
 
     private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
-        List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
+//        List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
 
         List<Flight> flights = new ArrayList<>();
         Map<Integer, Flight> flightsMap = new HashMap<>();
 
-        for (FullArrival a : arrivalsFull) {
-            Flight f = FullArrival.toFlight(a);
-            f.setOriginalStandId(standsStorage.getStandIdByGate(a.getGate()));
-            flights.add(f);
-            flightsMap.put(f.getId(), f);
-        }
+//        for (FullArrival a : arrivalsFull) {
+//            Flight f = FullArrival.toFlight(a);
+//            f.setOriginalStandId(standsStorage.getStandIdByGate(a.getGate()));
+//            flights.add(f);
+//            flightsMap.put(f.getId(), f);
+//        }
 
         for (FullDeparture d : departuresFull) {
             Flight f = FullDeparture.toFlight(d);
