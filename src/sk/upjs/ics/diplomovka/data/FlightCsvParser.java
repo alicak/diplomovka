@@ -85,19 +85,19 @@ public class FlightCsvParser {
         return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan), engineType);
     }
 
-    public List<FullArrival> parseArrivals(File arrivalsFile) throws IOException {
-        List<FullArrival> flights = new ArrayList<>();
-
-        BufferedReader reader = new BufferedReader(new FileReader(arrivalsFile));
-        reader.readLine(); // first line are column headers
-        String line = "";
-
-        while ((line = reader.readLine()) != null) {
-            flights.add(parseArrival(line));
-        }
-
-        return flights;
-    }
+//    public List<FullArrival> parseArrivals(File arrivalsFile) throws IOException {
+//        List<FullArrival> flights = new ArrayList<>();
+//
+//        BufferedReader reader = new BufferedReader(new FileReader(arrivalsFile));
+//        reader.readLine(); // first line are column headers
+//        String line = "";
+//
+//        while ((line = reader.readLine()) != null) {
+//            flights.add(parseArrival(line));
+//        }
+//
+//        return flights;
+//    }
 
     public List<FullDeparture> parseDepartures(File departuresFile) throws IOException {
         List<FullDeparture> flights = new ArrayList<>();
@@ -114,26 +114,26 @@ public class FlightCsvParser {
     }
 
 
-    private FullArrival parseArrival(String arrivalString) {
-        String[] flightArray = arrivalString.split(SEPARATOR);
-        for (String s : flightArray) {
-            s.trim();
-        }
-
-        FullArrival arrival = new FullArrival();
-
-        arrival.setScheduled(parseTime(flightArray[0]));
-        arrival.setActual(parseTime(flightArray[1]));
-        arrival.setFrom(flightArray[2]);
-        arrival.setTerminal(Integer.parseInt(flightArray[3]));
-        arrival.setGate(flightArray[4]);
-        arrival.setBaggageClaim(Integer.parseInt(flightArray[5]));
-        arrival.setStatus(flightArray[6]);
-        arrival.setFlightNo(flightArray[7]);
-        arrival.setAircraft(aircrafts.get(flightArray[8]));
-
-        return arrival;
-    }
+//    private FullArrival parseArrival(String arrivalString) {
+//        String[] flightArray = arrivalString.split(SEPARATOR);
+//        for (String s : flightArray) {
+//            s.trim();
+//        }
+//
+//        FullArrival arrival = new FullArrival();
+//
+//        arrival.setScheduled(parseTime(flightArray[0]));
+//        arrival.setActual(parseTime(flightArray[1]));
+//        arrival.setFrom(flightArray[2]);
+//        arrival.setTerminal(Integer.parseInt(flightArray[3]));
+//        arrival.setGate(flightArray[4]);
+//        arrival.setBaggageClaim(Integer.parseInt(flightArray[5]));
+//        arrival.setStatus(flightArray[6]);
+//        arrival.setFlightNo(flightArray[7]);
+//        arrival.setAircraft(aircrafts.get(flightArray[8]));
+//
+//        return arrival;
+//    }
 
     private FullDeparture parseDeparture(String departureString) {
         String[] flightArray = departureString.split(SEPARATOR);
@@ -152,6 +152,7 @@ public class FlightCsvParser {
         departure.setFlightNo(flightArray[6]);
         departure.setAircraft(aircrafts.get(flightArray[7]));
         departure.setTurnaroundTime(Integer.parseInt(flightArray[8]));
+        // TODO: priority
 
         return departure;
     }

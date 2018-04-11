@@ -19,6 +19,7 @@ public class FullDeparture extends FullFlight {
         flight.setId(FlightId.getId());
         flight.setType(Flight.FlightType.DEPARTURE);
         flight.setCategory(Flight.FlightCategory.SCHENGEN); // TODO
+        flight.setPriority(Flight.FlightPriority.NORMAL); // TODO
         flight.setAircraft(departure.getAircraft());
         flight.setTurnaroundTime(departure.getTurnaroundTime());
         flight.setStart(departure.getScheduled() - departure.getTurnaroundTime()); // TODO consider something else than turnaround time?

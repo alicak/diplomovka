@@ -9,6 +9,7 @@ public class Flight implements Comparable<Flight> {
     private int end;
     private FlightType type;
     private FlightCategory category;
+    private FlightPriority priority;
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
     private int originalStandId; // TODO
@@ -23,15 +24,23 @@ public class Flight implements Comparable<Flight> {
         NON_SCHENGEN
     }
 
+    public enum FlightPriority {
+        NORMAL,
+        HIGH,
+        LOW
+    }
+
     public Flight() {
     }
 
-    public Flight(int id, int start, int end, FlightType type, FlightCategory category, Aircraft aircraft, int turnaroundTime, int originalStandId) {
+    public Flight(int id, int start, int end, FlightType type, FlightCategory category, FlightPriority priority,
+                  Aircraft aircraft, int turnaroundTime, int originalStandId) {
         this.id = id;
         this.start = start;
         this.end = end;
         this.type = type;
         this.category = category;
+        this.priority = priority;
         this.aircraft = aircraft;
         this.turnaroundTime = turnaroundTime;
         this.originalStandId = originalStandId;
@@ -90,6 +99,14 @@ public class Flight implements Comparable<Flight> {
 
     public void setType(FlightType type) {
         this.type = type;
+    }
+
+    public FlightPriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(FlightPriority priority) {
+        this.priority = priority;
     }
 
     public Aircraft getAircraft() {
