@@ -52,7 +52,10 @@ public class FlightCsvParser {
         double maxWingspan = Double.parseDouble(wingspan);
         String[] gateArray = standArray[1].split(", ");
 
-        return new AircraftStand(id, maxWingspan, Flight.FlightCategory.SCHENGEN, null, Arrays.asList(gateArray)); // TODO: Schengen & null
+        return new AircraftStand(id, maxWingspan,
+                Arrays.asList(Flight.FlightCategory.SCHENGEN),
+                Arrays.asList(Aircraft.EngineType.JET, Aircraft.EngineType.TURBOPROP),
+                null, Arrays.asList(gateArray)); // TODO: Schengen & null
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {
@@ -73,7 +76,13 @@ public class FlightCsvParser {
 
         String wingspan = aircraftArray[1];
         wingspan = wingspan.replace(",", ".");
-        return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan));
+        Aircraft.EngineType engineType = Aircraft.EngineType.JET; // we set JET as default
+        if(aircraftArray[2].equals("jet")) {
+            engineType = Aircraft.EngineType.JET;
+        } else if(aircraftArray[2].equals("turboprop")) {
+            engineType = Aircraft.EngineType.TURBOPROP;
+        }
+        return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan), engineType);
     }
 
     public List<FullArrival> parseArrivals(File arrivalsFile) throws IOException {

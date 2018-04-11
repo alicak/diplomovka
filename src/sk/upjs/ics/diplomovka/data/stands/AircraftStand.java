@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.data.stands;
 
+import sk.upjs.ics.diplomovka.data.flights.Aircraft;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class AircraftStand {
     private int id;
     private double maxWingspan;
     private List<Flight.FlightCategory> flightCategories;
+    private List<Aircraft.EngineType> engineTypes;
     private AircraftStandType type;
     private List<String> gates;
 
@@ -24,19 +26,22 @@ public class AircraftStand {
         RMT         // Remote parking position
     }
 
-    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, AircraftStandType type, List<String> gates) {
+    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, Aircraft.EngineType engineType, AircraftStandType type, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.type = type;
         this.flightCategories = new ArrayList<>();
         this.flightCategories.add(flightCategory);
+        this.engineTypes = new ArrayList<>();
+        this.engineTypes.add(engineType);
         this.gates = gates;
     }
 
-    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, AircraftStandType type, List<String> gates) {
+    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes, AircraftStandType type, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.flightCategories = flightCategories;
+        this.engineTypes = engineTypes;
         this.type = type;
         this.gates = gates;
     }
@@ -54,15 +59,13 @@ public class AircraftStand {
     }
 
     public boolean checkFlight(Flight flight) {
-        if (flight == null) {
+        if (flight == null ||
+                !this.flightCategories.contains(flight.getCategory()) ||
+                this.maxWingspan < flight.getAircraft().getWingspan() ||
+                !this.engineTypes.contains(flight.getAircraft().getEngineType())) {
             return false;
         }
-        if (!this.flightCategories.contains(flight.getCategory())) {
-            return false;
-        }
-        if (this.maxWingspan < flight.getAircraft().getWingspan()) {
-            return false;
-        }
+
         return true;
     }
 

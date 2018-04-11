@@ -4,10 +4,17 @@ public class Aircraft {
 
     private String name;
     private double wingspan; // in meters
+    private EngineType engineType;
 
-    public Aircraft(String name, double wingspan) {
+    public enum EngineType {
+        TURBOPROP,
+        JET
+    }
+
+    public Aircraft(String name, double wingspan, EngineType engineType) {
         this.name = name;
         this.wingspan = wingspan;
+        this.engineType = engineType;
     }
 
     public String getName() {
@@ -18,4 +25,7 @@ public class Aircraft {
         return wingspan;
     }
 
+    public EngineType getEngineType() {
+        return engineType;
+    }
 }
