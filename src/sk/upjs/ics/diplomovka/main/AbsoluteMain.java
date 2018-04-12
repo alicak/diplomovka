@@ -4,18 +4,16 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteReassignmentFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffAndReassignmentFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.AbsoluteTimeDiffFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
+import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
-import sk.upjs.ics.diplomovka.termination.FitnessTermination;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -81,7 +79,10 @@ public class AbsoluteMain {
 
         //AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
         //AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
-        AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(flightStorage, standsStorage);
+        FitnessFunctionWeights weights = new FitnessFunctionWeights()
+                .setReassignmentWeight(10)
+                .setPassengerWeight(1);
+        AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(flightStorage, standsStorage, weights);
 
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);

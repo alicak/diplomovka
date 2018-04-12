@@ -1,14 +1,15 @@
-package sk.upjs.ics.diplomovka.absolutechromosome.fitness;
+package sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
+import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
-    public AbsoluteTimeDiffCountFitness(FlightStorage flightStorage) {
-        super(flightStorage);
+    public AbsoluteTimeDiffCountFitness(FlightStorage flightStorage, FitnessFunctionWeights weights) {
+        super(flightStorage, weights);
     }
 
     @Override

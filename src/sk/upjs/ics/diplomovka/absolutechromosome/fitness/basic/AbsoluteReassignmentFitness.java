@@ -1,8 +1,9 @@
-package sk.upjs.ics.diplomovka.absolutechromosome.fitness;
+package sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
+import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
@@ -10,8 +11,8 @@ import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
     private StandsStorage standsStorage;
 
-    public AbsoluteReassignmentFitness(FlightStorage flightStorage, StandsStorage standsStorage) {
-        super(flightStorage);
+    public AbsoluteReassignmentFitness(FlightStorage flightStorage, StandsStorage standsStorage, FitnessFunctionWeights weights) {
+        super(flightStorage, weights);
         this.standsStorage = standsStorage;
     }
 

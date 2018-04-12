@@ -1,12 +1,14 @@
 package sk.upjs.ics.diplomovka.base;
 
+import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public abstract class FitnessFunctionBase {
 
     protected FlightStorage flightStorage;
+    protected FitnessFunctionWeights weights;
 
-    public FitnessFunctionBase(FlightStorage flightStorage) {
+    public FitnessFunctionBase(FlightStorage flightStorage, FitnessFunctionWeights weights) {
         this.flightStorage = flightStorage;
     }
 
