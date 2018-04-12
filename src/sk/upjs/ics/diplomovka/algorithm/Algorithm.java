@@ -38,7 +38,7 @@ public class Algorithm extends AlgorithmBase {
 
         List<FitnessWorker> fitnessWorkers = new LinkedList<>();
         for (int w = 0; w < noOfCores; w++) {
-            fitnessWorkers.add(new FitnessWorker(fitnessFunction, offspring, counter));
+            fitnessWorkers.add(new FitnessWorker(fitnessFunction, offspring, counter, storage));
         }
         executor.invokeAll(fitnessWorkers);
 

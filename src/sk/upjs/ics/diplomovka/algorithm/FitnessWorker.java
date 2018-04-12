@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.algorithm;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -12,11 +13,13 @@ public class FitnessWorker implements Callable<Integer> {
     private FitnessFunctionBase fitnessFunction;
     private BlockingQueue<Chromosome> offspring;
     private AtomicInteger counter;
+    private GeneralStorage storage;
 
-    public FitnessWorker(FitnessFunctionBase fitnessFunction, BlockingQueue<Chromosome> offspring, AtomicInteger counter) {
+    public FitnessWorker(FitnessFunctionBase fitnessFunction, BlockingQueue<Chromosome> offspring, AtomicInteger counter, GeneralStorage storage) {
         this.fitnessFunction = fitnessFunction;
         this.offspring = offspring;
         this.counter = counter;
+        this.storage = storage;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class FitnessWorker implements Callable<Integer> {
                 chromosome = offspring.take();
 
                 if (!chromosome.hasFitness()) {
+                    chromosome.prepareForFitnessCalculation(storage);
                     fitnessFunction.calculateAndSetFitness(chromosome);
                 }
 
