@@ -1,15 +1,11 @@
 package sk.upjs.ics.diplomovka.algorithm;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
-import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Algorithm extends AlgorithmBase {
 
@@ -19,27 +15,37 @@ public class Algorithm extends AlgorithmBase {
     }
 
     @Override
-    public void evolveOneGeneration() {
-        int size = population.size();
+    public void evolveOneGeneration() throws InterruptedException {
+        BlockingQueue<Chromosome> offspring = new LinkedBlockingQueue<>();
+        AtomicInteger counter = new AtomicInteger(population.size());
 
-        List<Chromosome> offspring = new ArrayList<>();
-        while (offspring.size() < size) {
-            int c1 = Utils.randomInt(size);
-            int c2 = Utils.randomInt(size);
-            offspring.addAll(crossover.doCrossover(population.get(c1), population.get(c2)));
+        List<CrossoverWorker> crossoverWorkers = new LinkedList<>();
+        for (int w = 0; w < noOfCores; w++) {
+            crossoverWorkers.add(new CrossoverWorker(crossover, population, offspring, counter));
         }
+        executor.invokeAll(crossoverWorkers);
 
         offspring.addAll(population.get());
+        counter.set(offspring.size());
 
-        for (Chromosome c : offspring) {
-            mutation.doMutation(c);
-            c.prepareForFitnessCalculation(storage);
+        List<MutationWorker> mutationWorkers = new LinkedList<>();
+        for (int w = 0; w < noOfCores; w++) {
+            mutationWorkers.add(new MutationWorker(mutation, offspring, counter));
         }
+        executor.invokeAll(mutationWorkers);
 
-        calculateAndSetFitness(offspring);
-        Collections.sort(offspring);
+        counter.set(offspring.size());
 
-        List<Chromosome> newGeneration = selection.select(offspring, size);
+        List<FitnessWorker> fitnessWorkers = new LinkedList<>();
+        for (int w = 0; w < noOfCores; w++) {
+            fitnessWorkers.add(new FitnessWorker(fitnessFunction, offspring, counter));
+        }
+        executor.invokeAll(fitnessWorkers);
+
+        List<Chromosome> offspringList = new ArrayList<>(offspring);
+        Collections.sort(offspringList);
+
+        List<Chromosome> newGeneration = selection.select(offspringList, population.size());
 
 //        try {
 //            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("absolute_fitness.txt", true)));

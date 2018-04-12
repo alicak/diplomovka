@@ -6,18 +6,18 @@ import sk.upjs.ics.diplomovka.base.PopulationBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.List;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CrossoverWorker implements Callable {
+public class CrossoverWorker implements Callable<Integer> {
 
     private CrossoverBase crossover;
     private PopulationBase population;
-    private Queue<Chromosome> offspring;
+    private BlockingQueue<Chromosome> offspring;
     private AtomicInteger counter;
 
-    public CrossoverWorker(CrossoverBase crossover, PopulationBase population, Queue<Chromosome> offspring, AtomicInteger counter) {
+    public CrossoverWorker(CrossoverBase crossover, PopulationBase population, BlockingQueue<Chromosome> offspring, AtomicInteger counter) {
         this.crossover = crossover;
         this.population = population;
         this.offspring = offspring;
@@ -25,7 +25,7 @@ public class CrossoverWorker implements Callable {
     }
 
     @Override
-    public Object call() throws Exception {
+    public Integer call() throws Exception {
         int size = population.size();
 
         while (true) {
@@ -35,7 +35,7 @@ public class CrossoverWorker implements Callable {
 
             for (Chromosome ch : newChromosomes) {
                 if (counter.decrementAndGet() >= 0)
-                    offspring.add(ch);
+                    offspring.offer(ch);
                 else
                     return 1;
             }

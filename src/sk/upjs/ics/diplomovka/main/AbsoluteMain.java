@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class AbsoluteMain {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // general part
         File aircraftsFile = new File("aircrafts.csv");
         File arrivalsFile = new File("arrivals.csv");

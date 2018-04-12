@@ -4,6 +4,8 @@ import sk.upjs.ics.diplomovka.data.GeneralStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public abstract class AlgorithmBase {
 
@@ -15,6 +17,9 @@ public abstract class AlgorithmBase {
     protected TerminationBase termination;
     protected GeneralStorage storage;
 
+    protected ExecutorService executor;
+    protected int noOfCores;
+
     public AlgorithmBase(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection, TerminationBase termination, GeneralStorage storage) {
         this.population = population;
         this.fitnessFunction = fitnessFunction;
@@ -23,9 +28,12 @@ public abstract class AlgorithmBase {
         this.selection = selection;
         this.termination = termination;
         this.storage = storage;
+
+        this.noOfCores = Runtime.getRuntime().availableProcessors();
+        this.executor = Executors.newFixedThreadPool(noOfCores);
     }
 
-    public abstract void evolveOneGeneration();
+    public abstract void evolveOneGeneration() throws InterruptedException;
 
     protected void evolveOneGenerationSimple() {
         List<Chromosome> newGeneration = new ArrayList<>();
@@ -49,11 +57,12 @@ public abstract class AlgorithmBase {
         }
     }
 
-    public PopulationBase evolve() {
+    public PopulationBase evolve() throws InterruptedException {
         while (!termination.isTerminated()) {
             evolveOneGeneration();
             termination.onStepPerformed();
         }
+        executor.shutdownNow();
         return population;
     }
 }
