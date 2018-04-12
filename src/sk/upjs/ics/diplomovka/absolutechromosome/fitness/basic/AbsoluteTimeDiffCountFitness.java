@@ -29,4 +29,23 @@ public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
 
         return fitness;
     }
+
+    // TODO: solve duplicate code
+    @Override
+    public double calculateNonWeightedFitness(Chromosome chromosome) {
+        AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
+        double fitness = 0;
+
+        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
+            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
+                int diff = absChromosome.getCurrentFlightStart(g, f) - flight.getStart();
+                if (diff > 0) {
+                    fitness++;
+                }
+            }
+        }
+
+        return fitness;
+    }
 }

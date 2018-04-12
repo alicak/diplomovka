@@ -33,4 +33,22 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
         return result;
     }
 
+    // TODO: solve duplicate code
+    @Override
+    public double calculateNonWeightedFitness(Chromosome chromosome) {
+        AbsolutePositionChromosome c = (AbsolutePositionChromosome) chromosome;
+        double result = 0;
+
+        for (int g = 0; g < c.getNoOfGates(); g++) {
+            for (int f = 0; f < c.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(c.getGene(g,f));
+                int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
+                if (g != originalStandNo)
+                    result++;
+            }
+        }
+
+        return result;
+    }
+
 }
