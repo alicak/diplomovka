@@ -81,7 +81,7 @@ public class AbsoluteMain {
         //AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
                 .setReassignmentWeight(10)
-                .setPassengerWeight(1);
+                .setPassengerWeight(0.5);
         AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(flightStorage, standsStorage, weights);
 
         for (Chromosome c : population.get()) {

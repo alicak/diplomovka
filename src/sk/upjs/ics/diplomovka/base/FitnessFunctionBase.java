@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.base;
 
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public abstract class FitnessFunctionBase {
@@ -10,6 +11,7 @@ public abstract class FitnessFunctionBase {
 
     public FitnessFunctionBase(FlightStorage flightStorage, FitnessFunctionWeights weights) {
         this.flightStorage = flightStorage;
+        this.weights = weights;
     }
 
     public abstract double calculateFitness(Chromosome chromosome);
@@ -18,6 +20,11 @@ public abstract class FitnessFunctionBase {
         double fitness = calculateFitness(chromosome);
         chromosome.setFitness(fitness);
         return fitness;
+    }
+
+    public double calculateTotalWeights(Flight flight) {
+        return weights.getWeightsProduct() * flight.getNoOfPassengers()
+                * weights.getFlightPriorityValue(flight.getPriority());
     }
 
 }

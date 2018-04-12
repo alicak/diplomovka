@@ -26,7 +26,7 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
                 Flight flight = flightStorage.getFlightByNumber(c.getGene(g,f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
                 if (g != originalStandNo)
-                    result++;
+                    result += calculateTotalWeights(flight);
             }
         }
 

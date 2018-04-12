@@ -21,7 +21,6 @@ public class AbsoluteTimeDiffAndReassignmentFitness extends FitnessFunctionBase 
 
     @Override
     public double calculateFitness(Chromosome chromosome) {
-        return timeDiffFitness.calculateFitness(chromosome)
-                + weights.getReassignmentWeight() * reassignmentFitness.calculateFitness(chromosome);
+        return timeDiffFitness.calculateFitness(chromosome) + reassignmentFitness.calculateFitness(chromosome);
     }
 }
