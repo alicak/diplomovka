@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.Random;
-
 public class Flight implements Comparable<Flight> {
 
     private int id;
@@ -13,6 +11,7 @@ public class Flight implements Comparable<Flight> {
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
     private int originalStandId; // TODO
+    private int noOfPassengers;
 
     public enum FlightType {
         ARRIVAL,
@@ -28,22 +27,6 @@ public class Flight implements Comparable<Flight> {
         NORMAL,
         HIGH,
         LOW
-    }
-
-    public Flight() {
-    }
-
-    public Flight(int id, int start, int end, FlightType type, FlightCategory category, FlightPriority priority,
-                  Aircraft aircraft, int turnaroundTime, int originalStandId) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.type = type;
-        this.category = category;
-        this.priority = priority;
-        this.aircraft = aircraft;
-        this.turnaroundTime = turnaroundTime;
-        this.originalStandId = originalStandId;
     }
 
     @Override
@@ -65,71 +48,89 @@ public class Flight implements Comparable<Flight> {
         return id;
     }
 
-    public void setId(int id) {
+    public Flight setId(int id) {
         this.id = id;
+        return this;
     }
 
     public int getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public Flight setStart(int start) {
         this.start = start;
+        return this;
     }
 
     public int getEnd() {
         return end;
     }
 
-    public void setEnd(int end) {
+    public Flight setEnd(int end) {
         this.end = end;
+        return this;
     }
 
     public FlightCategory getCategory() {
         return category;
     }
 
-    public void setCategory(FlightCategory category) {
+    public Flight setCategory(FlightCategory category) {
         this.category = category;
+        return this;
     }
 
     public FlightType getType() {
         return type;
     }
 
-    public void setType(FlightType type) {
+    public Flight setType(FlightType type) {
         this.type = type;
+        return this;
     }
 
     public FlightPriority getPriority() {
         return priority;
     }
 
-    public void setPriority(FlightPriority priority) {
+    public Flight setPriority(FlightPriority priority) {
         this.priority = priority;
+        return this;
     }
 
     public Aircraft getAircraft() {
         return aircraft;
     }
 
-    public void setAircraft(Aircraft aircraft) {
+    public Flight setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;
+        return this;
     }
 
     public int getTurnaroundTime() {
         return turnaroundTime;
     }
 
-    public void setTurnaroundTime(int turnaroundTime) {
+    public Flight setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
+        return this;
     }
 
-    public void setOriginalStandId(int originalStandId) {
+    public Flight setOriginalStandId(int originalStandId) {
         this.originalStandId = originalStandId;
+        return this;
     }
 
     public int getOriginalStandId() {
         return originalStandId;
+    }
+
+    public int getNoOfPassengers() {
+        return noOfPassengers;
+    }
+
+    public Flight setNoOfPassengers(int noOfPassengers) {
+        this.noOfPassengers = noOfPassengers;
+        return this;
     }
 }

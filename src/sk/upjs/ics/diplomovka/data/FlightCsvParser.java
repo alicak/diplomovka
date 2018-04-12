@@ -77,9 +77,9 @@ public class FlightCsvParser {
         String wingspan = aircraftArray[1];
         wingspan = wingspan.replace(",", ".");
         Aircraft.EngineType engineType = Aircraft.EngineType.JET; // we set JET as default
-        if(aircraftArray[2].equals("jet")) {
+        if (aircraftArray[2].equals("jet")) {
             engineType = Aircraft.EngineType.JET;
-        } else if(aircraftArray[2].equals("turboprop")) {
+        } else if (aircraftArray[2].equals("turboprop")) {
             engineType = Aircraft.EngineType.TURBOPROP;
         }
         return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan), engineType);
@@ -152,6 +152,7 @@ public class FlightCsvParser {
         departure.setFlightNo(flightArray[6]);
         departure.setAircraft(aircrafts.get(flightArray[7]));
         departure.setTurnaroundTime(Integer.parseInt(flightArray[8]));
+        departure.setNoOfPassengers(Integer.parseInt(flightArray[9]));
         // TODO: priority
 
         return departure;
