@@ -14,25 +14,15 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
 
     @Override
     public double calculateFitness(Chromosome chromosome) {
-        AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
-        double fitness = 0;
-
-        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
-                int diff = absChromosome.getCurrentFlightStart(g, f) - flight.getStart();
-                if (diff > 0) {
-                    fitness += diff * calculateTotalWeights(flight);
-                }
-            }
-        }
-
-        return fitness;
+        return calculateGeneralFitness(chromosome, true);
     }
 
-    // TODO: solve duplicate code
     @Override
     public double calculateNonWeightedFitness(Chromosome chromosome) {
+        return calculateGeneralFitness(chromosome, false);
+    }
+
+    private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
         AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
         double fitness = 0;
 
@@ -41,7 +31,8 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
                 Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
                 int diff = absChromosome.getCurrentFlightStart(g, f) - flight.getStart();
                 if (diff > 0) {
-                    fitness += diff;
+                    double weight = weighted ? calculateTotalWeights(flight) : 1;
+                    fitness += diff * weight;
                 }
             }
         }
