@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.PopulationBase;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
@@ -14,10 +15,10 @@ public class AbsolutePositionPopulation extends PopulationBase {
     private FlightStorage flightStorage;
     private StandsStorage standsStorage;
 
-    public AbsolutePositionPopulation(List<Chromosome> generation, FlightStorage flightStorage, StandsStorage standsStorage) {
+    public AbsolutePositionPopulation(List<Chromosome> generation, GeneralStorage storage) {
         super(generation);
-        this.flightStorage = flightStorage;
-        this.standsStorage = standsStorage;
+        this.flightStorage = storage.getFlightStorage();
+        this.standsStorage = storage.getStandsStorage();
     }
 
     public void prepareForFitnessCalculation(List<Chromosome> chromosomes) {

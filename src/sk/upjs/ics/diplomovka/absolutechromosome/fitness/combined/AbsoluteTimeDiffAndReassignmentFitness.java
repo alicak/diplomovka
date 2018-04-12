@@ -6,6 +6,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.AbsoluteTimeDiffF
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
@@ -13,10 +14,10 @@ public class AbsoluteTimeDiffAndReassignmentFitness extends FitnessFunctionBase 
     private AbsoluteReassignmentFitness reassignmentFitness;
     private AbsoluteTimeDiffFitness timeDiffFitness;
 
-    public AbsoluteTimeDiffAndReassignmentFitness(FlightStorage flightStorage, StandsStorage standsStorage, FitnessFunctionWeights weights) {
-        super(flightStorage, weights);
-        reassignmentFitness = new AbsoluteReassignmentFitness(flightStorage, standsStorage, weights);
-        timeDiffFitness = new AbsoluteTimeDiffFitness(flightStorage, weights);
+    public AbsoluteTimeDiffAndReassignmentFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
+        super(storage, weights);
+        reassignmentFitness = new AbsoluteReassignmentFitness(storage, weights);
+        timeDiffFitness = new AbsoluteTimeDiffFitness(storage, weights);
     }
 
     @Override

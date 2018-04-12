@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.main;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import java.io.IOException;
@@ -12,9 +13,9 @@ public class AssignmentCreator {
     private StandsStorage standsStorage;
     private FlightStorage flightStorage;
 
-    public AssignmentCreator(StandsStorage standsStorage, FlightStorage flightStorage) throws IOException {
-        this.standsStorage = standsStorage;
-        this.flightStorage = flightStorage;
+    public AssignmentCreator(GeneralStorage storage) throws IOException {
+        this.standsStorage = storage.getStandsStorage();
+        this.flightStorage = storage.getFlightStorage();
     }
 
     public AbsolutePositionChromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
