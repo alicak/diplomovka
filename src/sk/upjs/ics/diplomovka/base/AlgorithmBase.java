@@ -2,8 +2,6 @@ package sk.upjs.ics.diplomovka.base;
 
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,28 +32,6 @@ public abstract class AlgorithmBase {
     }
 
     public abstract void evolveOneGeneration() throws InterruptedException;
-
-    protected void evolveOneGenerationSimple() {
-        List<Chromosome> newGeneration = new ArrayList<>();
-
-        while (newGeneration.size() < population.getNewGenerationSize()) {
-            List<Chromosome> pair = selection.select(population.get(), 2);
-            List<Chromosome> children = crossover.doCrossover(pair.get(0), pair.get(1));
-            mutation.doMutation(children);
-            newGeneration.addAll(children);
-        }
-
-        calculateAndSetFitness(newGeneration);
-        population.set(newGeneration);
-    }
-
-    protected void calculateAndSetFitness(List<Chromosome> chromosomes) {
-        for (Chromosome chromosome : chromosomes) {
-            if (!chromosome.hasFitness()) {
-                fitnessFunction.calculateAndSetFitness(chromosome);
-            }
-        }
-    }
 
     public PopulationBase evolve() throws InterruptedException {
         while (!termination.isTerminated()) {
