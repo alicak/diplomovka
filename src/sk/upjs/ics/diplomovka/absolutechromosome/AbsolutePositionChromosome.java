@@ -1,8 +1,10 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
@@ -212,6 +214,7 @@ public class AbsolutePositionChromosome extends Chromosome {
         return currentFlightEnds.get(getGene(gate, flightIdx));
     }
 
+    // also calculates ends
     public void calculateCurrentFlightStarts(FlightStorage flightStorage) {
         int previousNo = -1;
         Flight previousFlight = null;
@@ -259,6 +262,21 @@ public class AbsolutePositionChromosome extends Chromosome {
                 break;
             }
         }
+    }
+
+    public void applyAllClosures(StandsStorage standsStorage) {
+        for (int g = 0; g < noOfGates; g++) {
+            List<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
+            for (StandClosure closure : closuresForStand) {
+                applyStandClosure(closure, g);
+            }
+        }
+    }
+
+    @Override
+    public void prepareForFitnessCalculation(GeneralStorage storage) {
+        calculateCurrentFlightStarts(storage.getFlightStorage());
+        applyAllClosures(storage.getStandsStorage());
     }
 
     public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {

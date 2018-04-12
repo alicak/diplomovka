@@ -30,8 +30,10 @@ public class PopulationCreator {
         generation.add(originalAssignment.copy()); // we also add original assignment
         originalAssignment.calculateCurrentFlightStarts(storage.getFlightStorage());
 
-        AbsolutePositionPopulation population = new AbsolutePositionPopulation(generation, storage);
-        population.prepareForFitnessCalculation(generation);
+        AbsolutePositionPopulation population = new AbsolutePositionPopulation(generation);
+
+        for(Chromosome ch: population.get())
+            ch.prepareForFitnessCalculation(storage);
 
         return population;
     }

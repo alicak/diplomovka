@@ -1,6 +1,9 @@
 package sk.upjs.ics.diplomovka.algorithm;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.*;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.io.*;
@@ -10,8 +13,9 @@ import java.util.List;
 
 public class Algorithm extends AlgorithmBase {
 
-    public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover, MutationBase mutation, SelectionBase selection, TerminationBase termination) {
-        super(population, fitnessFunction, crossover, mutation, selection, termination);
+    public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover,
+                     MutationBase mutation, SelectionBase selection, TerminationBase termination, GeneralStorage storage) {
+        super(population, fitnessFunction, crossover, mutation, selection, termination, storage);
     }
 
     @Override
@@ -25,16 +29,13 @@ public class Algorithm extends AlgorithmBase {
             offspring.addAll(crossover.doCrossover(population.get(c1), population.get(c2)));
         }
 
+        offspring.addAll(population.get());
+
         for (Chromosome c : offspring) {
             mutation.doMutation(c);
+            c.prepareForFitnessCalculation(storage);
         }
 
-        for (Chromosome c : population.get()) {
-            mutation.doMutation(c);
-        }
-
-        offspring.addAll(population.get());
-        population.prepareForFitnessCalculation(offspring); // population is not the best place to have such a method, but whatever...
         calculateAndSetFitness(offspring);
         Collections.sort(offspring);
 
