@@ -40,4 +40,10 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
 
         return fitness;
     }
+
+    private double calculateTotalWeights(Flight flight) {
+        return weights.getTimeChangedWeight()
+                * weights.getPassengerWeight() * flight.getNoOfPassengers()
+                * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
+    }
 }

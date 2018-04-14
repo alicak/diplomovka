@@ -23,11 +23,6 @@ public abstract class FitnessFunctionBase {
         return fitness;
     }
 
-    public double calculateTotalWeights(Flight flight) {
-        return weights.getWeightsProduct() * flight.getNoOfPassengers()
-                * weights.getFlightPriorityValue(flight.getPriority());
-    }
-
     // makes sense for basic fitness functions when we want concrete results (total delays, no of reassignments etc.)
     public abstract double calculateNonWeightedFitness(Chromosome chromosome);
 }

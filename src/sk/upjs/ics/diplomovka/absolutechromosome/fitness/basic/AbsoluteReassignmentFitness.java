@@ -35,6 +35,7 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
             for (int f = 0; f < c.getNoOfFlights(g); f++) {
                 Flight flight = flightStorage.getFlightByNumber(c.getGene(g,f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
+                //int originalStandNo = flight.getOriginalStandId();
                 if (g != originalStandNo) {
                     double weight = weighted ? calculateTotalWeights(flight) : 1;
                     result += weight;
@@ -42,6 +43,12 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
             }
         }
         return result;
+    }
+
+    private double calculateTotalWeights(Flight flight) {
+        return weights.getReassignmentWeight() // TODO can passenger and priority weight be multiplied only in the end?
+                * weights.getPassengerWeight() * flight.getNoOfPassengers()
+                * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
     }
 
 }

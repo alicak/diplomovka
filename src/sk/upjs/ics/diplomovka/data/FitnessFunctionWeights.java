@@ -65,8 +65,4 @@ public class FitnessFunctionWeights {
         this.priorityValues = priorityValues;
         return this;
     }
-
-    public double getWeightsProduct() {
-        return reassignmentWeight * passengerWeight * flightPriorityWeight * timeChangedWeight;
-    }
 }
