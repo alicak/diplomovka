@@ -4,6 +4,8 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.AbsoluteReassignmentFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.AbsoluteTimeDiffFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
@@ -13,8 +15,10 @@ import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
+import sk.upjs.ics.diplomovka.termination.FitnessTermination;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -43,7 +47,11 @@ public class AbsoluteMain {
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
         Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage); // no 2
         Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage); // no 75
-        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(1,0,800, standsStorage);
+        Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage);
+        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage);
+        Disruption gate7condTempClosed = new StandConditionallyClosedDisruption(7, 0, 1439,
+                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage);
+
 
         SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(1000);
@@ -66,24 +74,44 @@ public class AbsoluteMain {
 
         AbsolutePositionPopulation population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
 
-        gate5tempClosed.disruptAssignment(originalAssignment); // this has to be done after population creation
+        gate1tempClosed.disruptAssignment(originalAssignment); // this has to be done after population creation
+        gate5tempClosed.disruptAssignment(originalAssignment);
+        gate7condTempClosed.disruptAssignment(originalAssignment);
+
+        flight13cancelled.disruptAssignment(originalAssignment);
+        flight0delayed.disruptAssignment(originalAssignment);
+        flight34delayed.disruptAssignment(originalAssignment);
 
         for (Chromosome c : population.get()) {
             //gate5closed.disruptAssignment(c);
             //gate6closed.disruptAssignment(c);
             //gate9closed.disruptAssignment(c);
+            gate1tempClosed.disruptAssignment(c);
             gate5tempClosed.disruptAssignment(c);
+            gate7condTempClosed.disruptAssignment(c);
+
+            flight13cancelled.disruptAssignment(c);
+            flight0delayed.disruptAssignment(c);
+            flight34delayed.disruptAssignment(c);
+
         }
 
         //gate6closed.disruptStorage();
         //gate9closed.disruptStorage();
+
+        flight13cancelled.disruptStorage();
+        flight0delayed.disruptStorage();
+        flight34delayed.disruptStorage();
+
+        gate1tempClosed.disruptStorage();
         gate5tempClosed.disruptStorage();
+        gate7condTempClosed.disruptStorage();
 
         //AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
         //AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
-                .setReassignmentWeight(10)
-                .setPassengerWeight(0.5);
+                .setReassignmentWeight(30)
+                .setPassengerWeight(0.1);
         AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(storage, weights);
 
         for (Chromosome c : population.get()) {
@@ -93,16 +121,23 @@ public class AbsoluteMain {
         CrossoverBase crossover = new AbsolutePositionCrossover(1);
         MutationBase mutation = new AbsolutePositionMutation(0.1);
 
-        //TerminationBase termination = new FitnessTermination(2000, population, fitnessFunction);
+        //TerminationBase termination = new FitnessTermination(6000, population, fitnessFunction);
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
         PopulationBase finalPopulation = algorithm.evolve();
         Chromosome result = finalPopulation.bestChromosome();
 
-        System.out.println("original fitness: " + fitnessFunction.calculateFitness(originalAssignment));
-        System.out.println("no of iterations: " + termination.getNoOfIterations());
-        System.out.println("fitness: " + result.getFitness());
+       System.out.println("original fitness: " + fitnessFunction.calculateFitness(originalAssignment));
+//        System.out.println("no of iterations: " + termination.getNoOfIterations());
+//        System.out.println("fitness: " + result.getFitness());
+
+        FitnessFunctionBase timeDiffFitness = new AbsoluteTimeDiffFitness(storage, weights);
+        FitnessFunctionBase reassignmentFitness = new AbsoluteReassignmentFitness(storage, weights);
+        System.out.println("original timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(originalAssignment));
+        System.out.println("timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(result));
+        System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
+
 
         PrintWriter writer = new PrintWriter(new File("results.txt"));
         writer.append(result.toString());
