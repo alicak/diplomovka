@@ -38,7 +38,7 @@ public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
             }
         }
 
-        return fitness;
+        return (-1) * fitness;
     }
 
     private double calculateTotalWeights(Flight flight) {

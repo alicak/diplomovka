@@ -33,7 +33,7 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
 
         for (int g = 0; g < c.getNoOfGates(); g++) {
             for (int f = 0; f < c.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlightByNumber(c.getGene(g,f));
+                Flight flight = flightStorage.getFlightByNumber(c.getGene(g, f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
                 //int originalStandNo = flight.getOriginalStandId();
                 if (g != originalStandNo) {
@@ -42,7 +42,7 @@ public class AbsoluteReassignmentFitness extends FitnessFunctionBase {
                 }
             }
         }
-        return result;
+        return (-1) * result;
     }
 
     private double calculateTotalWeights(Flight flight) {

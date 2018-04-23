@@ -88,8 +88,8 @@ public abstract class Chromosome implements Comparable<Chromosome> {
             return 0;
 
         if (this.getFitness() < c.getFitness())
-            return -1; // this object is better, thus earlier in order
+            return 1; // this object is worse, thus later in order
 
-        return 1;
+        return -1;
     }
 }
