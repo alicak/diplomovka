@@ -14,12 +14,24 @@ public class StandsStorage {
     private Map<String, AircraftStand> gatesToStands;
     private Map<Integer, List<StandClosure>> closures; // ids to closures
     private Map<Integer, List<ConditionalStandClosure>> conditionalClosures;
+    private Map<Integer, Integer> availabilityTimes;
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
         this.gatesToStands = gatesToStands;
         initializeStands(stands);
         initializeClosures();
+        initializeAvailabilityTimes();
+    }
+
+    private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands, Map<Integer,
+            List<StandClosure>> closures, Map<Integer, List<ConditionalStandClosure>> conditionalClosures, Map<Integer, Integer> availabilityTimes) {
+        this.stands = stands;
+        this.standsIds = standsIds;
+        this.gatesToStands = gatesToStands;
+        this.closures = closures;
+        this.conditionalClosures = conditionalClosures;
+        this.availabilityTimes = availabilityTimes;
     }
 
     public AircraftStand getStandById(int id) {
@@ -92,6 +104,13 @@ public class StandsStorage {
         }
     }
 
+    private void initializeAvailabilityTimes() {
+        availabilityTimes = new HashMap<>();
+        for (int i = 0; i < standsIds.length; i++) {
+            availabilityTimes.put(standsIds[i], 0);
+        }
+    }
+
     public List<StandClosure> getClosuresForStand(int standNo) {
         return closures.get(getStandByNumber(standNo).getId());
     }
@@ -106,5 +125,13 @@ public class StandsStorage {
 
     public void addConditionalClosure(ConditionalStandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
         conditionalClosures.get(closure.getStandId()).add(closure);
+    }
+
+    public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {
+        return new StandsStorage(stands, standsIds, gatesToStands, closures, conditionalClosures, availabilityTimes);
+    }
+
+    public int getStandAvailabilityTime(int standNo){
+        return availabilityTimes.get(getStandByNumber(standNo).getId());
     }
 }

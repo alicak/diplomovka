@@ -215,32 +215,28 @@ public class AbsolutePositionChromosome extends Chromosome {
     }
 
     // also calculates ends
-    public void calculateCurrentFlightStarts(FlightStorage flightStorage) {
+    public void calculateCurrentFlightStarts(GeneralStorage storage) {
+        FlightStorage flightStorage = storage.getFlightStorage();
+        StandsStorage standsStorage = storage.getStandsStorage();
+
         int previousNo = -1;
-        Flight previousFlight = null;
         for (int gate = 0; gate < noOfGates; gate++) {
+
             for (int flightIdx = 0; flightIdx < noOfFlights[gate]; flightIdx++) {
                 int flightNo = getGene(gate, flightIdx);
                 Flight f = flightStorage.getFlightByNumber(flightNo);
 
-                if (flightIdx == 0) {
-                    currentFlightStarts.put(flightNo, f.getStart());
-                    currentFlightEnds.put(flightNo, f.getEnd());
-                    previousNo = flightNo;
-                    previousFlight = f;
-                } else {
-                    int availableTime = currentFlightStarts.get(previousNo) + previousFlight.getLength();
-                    int start = f.getStart();
+                int availableTime = (flightIdx == 0) ? standsStorage.getStandAvailabilityTime(gate) : currentFlightEnds.get(previousNo);
+                int start = f.getStart();
 
-                    if (availableTime > start) {
-                        currentFlightStarts.put(flightNo, availableTime);
-                        currentFlightEnds.put(flightNo, availableTime + f.getLength());
-                    } else {
-                        currentFlightStarts.put(flightNo, start);
-                        currentFlightEnds.put(flightNo, start + f.getLength());
-                    }
-                    previousNo = flightNo;
+                if (availableTime > start) {
+                    currentFlightStarts.put(flightNo, availableTime);
+                    currentFlightEnds.put(flightNo, availableTime + f.getLength());
+                } else {
+                    currentFlightStarts.put(flightNo, start);
+                    currentFlightEnds.put(flightNo, start + f.getLength());
                 }
+                previousNo = flightNo;
             }
         }
     }
@@ -275,7 +271,7 @@ public class AbsolutePositionChromosome extends Chromosome {
 
     @Override
     public void prepareForFitnessCalculation(GeneralStorage storage) {
-        calculateCurrentFlightStarts(storage.getFlightStorage());
+        calculateCurrentFlightStarts(storage);
         applyAllClosures(storage.getStandsStorage());
     }
 

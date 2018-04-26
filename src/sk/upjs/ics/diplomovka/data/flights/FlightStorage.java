@@ -70,4 +70,19 @@ public class FlightStorage {
 
         return flightIds;
     }
+
+    // returns new FlightStorage which includes only flights that have (actual) starts after given time
+    public FlightStorage flightsAfterTime(int startTime) {
+        List<Flight> flights = new ArrayList<>();
+        Map<Integer, Flight> flightsMap = new HashMap<>();
+
+        for(Flight flight : getSortedFlights()) {
+            if(flight.getStart() >= startTime) {
+                flights.add(flight);
+                flightsMap.put(flight.getId(), flight);
+            }
+        }
+
+        return new FlightStorage(flights, flightsMap);
+    }
 }

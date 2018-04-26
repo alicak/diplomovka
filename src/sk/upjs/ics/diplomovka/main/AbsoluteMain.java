@@ -39,7 +39,7 @@ public class AbsoluteMain {
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
-        FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser, standsStorage);
+        FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
         GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage);
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
@@ -149,7 +149,7 @@ public class AbsoluteMain {
         writer.close();
     }
 
-    private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
+    private static FlightStorage processFlights(File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
         //List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
         List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
