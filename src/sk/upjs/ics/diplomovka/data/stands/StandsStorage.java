@@ -85,6 +85,10 @@ public class StandsStorage {
         return stands.size();
     }
 
+    public Set<Integer> getStandsIds() {
+        return stands.keySet();
+    }
+
     private int[] initializeStands(Map<Integer, AircraftStand> stands) {
         standsIds = new int[stands.size()];
 

@@ -31,7 +31,7 @@ public class AbsoluteMain {
     public static void main(String[] args) throws IOException, InterruptedException {
         // general part
         File aircraftsFile = new File("aircrafts.csv");
-        File arrivalsFile = new File("arrivals.csv");
+        // File arrivalsFile = new File("arrivals.csv");
         File departuresFile = new File("departures.csv");
         File standsFile = new File("stands.csv");
 
@@ -56,6 +56,9 @@ public class AbsoluteMain {
 
         SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(1000);
+
+        // here we would do that...
+        GeneralStorage storage2 = storage.getStorageWithOptionalStart(100);
 
         AssignmentCreator assignmentCreator = new AssignmentCreator(storage);
         PopulationCreator populationCreator = new PopulationCreator();
