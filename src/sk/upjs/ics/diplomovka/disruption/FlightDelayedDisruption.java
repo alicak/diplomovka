@@ -22,7 +22,7 @@ public class FlightDelayedDisruption implements Disruption {
     @Override
     public void disruptStorage() {
         int start = flightStorage.getFlightById(flight).getStart();
-        flightStorage.getFlightById(flight).setStart(start + delay);
+        flightStorage.getFlightById(flight).setStart(start + delay).setDelay(delay);
         int end = flightStorage.getFlightById(flight).getEnd();
         flightStorage.getFlightById(flight).setEnd(end + delay);
     }

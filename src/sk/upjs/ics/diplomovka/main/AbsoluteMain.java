@@ -13,6 +13,7 @@ import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.FlightCsvParser;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.SolutionCreator;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
@@ -137,6 +138,9 @@ public class AbsoluteMain {
         System.out.println("original timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(originalAssignment));
         System.out.println("timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(result));
         System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
+
+        List<FlightInfo> flightInfos = SolutionCreator.createSolutionFromChromosome((AbsolutePositionChromosome) result, storage);
+        System.out.println(flightInfos);
 
 
         PrintWriter writer = new PrintWriter(new File("results.txt"));

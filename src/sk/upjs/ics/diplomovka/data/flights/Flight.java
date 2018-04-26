@@ -4,7 +4,9 @@ public class Flight implements Comparable<Flight> {
 
     private int id;
     private int start;
+    private int originalStart;
     private int end;
+    private int delay;
     private FlightType type;
     private FlightCategory category;
     private FlightPriority priority;
@@ -12,6 +14,8 @@ public class Flight implements Comparable<Flight> {
     private int turnaroundTime; // in minutes
     private int originalStandId; // TODO
     private int noOfPassengers;
+    private String destination;
+    private String originalGate;
 
     public enum FlightType {
         ARRIVAL,
@@ -35,7 +39,7 @@ public class Flight implements Comparable<Flight> {
             return 0;
 
         if (this.getStart() < o.getStart())
-            return -1; // the earlier, the better
+            return -1; // the earlier in list, the better
 
         return 1;
     }
@@ -62,12 +66,30 @@ public class Flight implements Comparable<Flight> {
         return this;
     }
 
+    public int getOriginalStart() {
+        return originalStart;
+    }
+
+    public Flight setOriginalStart(int originalStart) {
+        this.originalStart = originalStart;
+        return this;
+    }
+
     public int getEnd() {
         return end;
     }
 
     public Flight setEnd(int end) {
         this.end = end;
+        return this;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public Flight setDelay(int delay) {
+        this.delay = delay;
         return this;
     }
 
@@ -131,6 +153,24 @@ public class Flight implements Comparable<Flight> {
 
     public Flight setNoOfPassengers(int noOfPassengers) {
         this.noOfPassengers = noOfPassengers;
+        return this;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Flight setDestination(String destination) {
+        this.destination = destination;
+        return this;
+    }
+
+    public String getOriginalGate() {
+        return originalGate;
+    }
+
+    public Flight setOriginalGate(String originalGate) {
+        this.originalGate = originalGate;
         return this;
     }
 }

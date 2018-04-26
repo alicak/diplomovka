@@ -22,7 +22,10 @@ public class FullDeparture extends FullFlight {
                 .setAircraft(departure.getAircraft())
                 .setTurnaroundTime(departure.getTurnaroundTime())
                 .setStart(departure.getScheduled() - departure.getTurnaroundTime()) // TODO consider something else than turnaround time?
+                .setOriginalStart(departure.getScheduled())
                 .setEnd(departure.getScheduled())
-                .setNoOfPassengers(departure.getNoOfPassengers());
+                .setNoOfPassengers(departure.getNoOfPassengers())
+                .setDestination(departure.getTo())
+                .setOriginalGate(departure.getGate());
     }
 }
