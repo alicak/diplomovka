@@ -15,6 +15,8 @@ public class StandsStorage {
     private Map<Integer, List<StandClosure>> closures; // ids to closures
     private Map<Integer, List<ConditionalStandClosure>> conditionalClosures;
     private Map<Integer, Integer> availabilityTimes;
+    private double[][] standsDistances; // TODO
+    private double[][] gateDistances; // TODO
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
@@ -137,5 +139,15 @@ public class StandsStorage {
 
     public int getStandAvailabilityTime(int standNo){
         return availabilityTimes.get(getStandByNumber(standNo).getId());
+    }
+
+    public double getGatesDistance(String g1, String g2) {
+        int g1idx = 0; // TODO: Will we use gate strings or will we create some integer ids?
+        int g2idx = 0;
+        return gateDistances[g1idx][g2idx];
+    }
+
+    public double getStandsDistance(int s1, int s2) {
+        return standsDistances[s1][s2];
     }
 }
