@@ -44,7 +44,7 @@ public class TimeDiffCountFitness extends FitnessFunctionBase {
     @Override
     protected double calculateTotalWeights(Flight flight) {
         return weights.getTimeChangedWeight() // TODO: this value is for time diff, not just change
-                * weights.getPassengerWeight() * flight.getNoOfPassengers()
-                * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
+                + weights.getPassengerWeight() * flight.getNoOfPassengers()
+                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
     }
 }

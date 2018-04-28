@@ -40,7 +40,7 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
     @Override
     protected double calculateTotalWeights(Flight flight) {
         return weights.getWalkingDistanceWeight()
-                * weights.getPassengerWeight() * flight.getNoOfPassengers()
-                * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
+                + weights.getPassengerWeight() * flight.getNoOfPassengers()
+                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
     }
 }
