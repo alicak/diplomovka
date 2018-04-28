@@ -45,7 +45,8 @@ public class ReassignmentFitness extends FitnessFunctionBase {
         return (-1) * result;
     }
 
-    private double calculateTotalWeights(Flight flight) {
+    @Override
+    protected double calculateTotalWeights(Flight flight) {
         return weights.getReassignmentWeight() // TODO can passenger and priority weight be multiplied only in the end?
                 * weights.getPassengerWeight() * flight.getNoOfPassengers()
                 * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());

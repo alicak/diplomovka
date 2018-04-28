@@ -25,4 +25,6 @@ public abstract class FitnessFunctionBase {
 
     // makes sense for basic fitness functions when we want concrete results (total delays, no of reassignments etc.)
     public abstract double calculateNonWeightedFitness(Chromosome chromosome);
+
+    protected abstract double calculateTotalWeights(Flight flight);
 }
