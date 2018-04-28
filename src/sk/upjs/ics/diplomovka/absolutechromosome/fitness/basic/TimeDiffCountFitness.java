@@ -8,8 +8,8 @@ import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
-public class AbsoluteTimeDiffCountFitness extends FitnessFunctionBase {
-    public AbsoluteTimeDiffCountFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
+public class TimeDiffCountFitness extends FitnessFunctionBase {
+    public TimeDiffCountFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
         super(storage, weights);
     }
 

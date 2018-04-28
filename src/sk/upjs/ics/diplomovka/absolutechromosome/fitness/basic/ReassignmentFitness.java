@@ -7,10 +7,14 @@ import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
-public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
-    public AbsoluteTimeDiffFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
+public class ReassignmentFitness extends FitnessFunctionBase {
+    private StandsStorage standsStorage;
+
+    public ReassignmentFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
         super(storage, weights);
+        this.standsStorage = storage.getStandsStorage();
     }
 
     @Override
@@ -24,26 +28,27 @@ public class AbsoluteTimeDiffFitness extends FitnessFunctionBase {
     }
 
     private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
-        AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
-        double fitness = 0;
+        AbsolutePositionChromosome c = (AbsolutePositionChromosome) chromosome;
+        double result = 0;
 
-        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
-                int diff = absChromosome.getCurrentFlightStart(g, f) - flight.getStart();
-                if (diff > 0) {
+        for (int g = 0; g < c.getNoOfGates(); g++) {
+            for (int f = 0; f < c.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(c.getGene(g, f));
+                int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
+                //int originalStandNo = flight.getOriginalStandId();
+                if (g != originalStandNo) {
                     double weight = weighted ? calculateTotalWeights(flight) : 1;
-                    fitness += diff * weight;
+                    result += weight;
                 }
             }
         }
-
-        return (-1) *fitness;
+        return (-1) * result;
     }
 
     private double calculateTotalWeights(Flight flight) {
-        return weights.getTimeChangedWeight()
+        return weights.getReassignmentWeight() // TODO can passenger and priority weight be multiplied only in the end?
                 * weights.getPassengerWeight() * flight.getNoOfPassengers()
                 * weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
     }
+
 }

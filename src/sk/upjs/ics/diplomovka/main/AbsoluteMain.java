@@ -4,8 +4,8 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.AbsoluteReassignmentFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.AbsoluteTimeDiffFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
@@ -19,7 +19,6 @@ import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
-import sk.upjs.ics.diplomovka.termination.FitnessTermination;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -111,8 +110,8 @@ public class AbsoluteMain {
         gate5tempClosed.disruptStorage();
         gate7condTempClosed.disruptStorage();
 
-        //AbsoluteTimeDiffFitness fitnessFunction = new AbsoluteTimeDiffFitness(flightStorage);
-        //AbsoluteReassignmentFitness fitnessFunction = new AbsoluteReassignmentFitness(flightStorage, standsStorage);
+        //TimeDiffFitness fitnessFunction = new TimeDiffFitness(flightStorage);
+        //ReassignmentFitness fitnessFunction = new ReassignmentFitness(flightStorage, standsStorage);
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
                 .setReassignmentWeight(30)
                 .setPassengerWeight(0.1);
@@ -136,8 +135,8 @@ public class AbsoluteMain {
 //        System.out.println("no of iterations: " + termination.getNoOfIterations());
 //        System.out.println("fitness: " + result.getFitness());
 
-        FitnessFunctionBase timeDiffFitness = new AbsoluteTimeDiffFitness(storage, weights);
-        FitnessFunctionBase reassignmentFitness = new AbsoluteReassignmentFitness(storage, weights);
+        FitnessFunctionBase timeDiffFitness = new TimeDiffFitness(storage, weights);
+        FitnessFunctionBase reassignmentFitness = new ReassignmentFitness(storage, weights);
         System.out.println("original timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(originalAssignment));
         System.out.println("timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(result));
         System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
