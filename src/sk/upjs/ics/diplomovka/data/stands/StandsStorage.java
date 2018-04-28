@@ -147,7 +147,7 @@ public class StandsStorage {
         return gateDistances[g1idx][g2idx];
     }
 
-    public double getStandsDistance(int s1, int s2) {
-        return standsDistances[s1][s2];
+    public double getStandsDistance(int standNo1, int standNo2) {
+        return standsDistances[standsIds[standNo1]][standsIds[standNo2]];
     }
 }

@@ -12,23 +12,14 @@ public class FitnessFunctionWeights {
     private double flightPriorityWeight = 1;
     private double timeChangedWeight = 1;
     private List<Double> priorityValues = Arrays.asList(0.5, 1.0, 1.5);
+    private double walkingDistanceWeight = 1;
 
     public double getReassignmentWeight() {
         return reassignmentWeight;
     }
 
-    public FitnessFunctionWeights setReassignmentWeight(double reassignmentWeight) {
-        this.reassignmentWeight = reassignmentWeight;
-        return this;
-    }
-
     public double getPassengerWeight() {
         return passengerWeight;
-    }
-
-    public FitnessFunctionWeights setPassengerWeight(double passengerWeight) {
-        this.passengerWeight = passengerWeight;
-        return this;
     }
 
     public double getFlightPriorityWeight() {
@@ -47,13 +38,32 @@ public class FitnessFunctionWeights {
         }
     }
 
-    public FitnessFunctionWeights setFlightPriorityWeight(double flightPriorityWeight) {
-        this.flightPriorityWeight = flightPriorityWeight;
+    public double getTimeChangedWeight() {
+        return timeChangedWeight;
+    }
+
+    public double getWalkingDistanceWeight() {
+        return walkingDistanceWeight;
+    }
+
+    public FitnessFunctionWeights setPassengerWeight(double passengerWeight) {
+        this.passengerWeight = passengerWeight;
         return this;
     }
 
-    public double getTimeChangedWeight() {
-        return timeChangedWeight;
+    public FitnessFunctionWeights setReassignmentWeight(double reassignmentWeight) {
+        this.reassignmentWeight = reassignmentWeight;
+        return this;
+    }
+
+    public FitnessFunctionWeights setWalkingDistanceWeight(double walkingDistanceWeight) {
+        this.walkingDistanceWeight = walkingDistanceWeight;
+        return this;
+    }
+
+    public FitnessFunctionWeights setFlightPriorityWeight(double flightPriorityWeight) {
+        this.flightPriorityWeight = flightPriorityWeight;
+        return this;
     }
 
     public FitnessFunctionWeights setTimeChangedWeight(double timeChangedWeight) {
@@ -65,4 +75,6 @@ public class FitnessFunctionWeights {
         this.priorityValues = priorityValues;
         return this;
     }
+
+
 }
