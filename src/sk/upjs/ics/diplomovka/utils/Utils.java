@@ -2,6 +2,8 @@ package sk.upjs.ics.diplomovka.utils;
 
 public class Utils {
 
+    public static int MINUTES_IN_DAY = 24*60;
+
     public static int randomInt(int min, int max) {
         return (int) Math.floor(Math.random() * max + min);
     }

@@ -39,7 +39,7 @@ public class AbsoluteMain {
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
         FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
-        GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage);
+        GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage);

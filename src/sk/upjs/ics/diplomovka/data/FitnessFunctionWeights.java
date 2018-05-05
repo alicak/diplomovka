@@ -5,14 +5,19 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import java.util.Arrays;
 import java.util.List;
 
+import static sk.upjs.ics.diplomovka.utils.Utils.MINUTES_IN_DAY;
+
 public class FitnessFunctionWeights {
 
-    private double reassignmentWeight = 1;
-    private double passengerWeight = 1;
-    private double flightPriorityWeight = 1;
-    private double timeChangedWeight = 1;
-    private List<Double> priorityValues = Arrays.asList(0.5, 1.0, 1.5);
-    private double walkingDistanceWeight = 1;
+    private static final double DEFAULT_WEIGHT = 1;
+
+    private double reassignmentWeight = DEFAULT_WEIGHT;
+    private double passengerWeight = DEFAULT_WEIGHT;
+    private double flightPriorityWeight = DEFAULT_WEIGHT;
+    private double timeChangedWeight = DEFAULT_WEIGHT;
+    private List<Double> priorityValues = Arrays.asList(DEFAULT_WEIGHT - 0.5, DEFAULT_WEIGHT, DEFAULT_WEIGHT + 0.5);
+    private double walkingDistanceWeight = DEFAULT_WEIGHT;
+    private List<IntervalWeight> futureWeights = Arrays.asList(new IntervalWeight(0, MINUTES_IN_DAY, DEFAULT_WEIGHT));
 
     public double getReassignmentWeight() {
         return reassignmentWeight;
@@ -46,6 +51,15 @@ public class FitnessFunctionWeights {
         return walkingDistanceWeight;
     }
 
+    public double getFutureWeight(int timeFromReassignmentStart) {
+        for (IntervalWeight interval : futureWeights) {
+            if (interval.contains(timeFromReassignmentStart)) {
+                return interval.getWeight();
+            }
+        }
+        return DEFAULT_WEIGHT;
+    }
+
     public FitnessFunctionWeights setPassengerWeight(double passengerWeight) {
         this.passengerWeight = passengerWeight;
         return this;
@@ -76,5 +90,8 @@ public class FitnessFunctionWeights {
         return this;
     }
 
-
+    public FitnessFunctionWeights setFutureWeights(List<IntervalWeight> futureWeights) {
+        this.futureWeights = futureWeights;
+        return this;
+    }
 }

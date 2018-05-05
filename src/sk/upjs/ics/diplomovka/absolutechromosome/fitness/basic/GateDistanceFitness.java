@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
@@ -13,16 +14,30 @@ public class GateDistanceFitness extends FitnessFunctionBase {
 
     @Override
     public double calculateFitness(Chromosome chromosome) {
-        return 0; // TODO
+        return calculateGeneralFitness(chromosome, true);
     }
 
     @Override
     public double calculateNonWeightedFitness(Chromosome chromosome) {
-        return 0; // TODO
+        return calculateGeneralFitness(chromosome, false);
     }
 
-    @Override
-    protected double calculateTotalWeights(Flight flight) {
-        return 0; // TODO
+    private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
+        AbsolutePositionChromosome absChromosome = (AbsolutePositionChromosome) chromosome;
+        double fitness = 0;
+
+        for (int g = 0; g < absChromosome.getNoOfGates(); g++) {
+            for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
+                Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
+                double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
+
+                // ------
+                // TODO
+                // ------
+
+            }
+        }
+
+        return (-1) * fitness;
     }
 }

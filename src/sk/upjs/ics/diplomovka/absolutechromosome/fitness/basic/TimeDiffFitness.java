@@ -32,19 +32,12 @@ public class TimeDiffFitness extends FitnessFunctionBase {
                 Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
                 int diff = absChromosome.getCurrentFlightStart(g, f) - flight.getStart();
                 if (diff > 0) {
-                    double weight = weighted ? calculateTotalWeights(flight) : 1;
+                    double weight = weighted ? calculateTotalWeights(flight, weights.getTimeChangedWeight()) : 1;
                     fitness += diff * weight;
                 }
             }
         }
 
-        return (-1) *fitness;
-    }
-
-    @Override
-    protected double calculateTotalWeights(Flight flight) {
-        return weights.getTimeChangedWeight()
-                + weights.getPassengerWeight() * flight.getNoOfPassengers()
-                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
+        return (-1) * fitness;
     }
 }

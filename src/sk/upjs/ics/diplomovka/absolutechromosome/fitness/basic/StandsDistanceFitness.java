@@ -30,17 +30,11 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
             for (int f = 0; f < absChromosome.getNoOfFlights(g); f++) {
                 Flight flight = flightStorage.getFlightByNumber(absChromosome.getGene(g, f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
-                fitness += standsStorage.getStandsDistance(g, originalStandNo);
+                double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
+                fitness += weight * standsStorage.getStandsDistance(g, originalStandNo);
             }
         }
 
         return (-1) * fitness;
-    }
-
-    @Override
-    protected double calculateTotalWeights(Flight flight) {
-        return weights.getWalkingDistanceWeight()
-                + weights.getPassengerWeight() * flight.getNoOfPassengers()
-                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
     }
 }

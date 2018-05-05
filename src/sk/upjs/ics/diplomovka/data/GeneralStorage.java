@@ -7,14 +7,18 @@ import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import java.util.HashMap;
 import java.util.Map;
 
+import static sk.upjs.ics.diplomovka.utils.Utils.MINUTES_IN_DAY;
+
 public class GeneralStorage {
 
     private FlightStorage flightStorage;
     private StandsStorage standsStorage;
+    private int startTime;
 
-    public GeneralStorage(FlightStorage flightStorage, StandsStorage standsStorage) {
+    public GeneralStorage(FlightStorage flightStorage, StandsStorage standsStorage, int startTime) {
         this.flightStorage = flightStorage;
         this.standsStorage = standsStorage;
+        this.startTime = startTime;
     }
 
     public FlightStorage getFlightStorage() {
@@ -26,7 +30,7 @@ public class GeneralStorage {
     }
 
     public GeneralStorage getStorageWithOptionalStart(int startTime) {
-        if(startTime > 24*60) {
+        if(startTime > MINUTES_IN_DAY) {
             throw new IllegalArgumentException("Start time can't be more than number of minutes in one day.");
         }
 
@@ -41,6 +45,10 @@ public class GeneralStorage {
                 availabilityTimes.put(flight.getOriginalStandId(), flight.getEnd());
             }
         }
-        return new GeneralStorage(flightStorage.flightsAfterTime(startTime), standsStorage.storageWithNewAvailabilityTimes(availabilityTimes));
+        return new GeneralStorage(flightStorage.flightsAfterTime(startTime), standsStorage.storageWithNewAvailabilityTimes(availabilityTimes), startTime);
+    }
+
+    public int getStartTime() {
+        return startTime;
     }
 }

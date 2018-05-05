@@ -8,11 +8,13 @@ import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 public abstract class FitnessFunctionBase {
 
+    protected GeneralStorage storage;
     protected FlightStorage flightStorage;
     protected StandsStorage standsStorage;
     protected FitnessFunctionWeights weights;
 
     public FitnessFunctionBase(GeneralStorage storage, FitnessFunctionWeights weights) {
+        this.storage = storage;
         this.flightStorage = storage.getFlightStorage();
         this.standsStorage = storage.getStandsStorage();
         this.weights = weights;
@@ -29,5 +31,10 @@ public abstract class FitnessFunctionBase {
     // makes sense for basic fitness functions when we want concrete results (total delays, no of reassignments etc.)
     public abstract double calculateNonWeightedFitness(Chromosome chromosome);
 
-    protected abstract double calculateTotalWeights(Flight flight);
+    protected double calculateTotalWeights(Flight flight, double fitnessSpecificWeight) {
+        return (fitnessSpecificWeight
+                + weights.getPassengerWeight() * flight.getNoOfPassengers()
+                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority()))
+                * weights.getFutureWeight(flight.getStart() - storage.getStartTime());
+    }
 }

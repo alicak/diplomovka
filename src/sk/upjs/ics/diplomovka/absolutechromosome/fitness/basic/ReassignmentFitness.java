@@ -36,19 +36,11 @@ public class ReassignmentFitness extends FitnessFunctionBase {
                 Flight flight = flightStorage.getFlightByNumber(c.getGene(g, f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
                 if (g != originalStandNo) {
-                    double weight = weighted ? calculateTotalWeights(flight) : 1;
+                    double weight = weighted ? calculateTotalWeights(flight, weights.getReassignmentWeight()) : 1;
                     result += weight;
                 }
             }
         }
         return (-1) * result;
     }
-
-    @Override
-    protected double calculateTotalWeights(Flight flight) {
-        return weights.getReassignmentWeight()
-                + weights.getPassengerWeight() * flight.getNoOfPassengers()
-                + weights.getFlightPriorityWeight() * weights.getFlightPriorityValue(flight.getPriority());
-    }
-
 }
