@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+
 public class FullDeparture extends FullFlight {
     // column structure: Scheduled, Actual, To, Terminal, Gate, Status, Flight No, Aircraft, Turnaround time, No of passengers
 
@@ -13,7 +15,7 @@ public class FullDeparture extends FullFlight {
         this.to = to;
     }
 
-    public static Flight toFlight(FullDeparture departure) {
+    public static Flight toFlight(FullDeparture departure, StandsStorage standsStorage) {
         return new Flight()
                 .setId(FlightId.getId())
                 .setType(Flight.FlightType.DEPARTURE)
@@ -27,6 +29,6 @@ public class FullDeparture extends FullFlight {
                 .setNoOfPassengers(departure.getNoOfPassengers())
                 .setDestination(departure.getTo())
                 .setOriginalGate(departure.getGate())
-                .setOriginalStandId(-1); // TODO
+                .setOriginalStandId(standsStorage.getStandIdByGate(departure.getGate()));
     }
 }

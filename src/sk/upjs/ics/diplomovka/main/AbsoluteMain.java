@@ -167,7 +167,7 @@ public class AbsoluteMain {
 //        }
 
         for (FullDeparture d : departuresFull) {
-            Flight f = FullDeparture.toFlight(d);
+            Flight f = FullDeparture.toFlight(d, standsStorage);
             f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
             flights.add(f);
             flightsMap.put(f.getId(), f);
