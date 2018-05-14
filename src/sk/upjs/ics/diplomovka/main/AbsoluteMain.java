@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
@@ -64,7 +64,7 @@ public class AbsoluteMain {
 
         // absolute position chromosome
         AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);
-        AbsolutePositionChromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
+        Chromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
 
         //System.out.println("original fitness 1: " + fitnessFunction.calculateFitness(originalAssignment));
 
@@ -75,7 +75,7 @@ public class AbsoluteMain {
 //        flight34delayed.disruptAssignment(originalAssignment);
 //        gate5closed.disruptAssignment(originalAssignment);
 
-        AbsolutePositionPopulation population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
+        AbsolutePositionPopulation population = PopulationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
 
         gate1tempClosed.disruptAssignment(originalAssignment); // this has to be done after population creation
         gate5tempClosed.disruptAssignment(originalAssignment);
@@ -141,7 +141,7 @@ public class AbsoluteMain {
         System.out.println("timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(result));
         System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
 
-        List<FlightInfo> flightInfos = SolutionCreator.createSolutionFromChromosome((AbsolutePositionChromosome) result, storage);
+        List<FlightInfo> flightInfos = SolutionCreator.createSolutionFromChromosome(result, storage);
         System.out.println(flightInfos);
 
 

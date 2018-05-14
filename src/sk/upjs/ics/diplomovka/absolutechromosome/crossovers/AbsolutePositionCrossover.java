@@ -1,8 +1,7 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.crossovers;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome.EMPTY_GENE;
+import static sk.upjs.ics.diplomovka.absolutechromosome.Chromosome.EMPTY_GENE;
 
 public class AbsolutePositionCrossover extends CrossoverBase {
     public static final int MIN_QUEUE_LENGTH = 2;
@@ -24,19 +23,17 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         if (Math.random() > probability)
             return Collections.emptyList();
 
-        AbsolutePositionChromosome c1 = (AbsolutePositionChromosome) chromosome1;
-        AbsolutePositionChromosome c2 = (AbsolutePositionChromosome) chromosome2;
-        return doAbsoluteCrossover(c1, c2);
+        return doAbsoluteCrossover(chromosome1, chromosome2);
     }
 
-    private List<Chromosome> doAbsoluteCrossover(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
+    private List<Chromosome> doAbsoluteCrossover(Chromosome chromosome1, Chromosome chromosome2) {
         if (Math.random() > 0.5)
             return crossWithSameStart(chromosome1, chromosome2);
         else
             return crossWithDifferentStart(chromosome1, chromosome2);
     }
 
-    private List<Chromosome> crossWithSameStart(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
+    private List<Chromosome> crossWithSameStart(Chromosome chromosome1, Chromosome chromosome2) {
         int gate = Utils.randomInt(chromosome1.getNoOfGates());
         int maxLength = Math.max(chromosome1.getNoOfFlights(gate), chromosome2.getNoOfFlights(gate));
 
@@ -46,8 +43,8 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         int queueStart = Utils.randomInt(maxLength - 1); // -1 so there is at least one flight after the start
         int queueLength = Utils.randomInt(1, maxLength - queueStart); // 1 would mean SwapBetweenGates mutations
 
-        AbsolutePositionChromosome c1 = chromosome1.copy();
-        AbsolutePositionChromosome c2 = chromosome2.copy();
+        Chromosome c1 = chromosome1.copy();
+        Chromosome c2 = chromosome2.copy();
 
         List<Chromosome> result = new ArrayList<>();
         if (updateChromosome(c1, chromosome2, queueStart, queueLength, gate))
@@ -58,7 +55,7 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         return result;
     }
 
-    private List<Chromosome> crossWithDifferentStart(AbsolutePositionChromosome chromosome1, AbsolutePositionChromosome chromosome2) {
+    private List<Chromosome> crossWithDifferentStart(Chromosome chromosome1, Chromosome chromosome2) {
         int gate = Utils.randomInt(chromosome1.getNoOfGates());
         int length1 = chromosome1.getNoOfFlights(gate);
         int length2 = chromosome2.getNoOfFlights(gate);
@@ -72,8 +69,8 @@ public class AbsolutePositionCrossover extends CrossoverBase {
 
         int queueLength = Utils.randomInt(1, maxLength); // 1 would mean SwapBetweenGates mutations
 
-        AbsolutePositionChromosome c1 = chromosome1.copy();
-        AbsolutePositionChromosome c2 = chromosome2.copy();
+        Chromosome c1 = chromosome1.copy();
+        Chromosome c2 = chromosome2.copy();
 
         List<Chromosome> result = new ArrayList<>();
         if (updateChromosome(c1, chromosome2, start1, queueLength, gate))
@@ -84,7 +81,7 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         return result;
     }
 
-    private boolean updateChromosome(AbsolutePositionChromosome updatedChromosome, AbsolutePositionChromosome secondChromosome, int queueStart, int queueLength, int gate) {
+    private boolean updateChromosome(Chromosome updatedChromosome, Chromosome secondChromosome, int queueStart, int queueLength, int gate) {
         for (int f = queueStart + queueLength - 1; f >= queueStart; f--) {
             int flightU = updatedChromosome.getGene(gate, f);
             int flightS = secondChromosome.getGene(gate, f);

@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
@@ -69,9 +69,9 @@ public class BenchmarkMain {
 
         //long startTime = System.nanoTime();
 
-        AbsolutePositionChromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
+        Chromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
 
-        AbsolutePositionPopulation population = populationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
+        AbsolutePositionPopulation population = PopulationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
 
         gate1tempClosed.disruptAssignment(originalAssignment); // this has to be done after population creation
         gate5tempClosed.disruptAssignment(originalAssignment);

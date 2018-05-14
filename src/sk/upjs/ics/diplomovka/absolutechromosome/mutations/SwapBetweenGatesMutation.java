@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
@@ -8,7 +8,7 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
         this.probability = probability;
     }
 
-    public boolean doAbsoluteMutation(AbsolutePositionChromosome chromosome) {
+    public boolean doAbsoluteMutation(Chromosome chromosome) {
         if (Math.random() > probability) {
             return false;
         }

@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.algorithm;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.base.PopulationBase;
 import sk.upjs.ics.diplomovka.utils.Utils;

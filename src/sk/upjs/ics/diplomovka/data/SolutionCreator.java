@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.data;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SolutionCreator {
 
-    public static List<FlightInfo> createSolutionFromChromosome(AbsolutePositionChromosome chromosome, GeneralStorage storage) {
+    public static List<FlightInfo> createSolutionFromChromosome(Chromosome chromosome, GeneralStorage storage) {
         List<FlightInfo> flightInfos = new ArrayList<>();
 
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {

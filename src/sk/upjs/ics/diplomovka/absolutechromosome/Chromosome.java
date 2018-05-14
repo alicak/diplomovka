@@ -1,6 +1,5 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
@@ -11,9 +10,12 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.*;
 
-public class AbsolutePositionChromosome extends Chromosome {
-    public static int EMPTY_GENE = -1;
+public class Chromosome implements Comparable<Chromosome> {
+    private static final int FITNESS_NOT_SET = -1;
+    public static final int EMPTY_GENE = -1;
 
+    private List<Integer> genes;
+    private double fitness = -1;
     private int noOfGates;
     private int[] noOfFlights; // number of flights per gate
     private int maxNoFlights;
@@ -21,14 +23,39 @@ public class AbsolutePositionChromosome extends Chromosome {
     private Map<Integer, Integer> currentFlightStarts = new HashMap<>();
     private Map<Integer, Integer> currentFlightEnds = new HashMap<>();
 
-    public AbsolutePositionChromosome(int noOfGates, int maxNoFlights) {
+    public Chromosome() {
+        genes = new ArrayList<>();
+    }
+
+    public Chromosome(List<Integer> genes) {
+        this.genes = genes;
+    }
+
+    public Chromosome(int noOfGates, int maxNoFlights) {
         this.noOfGates = noOfGates;
         this.maxNoFlights = maxNoFlights;
         this.noOfFlights = new int[noOfGates];
     }
 
+    protected int getIndex(int gate, int flight) {
+        return gate * maxNoFlights + flight;
+    }
+
     public int getGene(int gate, int flight) {
         return getGene(getIndex(gate, flight));
+    }
+
+    public int getGene(int position) {
+        return genes.get(position);
+    }
+
+    public List<Integer> getGenes() {
+        return genes;
+    }
+
+    public void setGene(int position, int gene) {
+        genes.set(position, gene);
+        resetFitness();
     }
 
     public void setGene(int gate, int flight, int flightValue) {
@@ -38,6 +65,32 @@ public class AbsolutePositionChromosome extends Chromosome {
         }
         setGene(getIndex(gate, flight), flightValue);
         resetFitness();
+    }
+
+    public void setGenes(List<Integer> genes) {
+        this.genes = genes;
+        resetFitness();
+    }
+
+    public double getFitness() {
+        return fitness;
+    }
+
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
+    }
+
+    public boolean hasFitness() {
+        return fitness != FITNESS_NOT_SET;
+    }
+
+    public void resetFitness() {
+        fitness = FITNESS_NOT_SET;
+    }
+
+    public void prepareForFitnessCalculation(GeneralStorage storage) {
+        calculateCurrentFlightStarts(storage);
+        applyAllClosures(storage.getStandsStorage());
     }
 
     public void addNextFlight(int gate, int flightValue) {
@@ -56,12 +109,10 @@ public class AbsolutePositionChromosome extends Chromosome {
             noOfFlights[gate]++;
     }
 
-    @Override
     public int addFlight() {
         return 0; // TODO
     }
 
-    @Override
     public void removeFlight(int flightValue) {
         FlightPosition position = findPosition(flightValue);
         removeFlightFromGenes(position.getGate(), position.getFlight());
@@ -81,17 +132,16 @@ public class AbsolutePositionChromosome extends Chromosome {
         maxNoFlights--;
     }
 
-    @Override
-    public int addGate() {
-        return 0; // TODO
-    }
-
     public void removeFlightFromGenes(int gate, int flight) {
         for (int f = flight; f < noOfFlights[gate]; f++) {
             setGene(gate, f, getGene(gate, f + 1));
         }
         noOfFlights[gate]--;
         resetFitness();
+    }
+
+    public int addGate() {
+        return 0; // TODO
     }
 
     public void removeGate(int gate) {
@@ -127,12 +177,10 @@ public class AbsolutePositionChromosome extends Chromosome {
         return noOfFlights[gate];
     }
 
-    @Override
     public int getNoOfFlights() {
         return maxNoFlights;
     }
 
-    @Override
     public int getNoOfGates() {
         return noOfGates;
     }
@@ -147,10 +195,6 @@ public class AbsolutePositionChromosome extends Chromosome {
         return new FlightPosition(-1, -1); // flight was not found
     }
 
-    protected int getIndex(int gate, int flight) {
-        return gate * maxNoFlights + flight;
-    }
-
     private void setNoOfFlightsPerGate(int[] noOfFlights) {
         this.noOfFlights = noOfFlights;
     }
@@ -159,45 +203,20 @@ public class AbsolutePositionChromosome extends Chromosome {
         this.feasibilityChecker = feasibilityChecker;
     }
 
-    @Override
     public boolean checkFlightFeasibility(int flightValue, int gate) {
         return feasibilityChecker.checkFlightFeasibility(flightValue, gate);
     }
 
-    @Override
     public boolean checkFeasibility() {
         return feasibilityChecker.checkChromosomeFeasibility(this);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (int g = 0; g < noOfGates; g++) {
-            result.append(g + ": ");
-            for (int f = 0; f < maxNoFlights; f++) {
-                result.append(getGene(g, f) + ", ");
-            }
-            result.append("\n");
-        }
-        return result.toString();
-    }
-
-    public AbsolutePositionChromosome copy() {
-        AbsolutePositionChromosome chromosome = new AbsolutePositionChromosome(noOfGates, maxNoFlights);
-
-        chromosome.setFitness(getFitness());
-        List<Integer> genes = new ArrayList<>(getGenes());
-        chromosome.setGenes(genes);
-        chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
-        chromosome.setFeasibilityChecker(feasibilityChecker);
-
-        chromosome.setCurrentFlightStarts(new HashMap<>(currentFlightStarts));
-        chromosome.setCurrentFlightEnds(new HashMap<>(currentFlightEnds));
-
-        return chromosome;
-    }
-
-    // we save current start time for that particular flight on that particular stand in this assignment
+    /**
+     * we save current start time for that particular flight on that particular stand in this assignment
+     * @param gate
+     * @param flightIdx
+     * @param amount
+     */
     public void incrementCurrentStartAndEnd(int gate, int flightIdx, int amount) {
         int flightNo = getGene(gate, flightIdx);
         int newStart = currentFlightStarts.get(flightNo) + amount;
@@ -206,15 +225,9 @@ public class AbsolutePositionChromosome extends Chromosome {
         currentFlightEnds.put(flightNo, newEnd);
     }
 
-    public int getCurrentFlightStart(int gate, int flightIdx) {
-        return currentFlightStarts.get(getGene(gate, flightIdx));
-    }
-
-    public int getCurrentFlightEnd(int gate, int flightIdx) {
-        return currentFlightEnds.get(getGene(gate, flightIdx));
-    }
-
-    // also calculates ends
+    /**
+     *     also calculates ends
+     */
     public void calculateCurrentFlightStarts(GeneralStorage storage) {
         FlightStorage flightStorage = storage.getFlightStorage();
         StandsStorage standsStorage = storage.getStandsStorage();
@@ -239,6 +252,22 @@ public class AbsolutePositionChromosome extends Chromosome {
                 previousNo = flightNo;
             }
         }
+    }
+
+    public int getCurrentFlightStart(int gate, int flightIdx) {
+        return currentFlightStarts.get(getGene(gate, flightIdx));
+    }
+
+    public int getCurrentFlightEnd(int gate, int flightIdx) {
+        return currentFlightEnds.get(getGene(gate, flightIdx));
+    }
+
+    public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
+        this.currentFlightStarts = currentFlightStarts;
+    }
+
+    public void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
+        this.currentFlightEnds = currentFlightEnds;
     }
 
     public void applyStandClosure(StandClosure closure, int standNo) {
@@ -269,22 +298,46 @@ public class AbsolutePositionChromosome extends Chromosome {
         }
     }
 
-    @Override
-    public void prepareForFitnessCalculation(GeneralStorage storage) {
-        calculateCurrentFlightStarts(storage);
-        applyAllClosures(storage.getStandsStorage());
-    }
-
-    public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
-        this.currentFlightStarts = currentFlightStarts;
-    }
-
-    public void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
-        this.currentFlightEnds = currentFlightEnds;
-    }
-
     public void applyConditionalStandClosure(ConditionalStandClosure conditionalClosure, int standNo) {
         StandClosure closure = new StandClosure(conditionalClosure.getStandId(), conditionalClosure.getStart(), conditionalClosure.getEnd());
         applyStandClosure(closure, standNo);
+    }
+
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int g = 0; g < noOfGates; g++) {
+            result.append(g + ": ");
+            for (int f = 0; f < maxNoFlights; f++) {
+                result.append(getGene(g, f) + ", ");
+            }
+            result.append("\n");
+        }
+        return result.toString();
+    }
+
+    public Chromosome copy() {
+        Chromosome chromosome = new Chromosome(noOfGates, maxNoFlights);
+
+        chromosome.setFitness(getFitness());
+        List<Integer> genes = new ArrayList<>(getGenes());
+        chromosome.setGenes(genes);
+        chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
+        chromosome.setFeasibilityChecker(feasibilityChecker);
+
+        chromosome.setCurrentFlightStarts(new HashMap<>(currentFlightStarts));
+        chromosome.setCurrentFlightEnds(new HashMap<>(currentFlightEnds));
+
+        return chromosome;
+    }
+
+    @Override
+    public int compareTo(Chromosome c) {
+        if (this.getFitness() == c.getFitness())
+            return 0;
+
+        if (this.getFitness() < c.getFitness())
+            return 1; // this object is worse, thus later in order
+
+        return -1;
     }
 }

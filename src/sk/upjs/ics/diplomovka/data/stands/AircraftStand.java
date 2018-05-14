@@ -45,14 +45,10 @@ public class AircraftStand {
     }
 
     public boolean checkFlight(Flight flight) {
-        if (flight == null ||
-                !this.flightCategories.contains(flight.getCategory()) ||
-                this.maxWingspan < flight.getAircraft().getWingspan() ||
-                !this.engineTypes.contains(flight.getAircraft().getEngineType())) {
-            return false;
-        }
-
-        return true;
+        return flight != null &&
+                this.flightCategories.contains(flight.getCategory()) &&
+                !(this.maxWingspan < flight.getAircraft().getWingspan()) &&
+                this.engineTypes.contains(flight.getAircraft().getEngineType());
     }
 
     public int getId() {

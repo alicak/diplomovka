@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
@@ -18,14 +18,14 @@ public class AssignmentCreator {
         this.flightStorage = storage.getFlightStorage();
     }
 
-    public AbsolutePositionChromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
+    public Chromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
         int noOfFlights = flightStorage.getNoOfFlights();
 
-        AbsolutePositionChromosome originalAssignment = new AbsolutePositionChromosome(standsStorage.getNoOfStands(), noOfFlights);
+        Chromosome originalAssignment = new Chromosome(standsStorage.getNoOfStands(), noOfFlights);
         originalAssignment.setFeasibilityChecker(feasibilityChecker);
 
         Integer[] genesArray = new Integer[standsStorage.getNoOfStands() * noOfFlights];
-        Arrays.fill(genesArray, AbsolutePositionChromosome.EMPTY_GENE);
+        Arrays.fill(genesArray, Chromosome.EMPTY_GENE);
         originalAssignment.setGenes(Arrays.asList(genesArray));
 
         for (Flight f : flightStorage.getSortedFlights()) {

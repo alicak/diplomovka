@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.algorithm;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 

@@ -1,19 +1,17 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGenerator;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PopulationCreator {
 
-    public static AbsolutePositionPopulation createAbsoluteInitialPopulation(int generationSize, AbsolutePositionChromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker, GeneralStorage storage) {
+    public static AbsolutePositionPopulation createAbsoluteInitialPopulation(int generationSize, Chromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker, GeneralStorage storage) {
         AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfGates(), originalAssignment.getNoOfFlights(), feasibilityChecker);
 
         // first half are random assignments

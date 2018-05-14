@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.algorithm;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.MutationBase;
 
 import java.util.concurrent.BlockingQueue;

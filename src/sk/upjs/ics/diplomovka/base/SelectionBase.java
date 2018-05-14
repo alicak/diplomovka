@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.base;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+
 import java.util.List;
 
 public abstract class SelectionBase {

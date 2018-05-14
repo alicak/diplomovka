@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;

@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.disruption;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public class FlightCancelledDisruption implements Disruption {

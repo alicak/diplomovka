@@ -1,6 +1,5 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.base.Chromosome;
 import sk.upjs.ics.diplomovka.base.PopulationBase;
 
 import java.util.List;
