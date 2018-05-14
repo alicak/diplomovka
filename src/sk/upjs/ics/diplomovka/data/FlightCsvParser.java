@@ -55,7 +55,7 @@ public class FlightCsvParser {
         return new AircraftStand(id, maxWingspan,
                 Arrays.asList(Flight.FlightCategory.SCHENGEN),
                 Arrays.asList(Aircraft.EngineType.JET, Aircraft.EngineType.TURBOPROP),
-                null, Arrays.asList(gateArray)); // TODO: Schengen & null
+                Arrays.asList(gateArray)); // TODO: Schengen & null
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {

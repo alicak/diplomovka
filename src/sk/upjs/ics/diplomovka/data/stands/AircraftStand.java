@@ -12,24 +12,11 @@ public class AircraftStand {
     private double maxWingspan;
     private List<Flight.FlightCategory> flightCategories;
     private List<Aircraft.EngineType> engineTypes;
-    private AircraftStandType type;
     private List<String> gates;
 
-    // http://www.aixm.aero/sites/aixm.aero/files/imce/AIXM511HTML/AIXM/DataType_CodeAircraftStandType.html
-    public enum AircraftStandType {
-        ANG_NI,     // Angled nose-in parking position
-        ANG_NO,     // Angled nose-out parking position
-        ISOL,       // Isolated parking position
-        NI,         // Nose-in parking position
-        OTHER,      // Other
-        PARL,       // Parallel (to building) parking position
-        RMT         // Remote parking position
-    }
-
-    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, Aircraft.EngineType engineType, AircraftStandType type, List<String> gates) {
+    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, Aircraft.EngineType engineType, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
-        this.type = type;
         this.flightCategories = new ArrayList<>();
         this.flightCategories.add(flightCategory);
         this.engineTypes = new ArrayList<>();
@@ -37,12 +24,11 @@ public class AircraftStand {
         this.gates = gates;
     }
 
-    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes, AircraftStandType type, List<String> gates) {
+    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes, List<String> gates) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.flightCategories = flightCategories;
         this.engineTypes = engineTypes;
-        this.type = type;
         this.gates = gates;
     }
 
