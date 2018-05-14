@@ -47,7 +47,7 @@ public class BenchmarkMain {
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
         FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser, standsStorage);
-        GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage);
+        GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
 
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
         Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage); // no 2
