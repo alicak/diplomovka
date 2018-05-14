@@ -26,6 +26,7 @@ public class FullDeparture extends FullFlight {
                 .setEnd(departure.getScheduled())
                 .setNoOfPassengers(departure.getNoOfPassengers())
                 .setDestination(departure.getTo())
-                .setOriginalGate(departure.getGate());
+                .setOriginalGate(departure.getGate())
+                .setOriginalStandId(-1); // TODO
     }
 }

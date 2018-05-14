@@ -12,7 +12,7 @@ public class Flight implements Comparable<Flight> {
     private FlightPriority priority;
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
-    private int originalStandId; // TODO
+    private int originalStandId;
     private int noOfPassengers;
     private String destination;
     private String originalGate;
