@@ -13,6 +13,7 @@ import java.util.Map;
 public class StandToGateMapper {
 
     private GeneralStorage storage;
+    private static final int GATE_TIME_BEFORE_START = 60; // we need the gate one hour before the departure
 
     public StandToGateMapper(GeneralStorage storage) {
         this.storage = storage;
@@ -32,7 +33,7 @@ public class StandToGateMapper {
                 Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(g, f));
                 String originalGate = flight.getOriginalGate();
 
-                int start = flight.getStart();
+                int start = Math.max(0, flight.getStart() - GATE_TIME_BEFORE_START); // 0 for the case that the flight is first
                 int end = flight.getEnd();
 
                 // stand was not changed
