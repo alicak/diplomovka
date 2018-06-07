@@ -6,7 +6,6 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +22,13 @@ public class StandToGateMapper {
         FlightStorage flightStorage = storage.getFlightStorage();
         StandsStorage standsStorage = storage.getStandsStorage();
 
-        Map<String, boolean[]> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
+        Map<String, Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
+        Map<Integer, String> flightsToGates = new HashMap<>();
 
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
+            int currentStandId = standsStorage.getStandByNumber(g).getId();
 
+            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
                 Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(g, f));
                 String originalGate = flight.getOriginalGate();
 
@@ -35,52 +36,50 @@ public class StandToGateMapper {
                 int end = flight.getEnd();
 
                 // stand was not changed
-                if (flight.getOriginalStandId() == standsStorage.getStandByNumber(g).getId()) {
-                    // try original gate
-                    if (checkUsedTime(start, end, usedTimesOnGates.get(originalGate))) {
-                        setUsedTime(start,end,usedTimesOnGates.get(originalGate));
+                if (flight.getOriginalStandId() == currentStandId) {
+                    // try the original gate
+                    if (usedTimesOnGates.get(originalGate) <= start) {
+                        flightsToGates.put(flight.getId(), originalGate);
+                        usedTimesOnGates.put(originalGate, end);
                         continue;
                     }
                 }
 
-                // new stand was assigned
-                // skusim inu branu z originalnej alebo novej stojanky
+                // new stand was assigned or original gate is not available - we need to assign a new gate
                 List<String> gatesForStand = standsStorage.getStandByNumber(g).getGates();
+                int noOfGates = gatesForStand.size();
+                int randomGateIndex = Utils.randomInt(noOfGates); // we randomly choose starting point in the list of gates
+                boolean control = false; // controls if new gate was assigned
 
+                for (int i = 0; i < noOfGates; i++) {
+                    String gate = gatesForStand.get((randomGateIndex + i) % noOfGates);
+                    if (usedTimesOnGates.get(gate) <= start) {
+                        flightsToGates.put(flight.getId(), gate);
+                        usedTimesOnGates.put(gate, end);
+                        control = true;
+                        break;
+                    }
+                }
 
-                String newGate = gatesForStand.get(0);
-
+                if (!control) {
+                    throw new IllegalStateException("Flight must be assigned a gate.");
+                }
             }
         }
 
-        return null; // TODO
+        return flightsToGates;
     }
 
 
-    private Map<String, boolean[]> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
-        Map<String, boolean[]> usedTimesOnGates = new HashMap<>();
+    private Map<String, Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
+        Map<String, Integer> usedTimesOnGates = new HashMap<>();
 
         for (AircraftStand stand : standsStorage.getStands()) {
             for (String gate : stand.getGates()) {
-                usedTimesOnGates.put(gate, new boolean[Utils.MINUTES_IN_DAY]);
+                usedTimesOnGates.put(gate, 0);
             }
         }
 
         return usedTimesOnGates;
-    }
-
-    // returns true if whole interval is not used
-    private boolean checkUsedTime(int start, int end, boolean[] usedTimes) {
-        for (int i = start; i <= end; i++) {
-            if (usedTimes[i])
-                return false;
-        }
-        return true;
-    }
-
-    private void setUsedTime(int start, int end, boolean[] usedTimes) {
-        for (int i = start; i <= end; i++) {
-            usedTimes[i] = true;
-        }
     }
 }
