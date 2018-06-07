@@ -15,25 +15,32 @@ public class StandsStorage {
     private Map<Integer, List<StandClosure>> closures; // ids to closures
     private Map<Integer, List<ConditionalStandClosure>> conditionalClosures;
     private Map<Integer, Integer> availabilityTimes;
+    private Map<String, Integer> gatesToIds;
     private double[][] standsDistances; // TODO
     private double[][] gateDistances; // TODO
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands) {
         this.stands = stands;
         this.gatesToStands = gatesToStands;
-        initializeStands(stands);
+        initializeStands();
         initializeClosures();
         initializeAvailabilityTimes();
+        initializeGates();
     }
 
-    private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands, Map<Integer,
-            List<StandClosure>> closures, Map<Integer, List<ConditionalStandClosure>> conditionalClosures, Map<Integer, Integer> availabilityTimes) {
+    private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands,
+                          Map<Integer, List<StandClosure>> closures, Map<Integer, List<ConditionalStandClosure>> conditionalClosures,
+                          Map<Integer, Integer> availabilityTimes, Map<String, Integer> gatesToIds, double[][] standsDistances,
+                          double[][] gateDistances) {
         this.stands = stands;
         this.standsIds = standsIds;
         this.gatesToStands = gatesToStands;
         this.closures = closures;
         this.conditionalClosures = conditionalClosures;
         this.availabilityTimes = availabilityTimes;
+        this.gatesToIds = gatesToIds;
+        this.standsDistances = standsDistances;
+        this.gateDistances = gateDistances;
     }
 
     public Collection<AircraftStand> getStands() {
@@ -95,7 +102,7 @@ public class StandsStorage {
         return stands.keySet();
     }
 
-    private int[] initializeStands(Map<Integer, AircraftStand> stands) {
+    private int[] initializeStands() {
         standsIds = new int[stands.size()];
 
         for (int j = 0; j < standsIds.length; j++) {
@@ -121,6 +128,15 @@ public class StandsStorage {
         }
     }
 
+    private void initializeGates() {
+        gatesToIds = new HashMap<>();
+        int id = 0;
+        for(String gate: gatesToStands.keySet()) {
+            gatesToIds.put(gate, id);
+            id++;
+        }
+    }
+
     public List<StandClosure> getClosuresForStand(int standNo) {
         return closures.get(getStandByNumber(standNo).getId());
     }
@@ -138,16 +154,17 @@ public class StandsStorage {
     }
 
     public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {
-        return new StandsStorage(stands, standsIds, gatesToStands, closures, conditionalClosures, availabilityTimes);
+        return new StandsStorage(stands, standsIds, gatesToStands, closures, conditionalClosures,
+                availabilityTimes, gatesToIds, standsDistances, gateDistances);
     }
 
-    public int getStandAvailabilityTime(int standNo){
+    public int getStandAvailabilityTime(int standNo) {
         return availabilityTimes.get(getStandByNumber(standNo).getId());
     }
 
     public double getGatesDistance(String g1, String g2) {
-        int g1idx = 0; // TODO: Will we use gate strings or will we create some integer ids?
-        int g2idx = 0;
+        int g1idx = gatesToIds.get(g1);
+        int g2idx = gatesToIds.get(g2);
         return gateDistances[g1idx][g2idx];
     }
 
