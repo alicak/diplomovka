@@ -15,7 +15,7 @@ public class Flight implements Comparable<Flight> {
     private int originalStandId;
     private int noOfPassengers;
     private String destination;
-    private String originalGate;
+    private int originalGateId;
 
     public enum FlightType {
         ARRIVAL,
@@ -165,12 +165,12 @@ public class Flight implements Comparable<Flight> {
         return this;
     }
 
-    public String getOriginalGate() {
-        return originalGate;
+    public int getOriginalGateId() {
+        return originalGateId;
     }
 
-    public Flight setOriginalGate(String originalGate) {
-        this.originalGate = originalGate;
+    public Flight setOriginalGateId(int originalGateId) {
+        this.originalGateId = originalGateId;
         return this;
     }
 }

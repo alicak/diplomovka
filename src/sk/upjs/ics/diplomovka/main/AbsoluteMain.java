@@ -36,7 +36,7 @@ public class AbsoluteMain {
 
         int generationSize = 30; // TODO
 
-        FlightCsvParser parser = new FlightCsvParser(aircraftsFile, standsFile);
+        FlightCsvParser parser = new FlightCsvParser(aircraftsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
         FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
         GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);

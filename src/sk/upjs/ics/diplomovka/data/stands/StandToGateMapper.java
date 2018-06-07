@@ -6,9 +6,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StandToGateMapper {
 
@@ -19,19 +17,20 @@ public class StandToGateMapper {
         this.storage = storage;
     }
 
-    public Map<Integer, String> mapFlightsToGates(Chromosome chromosome) {
+    public Map<Integer, Integer> mapFlightsToGates(Chromosome chromosome) {
         FlightStorage flightStorage = storage.getFlightStorage();
         StandsStorage standsStorage = storage.getStandsStorage();
 
-        Map<String, Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
-        Map<Integer, String> flightsToGates = new HashMap<>();
+        Map<Integer, Integer> flightsToGates = new HashMap<>();
+
+        List<Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
 
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {
             int currentStandId = standsStorage.getStandByNumber(g).getId();
 
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
                 Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(g, f));
-                String originalGate = flight.getOriginalGate();
+                int originalGate = flight.getOriginalGateId();
 
                 int start = Math.max(0, flight.getStart() - GATE_TIME_BEFORE_START); // 0 for the case that the flight is first
                 int end = flight.getEnd();
@@ -41,22 +40,22 @@ public class StandToGateMapper {
                     // try the original gate
                     if (usedTimesOnGates.get(originalGate) <= start) {
                         flightsToGates.put(flight.getId(), originalGate);
-                        usedTimesOnGates.put(originalGate, end);
+                        usedTimesOnGates.set(originalGate, end);
                         continue;
                     }
                 }
 
                 // new stand was assigned or original gate is not available - we need to assign a new gate
-                List<String> gatesForStand = standsStorage.getStandByNumber(g).getGates();
+                List<Integer> gatesForStand = standsStorage.getStandByNumber(g).getGates();
                 int noOfGates = gatesForStand.size();
                 int randomGateIndex = Utils.randomInt(noOfGates); // we randomly choose starting point in the list of gates
                 boolean control = false; // controls if new gate was assigned
 
                 for (int i = 0; i < noOfGates; i++) {
-                    String gate = gatesForStand.get((randomGateIndex + i) % noOfGates);
+                    int gate = gatesForStand.get((randomGateIndex + i) % noOfGates);
                     if (usedTimesOnGates.get(gate) <= start) {
                         flightsToGates.put(flight.getId(), gate);
-                        usedTimesOnGates.put(gate, end);
+                        usedTimesOnGates.set(gate, end);
                         control = true;
                         break;
                     }
@@ -72,15 +71,8 @@ public class StandToGateMapper {
     }
 
 
-    private Map<String, Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
-        Map<String, Integer> usedTimesOnGates = new HashMap<>();
-
-        for (AircraftStand stand : standsStorage.getStands()) {
-            for (String gate : stand.getGates()) {
-                usedTimesOnGates.put(gate, 0);
-            }
-        }
-
-        return usedTimesOnGates;
+    private List<Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
+        Integer[] times = new Integer[standsStorage.getNoOfGates()];
+        return Arrays.asList(times);
     }
 }

@@ -12,24 +12,13 @@ public class AircraftStand {
     private double maxWingspan;
     private List<Flight.FlightCategory> flightCategories;
     private List<Aircraft.EngineType> engineTypes;
-    private List<String> gates;
+    private List<Integer> gates;
 
-    public AircraftStand(int id, double maxWingspan, Flight.FlightCategory flightCategory, Aircraft.EngineType engineType, List<String> gates) {
-        this.id = id;
-        this.maxWingspan = maxWingspan;
-        this.flightCategories = new ArrayList<>();
-        this.flightCategories.add(flightCategory);
-        this.engineTypes = new ArrayList<>();
-        this.engineTypes.add(engineType);
-        this.gates = gates;
-    }
-
-    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes, List<String> gates) {
+    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes) {
         this.id = id;
         this.maxWingspan = maxWingspan;
         this.flightCategories = flightCategories;
         this.engineTypes = engineTypes;
-        this.gates = gates;
     }
 
     public double getMaxWingspan() {
@@ -55,7 +44,11 @@ public class AircraftStand {
         return id;
     }
 
-    public List<String> getGates() {
+    public List<Integer> getGates() {
         return gates;
+    }
+
+    public void setGates(List<Integer> gates) {
+        this.gates = gates;
     }
 }

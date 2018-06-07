@@ -17,8 +17,9 @@ public class FlightCsvParser {
 
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
+    private int gateId = 0;
 
-    public FlightCsvParser(File aircraftFile, File standsFile) throws IOException {
+    public FlightCsvParser(File aircraftFile) throws IOException {
         parseAircrafts(aircraftFile);
     }
 
@@ -28,16 +29,28 @@ public class FlightCsvParser {
 
         Map<Integer, AircraftStand> stands = new HashMap<>();
         Map<String, AircraftStand> gatesToStands = new HashMap<>();
+        List<String> gates = new ArrayList<>();
+        int id = 0;
 
         while ((line = reader.readLine()) != null) {
             AircraftStand stand = parseStand(line);
             stands.put(stand.getId(), stand);
-            for (String gate : stand.getGates()) {
+
+            List<String> gatesForStand = parseGates(line);
+            List<Integer> gateIdsForStand = new ArrayList<>();
+
+            for (String gate : gatesForStand) {
                 gatesToStands.put(gate, stand);
+                gates.add(gate);
+
+                gateIdsForStand.add(id);
+                id++;
             }
+
+            stand.setGates(gateIdsForStand);
         }
 
-        return new StandsStorage(stands, gatesToStands);
+        return new StandsStorage(stands, gatesToStands, gates);
     }
 
     private AircraftStand parseStand(String standString) {
@@ -54,8 +67,16 @@ public class FlightCsvParser {
 
         return new AircraftStand(id, maxWingspan,
                 Arrays.asList(Flight.FlightCategory.SCHENGEN),
-                Arrays.asList(Aircraft.EngineType.JET, Aircraft.EngineType.TURBOPROP),
-                Arrays.asList(gateArray)); // TODO: Schengen & null
+                Arrays.asList(Aircraft.EngineType.JET, Aircraft.EngineType.TURBOPROP)); // TODO: Schengen & null
+    }
+
+    private List<String> parseGates(String standString) {
+        String[] standArray = standString.split(SEPARATOR);
+        for (String s : standArray) {
+            s.trim();
+        }
+
+        return Arrays.asList(standArray[1].split(", "));
     }
 
     private void parseAircrafts(File aircraftFile) throws IOException {
