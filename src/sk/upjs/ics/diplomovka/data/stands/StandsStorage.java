@@ -36,6 +36,10 @@ public class StandsStorage {
         this.availabilityTimes = availabilityTimes;
     }
 
+    public Collection<AircraftStand> getStands() {
+        return stands.values();
+    }
+
     public AircraftStand getStandById(int id) {
         return stands.get(id);
     }
