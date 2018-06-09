@@ -18,11 +18,13 @@ public class StandsStorage {
     private List<String> gates;
     private double[][] standsDistances; // TODO
     private double[][] gateDistances; // TODO
+    private int noOfStandsInUse;
 
     public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands, List<String> gates) {
         this.stands = stands;
         this.gatesToStands = gatesToStands;
         this.gates = gates;
+        noOfStandsInUse = stands.size();
         initializeStands();
         initializeClosures();
         initializeAvailabilityTimes();
@@ -31,7 +33,7 @@ public class StandsStorage {
     private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands,
                           Map<Integer, List<StandClosure>> closures, Map<Integer, List<ConditionalStandClosure>> conditionalClosures,
                           Map<Integer, Integer> availabilityTimes, List<String> gates, double[][] standsDistances,
-                          double[][] gateDistances) {
+                          double[][] gateDistances, int noOfStandsInUse) {
         this.stands = stands;
         this.standsIds = standsIds;
         this.gatesToStands = gatesToStands;
@@ -41,6 +43,7 @@ public class StandsStorage {
         this.gates = gates;
         this.standsDistances = standsDistances;
         this.gateDistances = gateDistances;
+        this.noOfStandsInUse = noOfStandsInUse;
     }
 
     public Collection<AircraftStand> getStands() {
@@ -75,8 +78,10 @@ public class StandsStorage {
         return standsIds[number];
     }
 
-    public int addStand(AircraftStand stand) {
-        return 0; // TODO
+    public void addStand(AircraftStand stand, int noOfStandsInUse) {
+        standsIds[getNoOfStands() - 1] = standsIds[noOfStandsInUse];
+        standsIds[noOfStandsInUse] = stand.getId();
+        this.noOfStandsInUse++;
     }
 
     public void removeStand(int standId) {
@@ -87,15 +92,13 @@ public class StandsStorage {
 
         for (int i = 0; i < length; i++) {
             if (standsIds[i] == standId) {
-
-                for (int j = i; j < length - 1; j++) {
-                    standsIds[j] = standsIds[j + 1];
-                }
-
-                standsIds = Arrays.copyOf(standsIds, length - 1);
+                standsIds[i] = standsIds[length - 1];
+                standsIds[length - 1] = standId;
                 return;
             }
         }
+
+        noOfStandsInUse--;
     }
 
     public int getNoOfStands() {
@@ -150,7 +153,7 @@ public class StandsStorage {
 
     public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {
         return new StandsStorage(stands, standsIds, gatesToStands, closures, conditionalClosures,
-                availabilityTimes, gates, standsDistances, gateDistances);
+                availabilityTimes, gates, standsDistances, gateDistances, noOfStandsInUse);
     }
 
     public int getStandAvailabilityTime(int standNo) {
@@ -175,5 +178,9 @@ public class StandsStorage {
 
     public int getGateId(String gate) {
         return gates.indexOf(gate);
+    }
+
+    public int getNoOfStandsInUse() {
+        return noOfStandsInUse;
     }
 }

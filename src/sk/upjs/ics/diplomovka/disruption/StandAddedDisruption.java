@@ -20,6 +20,6 @@ public class StandAddedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() {
-        standsStorage.addStand(stand);
+        standsStorage.addStand(stand, standsStorage.getNoOfStandsInUse());
     }
 }

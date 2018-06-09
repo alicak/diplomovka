@@ -141,7 +141,17 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public int addGate() {
-        return 0; // TODO
+        for (int i = 0; i < maxNoFlights; i++) {
+            genes.add(EMPTY_GENE);
+        }
+
+        int newNumber = noOfGates;
+        noOfGates++;
+
+        noOfFlights = Arrays.copyOf(noOfFlights, noOfGates);
+        noOfFlights[newNumber] = 0;
+
+        return newNumber;
     }
 
     public void removeGate(int gate) {
@@ -160,15 +170,16 @@ public class Chromosome implements Comparable<Chromosome> {
             insertFlight(newGate, position, gene);
         }
 
-        for (int i = getIndex(gate, 0); i < (noOfGates - 1) * maxNoFlights; i++) { // we remove all positions for that gate
-            setGene(i, getGene(i + maxNoFlights));
-        }
+        int lastGate = noOfGates -1;
 
-        for (int i = gate; i < noOfGates - 1; i++) {
-            noOfFlights[i] = noOfFlights[i + 1];
+        for (int i = 0; i < maxNoFlights; i++) {
+            setGene(gate, getGene(lastGate, i));
         }
+        genes = genes.subList(0, genes.size() - maxNoFlights);
 
+        noOfFlights[gate] = noOfFlights[lastGate];
         noOfFlights = Arrays.copyOf(noOfFlights, noOfFlights.length - 1);
+
         noOfGates--;
         resetFitness();
     }
