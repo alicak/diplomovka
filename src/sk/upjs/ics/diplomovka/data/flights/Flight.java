@@ -1,5 +1,8 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Flight implements Comparable<Flight> {
 
     private int id;
@@ -16,6 +19,7 @@ public class Flight implements Comparable<Flight> {
     private String destination;
     private int originalGateId;
     private Arrival arrival;
+    private Map<Integer, Integer> transfers = new HashMap<>(); // key is id of departure that has this arrival, value is no of passengers
 
     public enum FlightCategory {
         SCHENGEN,
@@ -157,6 +161,19 @@ public class Flight implements Comparable<Flight> {
 
     public Flight setOriginalGateId(int originalGateId) {
         this.originalGateId = originalGateId;
+        return this;
+    }
+
+    public boolean hasTransfers() {
+        return !transfers.isEmpty();
+    }
+
+    public Map<Integer, Integer> getTransfers() {
+        return transfers;
+    }
+
+    public Flight setTransfers(Map<Integer, Integer> transfers) {
+        this.transfers = transfers;
         return this;
     }
 
