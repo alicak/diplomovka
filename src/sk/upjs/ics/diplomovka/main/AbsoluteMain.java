@@ -152,22 +152,14 @@ public class AbsoluteMain {
     }
 
     private static FlightStorage processFlights(File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
-        //List<FullArrival> arrivalsFull = parser.parseArrivals(arrivalsFile);
-        List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
+        List<FullFlight> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
 
         List<Flight> flights = new ArrayList<>();
         Map<Integer, Flight> flightsMap = new HashMap<>();
 
-//        for (FullArrival a : arrivalsFull) {
-//            Flight f = FullArrival.toFlight(a);
-//            f.setOriginalStandId(standsStorage.getStandIdByGate(a.getGate()));
-//            flights.add(f);
-//            flightsMap.put(f.getId(), f);
-//        }
-
-        for (FullDeparture d : departuresFull) {
-            Flight f = FullDeparture.toFlight(d, standsStorage);
+        for (FullFlight d : departuresFull) {
+            Flight f = FullFlight.toFlight(d, standsStorage);
             f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
             flights.add(f);
             flightsMap.put(f.getId(), f);

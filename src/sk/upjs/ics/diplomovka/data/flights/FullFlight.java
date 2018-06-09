@@ -1,6 +1,10 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-public abstract class FullFlight {
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+
+public class FullFlight {
+
+    // column structure: Scheduled, Actual, To, Terminal, Gate, Status, Flight No, Aircraft, Turnaround time, No of passengers
 
     private int scheduled;
     private int actual;
@@ -91,5 +95,31 @@ public abstract class FullFlight {
     public FullFlight setNoOfPassengers(int noOfPassengers) {
         this.noOfPassengers = noOfPassengers;
         return this;
+    }
+
+    private String to;
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public static Flight toFlight(FullFlight departure, StandsStorage standsStorage) {
+        return new Flight()
+                .setId(FlightId.getId())
+                .setCategory(Flight.FlightCategory.SCHENGEN) // TODO
+                .setPriority(Flight.FlightPriority.NORMAL) // TODO
+                .setAircraft(departure.getAircraft())
+                .setTurnaroundTime(departure.getTurnaroundTime())
+                .setStart(departure.getScheduled() - departure.getTurnaroundTime()) // TODO consider something else than turnaround time?
+                .setOriginalStart(departure.getScheduled())
+                .setEnd(departure.getScheduled())
+                .setNoOfPassengers(departure.getNoOfPassengers())
+                .setDestination(departure.getTo())
+                .setOriginalGateId(standsStorage.getGateId(departure.getGate()))
+                .setOriginalStandId(standsStorage.getStandIdByGate(departure.getGate()));
     }
 }

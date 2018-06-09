@@ -38,7 +38,7 @@ public class BenchmarkMain {
     public static long run() throws IOException, InterruptedException {
         // general part
         File aircraftsFile = new File("aircrafts.csv");
-        File arrivalsFile = new File("arrivals.csv");
+        //File arrivalsFile = new File("arrivals.csv");
         File departuresFile = new File("departures.csv");
         File standsFile = new File("stands.csv");
 
@@ -46,7 +46,7 @@ public class BenchmarkMain {
 
         FlightCsvParser parser = new FlightCsvParser(aircraftsFile);
         StandsStorage standsStorage = parser.parseStands(standsFile);
-        FlightStorage flightStorage = processFlights(arrivalsFile, departuresFile, parser, standsStorage);
+        FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
         GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
 
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
@@ -131,15 +131,15 @@ public class BenchmarkMain {
         return (endTime - startTime)/1000000;
     }
 
-    private static FlightStorage processFlights(File arrivalsFile, File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
-        List<FullDeparture> departuresFull = parser.parseDepartures(departuresFile);
+    private static FlightStorage processFlights(File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
+        List<FullFlight> departuresFull = parser.parseDepartures(departuresFile);
         FlightId.reset();
 
         List<Flight> flights = new ArrayList<>();
         Map<Integer, Flight> flightsMap = new HashMap<>();
 
-        for (FullDeparture d : departuresFull) {
-            Flight f = FullDeparture.toFlight(d, standsStorage);
+        for (FullFlight d : departuresFull) {
+            Flight f = FullFlight.toFlight(d, standsStorage);
             f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
             flights.add(f);
             flightsMap.put(f.getId(), f);

@@ -7,7 +7,6 @@ public class Flight implements Comparable<Flight> {
     private int originalStart;
     private int end;
     private int delay;
-    private FlightType type;
     private FlightCategory category;
     private FlightPriority priority;
     private Aircraft aircraft;
@@ -16,11 +15,6 @@ public class Flight implements Comparable<Flight> {
     private int noOfPassengers;
     private String destination;
     private int originalGateId;
-
-    public enum FlightType {
-        ARRIVAL,
-        DEPARTURE
-    }
 
     public enum FlightCategory {
         SCHENGEN,
@@ -99,15 +93,6 @@ public class Flight implements Comparable<Flight> {
 
     public Flight setCategory(FlightCategory category) {
         this.category = category;
-        return this;
-    }
-
-    public FlightType getType() {
-        return type;
-    }
-
-    public Flight setType(FlightType type) {
-        this.type = type;
         return this;
     }
 

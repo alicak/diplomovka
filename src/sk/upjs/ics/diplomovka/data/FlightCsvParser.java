@@ -2,8 +2,7 @@ package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.data.flights.Aircraft;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FullArrival;
-import sk.upjs.ics.diplomovka.data.flights.FullDeparture;
+import sk.upjs.ics.diplomovka.data.flights.FullFlight;
 import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
@@ -106,22 +105,8 @@ public class FlightCsvParser {
         return new Aircraft(aircraftArray[0].trim(), Double.parseDouble(wingspan), engineType);
     }
 
-//    public List<FullArrival> parseArrivals(File arrivalsFile) throws IOException {
-//        List<FullArrival> flights = new ArrayList<>();
-//
-//        BufferedReader reader = new BufferedReader(new FileReader(arrivalsFile));
-//        reader.readLine(); // first line are column headers
-//        String line = "";
-//
-//        while ((line = reader.readLine()) != null) {
-//            flights.add(parseArrival(line));
-//        }
-//
-//        return flights;
-//    }
-
-    public List<FullDeparture> parseDepartures(File departuresFile) throws IOException {
-        List<FullDeparture> flights = new ArrayList<>();
+    public List<FullFlight> parseDepartures(File departuresFile) throws IOException {
+        List<FullFlight> flights = new ArrayList<>();
 
         BufferedReader reader = new BufferedReader(new FileReader(departuresFile));
         reader.readLine(); // first line are column headers
@@ -134,35 +119,13 @@ public class FlightCsvParser {
         return flights;
     }
 
-
-//    private FullArrival parseArrival(String arrivalString) {
-//        String[] flightArray = arrivalString.split(SEPARATOR);
-//        for (String s : flightArray) {
-//            s.trim();
-//        }
-//
-//        FullArrival arrival = new FullArrival();
-//
-//        arrival.setScheduled(parseTime(flightArray[0]));
-//        arrival.setActual(parseTime(flightArray[1]));
-//        arrival.setFrom(flightArray[2]);
-//        arrival.setTerminal(Integer.parseInt(flightArray[3]));
-//        arrival.setGate(flightArray[4]);
-//        arrival.setBaggageClaim(Integer.parseInt(flightArray[5]));
-//        arrival.setStatus(flightArray[6]);
-//        arrival.setFlightNo(flightArray[7]);
-//        arrival.setAircraft(aircrafts.get(flightArray[8]));
-//
-//        return arrival;
-//    }
-
-    private FullDeparture parseDeparture(String departureString) {
+    private FullFlight parseDeparture(String departureString) {
         String[] flightArray = departureString.split(SEPARATOR);
         for (String s : flightArray) {
             s.trim();
         }
 
-        FullDeparture departure = new FullDeparture();
+        FullFlight departure = new FullFlight();
 
         departure.setScheduled(parseTime(flightArray[0]));
         departure.setActual(parseTime(flightArray[1]));
