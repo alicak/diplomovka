@@ -22,7 +22,7 @@ public class SolutionCreator {
 
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = storage.getFlightStorage().getFlightByNumber(chromosome.getGene(g, f));
+                Flight flight = storage.getFlightStorage().getFlight(chromosome.getGene(g, f));
 
                 FlightInfo flightInfo = new FlightInfo()
                         .setActualStart(chromosome.getCurrentFlightStart(g, f) + flight.getTurnaroundTime())

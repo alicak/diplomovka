@@ -27,11 +27,11 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
     @Override
     public boolean checkFlightFeasibility(int flightValue, int gate) {
         AircraftStand stand = standsStorage.getStandByNumber(gate);
-        return stand.checkFlight(flightStorage.getFlightByNumber(flightValue));
+        return stand.checkFlight(flightStorage.getFlight(flightValue));
     }
 
     public boolean checkConditionalClosures(int flightIdx, int gate, Chromosome chromosome) {
-        Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(gate, flightIdx));
+        Flight flight = flightStorage.getFlight(chromosome.getGene(gate, flightIdx));
 
         for (ConditionalStandClosure closure: standsStorage.getConditionalClosuresForStand(gate)) {
             if(!closure.checkFlight(flight, chromosome.getCurrentFlightStart(gate, flightIdx), chromosome.getCurrentFlightEnd(gate, flightIdx)))

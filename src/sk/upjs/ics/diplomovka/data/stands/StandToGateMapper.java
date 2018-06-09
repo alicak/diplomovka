@@ -29,7 +29,7 @@ public class StandToGateMapper {
             int currentStandId = standsStorage.getStandByNumber(g).getId();
 
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(g, f));
+                Flight flight = flightStorage.getFlight(chromosome.getGene(g, f));
                 int originalGate = flight.getOriginalGateId();
 
                 int start = Math.max(0, flight.getStart() - GATE_TIME_BEFORE_START); // 0 for the case that the flight is first

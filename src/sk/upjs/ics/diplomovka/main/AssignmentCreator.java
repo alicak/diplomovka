@@ -30,8 +30,7 @@ public class AssignmentCreator {
 
         for (Flight f : flightStorage.getSortedFlights()) {
             int standNo = standsStorage.getNumberById(f.getOriginalStandId());
-            int flightNo = flightStorage.getNumberById(f.getId());
-            originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), flightNo);
+            originalAssignment.setGene(standNo, originalAssignment.getNoOfFlights(standNo), f.getId());
         }
 
         return originalAssignment;

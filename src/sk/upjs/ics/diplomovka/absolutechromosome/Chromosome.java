@@ -109,8 +109,22 @@ public class Chromosome implements Comparable<Chromosome> {
             noOfFlights[gate]++;
     }
 
-    public int addFlight() {
-        return 0; // TODO
+    public int addFlight(int flightValue) {
+        List<Integer> newGenes = new ArrayList<>(genes.size() + maxNoFlights + 1);
+
+        for (int g = 0; g < noOfGates; g++) {
+            for (int f = 0; f < maxNoFlights; f++) {
+                newGenes.add(getGene(g, f));
+            }
+            newGenes.add(EMPTY_GENE);
+        }
+        setGenes(newGenes);
+        maxNoFlights++;
+
+        int gateForFlight = Utils.randomInt(noOfGates);
+        addNextFlight(gateForFlight, flightValue);
+
+        return gateForFlight;
     }
 
     public void removeFlight(int flightValue) {
@@ -122,8 +136,6 @@ public class Chromosome implements Comparable<Chromosome> {
             for (int f = 0; f < maxNoFlights - 1; f++) {
                 int idx = g * (maxNoFlights - 1) + f;
                 int oldGene = getGene(g, f);
-                if (oldGene > flightValue)
-                    oldGene--;
                 newGenes[idx] = oldGene;
             }
         }
@@ -170,7 +182,7 @@ public class Chromosome implements Comparable<Chromosome> {
             insertFlight(newGate, position, gene);
         }
 
-        int lastGate = noOfGates -1;
+        int lastGate = noOfGates - 1;
 
         for (int i = 0; i < maxNoFlights; i++) {
             setGene(gate, getGene(lastGate, i));
@@ -224,6 +236,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
     /**
      * we save current start time for that particular flight on that particular stand in this assignment
+     *
      * @param gate
      * @param flightIdx
      * @param amount
@@ -237,7 +250,7 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     /**
-     *     also calculates ends
+     * also calculates ends
      */
     public void calculateCurrentFlightStarts(GeneralStorage storage) {
         FlightStorage flightStorage = storage.getFlightStorage();
@@ -248,7 +261,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
             for (int flightIdx = 0; flightIdx < noOfFlights[gate]; flightIdx++) {
                 int flightNo = getGene(gate, flightIdx);
-                Flight f = flightStorage.getFlightByNumber(flightNo);
+                Flight f = flightStorage.getFlight(flightNo);
 
                 int availableTime = (flightIdx == 0) ? standsStorage.getStandAvailabilityTime(gate) : currentFlightEnds.get(previousNo);
                 int start = f.getStart();
