@@ -138,6 +138,7 @@ public class FlightCsvParser {
         departure.setTurnaroundTime(Integer.parseInt(flightArray[8]));
         departure.setNoOfPassengers(Integer.parseInt(flightArray[9]));
         // TODO: priority
+        // TODO: arrival data
 
         return departure;
     }

@@ -121,5 +121,6 @@ public class FullFlight {
                 .setDestination(departure.getTo())
                 .setOriginalGateId(standsStorage.getGateId(departure.getGate()))
                 .setOriginalStandId(standsStorage.getStandIdByGate(departure.getGate()));
+                // TODO: arrival data
     }
 }
