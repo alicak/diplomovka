@@ -73,6 +73,9 @@ public class StandToGateMapper {
 
     private List<Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
         Integer[] times = new Integer[standsStorage.getNoOfGates()];
+        for (int i = 0; i < times.length; i++) {
+            times[i] = 0;
+        }
         return Arrays.asList(times);
     }
 }
