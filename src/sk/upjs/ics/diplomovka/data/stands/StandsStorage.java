@@ -71,6 +71,10 @@ public class StandsStorage {
         return STAND_NOT_FOUND;
     }
 
+    public int getIdByNumber(int number) {
+        return standsIds[number];
+    }
+
     public int addStand(AircraftStand stand) {
         return 0; // TODO
     }

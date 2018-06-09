@@ -34,9 +34,14 @@ public class GateDistanceFitness extends FitnessFunctionBase {
         for (int g = 0; g < chromosome.getNoOfGates(); g++) {
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
                 Flight flight = flightStorage.getFlightByNumber(chromosome.getGene(g, f));
+                int originalGateId = flight.getOriginalGateId();
 
                 double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
-                fitness += weight * standsStorage.getGatesDistance(flight.getOriginalGateId(), flightsToGates.get(flight.getId()));
+                fitness += weight * standsStorage.getGatesDistance(flightsToGates.get(flight.getId()), originalGateId);
+
+                for (Map.Entry<Integer, Integer> entry : flight.getTransfers().entrySet()) {
+                    fitness += weight * standsStorage.getGatesDistance(flightsToGates.get(entry.getKey()), originalGateId);
+                }
             }
         }
 
