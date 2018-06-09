@@ -15,6 +15,7 @@ public class Flight implements Comparable<Flight> {
     private int noOfPassengers;
     private String destination;
     private int originalGateId;
+    private Arrival arrival;
 
     public enum FlightCategory {
         SCHENGEN,
@@ -157,5 +158,35 @@ public class Flight implements Comparable<Flight> {
     public Flight setOriginalGateId(int originalGateId) {
         this.originalGateId = originalGateId;
         return this;
+    }
+
+    public boolean hasArrival() {
+        return arrival != null;
+    }
+
+    public Arrival getArrival() {
+        return arrival;
+    }
+
+    public class Arrival {
+        private int originalGateId; // stand is the same, but gate can be different
+        private int noOfPassengers; // redundant for now...
+        // arrival time is the same as start time of Flight
+
+        public int getOriginalGateId() {
+            return originalGateId;
+        }
+
+        public void setOriginalGateId(int originalGateId) {
+            this.originalGateId = originalGateId;
+        }
+
+        public int getNoOfPassengers() {
+            return noOfPassengers;
+        }
+
+        public void setNoOfPassengers(int noOfPassengers) {
+            this.noOfPassengers = noOfPassengers;
+        }
     }
 }
