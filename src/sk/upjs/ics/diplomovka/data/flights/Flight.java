@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Flight implements Comparable<Flight> {
 
+    private String code;
     private int id;
     private int start;
     private int originalStart;
@@ -45,6 +46,14 @@ public class Flight implements Comparable<Flight> {
 
     public int getLength() {
         return end - start;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public int getId() {
