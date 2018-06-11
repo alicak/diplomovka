@@ -7,6 +7,7 @@ package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.ui.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.FlightTableModel;
 
 import javax.swing.UIManager;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MainFrame extends javax.swing.JFrame {
 
     private FlightTableModel flightTableModel = new FlightTableModel(Collections.emptyList());
+    private DisruptionListModel disruptionListModel = new DisruptionListModel(Collections.emptyList());
 
     /**
      * Creates new form MainFrame
@@ -74,17 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
         assignmentTable.setModel(flightTableModel);
         jScrollPane1.setViewportView(assignmentTable);
 
-        disruptionsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
+        disruptionsList.setModel(disruptionListModel);
         jScrollPane2.setViewportView(disruptionsList);
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -300,7 +292,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void refreshDisruptions(List<Disruption> disruptions) {
-        // TODO
+        disruptionListModel.setData(disruptions);
     }
 
 

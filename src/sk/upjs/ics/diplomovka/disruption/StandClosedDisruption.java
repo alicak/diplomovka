@@ -21,4 +21,9 @@ public class StandClosedDisruption implements Disruption {
     public void disruptStorage() {
         standsStorage.removeStand(stand);
     }
+
+    @Override
+    public String toString() {
+        return "Stand " + stand + " closed.";
+    }
 }

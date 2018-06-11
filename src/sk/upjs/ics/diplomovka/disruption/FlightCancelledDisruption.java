@@ -19,4 +19,9 @@ public class FlightCancelledDisruption implements Disruption {
 
     @Override
     public void disruptStorage() { }
+
+    @Override
+    public String toString() {
+        return "Flight " + flightStorage.getFlight(flight).getCode() + " cancelled.";
+    }
 }

@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.disruption;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class StandTemporarilyClosedDisruption implements Disruption {
 
@@ -22,5 +23,18 @@ public class StandTemporarilyClosedDisruption implements Disruption {
     @Override
     public void disruptStorage() {
         standsStorage.addClosure(closure);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder()
+                .append("Stand ")
+                .append(closure.getStandId())
+                .append(" closed from ")
+                .append(Utils.minutesToTime(closure.getStart()))
+                .append(" to ")
+                .append(Utils.minutesToTime(closure.getEnd()))
+                .append(".");
+        return sb.toString();
     }
 }

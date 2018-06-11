@@ -22,4 +22,9 @@ public class StandAddedDisruption implements Disruption {
     public void disruptStorage() {
         standsStorage.addStand(stand, standsStorage.getNoOfStandsInUse());
     }
+
+    @Override
+    public String toString() {
+        return "Stand " + stand + " opened.";
+    }
 }

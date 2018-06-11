@@ -26,4 +26,9 @@ public class FlightDelayedDisruption implements Disruption {
         int end = flightStorage.getFlight(flight).getEnd();
         flightStorage.getFlight(flight).setEnd(end + delay);
     }
+
+    @Override
+    public String toString() {
+        return "Flight " + flightStorage.getFlight(flight).getCode() + " delayed by " + delay + " minutes.";
+    }
 }

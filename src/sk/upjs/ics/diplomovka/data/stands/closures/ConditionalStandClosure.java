@@ -17,4 +17,8 @@ public class ConditionalStandClosure extends StandClosure {
 
         return condition.checkFlight(flight);
     }
+
+    public ClosureCondition getCondition() {
+        return condition;
+    }
 }

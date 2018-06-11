@@ -14,4 +14,9 @@ public class WingspanClosureCondition implements ClosureCondition {
     public boolean checkFlight(Flight flight) {
         return flight.getAircraft().getWingspan() <= wingspan;
     }
+
+    @Override
+    public String toString() {
+        return "wingspan larger than " + wingspan + " meters";
+    }
 }

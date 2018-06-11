@@ -17,4 +17,9 @@ public class EngineTypeClosureCondition implements ClosureCondition {
     public boolean checkFlight(Flight flight) {
         return engineTypes.contains(flight.getAircraft().getEngineType());
     }
+
+    @Override
+    public String toString() {
+        return "engine types " + engineTypes;
+    }
 }

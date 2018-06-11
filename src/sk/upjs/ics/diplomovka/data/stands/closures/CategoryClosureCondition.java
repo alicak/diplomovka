@@ -16,4 +16,9 @@ public class CategoryClosureCondition implements ClosureCondition {
     public boolean checkFlight(Flight flight) {
         return flightCategories.contains(flight.getCategory());
     }
+
+    @Override
+    public String toString() {
+        return "categories " + flightCategories;
+    }
 }

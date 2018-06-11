@@ -24,4 +24,9 @@ public class StandConditionallyClosedDisruption implements Disruption {
     public void disruptStorage() {
         standsStorage.addConditionalClosure(closure);
     }
+
+    @Override
+    public String toString() {
+        return "Stand " + closure.getStandId() + " closed for: " + closure.getCondition() + ".";
+    }
 }

@@ -20,4 +20,9 @@ public class FlightAddedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() { }
+
+    @Override
+    public String toString() {
+        return "Flight " + flight.getCode() + " added.";
+    }
 }
