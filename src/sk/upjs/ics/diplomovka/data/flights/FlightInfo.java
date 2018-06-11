@@ -11,8 +11,18 @@ public class FlightInfo {
     private int delay;
     private int assignmentDelay;
 
+    private static final int DELAY_TOLERANCE = 10;
+
     public boolean isGateChanged() {
         return !gate.equals(originalGate);
+    }
+
+    public boolean isDelayed() {
+        return delay > DELAY_TOLERANCE;
+    }
+
+    public boolean isAssignmentDelayed() {
+        return assignmentDelay > DELAY_TOLERANCE;
     }
 
     public int getTotalDelay() {

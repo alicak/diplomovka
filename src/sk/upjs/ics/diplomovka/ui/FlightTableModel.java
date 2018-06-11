@@ -48,4 +48,9 @@ public class FlightTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return COLUMN_NAMES[column];
     }
+
+    public void setData(List<FlightInfo> flights) {
+        this.flights = flights;
+        fireTableDataChanged();
+    }
 }
