@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ReassignmentDetailsDialog extends javax.swing.JDialog {
 
-    private List<FlightInfo> flights;
+    private FlightTableModel flightTableModel;
 
     /**
      * Creates new form ReassignmentDetailsDialog
@@ -23,7 +23,8 @@ public class ReassignmentDetailsDialog extends javax.swing.JDialog {
     public ReassignmentDetailsDialog(java.awt.Frame parent, boolean modal, List<FlightInfo> flights) {
         super(parent, modal);
         initComponents();
-        this.flights = flights;
+        flightTableModel = new FlightTableModel(flights);
+        this.detailsList.setModel(flightTableModel);
     }
 
     /**
