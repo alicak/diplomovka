@@ -103,15 +103,15 @@ public class ReassignmentFinished extends javax.swing.JDialog {
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_detailsButtonActionPerformed
+    }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_acceptButtonActionPerformed
+    }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelButtonActionPerformed
+        dispose();
+    }
 
     /**
      * @param args the command line arguments
