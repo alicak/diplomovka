@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.ui;
 
 import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -31,7 +32,7 @@ public class FlightTableModel extends AbstractTableModel {
             case 0:
                 return flight.getCode();
             case 1:
-                return flight.getActualStart();
+                return Utils.minutesToTime(flight.getActualStart());
             case 2:
                 return flight.getDestination();
             case 3:
