@@ -5,17 +5,24 @@
  */
 package sk.upjs.ics.diplomovka.ui;
 
+import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ReassignmentDetailsDialog extends javax.swing.JDialog {
+
+    private List<FlightInfo> flights;
 
     /**
      * Creates new form ReassignmentDetailsDialog
      */
-    public ReassignmentDetailsDialog(java.awt.Frame parent, boolean modal) {
+    public ReassignmentDetailsDialog(java.awt.Frame parent, boolean modal, List<FlightInfo> flights) {
         super(parent, modal);
         initComponents();
-        // TODO: fill with data
+        this.flights = flights;
     }
 
     /**
@@ -28,25 +35,15 @@ public class ReassignmentDetailsDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        DetailsList = new javax.swing.JTable();
+        detailsList = new javax.swing.JTable();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reassignment details");
 
-        DetailsList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        DetailsList.setName("DetailsList"); // NOI18N
-        jScrollPane1.setViewportView(DetailsList);
+        detailsList.setModel(new FlightTableModel(Collections.emptyList()));
+        detailsList.setName("detailsList"); // NOI18N
+        jScrollPane1.setViewportView(detailsList);
 
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +58,7 @@ public class ReassignmentDetailsDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,7 +103,7 @@ public class ReassignmentDetailsDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReassignmentDetailsDialog dialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true);
+                ReassignmentDetailsDialog dialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, new ArrayList<>());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -119,7 +116,7 @@ public class ReassignmentDetailsDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable DetailsList;
+    private javax.swing.JTable detailsList;
     private javax.swing.JButton closeButton;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

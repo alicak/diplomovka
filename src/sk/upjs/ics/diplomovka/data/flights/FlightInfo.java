@@ -2,6 +2,7 @@ package sk.upjs.ics.diplomovka.data.flights;
 
 public class FlightInfo {
 
+    private String code;
     private String destination;
     private int originalStart;
     private int actualStart;
@@ -16,6 +17,14 @@ public class FlightInfo {
 
     public int getTotalDelay() {
         return delay + assignmentDelay;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDestination() {

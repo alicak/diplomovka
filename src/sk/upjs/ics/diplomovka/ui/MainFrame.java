@@ -5,7 +5,12 @@
  */
 package sk.upjs.ics.diplomovka.ui;
 
+import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+
 import javax.swing.UIManager;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -15,6 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,14 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel2.setText("Assignment");
 
-        assignmentTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
+        assignmentTable.setModel(new FlightTableModel(Collections.emptyList()));
         jScrollPane1.setViewportView(assignmentTable);
 
         disruptionsList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -211,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 229, Short.MAX_VALUE))
+                        .addGap(0, 468, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,6 +239,10 @@ public class MainFrame extends javax.swing.JFrame {
         NewAssignmentDialog newAssignmentDialog = new NewAssignmentDialog(this, true);
         newAssignmentDialog.setVisible(true);
     }//GEN-LAST:event_newAssignmentButtonActionPerformed
+
+    private void refreshFlights(List<FlightInfo> flightInfos) {
+        // TODO
+    }
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,8 @@
 package sk.upjs.ics.diplomovka.ui;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
@@ -29,7 +31,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        StatusTextArea = new javax.swing.JTextArea();
+        statusTextArea = new javax.swing.JTextArea();
         detailsButton = new javax.swing.JButton();
         acceptButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -39,11 +41,11 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Reassignment was finished. See the status below.");
 
-        StatusTextArea.setEditable(false);
-        StatusTextArea.setColumns(20);
-        StatusTextArea.setLineWrap(true);
-        StatusTextArea.setRows(5);
-        jScrollPane1.setViewportView(StatusTextArea);
+        statusTextArea.setEditable(false);
+        statusTextArea.setColumns(20);
+        statusTextArea.setLineWrap(true);
+        statusTextArea.setRows(5);
+        jScrollPane1.setViewportView(statusTextArea);
 
         detailsButton.setText("Details");
         detailsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +107,8 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true);
+        // TODO: display data
+        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, Collections.emptyList());
         reassignmentDetailsDialog.setVisible(true);
     } //GEN-LAST:event_detailsButtonActionPerformed
 
@@ -151,7 +154,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea StatusTextArea;
+    private javax.swing.JTextArea statusTextArea;
     private javax.swing.JButton acceptButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton detailsButton;
