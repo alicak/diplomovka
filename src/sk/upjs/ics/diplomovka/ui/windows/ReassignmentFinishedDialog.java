@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.upjs.ics.diplomovka.ui;
+package sk.upjs.ics.diplomovka.ui.windows;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Collections;
 
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {

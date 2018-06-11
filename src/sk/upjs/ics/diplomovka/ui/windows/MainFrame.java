@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.upjs.ics.diplomovka.ui;
+package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+import sk.upjs.ics.diplomovka.ui.FlightTableModel;
 
 import javax.swing.UIManager;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
