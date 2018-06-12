@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.ui;
+package sk.upjs.ics.diplomovka.ui.models;
 
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 
