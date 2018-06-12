@@ -5,14 +5,22 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+
+import java.util.Collections;
+import java.util.List;
+
 public class NewAssignmentDialog extends javax.swing.JDialog {
+
+    private MainFrame parent;
 
     /**
      * Creates new form NewAssignmentDialog
      */
-    public NewAssignmentDialog(java.awt.Frame parent, boolean modal) {
+    public NewAssignmentDialog(MainFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parent = parent;
     }
 
     /**
@@ -244,7 +252,11 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
     }
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
-        ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(new javax.swing.JFrame(), true);
+        // TODO: add calculation
+        List<FlightInfo> result = Collections.emptyList();
+        dispose();
+
+        ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parent, true, result);
         reassignmentFinishedDialog.setVisible(true);
     }
 
@@ -272,7 +284,7 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewAssignmentDialog dialog = new NewAssignmentDialog(new javax.swing.JFrame(), true);
+                NewAssignmentDialog dialog = new NewAssignmentDialog(new MainFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

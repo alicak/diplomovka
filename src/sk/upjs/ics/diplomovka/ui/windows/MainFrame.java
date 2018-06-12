@@ -7,8 +7,8 @@ package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
-import sk.upjs.ics.diplomovka.ui.DisruptionListModel;
-import sk.upjs.ics.diplomovka.ui.FlightTableModel;
+import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
+import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
 
 import javax.swing.UIManager;
 import java.text.DateFormat;
@@ -108,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        lastReassignmentTimeLabel.setText("8:35 AM");
+        lastReassignmentTimeLabel.setText("n/a");
 
         regularDelayCountLabel.setText("0");
 
@@ -244,7 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
         newAssignmentDialog.setVisible(true);
     }//GEN-LAST:event_newAssignmentButtonActionPerformed
 
-    private void refreshAssignment(List<FlightInfo> flights) {
+    public void refreshAssignment(List<FlightInfo> flights) {
         refreshFlights(flights);
         calculateAndSetStatistics(flights);
         setCurrentTime();
@@ -260,6 +260,18 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void calculateAndSetStatistics(List<FlightInfo> flights) {
+        if(flights.isEmpty()) {
+            regularDelayMaxLabel.setText("n/a");
+            regularDelayCountLabel.setText("n/a");
+            regularDelayAverageLabel.setText("n/a");
+
+            assignmentDelayMaxLabel.setText("n/a");
+            assignmentDelayCountLabel.setText("n/a");
+            assignmentDelayAverageLabel.setText("n/a");
+
+            return;
+        }
+
         int regularDelaySum = 0;
         int regularDelayCount = 0;
         int regularDelayMax = 0;

@@ -5,18 +5,25 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+
 import javax.swing.*;
 import java.util.Collections;
+import java.util.List;
 
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {
+
+    private MainFrame parent;
+    private List<FlightInfo> data;
 
     /**
      * Creates new form AssignmentCreated
      */
-    public ReassignmentFinishedDialog(java.awt.Frame parent, boolean modal) {
+    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightInfo> data) {
         super(parent, modal);
         initComponents();
-        // TODO: fill with data
+        this.parent = parent;
+        this.data = data;
     }
 
     /**
@@ -106,13 +113,13 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        // TODO: display data
-        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, Collections.emptyList());
+        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, data);
         reassignmentDetailsDialog.setVisible(true);
     } //GEN-LAST:event_detailsButtonActionPerformed
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
-        // TODO add your handling code here:
+        parent.refreshAssignment(data);
+        dispose();
     } //GEN-LAST:event_acceptButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -140,7 +147,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new javax.swing.JFrame(), true);
+                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainFrame(), true, Collections.emptyList());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
