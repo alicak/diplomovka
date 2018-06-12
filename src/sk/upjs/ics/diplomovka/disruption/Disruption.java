@@ -7,7 +7,7 @@ public interface Disruption {
 
     void disruptStorage();
 
-    void cancelDisruptionOnAssignment(Chromosome chromosome);
+    void undisruptStorage();
 
     int getId();
 }

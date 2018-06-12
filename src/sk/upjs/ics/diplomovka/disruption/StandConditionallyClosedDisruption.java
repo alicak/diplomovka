@@ -11,13 +11,11 @@ public class StandConditionallyClosedDisruption implements Disruption {
     private int id;
     private StandsStorage standsStorage;
     private ConditionalStandClosure closure;
-    private int standId;
 
     public StandConditionallyClosedDisruption(int standId, int start, int end, ClosureCondition condition, StandsStorage standsStorage, int id) {
         this.standsStorage = standsStorage;
         this.closure = new ConditionalStandClosure(standId, start, end, condition, id);
         this.id = id;
-        this.standId = standId;
     }
 
     @Override
@@ -31,9 +29,8 @@ public class StandConditionallyClosedDisruption implements Disruption {
     }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
-        standsStorage.removeConditionalClosure(id, standId);
-        //  TODO
+    public void undisruptStorage() {
+        standsStorage.removeConditionalClosure(closure.getId(), closure.getStandId());
     }
 
     @Override

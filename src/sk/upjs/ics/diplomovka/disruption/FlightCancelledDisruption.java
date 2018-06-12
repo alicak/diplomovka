@@ -24,9 +24,7 @@ public class FlightCancelledDisruption implements Disruption {
     public void disruptStorage() { }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
-        chromosome.addFlight(flight);
-    }
+    public void undisruptStorage() { }
 
     @Override
     public int getId() {

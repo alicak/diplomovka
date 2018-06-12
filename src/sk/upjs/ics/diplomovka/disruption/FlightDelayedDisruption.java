@@ -29,9 +29,9 @@ public class FlightDelayedDisruption implements Disruption {
     }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+    public void undisruptStorage() {
         flight.setStart(flight.getStart() - delay)
-                .setDelay(delay)
+                .setDelay(0)
                 .setEnd(flight.getEnd() - delay);
     }
 

@@ -25,7 +25,7 @@ public class StandClosedDisruption implements Disruption {
     }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+    public void undisruptStorage() {
         standsStorage.addStand(standsStorage.getStandById(stand));
     }
 

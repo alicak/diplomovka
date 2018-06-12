@@ -26,7 +26,7 @@ public class StandAddedDisruption implements Disruption {
     }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+    public void undisruptStorage() {
         standsStorage.removeStand(stand.getId());
     }
 

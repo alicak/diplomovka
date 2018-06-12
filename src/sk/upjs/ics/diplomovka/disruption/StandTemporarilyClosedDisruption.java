@@ -10,13 +10,11 @@ public class StandTemporarilyClosedDisruption implements Disruption {
     private int id;
     private StandsStorage standsStorage;
     private StandClosure closure;
-    private int standId;
 
     public StandTemporarilyClosedDisruption(int standId, int start, int end, StandsStorage standsStorage, int id) {
         this.standsStorage = standsStorage;
         this.closure = new StandClosure(standId, start, end, id);
         this.id = id;
-        this.standId = standId;
     }
 
     @Override
@@ -30,9 +28,8 @@ public class StandTemporarilyClosedDisruption implements Disruption {
     }
 
     @Override
-    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
-        standsStorage.removeClosure(id, standId);
-        //  TODO
+    public void undisruptStorage() {
+        standsStorage.removeClosure(closure.getId(), closure.getStandId());
     }
 
     @Override
