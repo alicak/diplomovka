@@ -5,11 +5,6 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
-import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
-
-import java.util.Collections;
-import java.util.List;
-
 public class NewAssignmentDialog extends javax.swing.JDialog {
 
     private MainFrame parent;
@@ -252,12 +247,8 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
     }
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
-        // TODO: add calculation
-        List<FlightInfo> result = Collections.emptyList();
         dispose();
-
-        ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parent, true, result);
-        reassignmentFinishedDialog.setVisible(true);
+        parent.calculateNewAssignment();
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

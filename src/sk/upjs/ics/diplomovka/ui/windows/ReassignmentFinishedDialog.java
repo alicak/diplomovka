@@ -119,6 +119,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
         parent.refreshAssignment(data);
+        parent.refreshDisruptions(Collections.emptyList()); // TODO: add new disruptions?
         dispose();
     } //GEN-LAST:event_acceptButtonActionPerformed
 

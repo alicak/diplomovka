@@ -10,12 +10,13 @@ import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
 
-import javax.swing.UIManager;
+import javax.swing.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -260,7 +261,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void calculateAndSetStatistics(List<FlightInfo> flights) {
-        if(flights.isEmpty()) {
+        if (flights.isEmpty()) {
             regularDelayMaxLabel.setText("n/a");
             regularDelayCountLabel.setText("n/a");
             regularDelayAverageLabel.setText("n/a");
@@ -296,15 +297,24 @@ public class MainFrame extends javax.swing.JFrame {
 
         regularDelayMaxLabel.setText(Integer.toString(regularDelayMax));
         regularDelayCountLabel.setText(Integer.toString(regularDelayCount));
-        regularDelayAverageLabel.setText(Integer.toString(regularDelaySum/regularDelayCount));
+        regularDelayAverageLabel.setText(Integer.toString(regularDelaySum / regularDelayCount));
 
         assignmentDelayMaxLabel.setText(Integer.toString(assignmentDelayMax));
         assignmentDelayCountLabel.setText(Integer.toString(assignmentDelayCount));
-        assignmentDelayAverageLabel.setText(Integer.toString(assignmentDelaySum/assignmentDelayCount));
+        assignmentDelayAverageLabel.setText(Integer.toString(assignmentDelaySum / assignmentDelayCount));
     }
 
-    private void refreshDisruptions(List<Disruption> disruptions) {
+    public void refreshDisruptions(List<Disruption> disruptions) {
         disruptionListModel.setData(disruptions);
+    }
+
+    public void calculateNewAssignment() {
+        InProgressDialog inProgressDialog = new InProgressDialog(this, true);
+
+        CalculationWorker calculationWorker = new CalculationWorker(this, inProgressDialog);
+        calculationWorker.execute();
+
+        inProgressDialog.setVisible(true);
     }
 
 
@@ -359,4 +369,38 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel regularDelayCountLabel;
     private javax.swing.JLabel regularDelayMaxLabel;
     // End of variables declaration//GEN-END:variables
+
+    private class CalculationWorker extends SwingWorker<List<FlightInfo>, Integer> {
+        MainFrame parentFrame;
+        InProgressDialog inProgressDialog;
+
+        public CalculationWorker(MainFrame parentFrame, InProgressDialog inProgressDialog) {
+            this.parentFrame = parentFrame;
+            this.inProgressDialog = inProgressDialog;
+        }
+
+        protected List<FlightInfo> doInBackground() {
+            // TODO add calculation
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return Collections.emptyList();
+        }
+
+        protected void done() {
+            inProgressDialog.dispose();
+
+            try {
+                ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame, true, get());
+                reassignmentFinishedDialog.setVisible(true);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }
