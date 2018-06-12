@@ -90,7 +90,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public void prepareForFitnessCalculation(GeneralStorage storage) {
         calculateCurrentFlightStarts(storage);
-        applyAllClosures(storage.getStandsStorage());
+        applyAllClosures(storage);
     }
 
     public void addNextFlight(int gate, int flightValue) {
@@ -313,18 +313,33 @@ public class Chromosome implements Comparable<Chromosome> {
         }
     }
 
-    public void applyAllClosures(StandsStorage standsStorage) {
+    public void applyAllClosures(GeneralStorage storage) {
         for (int g = 0; g < noOfGates; g++) {
-            Collection<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
+            Collection<StandClosure> closuresForStand = storage.getStandsStorage().getClosuresForStand(g);
             for (StandClosure closure : closuresForStand) {
                 applyStandClosure(closure, g);
+            }
+            Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(g);
+            for(ConditionalStandClosure closure: conditionalClosuresForStand) {
+                applyConditionalStandClosure(closure, g, storage.getFlightStorage());
             }
         }
     }
 
-    public void applyConditionalStandClosure(ConditionalStandClosure conditionalClosure, int standNo) {
-        StandClosure closure = new StandClosure(conditionalClosure.getStandId(), conditionalClosure.getStart(), conditionalClosure.getEnd(), conditionalClosure.getId());
-        applyStandClosure(closure, standNo); // TODO really?
+    public void applyConditionalStandClosure(ConditionalStandClosure closure, int standNo, FlightStorage storage) {
+        for (int f = 0; f < getNoOfFlights(standNo); f++) {
+            int currentStart = getCurrentFlightStart(standNo, f);
+            int currentEnd = getCurrentFlightEnd(standNo, f);
+            Flight flight = storage.getFlight(f);
+
+            if (!closure.checkFlight(flight, currentStart, currentEnd)) {
+                int delay = closure.getEnd() - currentStart;
+                for (int lateFlight = f; lateFlight < getNoOfFlights(standNo); lateFlight++) {
+                    incrementCurrentStartAndEnd(standNo, lateFlight, delay);
+                }
+                break;
+            }
+        }
     }
 
     public String toString() {
