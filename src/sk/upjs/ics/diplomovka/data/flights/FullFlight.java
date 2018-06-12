@@ -11,7 +11,7 @@ public class FullFlight {
     private int terminal;
     private String gate;
     private String status;
-    private String flightNo;
+    private String code;
     private Aircraft aircraft;
     private int turnaroundTime;
     private int noOfPassengers;
@@ -61,12 +61,12 @@ public class FullFlight {
         return this;
     }
 
-    public String getFlightNo() {
-        return flightNo;
+    public String getCode() {
+        return code;
     }
 
-    public FullFlight setFlightNo(String flightNo) {
-        this.flightNo = flightNo;
+    public FullFlight setCode(String code) {
+        this.code = code;
         return this;
     }
 
@@ -110,6 +110,7 @@ public class FullFlight {
     public static Flight toFlight(FullFlight departure, StandsStorage standsStorage) {
         return new Flight()
                 .setId(FlightId.getId())
+                .setCode(departure.getCode())
                 .setCategory(Flight.FlightCategory.SCHENGEN) // TODO
                 .setPriority(Flight.FlightPriority.NORMAL) // TODO
                 .setAircraft(departure.getAircraft())

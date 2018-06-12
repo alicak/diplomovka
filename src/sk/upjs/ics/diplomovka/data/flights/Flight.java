@@ -52,8 +52,9 @@ public class Flight implements Comparable<Flight> {
         return code;
     }
 
-    public void setCode(String code) {
+    public Flight setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public int getId() {
