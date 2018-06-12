@@ -7,10 +7,12 @@ import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 public class StandAddedDisruption implements Disruption {
     private AircraftStand stand;
     private StandsStorage standsStorage;
+    private int id;
 
-    public StandAddedDisruption(AircraftStand stand, StandsStorage standsStorage) {
+    public StandAddedDisruption(AircraftStand stand, StandsStorage standsStorage, int id) {
         this.stand = stand;
         this.standsStorage = standsStorage;
+        this.id = id;
     }
 
     @Override
@@ -20,11 +22,21 @@ public class StandAddedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() {
-        standsStorage.addStand(stand, standsStorage.getNoOfStandsInUse());
+        standsStorage.addStand(stand);
+    }
+
+    @Override
+    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+        standsStorage.removeStand(stand.getId());
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
     public String toString() {
-        return "Stand " + stand + " opened.";
+        return "#" + id + ": Stand " + stand + " opened.";
     }
 }

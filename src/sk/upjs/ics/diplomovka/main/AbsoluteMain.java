@@ -41,16 +41,16 @@ public class AbsoluteMain {
         FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
         GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
 
-        Disruption gate5closed = new StandClosedDisruption(5, standsStorage);
-        Disruption gate6closed = new StandClosedDisruption(6, standsStorage);
-        Disruption gate9closed = new StandClosedDisruption(9, standsStorage);
-        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
-        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage); // no 2
-        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage); // no 75
-        Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage);
-        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage);
+        Disruption gate5closed = new StandClosedDisruption(5, standsStorage, 1);
+        Disruption gate6closed = new StandClosedDisruption(6, standsStorage, 2);
+        Disruption gate9closed = new StandClosedDisruption(9, standsStorage, 3);
+        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage, 4);
+        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage, 5); // no 2
+        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage, 6); // no 75
+        Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage, 7);
+        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage, 8);
         Disruption gate7condTempClosed = new StandConditionallyClosedDisruption(7, 0, 1439,
-                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage);
+                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage, 9);
 
 
         SelectionBase selection = new RankingSelection();
@@ -131,7 +131,7 @@ public class AbsoluteMain {
         PopulationBase finalPopulation = algorithm.evolve();
         Chromosome result = finalPopulation.bestChromosome();
 
-       System.out.println("original fitness: " + fitnessFunction.calculateFitness(originalAssignment));
+        System.out.println("original fitness: " + fitnessFunction.calculateFitness(originalAssignment));
 //        System.out.println("no of iterations: " + termination.getNoOfIterations());
 //        System.out.println("fitness: " + result.getFitness());
 

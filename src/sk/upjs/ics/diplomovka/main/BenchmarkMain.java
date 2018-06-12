@@ -32,7 +32,7 @@ public class BenchmarkMain {
         for (int i = 0; i < 20; i++) {
             time += run();
         }
-        System.out.println(time/20);
+        System.out.println(time / 20);
     }
 
     public static long run() throws IOException, InterruptedException {
@@ -49,14 +49,14 @@ public class BenchmarkMain {
         FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
         GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
 
-        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage);
-        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage); // no 2
-        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage); // no 75
+        Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage, 1);
+        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage, 2); // no 2
+        Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage, 3); // no 75
 
-        Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage);
-        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage);
+        Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage, 4);
+        Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage, 5);
         Disruption gate7condTempClosed = new StandConditionallyClosedDisruption(7, 0, 1439,
-                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage);
+                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage, 6);
 
         SelectionBase selection = new RankingSelection();
         TerminationBase termination = new IterationsTermination(1000);
@@ -105,7 +105,7 @@ public class BenchmarkMain {
         gate1tempClosed.disruptStorage();
         gate5tempClosed.disruptStorage();
         gate7condTempClosed.disruptStorage();
-        
+
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
                 .setReassignmentWeight(10)
                 .setPassengerWeight(0.5);
@@ -117,7 +117,7 @@ public class BenchmarkMain {
 
         CrossoverBase crossover = new AbsolutePositionCrossover(1);
         MutationBase mutation = new AbsolutePositionMutation(0.1);
-        
+
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
 
@@ -128,7 +128,7 @@ public class BenchmarkMain {
 
         long endTime = System.nanoTime();
 
-        return (endTime - startTime)/1000000;
+        return (endTime - startTime) / 1000000;
     }
 
     private static FlightStorage processFlights(File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {

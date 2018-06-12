@@ -6,11 +6,11 @@ import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 
 public class FlightAddedDisruption implements Disruption {
     private Flight flight;
-    private FlightStorage flightStorage;
+    private int id;
 
-    public FlightAddedDisruption(Flight flight, FlightStorage flightStorage) {
+    public FlightAddedDisruption(Flight flight, int id) {
         this.flight = flight;
-        this.flightStorage = flightStorage;
+        this.id = id;
     }
 
     @Override
@@ -19,10 +19,21 @@ public class FlightAddedDisruption implements Disruption {
     }
 
     @Override
-    public void disruptStorage() { }
+    public void disruptStorage() {
+    }
+
+    @Override
+    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+        chromosome.removeFlight(flight.getId());
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
-        return "Flight " + flight.getCode() + " added.";
+        return "#" + id + ": Flight " + flight.getCode() + " added.";
     }
 }

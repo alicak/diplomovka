@@ -6,8 +6,8 @@ public class ConditionalStandClosure extends StandClosure {
 
     private ClosureCondition condition;
 
-    public ConditionalStandClosure(int standId, int start, int end, ClosureCondition condition) {
-        super(standId, start, end);
+    public ConditionalStandClosure(int standId, int start, int end, ClosureCondition condition, int id) {
+        super(standId, start, end, id);
         this.condition = condition;
     }
 

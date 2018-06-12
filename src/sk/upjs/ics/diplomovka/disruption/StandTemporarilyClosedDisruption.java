@@ -7,12 +7,16 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class StandTemporarilyClosedDisruption implements Disruption {
 
+    private int id;
     private StandsStorage standsStorage;
     private StandClosure closure;
+    private int standId;
 
-    public StandTemporarilyClosedDisruption(int standId, int start, int end, StandsStorage standsStorage) {
+    public StandTemporarilyClosedDisruption(int standId, int start, int end, StandsStorage standsStorage, int id) {
         this.standsStorage = standsStorage;
-        this.closure = new StandClosure(standId, start, end);
+        this.closure = new StandClosure(standId, start, end, id);
+        this.id = id;
+        this.standId = standId;
     }
 
     @Override
@@ -26,9 +30,22 @@ public class StandTemporarilyClosedDisruption implements Disruption {
     }
 
     @Override
+    public void cancelDisruptionOnAssignment(Chromosome chromosome) {
+        standsStorage.removeClosure(id, standId);
+        //  TODO
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder()
-                .append("Stand ")
+                .append("#")
+                .append(id)
+                .append(": Stand ")
                 .append(closure.getStandId())
                 .append(" closed from ")
                 .append(Utils.minutesToTime(closure.getStart()))

@@ -12,8 +12,8 @@ public class StandsStorage {
     private Map<Integer, AircraftStand> stands;
     private int[] standsIds;
     private Map<String, AircraftStand> gatesToStands;
-    private Map<Integer, List<StandClosure>> closures; // ids to closures
-    private Map<Integer, List<ConditionalStandClosure>> conditionalClosures;
+    private Map<Integer, Map<Integer, StandClosure>> closures; // stand ids to closures
+    private Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures;
     private Map<Integer, Integer> availabilityTimes;
     private List<String> gates;
     private double[][] standsDistances; // TODO
@@ -31,7 +31,8 @@ public class StandsStorage {
     }
 
     private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands,
-                          Map<Integer, List<StandClosure>> closures, Map<Integer, List<ConditionalStandClosure>> conditionalClosures,
+                          Map<Integer, Map<Integer, StandClosure>> closures,
+                          Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures,
                           Map<Integer, Integer> availabilityTimes, List<String> gates, double[][] standsDistances,
                           double[][] gateDistances, int noOfStandsInUse) {
         this.stands = stands;
@@ -78,16 +79,13 @@ public class StandsStorage {
         return standsIds[number];
     }
 
-    public void addStand(AircraftStand stand, int noOfStandsInUse) {
+    public void addStand(AircraftStand stand) {
         standsIds[getNoOfStands() - 1] = standsIds[noOfStandsInUse];
         standsIds[noOfStandsInUse] = stand.getId();
-        this.noOfStandsInUse++;
+        noOfStandsInUse++;
     }
 
     public void removeStand(int standId) {
-        if (stands.remove(standId) == null)
-            return;
-
         int length = standsIds.length;
 
         for (int i = 0; i < length; i++) {
@@ -123,8 +121,8 @@ public class StandsStorage {
         closures = new HashMap<>();
         conditionalClosures = new HashMap<>();
         for (int i = 0; i < standsIds.length; i++) {
-            closures.put(standsIds[i], new LinkedList<>());
-            conditionalClosures.put(standsIds[i], new LinkedList<>());
+            closures.put(standsIds[i], new HashMap<>());
+            conditionalClosures.put(standsIds[i], new HashMap<>());
         }
     }
 
@@ -135,20 +133,28 @@ public class StandsStorage {
         }
     }
 
-    public List<StandClosure> getClosuresForStand(int standNo) {
-        return closures.get(getStandByNumber(standNo).getId());
+    public Collection<StandClosure> getClosuresForStand(int standNo) {
+        return closures.get(getStandByNumber(standNo).getId()).values();
     }
 
-    public List<ConditionalStandClosure> getConditionalClosuresForStand(int standNo) {
-        return conditionalClosures.get(getStandByNumber(standNo).getId());
+    public Collection<ConditionalStandClosure> getConditionalClosuresForStand(int standNo) {
+        return conditionalClosures.get(getStandByNumber(standNo).getId()).values();
     }
 
-    public void addClosure(StandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
-        closures.get(closure.getStandId()).add(closure);
+    public void addClosure(StandClosure closure) {
+        closures.get(closure.getStandId()).put(closure.getId(), closure);
     }
 
-    public void addConditionalClosure(ConditionalStandClosure closure) { // TODO: What about cancelled closures? Shall we use some ids?
-        conditionalClosures.get(closure.getStandId()).add(closure);
+    public void removeClosure(int id, int standId) {
+        closures.get(standId).remove(id);
+    }
+
+    public void addConditionalClosure(ConditionalStandClosure closure) {
+        conditionalClosures.get(closure.getStandId()).put(closure.getId(), closure);
+    }
+
+    public void removeConditionalClosure(int id, int standId) {
+        conditionalClosures.get(standId).remove(id);
     }
 
     public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {

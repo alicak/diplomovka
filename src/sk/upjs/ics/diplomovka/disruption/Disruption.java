@@ -6,4 +6,8 @@ public interface Disruption {
     void disruptAssignment(Chromosome chromosome);
 
     void disruptStorage();
+
+    void cancelDisruptionOnAssignment(Chromosome chromosome);
+
+    int getId();
 }

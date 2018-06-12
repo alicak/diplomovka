@@ -315,7 +315,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public void applyAllClosures(StandsStorage standsStorage) {
         for (int g = 0; g < noOfGates; g++) {
-            List<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
+            Collection<StandClosure> closuresForStand = standsStorage.getClosuresForStand(g);
             for (StandClosure closure : closuresForStand) {
                 applyStandClosure(closure, g);
             }
@@ -323,8 +323,8 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public void applyConditionalStandClosure(ConditionalStandClosure conditionalClosure, int standNo) {
-        StandClosure closure = new StandClosure(conditionalClosure.getStandId(), conditionalClosure.getStart(), conditionalClosure.getEnd());
-        applyStandClosure(closure, standNo);
+        StandClosure closure = new StandClosure(conditionalClosure.getStandId(), conditionalClosure.getStart(), conditionalClosure.getEnd(), conditionalClosure.getId());
+        applyStandClosure(closure, standNo); // TODO really?
     }
 
     public String toString() {
