@@ -16,7 +16,6 @@ public class FlightCsvParser {
 
     private static String SEPARATOR = ";";
     private Map<String, Aircraft> aircrafts = new HashMap<>();
-    private int gateId = 0;
 
     public FlightCsvParser(File aircraftFile) throws IOException {
         parseAircrafts(aircraftFile);
@@ -29,7 +28,7 @@ public class FlightCsvParser {
         Map<Integer, AircraftStand> stands = new HashMap<>();
         Map<String, AircraftStand> gatesToStands = new HashMap<>();
         List<String> gates = new ArrayList<>();
-        int id = 0;
+        int gateId = 0;
 
         while ((line = reader.readLine()) != null) {
             AircraftStand stand = parseStand(line);
@@ -42,8 +41,8 @@ public class FlightCsvParser {
                 gatesToStands.put(gate, stand);
                 gates.add(gate);
 
-                gateIdsForStand.add(id);
-                id++;
+                gateIdsForStand.add(gateId);
+                gateId++;
             }
 
             stand.setGates(gateIdsForStand);
@@ -129,7 +128,7 @@ public class FlightCsvParser {
 
         departure.setScheduled(parseTime(flightArray[0]));
         departure.setActual(parseTime(flightArray[1]));
-        departure.setTo(flightArray[2]);
+        departure.setDestination(flightArray[2]);
         departure.setTerminal(Integer.parseInt(flightArray[3]));
         departure.setGate(flightArray[4]);
         departure.setStatus(flightArray[5]);

@@ -15,6 +15,7 @@ public class FullFlight {
     private Aircraft aircraft;
     private int turnaroundTime;
     private int noOfPassengers;
+    private String destination;
 
     public int getScheduled() {
         return scheduled;
@@ -97,14 +98,12 @@ public class FullFlight {
         return this;
     }
 
-    private String to;
-
-    public String getTo() {
-        return to;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public static Flight toFlight(FullFlight departure, StandsStorage standsStorage) {
@@ -119,7 +118,7 @@ public class FullFlight {
                 .setOriginalStart(departure.getScheduled())
                 .setEnd(departure.getScheduled())
                 .setNoOfPassengers(departure.getNoOfPassengers())
-                .setDestination(departure.getTo())
+                .setDestination(departure.getDestination())
                 .setOriginalGateId(standsStorage.getGateId(departure.getGate()))
                 .setOriginalStandId(standsStorage.getStandIdByGate(departure.getGate()));
                 // TODO: arrival data
