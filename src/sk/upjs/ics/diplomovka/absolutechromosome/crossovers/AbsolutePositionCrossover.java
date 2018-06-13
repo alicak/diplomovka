@@ -34,10 +34,10 @@ public class AbsolutePositionCrossover extends CrossoverBase {
     }
 
     private List<Chromosome> crossWithSameStart(Chromosome chromosome1, Chromosome chromosome2) {
-        int gate = Utils.randomInt(chromosome1.getNoOfGates());
-        int maxLength = Math.max(chromosome1.getNoOfFlights(gate), chromosome2.getNoOfFlights(gate));
+        int stand = Utils.randomInt(chromosome1.getNoOfStands());
+        int maxLength = Math.max(chromosome1.getNoOfFlights(stand), chromosome2.getNoOfFlights(stand));
 
-        if (maxLength < MIN_QUEUE_LENGTH) // there aren't enough flights at the gate
+        if (maxLength < MIN_QUEUE_LENGTH) // there aren't enough flights at the stand
             return Collections.emptyList();
 
         int queueStart = Utils.randomInt(maxLength - 1); // -1 so there is at least one flight after the start
@@ -47,16 +47,16 @@ public class AbsolutePositionCrossover extends CrossoverBase {
         Chromosome c2 = chromosome2.copy();
 
         List<Chromosome> result = new ArrayList<>();
-        if (updateChromosome(c1, chromosome2, queueStart, queueLength, gate))
+        if (updateChromosome(c1, chromosome2, queueStart, queueLength, stand))
             result.add(c1);
-        if (updateChromosome(c2, chromosome1, queueStart, queueLength, gate))
+        if (updateChromosome(c2, chromosome1, queueStart, queueLength, stand))
             result.add(c2);
 
         return result;
     }
 
     private List<Chromosome> crossWithDifferentStart(Chromosome chromosome1, Chromosome chromosome2) {
-        int gate = Utils.randomInt(chromosome1.getNoOfGates());
+        int gate = Utils.randomInt(chromosome1.getNoOfStands());
         int length1 = chromosome1.getNoOfFlights(gate);
         int length2 = chromosome2.getNoOfFlights(gate);
 
@@ -96,11 +96,11 @@ public class AbsolutePositionCrossover extends CrossoverBase {
                 if (!updatedChromosome.checkFlightFeasibility(flightS, gate))
                     return false;
 
-                updatedChromosome.removeFlightFromGenes(flightSPosition.getGate(), flightSPosition.getFlight()); // we remove new flight from where it is now
+                updatedChromosome.removeFlightFromGenes(flightSPosition.getStand(), flightSPosition.getFlight()); // we remove new flight from where it is now
                 updatedChromosome.addNextFlight(gate, flightS); // we add new flight to the position that is being updated
 
             } else if (flightS == EMPTY_GENE) { // we'll be removing flight on the position and must add it somewhere else - to the next gate
-                int newGate = (gate + 1) % updatedChromosome.getNoOfGates();
+                int newGate = (gate + 1) % updatedChromosome.getNoOfStands();
 
                 if (!updatedChromosome.checkFlightFeasibility(flightU, newGate))
                     return false;
@@ -111,11 +111,11 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             } else { // we'll be getting new flight for the position, so we must put old flight to the old position of new flight
                 FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
 
-                if (!updatedChromosome.checkFlightFeasibility(flightS, gate) || !updatedChromosome.checkFlightFeasibility(flightU, flightSPosition.getGate()))
+                if (!updatedChromosome.checkFlightFeasibility(flightS, gate) || !updatedChromosome.checkFlightFeasibility(flightU, flightSPosition.getStand()))
                     return false;
 
                 updatedChromosome.setGene(gate, f, flightS);
-                updatedChromosome.setGene(flightSPosition.getGate(), flightSPosition.getFlight(), flightU); // TODO replace chronologically
+                updatedChromosome.setGene(flightSPosition.getStand(), flightSPosition.getFlight(), flightU); // TODO replace chronologically
             }
         }
         return true;

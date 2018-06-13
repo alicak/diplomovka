@@ -25,7 +25,7 @@ public class StandToGateMapper {
 
         List<Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
 
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
+        for (int g = 0; g < chromosome.getNoOfStands(); g++) {
             int currentStandId = standsStorage.getStandByNumber(g).getId();
 
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {

@@ -24,10 +24,10 @@ public class TimeDiffFitness extends FitnessFunctionBase {
     private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
         double fitness = 0;
 
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlight(chromosome.getGene(g, f));
-                int diff = chromosome.getCurrentFlightStart(g, f) - flight.getStart();
+        for (int s = 0; s < chromosome.getNoOfStands(); s++) {
+            for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
+                Flight flight = flightStorage.getFlight(chromosome.getGene(s, f));
+                int diff = chromosome.getCurrentFlightStart(s, f) - flight.getStart();
                 if (diff > 0) {
                     double weight = weighted ? calculateTotalWeights(flight, weights.getTimeChangedWeight()) : 1;
                     fitness += diff * weight;

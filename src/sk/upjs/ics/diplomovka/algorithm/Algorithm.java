@@ -48,6 +48,7 @@ public class Algorithm extends AlgorithmBase {
 
         List<Chromosome> newGeneration = selection.select(offspringList, population.size());
 
+        // TODO: remove that
 //        try {
 //            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("absolute_fitness.txt", true)));
 //            out.println(newGeneration.get(0).getFitness());

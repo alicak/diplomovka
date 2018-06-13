@@ -2,16 +2,16 @@ package sk.upjs.ics.diplomovka.absolutechromosome;
 
 public class FlightPosition {
 
-    private int gate;
+    private int stand;
     private int flight;
 
-    public FlightPosition(int gate, int flight) {
-        this.gate = gate;
+    public FlightPosition(int stand, int flight) {
+        this.stand = stand;
         this.flight = flight;
     }
 
-    public int getGate() {
-        return gate;
+    public int getStand() {
+        return stand;
     }
 
     public int getFlight() {

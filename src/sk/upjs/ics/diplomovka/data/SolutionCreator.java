@@ -20,13 +20,13 @@ public class SolutionCreator {
         StandToGateMapper standToGateMapper = new StandToGateMapper(storage);
         Map<Integer, Integer> flightsToGates = standToGateMapper.mapFlightsToGates(chromosome);
 
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = storage.getFlightStorage().getFlight(chromosome.getGene(g, f));
+        for (int s = 0; s < chromosome.getNoOfStands(); s++) {
+            for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
+                Flight flight = storage.getFlightStorage().getFlight(chromosome.getGene(s, f));
 
                 FlightInfo flightInfo = new FlightInfo()
-                        .setActualStart(chromosome.getCurrentFlightStart(g, f) + flight.getTurnaroundTime())
-                        .setAssignmentDelay(chromosome.getCurrentFlightStart(g, f) - flight.getStart())
+                        .setActualStart(chromosome.getCurrentFlightStart(s, f) + flight.getTurnaroundTime())
+                        .setAssignmentDelay(chromosome.getCurrentFlightStart(s, f) - flight.getStart())
                         .setDelay(flight.getDelay())
                         .setDestination(flight.getDestination())
                         .setOriginalGate(standsStorage.getGateById(flight.getOriginalGateId()))

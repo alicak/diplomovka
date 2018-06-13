@@ -13,7 +13,7 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
 
     @Override
     public boolean checkChromosomeFeasibility(Chromosome chromosome) {
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
+        for (int g = 0; g < chromosome.getNoOfStands(); g++) {
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
                 int flightNo = chromosome.getGene(g, f);
                 if (!checkFlightFeasibility(flightNo, g) || !checkConditionalClosures(f, g, chromosome)) {

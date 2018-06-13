@@ -27,19 +27,19 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
         double fitness = 0;
 
         int[] flightsToStands = new int[chromosome.getNoOfFlights()];
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
+        for (int g = 0; g < chromosome.getNoOfStands(); g++) {
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
                 flightsToStands[chromosome.getGene(g, f)] = g;
             }
         }
 
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlight(chromosome.getGene(g, f));
+        for (int s = 0; s < chromosome.getNoOfStands(); s++) {
+            for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
+                Flight flight = flightStorage.getFlight(chromosome.getGene(s, f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
 
                 double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
-                fitness += weight * standsStorage.getStandsDistance(g, originalStandNo);
+                fitness += weight * standsStorage.getStandsDistance(s, originalStandNo);
 
                 for (Map.Entry<Integer, Integer> entry : flight.getTransfers().entrySet()) {
                     fitness += weight * standsStorage.getStandsDistance(flightsToStands[entry.getKey()], originalStandNo);

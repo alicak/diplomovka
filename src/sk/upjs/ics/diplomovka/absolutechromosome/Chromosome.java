@@ -16,7 +16,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
     private List<Integer> genes;
     private double fitness = -1;
-    private int noOfGates;
+    private int noOfStands;
     private int[] noOfFlights; // number of flights per gate
     private int maxNoFlights;
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
@@ -31,18 +31,18 @@ public class Chromosome implements Comparable<Chromosome> {
         this.genes = genes;
     }
 
-    public Chromosome(int noOfGates, int maxNoFlights) {
-        this.noOfGates = noOfGates;
+    public Chromosome(int noOfStands, int maxNoFlights) {
+        this.noOfStands = noOfStands;
         this.maxNoFlights = maxNoFlights;
-        this.noOfFlights = new int[noOfGates];
+        this.noOfFlights = new int[noOfStands];
     }
 
-    protected int getIndex(int gate, int flight) {
-        return gate * maxNoFlights + flight;
+    protected int getIndex(int stand, int flight) {
+        return stand * maxNoFlights + flight;
     }
 
-    public int getGene(int gate, int flight) {
-        return getGene(getIndex(gate, flight));
+    public int getGene(int stand, int flight) {
+        return getGene(getIndex(stand, flight));
     }
 
     public int getGene(int position) {
@@ -58,12 +58,12 @@ public class Chromosome implements Comparable<Chromosome> {
         resetFitness();
     }
 
-    public void setGene(int gate, int flight, int flightValue) {
-        int oldValue = getGene(gate, flight);
+    public void setGene(int stand, int flight, int flightValue) {
+        int oldValue = getGene(stand, flight);
         if (flightValue != EMPTY_GENE && oldValue == EMPTY_GENE) {
-            noOfFlights[gate]++;
+            noOfFlights[stand]++;
         }
-        setGene(getIndex(gate, flight), flightValue);
+        setGene(getIndex(stand, flight), flightValue);
         resetFitness();
     }
 
@@ -93,49 +93,49 @@ public class Chromosome implements Comparable<Chromosome> {
         applyAllClosures(storage);
     }
 
-    public void addNextFlight(int gate, int flightValue) {
-        setGene(gate, noOfFlights[gate], flightValue);
+    public void addNextFlight(int stand, int flightValue) {
+        setGene(stand, noOfFlights[stand], flightValue);
     }
 
-    public void insertFlight(int gate, int flight, int flightValue) {
+    public void insertFlight(int stand, int flight, int flightValue) {
         boolean append = true;
-        for (int f = noOfFlights[gate] - 1; f >= flight; f--) {
-            setGene(getIndex(gate, f + 1), getGene(gate, f));
+        for (int f = noOfFlights[stand] - 1; f >= flight; f--) {
+            setGene(getIndex(stand, f + 1), getGene(stand, f));
             append = false;
         }
 
-        setGene(gate, flight, flightValue);
+        setGene(stand, flight, flightValue);
         if (!append) // if the flight was appended, the count was already incremented in previous line
-            noOfFlights[gate]++;
+            noOfFlights[stand]++;
     }
 
     public int addFlight(int flightValue) {
         List<Integer> newGenes = new ArrayList<>(genes.size() + maxNoFlights + 1);
 
-        for (int g = 0; g < noOfGates; g++) {
+        for (int s = 0; s < noOfStands; s++) {
             for (int f = 0; f < maxNoFlights; f++) {
-                newGenes.add(getGene(g, f));
+                newGenes.add(getGene(s, f));
             }
             newGenes.add(EMPTY_GENE);
         }
         setGenes(newGenes);
         maxNoFlights++;
 
-        int gateForFlight = Utils.randomInt(noOfGates);
-        addNextFlight(gateForFlight, flightValue);
+        int standForFlight = Utils.randomInt(noOfStands);
+        addNextFlight(standForFlight, flightValue);
 
-        return gateForFlight;
+        return standForFlight;
     }
 
     public void removeFlight(int flightValue) {
         FlightPosition position = findPosition(flightValue);
-        removeFlightFromGenes(position.getGate(), position.getFlight());
+        removeFlightFromGenes(position.getStand(), position.getFlight());
 
-        Integer[] newGenes = new Integer[(maxNoFlights - 1) * noOfGates];
-        for (int g = 0; g < noOfGates; g++) {
+        Integer[] newGenes = new Integer[(maxNoFlights - 1) * noOfStands];
+        for (int s = 0; s < noOfStands; s++) {
             for (int f = 0; f < maxNoFlights - 1; f++) {
-                int idx = g * (maxNoFlights - 1) + f;
-                int oldGene = getGene(g, f);
+                int idx = s * (maxNoFlights - 1) + f;
+                int oldGene = getGene(s, f);
                 newGenes[idx] = oldGene;
             }
         }
@@ -144,11 +144,11 @@ public class Chromosome implements Comparable<Chromosome> {
         maxNoFlights--;
     }
 
-    public void removeFlightFromGenes(int gate, int flight) {
-        for (int f = flight; f < noOfFlights[gate]; f++) {
-            setGene(gate, f, getGene(gate, f + 1));
+    public void removeFlightFromGenes(int stand, int flight) {
+        for (int f = flight; f < noOfFlights[stand]; f++) {
+            setGene(stand, f, getGene(stand, f + 1));
         }
-        noOfFlights[gate]--;
+        noOfFlights[stand]--;
         resetFitness();
     }
 
@@ -157,68 +157,68 @@ public class Chromosome implements Comparable<Chromosome> {
             genes.add(EMPTY_GENE);
         }
 
-        int newNumber = noOfGates;
-        noOfGates++;
+        int newNumber = noOfStands;
+        noOfStands++;
 
-        noOfFlights = Arrays.copyOf(noOfFlights, noOfGates);
+        noOfFlights = Arrays.copyOf(noOfFlights, noOfStands);
         noOfFlights[newNumber] = 0;
 
         return newNumber;
     }
 
-    public void removeGate(int gate) {
-        for (int i = 0; i < noOfFlights[gate]; i++) { // assign flights to remaining gates
-            int gene = getGene(gate, i);
-            int newGate = -1;
+    public void removeStand(int stand) {
+        for (int i = 0; i < noOfFlights[stand]; i++) { // assign flights to remaining gates
+            int gene = getGene(stand, i);
+            int newStand = -1;
             boolean feasible = false;
 
             while (!feasible) {
-                newGate = Utils.randomInt(noOfGates);
-                if (newGate == gate)
+                newStand = Utils.randomInt(noOfStands);
+                if (newStand == stand)
                     continue;
-                feasible = checkFlightFeasibility(gene, gate);
+                feasible = checkFlightFeasibility(gene, stand);
             }
-            int position = Utils.randomInt(noOfFlights[newGate]);
-            insertFlight(newGate, position, gene);
+            int position = Utils.randomInt(noOfFlights[newStand]);
+            insertFlight(newStand, position, gene);
         }
 
-        int lastGate = noOfGates - 1;
+        int lastStand = noOfStands - 1;
 
         for (int i = 0; i < maxNoFlights; i++) {
-            setGene(gate, getGene(lastGate, i));
+            setGene(stand, getGene(lastStand, i));
         }
         genes = genes.subList(0, genes.size() - maxNoFlights);
 
-        noOfFlights[gate] = noOfFlights[lastGate];
+        noOfFlights[stand] = noOfFlights[lastStand];
         noOfFlights = Arrays.copyOf(noOfFlights, noOfFlights.length - 1);
 
-        noOfGates--;
+        noOfStands--;
         resetFitness();
     }
 
-    public int getNoOfFlights(int gate) {
-        return noOfFlights[gate];
+    public int getNoOfFlights(int stand) {
+        return noOfFlights[stand];
     }
 
     public int getNoOfFlights() {
         return maxNoFlights;
     }
 
-    public int getNoOfGates() {
-        return noOfGates;
+    public int getNoOfStands() {
+        return noOfStands;
     }
 
     public FlightPosition findPosition(int flightValue) {
-        for (int g = 0; g < noOfGates; g++) {
-            for (int f = 0; f < noOfFlights[g]; f++) {
-                if (getGene(g, f) == flightValue)
-                    return new FlightPosition(g, f);
+        for (int s = 0; s < noOfStands; s++) {
+            for (int f = 0; f < noOfFlights[s]; f++) {
+                if (getGene(s, f) == flightValue)
+                    return new FlightPosition(s, f);
             }
         }
         return new FlightPosition(-1, -1); // flight was not found
     }
 
-    private void setNoOfFlightsPerGate(int[] noOfFlights) {
+    private void setNoOfFlightsPerStand(int[] noOfFlights) {
         this.noOfFlights = noOfFlights;
     }
 
@@ -226,44 +226,36 @@ public class Chromosome implements Comparable<Chromosome> {
         this.feasibilityChecker = feasibilityChecker;
     }
 
-    public boolean checkFlightFeasibility(int flightValue, int gate) {
-        return feasibilityChecker.checkFlightFeasibility(flightValue, gate);
+    public boolean checkFlightFeasibility(int flightValue, int stand) {
+        return feasibilityChecker.checkFlightFeasibility(flightValue, stand);
     }
 
     public boolean checkFeasibility() {
         return feasibilityChecker.checkChromosomeFeasibility(this);
     }
 
-    /**
-     * we save current start time for that particular flight on that particular stand in this assignment
-     *
-     * @param gate
-     * @param flightIdx
-     * @param amount
-     */
-    public void incrementCurrentStartAndEnd(int gate, int flightIdx, int amount) {
-        int flightNo = getGene(gate, flightIdx);
+    // we save current start time for that particular flight on that particular stand in this assignment
+    public void incrementCurrentStartAndEnd(int stand, int flightIdx, int amount) {
+        int flightNo = getGene(stand, flightIdx);
         int newStart = currentFlightStarts.get(flightNo) + amount;
         currentFlightStarts.put(flightNo, newStart);
         int newEnd = currentFlightEnds.get(flightNo) + amount;
         currentFlightEnds.put(flightNo, newEnd);
     }
 
-    /**
-     * also calculates ends
-     */
+    // also the ends
     public void calculateCurrentFlightStarts(GeneralStorage storage) {
         FlightStorage flightStorage = storage.getFlightStorage();
         StandsStorage standsStorage = storage.getStandsStorage();
 
         int previousNo = -1;
-        for (int gate = 0; gate < noOfGates; gate++) {
+        for (int stand = 0; stand < noOfStands; stand++) {
 
-            for (int flightIdx = 0; flightIdx < noOfFlights[gate]; flightIdx++) {
-                int flightNo = getGene(gate, flightIdx);
+            for (int flightIdx = 0; flightIdx < noOfFlights[stand]; flightIdx++) {
+                int flightNo = getGene(stand, flightIdx);
                 Flight f = flightStorage.getFlight(flightNo);
 
-                int availableTime = (flightIdx == 0) ? standsStorage.getStandAvailabilityTime(gate) : currentFlightEnds.get(previousNo);
+                int availableTime = (flightIdx == 0) ? standsStorage.getStandAvailabilityTime(stand) : currentFlightEnds.get(previousNo);
                 int start = f.getStart();
 
                 if (availableTime > start) {
@@ -278,12 +270,12 @@ public class Chromosome implements Comparable<Chromosome> {
         }
     }
 
-    public int getCurrentFlightStart(int gate, int flightIdx) {
-        return currentFlightStarts.get(getGene(gate, flightIdx));
+    public int getCurrentFlightStart(int stand, int flightIdx) {
+        return currentFlightStarts.get(getGene(stand, flightIdx));
     }
 
-    public int getCurrentFlightEnd(int gate, int flightIdx) {
-        return currentFlightEnds.get(getGene(gate, flightIdx));
+    public int getCurrentFlightEnd(int stand, int flightIdx) {
+        return currentFlightEnds.get(getGene(stand, flightIdx));
     }
 
     public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
@@ -314,14 +306,14 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public void applyAllClosures(GeneralStorage storage) {
-        for (int g = 0; g < noOfGates; g++) {
-            Collection<StandClosure> closuresForStand = storage.getStandsStorage().getClosuresForStand(g);
+        for (int s = 0; s < noOfStands; s++) {
+            Collection<StandClosure> closuresForStand = storage.getStandsStorage().getClosuresForStand(s);
             for (StandClosure closure : closuresForStand) {
-                applyStandClosure(closure, g);
+                applyStandClosure(closure, s);
             }
-            Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(g);
+            Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(s);
             for(ConditionalStandClosure closure: conditionalClosuresForStand) {
-                applyConditionalStandClosure(closure, g, storage.getFlightStorage());
+                applyConditionalStandClosure(closure, s, storage.getFlightStorage());
             }
         }
     }
@@ -344,10 +336,10 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int g = 0; g < noOfGates; g++) {
-            result.append(g + ": ");
+        for (int s = 0; s < noOfStands; s++) {
+            result.append(s + ": ");
             for (int f = 0; f < maxNoFlights; f++) {
-                result.append(getGene(g, f) + ", ");
+                result.append(getGene(s, f) + ", ");
             }
             result.append("\n");
         }
@@ -355,12 +347,12 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public Chromosome copy() {
-        Chromosome chromosome = new Chromosome(noOfGates, maxNoFlights);
+        Chromosome chromosome = new Chromosome(noOfStands, maxNoFlights);
 
         chromosome.setFitness(getFitness());
         List<Integer> genes = new ArrayList<>(getGenes());
         chromosome.setGenes(genes);
-        chromosome.setNoOfFlightsPerGate(Arrays.copyOf(noOfFlights, noOfFlights.length));
+        chromosome.setNoOfFlightsPerStand(Arrays.copyOf(noOfFlights, noOfFlights.length));
         chromosome.setFeasibilityChecker(feasibilityChecker);
 
         chromosome.setCurrentFlightStarts(new HashMap<>(currentFlightStarts));

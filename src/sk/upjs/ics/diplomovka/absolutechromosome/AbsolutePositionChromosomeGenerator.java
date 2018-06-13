@@ -8,12 +8,12 @@ import java.util.Arrays;
 public class AbsolutePositionChromosomeGenerator {
 
     private int noOfFlights;
-    private int noOfGates;
+    private int noOfStands;
     private AbsolutePositionMutation mutation;
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
 
-    public AbsolutePositionChromosomeGenerator(int noOfGates, int noOfFlights, AbsolutePositionFeasibilityChecker feasibilityChecker) {
-        this.noOfGates = noOfGates;
+    public AbsolutePositionChromosomeGenerator(int noOfStands, int noOfFlights, AbsolutePositionFeasibilityChecker feasibilityChecker) {
+        this.noOfStands = noOfStands;
         this.noOfFlights = noOfFlights;
         this.mutation = new AbsolutePositionMutation(1);
         this.feasibilityChecker = feasibilityChecker;
@@ -24,14 +24,14 @@ public class AbsolutePositionChromosomeGenerator {
 
         boolean feasible = false;
         while (!feasible) {
-            chromosome = new Chromosome(noOfGates, noOfFlights);
+            chromosome = new Chromosome(noOfStands, noOfFlights);
             chromosome.setFeasibilityChecker(feasibilityChecker);
-            Integer[] genesArray = new Integer[noOfGates * noOfFlights];
+            Integer[] genesArray = new Integer[noOfStands * noOfFlights];
             chromosome.setGenes(Arrays.asList(genesArray));
             Arrays.fill(genesArray, Chromosome.EMPTY_GENE);
 
             for (int i = 0; i < noOfFlights; i++) {
-                int gate = Utils.randomInt(noOfGates);
+                int gate = Utils.randomInt(noOfStands);
                 chromosome.addNextFlight(gate, i);
             }
 

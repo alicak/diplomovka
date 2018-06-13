@@ -13,24 +13,24 @@ public class SwapBetweenGatesMutation extends AbsolutePositionMutation {
             return false;
         }
 
-        int gate1 = Utils.randomInt(chromosome.getNoOfGates());
-        int gate2 = Utils.randomInt(chromosome.getNoOfGates());
+        int stand1 = Utils.randomInt(chromosome.getNoOfStands());
+        int stand2 = Utils.randomInt(chromosome.getNoOfStands());
 
-        if (chromosome.getNoOfFlights(gate1) == 0 || chromosome.getNoOfFlights(gate2) == 0) {
+        if (chromosome.getNoOfFlights(stand1) == 0 || chromosome.getNoOfFlights(stand2) == 0) {
             return false;
         }
 
-        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate1));
-        int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights(gate2);
+        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(stand1));
+        int flightIdx2 = (flightIdx1 + 1) % chromosome.getNoOfFlights(stand2);
 
-        int flight1 = chromosome.getGene(gate1, flightIdx1);
-        int flight2 = chromosome.getGene(gate2, flightIdx2);
+        int flight1 = chromosome.getGene(stand1, flightIdx1);
+        int flight2 = chromosome.getGene(stand2, flightIdx2);
 
-        if (!chromosome.checkFlightFeasibility(flight1, gate2) || !chromosome.checkFlightFeasibility(flight2, gate1))
+        if (!chromosome.checkFlightFeasibility(flight1, stand2) || !chromosome.checkFlightFeasibility(flight2, stand1))
             return false;
 
-        chromosome.setGene(gate1, flightIdx1, flight2);
-        chromosome.setGene(gate2, flightIdx2, flight1);
+        chromosome.setGene(stand1, flightIdx1, flight2);
+        chromosome.setGene(stand2, flightIdx2, flight1);
 
         return true;
     }

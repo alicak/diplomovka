@@ -13,21 +13,21 @@ public class MoveBetweenGatesMutation extends AbsolutePositionMutation {
             return false;
         }
 
-        int gate1 = Utils.randomInt(chromosome.getNoOfGates());
-        int gate2 = Utils.randomInt(chromosome.getNoOfGates());
+        int stand1 = Utils.randomInt(chromosome.getNoOfStands());
+        int stand2 = Utils.randomInt(chromosome.getNoOfStands());
 
-        int noOfFlights1 = chromosome.getNoOfFlights(gate1);
+        int noOfFlights1 = chromosome.getNoOfFlights(stand1);
         if (noOfFlights1 == 0) // there are no flights at the gate
             return false;
 
         int flightIdx = Utils.randomInt(noOfFlights1);
-        int flight = chromosome.getGene(gate1, flightIdx);
+        int flight = chromosome.getGene(stand1, flightIdx);
 
-        if (!chromosome.checkFlightFeasibility(flight, gate2))
+        if (!chromosome.checkFlightFeasibility(flight, stand2))
             return false;
 
-        chromosome.removeFlightFromGenes(gate1, flightIdx);
-        chromosome.addNextFlight(gate2, flight);
+        chromosome.removeFlightFromGenes(stand1, flightIdx);
+        chromosome.addNextFlight(stand2, flight);
 
         return true;
     }

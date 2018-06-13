@@ -28,11 +28,11 @@ public class ReassignmentFitness extends FitnessFunctionBase {
     private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
         double result = 0;
 
-        for (int g = 0; g < chromosome.getNoOfGates(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                Flight flight = flightStorage.getFlight(chromosome.getGene(g, f));
+        for (int s = 0; s < chromosome.getNoOfStands(); s++) {
+            for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
+                Flight flight = flightStorage.getFlight(chromosome.getGene(s, f));
                 int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
-                if (g != originalStandNo) {
+                if (s != originalStandNo) {
                     double weight = weighted ? calculateTotalWeights(flight, weights.getReassignmentWeight()) : 1;
                     result += weight;
                 }

@@ -13,20 +13,20 @@ public class SwapFlightsMutation extends AbsolutePositionMutation {
             return false;
         }
 
-        int gate = Utils.randomInt(chromosome.getNoOfGates());
+        int stand = Utils.randomInt(chromosome.getNoOfStands());
 
-        if (chromosome.getNoOfFlights(gate) <= 1) {
+        if (chromosome.getNoOfFlights(stand) <= 1) {
             return false;
         }
 
-        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(gate));
-        int flightIdx2 = Utils.randomInt(chromosome.getNoOfFlights(gate));
+        int flightIdx1 = Utils.randomInt(chromosome.getNoOfFlights(stand));
+        int flightIdx2 = Utils.randomInt(chromosome.getNoOfFlights(stand));
 
-        int flight1 = chromosome.getGene(gate, flightIdx1);
-        int flight2 = chromosome.getGene(gate, flightIdx2);
+        int flight1 = chromosome.getGene(stand, flightIdx1);
+        int flight2 = chromosome.getGene(stand, flightIdx2);
 
-        chromosome.setGene(gate, flightIdx1, flight2);
-        chromosome.setGene(gate, flightIdx2, flight1);
+        chromosome.setGene(stand, flightIdx1, flight2);
+        chromosome.setGene(stand, flightIdx2, flight1);
 
         return true;
     }
