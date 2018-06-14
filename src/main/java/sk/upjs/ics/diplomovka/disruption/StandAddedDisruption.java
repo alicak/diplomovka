@@ -1,15 +1,15 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.Stand;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 public class StandAddedDisruption implements Disruption {
-    private AircraftStand stand;
+    private Stand stand;
     private StandsStorage standsStorage;
     private int id;
 
-    public StandAddedDisruption(AircraftStand stand, StandsStorage standsStorage, int id) {
+    public StandAddedDisruption(Stand stand, StandsStorage standsStorage, int id) {
         this.stand = stand;
         this.standsStorage = standsStorage;
         this.id = id;

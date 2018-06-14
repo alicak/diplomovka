@@ -4,7 +4,7 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 
 import java.util.List;
 
-public class AircraftStand {
+public class Stand {
 
     private int id;
     private double maxWingspan;
@@ -12,14 +12,6 @@ public class AircraftStand {
     private List<Integer> flightCategories;
     private List<Integer> engineTypes;
     private List<Integer> gates;
-
-    public AircraftStand(int id, double maxWingspan, double maxWeight, List<Integer> flightCategories, List<Integer> engineTypes) {
-        this.id = id;
-        this.maxWingspan = maxWingspan;
-        this.maxWeight = maxWeight;
-        this.flightCategories = flightCategories;
-        this.engineTypes = engineTypes;
-    }
 
     public double getMaxWingspan() {
         return maxWingspan;

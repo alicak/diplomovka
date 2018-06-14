@@ -8,7 +8,7 @@ public class FlightDataModel {
     private int scheduled;
     private int actual;
     private int turnaroundTime;
-    private String gate;
+    private int gate;
     private int standId;
     private String code;
     private int noOfPassengers;
@@ -18,26 +18,6 @@ public class FlightDataModel {
     private int categoryId;
     private Arrival arrival;
     private String destination;
-
-    public FlightDataModel(int id, int scheduled, int actual, int turnaroundTime,
-                           String gate, int standId, String code, int noOfPassengers,
-                           Map<Integer, Integer> transfers, String aircraftId,
-                           int priorityId, int categoryId, Arrival arrival, String destination) {
-        this.id = id;
-        this.scheduled = scheduled;
-        this.actual = actual;
-        this.turnaroundTime = turnaroundTime;
-        this.gate = gate;
-        this.standId = standId;
-        this.code = code;
-        this.noOfPassengers = noOfPassengers;
-        this.transfers = transfers;
-        this.aircraftName = aircraftId;
-        this.priorityId = priorityId;
-        this.categoryId = categoryId;
-        this.arrival = arrival;
-        this.destination = destination;
-    }
 
     public int getId() {
         return id;
@@ -75,11 +55,11 @@ public class FlightDataModel {
         return this;
     }
 
-    public String getGate() {
+    public int getGate() {
         return gate;
     }
 
-    public FlightDataModel setGate(String gate) {
+    public FlightDataModel setGate(int gate) {
         this.gate = gate;
         return this;
     }

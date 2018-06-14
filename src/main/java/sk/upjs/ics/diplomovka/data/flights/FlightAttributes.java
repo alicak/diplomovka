@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class FlightAttributes {
 
-    private List<String> categories = Collections.emptyList();
-    private List<Aircraft> aircrafts = Collections.emptyList();
+    private Map<Integer, String> categories = Collections.emptyMap();
+    private Map<Integer, Aircraft> aircrafts = Collections.emptyMap();
     private Map<String, Aircraft> namesToAircrafts = Collections.emptyMap();
-    private List<String> engineTypes = Collections.emptyList();
+    private Map<Integer, String> engineTypes = Collections.emptyMap();
 
-    public List<Aircraft> getAircrafts() {
+    public Map<Integer, Aircraft> getAircrafts() {
         return aircrafts;
     }
 
@@ -20,7 +20,7 @@ public class FlightAttributes {
         return namesToAircrafts.get(name);
     }
 
-    public List<String> getCategories() {
+    public Map<Integer, String> getCategories() {
         return categories;
     }
 
@@ -28,7 +28,7 @@ public class FlightAttributes {
         return categories.get(id);
     }
 
-    public List<String> getEngineTypes() {
+    public Map<Integer, String> getEngineTypes() {
         return engineTypes;
     }
 
@@ -36,21 +36,21 @@ public class FlightAttributes {
         return engineTypes.get(id);
     }
 
-    public FlightAttributes setCategories(List<String> categories) {
+    public FlightAttributes setCategories(Map<Integer, String> categories) {
         this.categories = categories;
         return this;
     }
 
-    public FlightAttributes setAircrafts(List<Aircraft> aircrafts) {
+    public FlightAttributes setAircrafts(Map<Integer, Aircraft> aircrafts) {
         this.aircrafts = aircrafts;
         namesToAircrafts = new HashMap<>();
-        for (Aircraft aircraft : aircrafts) {
+        for (Aircraft aircraft : aircrafts.values()) {
             namesToAircrafts.put(aircraft.getName(), aircraft);
         }
         return this;
     }
 
-    public FlightAttributes setEngineTypes(List<String> engineTypes) {
+    public FlightAttributes setEngineTypes(Map<Integer, String> engineTypes) {
         this.engineTypes = engineTypes;
         return this;
     }

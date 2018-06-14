@@ -3,11 +3,14 @@ package sk.upjs.ics.diplomovka.data.flights;
 import java.util.*;
 
 public class FlightStorage {
+
+    private FlightAttributes attributes;
     private Map<Integer, Flight> flightsMap;
     private List<Flight> sortedFlights;
 
-    public FlightStorage(Map<Integer, Flight> flightsMap) {
+    public FlightStorage(Map<Integer, Flight> flightsMap, FlightAttributes attributes) {
         this.flightsMap = flightsMap;
+        this.attributes = attributes;
     }
 
     public Flight getFlight(int id) {
@@ -46,7 +49,7 @@ public class FlightStorage {
             }
         }
 
-        return new FlightStorage(flightsMap);
+        return new FlightStorage(flightsMap, attributes);
     }
 
     public void flightTimeChanged() {

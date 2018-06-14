@@ -23,7 +23,7 @@ public class Flight implements Comparable<Flight> {
     private Arrival arrival;
     private Map<Integer, Integer> transfers; // key is id of departure that has this arrival, value is no of passengers
 
-    public Flight(FlightDataModel flightDataModel, FlightAttributes attributes, StandsStorage standsStorage) {
+    public Flight(FlightDataModel flightDataModel, FlightAttributes attributes) {
         this.code = flightDataModel.getCode();
         this.id = flightDataModel.getId();
         this.start = flightDataModel.getScheduled() - flightDataModel.getTurnaroundTime();
@@ -35,7 +35,7 @@ public class Flight implements Comparable<Flight> {
         this.aircraft = attributes.getAircraftByName(flightDataModel.getAircraftName());
         this.turnaroundTime = flightDataModel.getTurnaroundTime();
         this.originalStandId = flightDataModel.getStandId();
-        this.originalGateId = standsStorage.getGateId(flightDataModel.getGate());
+        this.originalGateId = flightDataModel.getGate();
         this.noOfPassengers = flightDataModel.getNoOfPassengers();
         this.destination = flightDataModel.getDestination();
         this.arrival = flightDataModel.getArrival();

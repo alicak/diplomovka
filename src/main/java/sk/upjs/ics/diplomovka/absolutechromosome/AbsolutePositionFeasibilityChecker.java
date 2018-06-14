@@ -3,7 +3,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome;
 import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.stands.AircraftStand;
+import sk.upjs.ics.diplomovka.data.stands.Stand;
 import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
 
 public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
@@ -26,7 +26,7 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
 
     @Override
     public boolean checkFlightFeasibility(int flightValue, int gate) {
-        AircraftStand stand = standsStorage.getStandByNumber(gate);
+        Stand stand = standsStorage.getStandByNumber(gate);
         return stand.checkFlight(flightStorage.getFlight(flightValue));
     }
 

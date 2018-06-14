@@ -9,62 +9,53 @@ public class StandsStorage {
 
     public static final int STAND_NOT_FOUND = -1;
 
-    private Map<Integer, AircraftStand> stands;
+    private StandAttributes attributes;
+    private Map<Integer, Stand> stands;
     private int[] standsIds;
-    private Map<String, AircraftStand> gatesToStands;
+    private Map<Integer, Stand> gatesToStands;
     private Map<Integer, Map<Integer, StandClosure>> closures; // stand ids to closures
     private Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures;
     private Map<Integer, Integer> availabilityTimes;
-    private List<String> gates;
     private double[][] standsDistances; // TODO
     private double[][] gateDistances; // TODO
     private int noOfStandsInUse;
 
-    public StandsStorage(Map<Integer, AircraftStand> stands, Map<String, AircraftStand> gatesToStands, List<String> gates) {
+    public StandsStorage(Map<Integer, Stand> stands, Map<Integer, Stand> gatesToStands, StandAttributes attributes) {
         this.stands = stands;
         this.gatesToStands = gatesToStands;
-        this.gates = gates;
+        this.attributes = attributes;
         noOfStandsInUse = stands.size();
         initializeStands();
         initializeClosures();
         initializeAvailabilityTimes();
     }
 
-    private StandsStorage(Map<Integer, AircraftStand> stands, int[] standsIds, Map<String, AircraftStand> gatesToStands,
+    private StandsStorage(Map<Integer, Stand> stands, int[] standsIds, Map<Integer, Stand> gatesToStands,
+                          StandAttributes attributes,
                           Map<Integer, Map<Integer, StandClosure>> closures,
                           Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures,
-                          Map<Integer, Integer> availabilityTimes, List<String> gates, double[][] standsDistances,
+                          Map<Integer, Integer> availabilityTimes, double[][] standsDistances,
                           double[][] gateDistances, int noOfStandsInUse) {
-        this.stands = stands;
+        this(stands, gatesToStands, attributes);
         this.standsIds = standsIds;
-        this.gatesToStands = gatesToStands;
         this.closures = closures;
         this.conditionalClosures = conditionalClosures;
         this.availabilityTimes = availabilityTimes;
-        this.gates = gates;
         this.standsDistances = standsDistances;
         this.gateDistances = gateDistances;
         this.noOfStandsInUse = noOfStandsInUse;
     }
 
-    public Collection<AircraftStand> getStands() {
+    public Collection<Stand> getStands() {
         return stands.values();
     }
 
-    public AircraftStand getStandById(int id) {
+    public Stand getStandById(int id) {
         return stands.get(id);
     }
 
-    public AircraftStand getStandByNumber(int number) {
+    public Stand getStandByNumber(int number) {
         return stands.get(standsIds[number]);
-    }
-
-    public AircraftStand getStandByGate(String gate) {
-        return gatesToStands.get(gate);
-    }
-
-    public int getStandIdByGate(String gate) {
-        return getStandByGate(gate).getId();
     }
 
     public int getNumberById(int id) {
@@ -79,7 +70,7 @@ public class StandsStorage {
         return standsIds[number];
     }
 
-    public void addStand(AircraftStand stand) {
+    public void addStand(Stand stand) {
         standsIds[getNoOfStands() - 1] = standsIds[noOfStandsInUse];
         standsIds[noOfStandsInUse] = stand.getId();
         noOfStandsInUse++;
@@ -158,8 +149,8 @@ public class StandsStorage {
     }
 
     public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {
-        return new StandsStorage(stands, standsIds, gatesToStands, closures, conditionalClosures,
-                availabilityTimes, gates, standsDistances, gateDistances, noOfStandsInUse);
+        return new StandsStorage(stands, standsIds, gatesToStands, attributes, closures, conditionalClosures,
+                availabilityTimes, standsDistances, gateDistances, noOfStandsInUse);
     }
 
     public int getStandAvailabilityTime(int standNo) {
@@ -175,15 +166,11 @@ public class StandsStorage {
     }
 
     public int getNoOfGates() {
-        return gates.size();
+        return gatesToStands.size();
     }
 
     public String getGateById(int gateId) {
-        return gates.get(gateId);
-    }
-
-    public int getGateId(String gate) {
-        return gates.indexOf(gate);
+        return attributes.getGateById(gateId);
     }
 
     public int getNoOfStandsInUse() {
