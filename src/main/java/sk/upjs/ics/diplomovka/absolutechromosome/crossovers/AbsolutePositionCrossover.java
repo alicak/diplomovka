@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.crossovers;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 

@@ -1,6 +1,5 @@
 package sk.upjs.ics.diplomovka.data.stands.closures;
 
-import sk.upjs.ics.diplomovka.data.flights.Aircraft;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 
 import java.util.List;

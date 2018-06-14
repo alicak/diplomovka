@@ -2,10 +2,9 @@ package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.ClosureCondition;
 import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class StandConditionallyClosedDisruption implements Disruption {
 

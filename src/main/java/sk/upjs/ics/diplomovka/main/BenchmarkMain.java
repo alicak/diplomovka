@@ -19,7 +19,7 @@ import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
 
 public class BenchmarkMain {
 
