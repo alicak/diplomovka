@@ -1,6 +1,8 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.Map;
+import sk.upjs.ics.diplomovka.utils.Utils;
+
+import java.util.List;
 
 public class Flight implements Comparable<Flight> {
 
@@ -18,26 +20,24 @@ public class Flight implements Comparable<Flight> {
     private int originalGateId;
     private int noOfPassengers;
     private String destination;
-    private Arrival arrival;
-    private Map<Integer, Integer> transfers; // key is id of departure that has this arrival, value is no of passengers
+    private List<Transfer> transfers;
 
     public Flight(FlightDataModel flightDataModel, FlightAttributes attributes) {
         this.code = flightDataModel.getCode();
         this.id = flightDataModel.getId();
-        this.start = flightDataModel.getScheduled() - flightDataModel.getTurnaroundTime();
-        this.originalStart = flightDataModel.getScheduled();
-        this.end = flightDataModel.getScheduled();
+        this.start = Utils.timeToMinutes(flightDataModel.getScheduled()) - flightDataModel.getTurnaroundTime();
+        this.originalStart = Utils.timeToMinutes(flightDataModel.getScheduled());
+        this.end = Utils.timeToMinutes(flightDataModel.getScheduled());
         this.delay = 0;
         this.category = flightDataModel.getCategoryId();
-        this.priority = flightDataModel.getPriorityId();
-        this.aircraft = attributes.getAircraftByName(flightDataModel.getAircraftName());
+        this.priority = flightDataModel.getPriority();
+        this.aircraft = attributes.getAircraftById(flightDataModel.getAircraftId());
         this.turnaroundTime = flightDataModel.getTurnaroundTime();
         this.originalStandId = flightDataModel.getStandId();
-        this.originalGateId = flightDataModel.getGate();
+        this.originalGateId = flightDataModel.getGateId();
         this.noOfPassengers = flightDataModel.getNoOfPassengers();
         this.destination = flightDataModel.getDestination();
-        this.arrival = flightDataModel.getArrival();
-        this.transfers = flightDataModel.getTransfers();
+        this.transfers = attributes.getTransfersByIds(flightDataModel.getTransfersIds());
     }
 
     @Override
@@ -130,17 +130,8 @@ public class Flight implements Comparable<Flight> {
         return !transfers.isEmpty();
     }
 
-    public Map<Integer, Integer> getTransfers() {
+    public List<Transfer> getTransfers() {
         return transfers;
     }
-
-    public boolean hasArrival() {
-        return arrival != null;
-    }
-
-    public Arrival getArrival() {
-        return arrival;
-    }
-
 
 }

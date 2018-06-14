@@ -5,6 +5,7 @@ import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.Transfer;
 import sk.upjs.ics.diplomovka.data.stands.StandToGateMapper;
 
 import java.util.Map;
@@ -34,13 +35,16 @@ public class GateDistanceFitness extends FitnessFunctionBase {
         for (int s = 0; s < chromosome.getNoOfStands(); s++) {
             for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
                 Flight flight = flightStorage.getFlight(chromosome.getGene(s, f));
-                int originalGateId = flight.getOriginalGateId();
+                int originalGate = flight.getOriginalGateId();
 
                 double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
-                fitness += weight * standsStorage.getGatesDistance(flightsToGates.get(flight.getId()), originalGateId);
+                int newGate = flightsToGates.get(flight.getId());
+                fitness += weight * standsStorage.getGatesDistance(newGate, originalGate);
 
-                for (Map.Entry<Integer, Integer> entry : flight.getTransfers().entrySet()) {
-                    fitness += weight * standsStorage.getGatesDistance(flightsToGates.get(entry.getKey()), originalGateId);
+                // TODO arriving gate should be different than departing gate
+                for (Transfer transfer : flight.getTransfers()) {
+                    int arrivingGate = flightsToGates.get(transfer.getFlightId());
+                    fitness += weight * standsStorage.getGatesDistance(newGate, arrivingGate);
                 }
             }
         }

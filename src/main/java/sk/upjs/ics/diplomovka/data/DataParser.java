@@ -20,36 +20,26 @@ public class DataParser {
     private FlightStorage flightStorage;
     private Gson gson = new Gson();
 
-    public sk.upjs.ics.diplomovka.data.GeneralStorage parseDataFromJsons(String categoriesFile, String aircraftsFile, String engineTypesFile,
+    public sk.upjs.ics.diplomovka.data.GeneralStorage parseDataFromJsons(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile,
                                                                          String gatesFile, String standsFile, String flightsFile) {
-        parseFlightAttributes(categoriesFile, aircraftsFile, engineTypesFile);
+        parseFlightAttributes(categoriesFile, aircraftsFile, engineTypesFile, transfersFile);
         parseStandAttributes(gatesFile);
         parseStands(standsFile);
         parseFlights(flightsFile);
         return new GeneralStorage(flightStorage, standsStorage, 0);
     }
 
-    private void parseFlightAttributes(String categoriesFile, String aircraftsFile, String engineTypesFile) {
+    private void parseFlightAttributes(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile) {
         flightAttributes = new FlightAttributes()
-                .setCategories(parseAttribute(categoriesFile))
-                .setEngineTypes(parseAttribute(engineTypesFile))
-                .setAircrafts(parseAircrafts(aircraftsFile));
-    }
-
-    private Map<Integer, Aircraft> parseAircrafts(String aircraftsFile) {
-        Aircraft[] aircrafts = parseObjects(aircraftsFile, Aircraft.class);
-
-        Map<Integer, Aircraft> aircraftMap = new HashMap<>();
-        for (Aircraft aircraft : aircrafts) {
-            aircraftMap.put(aircraft.getId(), aircraft);
-        }
-
-        return aircraftMap;
+                .setCategories(parseStringAttribute(categoriesFile))
+                .setEngineTypes(parseStringAttribute(engineTypesFile))
+                .setAircrafts(parseObjectAttribute(aircraftsFile, Aircraft.class))
+                .setTransfers(parseObjectAttribute(transfersFile, Transfer.class));
     }
 
     private void parseStandAttributes(String gatesFile) {
         standAttributes = new StandAttributes()
-                .setGates(parseAttribute(gatesFile));
+                .setGates(parseStringAttribute(gatesFile));
     }
 
     private void parseStands(String standsFile) {
@@ -80,8 +70,8 @@ public class DataParser {
         flightStorage = new FlightStorage(flightsMap, flightAttributes);
     }
 
-    private Map<Integer, String> parseAttribute(String attributeFile) {
-        FlightAttribute[] attributes = parseObjects(attributeFile, FlightAttribute.class);
+    private Map<Integer, String> parseStringAttribute(String attributesFile) {
+        FlightAttribute[] attributes = parseObjects(attributesFile, FlightAttribute.class);
 
         Map<Integer, String> attributeMap = new HashMap<>();
         for (FlightAttribute attribute : attributes) {
@@ -89,6 +79,17 @@ public class DataParser {
         }
 
         return attributeMap;
+    }
+
+    private <T extends Attribute> Map<Integer, T> parseObjectAttribute(String attributesFile, Class<T> type) {
+        T[] attributes = parseObjects(attributesFile, type);
+
+        Map<Integer, T> aircraftMap = new HashMap<>();
+        for (T attribute : attributes) {
+            aircraftMap.put(attribute.getId(), attribute);
+        }
+
+        return aircraftMap;
     }
 
     private <T> T[] parseObjects(String fileName, Class<T> type) {

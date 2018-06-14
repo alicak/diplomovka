@@ -23,4 +23,11 @@ public class Utils {
         return h + ":" + m;
     }
 
+    public static int timeToMinutes(String time) {
+        String[] timeArray = time.split(":");
+        int hours = Integer.parseInt(timeArray[0]);
+        int minutes = Integer.parseInt(timeArray[1]);
+        return hours * 60 + minutes;
+    }
+
 }

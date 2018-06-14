@@ -1,8 +1,9 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-public class Aircraft {
+import sk.upjs.ics.diplomovka.data.Attribute;
 
-    private int id;
+public class Aircraft extends Attribute {
+
     private String name;
     private double wingspan; // in meters
     private int engineType;

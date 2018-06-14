@@ -1,22 +1,20 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FlightAttributes {
 
     private Map<Integer, String> categories = Collections.emptyMap();
     private Map<Integer, Aircraft> aircrafts = Collections.emptyMap();
-    private Map<String, Aircraft> namesToAircrafts = Collections.emptyMap();
     private Map<Integer, String> engineTypes = Collections.emptyMap();
+    private Map<Integer, Transfer> transfers = Collections.emptyMap();
 
     public Map<Integer, Aircraft> getAircrafts() {
         return aircrafts;
     }
 
-    public Aircraft getAircraftByName(String name) {
-        return namesToAircrafts.get(name);
+    public Aircraft getAircraftById(int id) {
+        return aircrafts.get(id);
     }
 
     public Map<Integer, String> getCategories() {
@@ -35,6 +33,20 @@ public class FlightAttributes {
         return engineTypes.get(id);
     }
 
+    public Map<Integer, Transfer> getTransfers() {
+        return transfers;
+    }
+
+    public List<Transfer> getTransfersByIds(List<Integer> transferIds) {
+        List<Transfer> transfersWithIds = new ArrayList<>();
+
+        for (Integer id : transferIds) {
+            transfersWithIds.add(transfers.get(id));
+        }
+
+        return transfersWithIds;
+    }
+
     public FlightAttributes setCategories(Map<Integer, String> categories) {
         this.categories = categories;
         return this;
@@ -42,15 +54,16 @@ public class FlightAttributes {
 
     public FlightAttributes setAircrafts(Map<Integer, Aircraft> aircrafts) {
         this.aircrafts = aircrafts;
-        namesToAircrafts = new HashMap<>();
-        for (Aircraft aircraft : aircrafts.values()) {
-            namesToAircrafts.put(aircraft.getName(), aircraft);
-        }
         return this;
     }
 
     public FlightAttributes setEngineTypes(Map<Integer, String> engineTypes) {
         this.engineTypes = engineTypes;
+        return this;
+    }
+
+    public FlightAttributes setTransfers(Map<Integer, Transfer> transfers) {
+        this.transfers = transfers;
         return this;
     }
 }

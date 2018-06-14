@@ -1,22 +1,22 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.Map;
+import java.util.List;
 
 public class FlightDataModel {
 
     private int id;
-    private int scheduled;
-    private int actual;
+    private String scheduled;
+    private String actual;
     private int turnaroundTime;
-    private int gate;
+    private int gateId;
     private int standId;
     private String code;
     private int noOfPassengers;
-    private Map<Integer, Integer> transfers;
-    private String aircraftName;
-    private int priorityId;
+    private List<Integer> transfersIds;
+    private int aircraftId;
+    private int priority;
     private int categoryId;
-    private Arrival arrival;
+    private int arrivalId;
     private String destination;
 
     public int getId() {
@@ -28,20 +28,20 @@ public class FlightDataModel {
         return this;
     }
 
-    public int getScheduled() {
+    public String getScheduled() {
         return scheduled;
     }
 
-    public FlightDataModel setScheduled(int scheduled) {
+    public FlightDataModel setScheduled(String scheduled) {
         this.scheduled = scheduled;
         return this;
     }
 
-    public int getActual() {
+    public String getActual() {
         return actual;
     }
 
-    public FlightDataModel setActual(int actual) {
+    public FlightDataModel setActual(String actual) {
         this.actual = actual;
         return this;
     }
@@ -55,12 +55,12 @@ public class FlightDataModel {
         return this;
     }
 
-    public int getGate() {
-        return gate;
+    public int getGateId() {
+        return gateId;
     }
 
-    public FlightDataModel setGate(int gate) {
-        this.gate = gate;
+    public FlightDataModel setGateId(int gateId) {
+        this.gateId = gateId;
         return this;
     }
 
@@ -91,30 +91,30 @@ public class FlightDataModel {
         return this;
     }
 
-    public Map<Integer, Integer> getTransfers() {
-        return transfers;
+    public List<Integer> getTransfersIds() {
+        return transfersIds;
     }
 
-    public FlightDataModel setTransfers(Map<Integer, Integer> transfers) {
-        this.transfers = transfers;
+    public FlightDataModel setTransfersIds(List<Integer> transfersIds) {
+        this.transfersIds = transfersIds;
         return this;
     }
 
-    public String getAircraftName() {
-        return aircraftName;
+    public int getAircraftId() {
+        return aircraftId;
     }
 
-    public FlightDataModel setAircraftName(String aircraftName) {
-        this.aircraftName = aircraftName;
+    public FlightDataModel setAircraftId(int aircraftId) {
+        this.aircraftId = aircraftId;
         return this;
     }
 
-    public int getPriorityId() {
-        return priorityId;
+    public int getPriority() {
+        return priority;
     }
 
-    public FlightDataModel setPriorityId(int priorityId) {
-        this.priorityId = priorityId;
+    public FlightDataModel setPriority(int priority) {
+        this.priority = priority;
         return this;
     }
 
@@ -127,12 +127,12 @@ public class FlightDataModel {
         return this;
     }
 
-    public Arrival getArrival() {
-        return arrival;
+    public int getArrivalId() {
+        return arrivalId;
     }
 
-    public FlightDataModel setArrival(Arrival arrival) {
-        this.arrival = arrival;
+    public FlightDataModel setArrivalId(int arrivalId) {
+        this.arrivalId = arrivalId;
         return this;
     }
 

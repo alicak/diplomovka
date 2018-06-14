@@ -5,6 +5,7 @@ import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.Transfer;
 
 import java.util.Map;
 
@@ -41,8 +42,9 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
                 double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
                 fitness += weight * standsStorage.getStandsDistance(s, originalStandNo);
 
-                for (Map.Entry<Integer, Integer> entry : flight.getTransfers().entrySet()) {
-                    fitness += weight * standsStorage.getStandsDistance(flightsToStands[entry.getKey()], originalStandNo);
+                for (Transfer transfer : flight.getTransfers()) {
+                    int transferArrivingStand = flightsToStands[transfer.getFlightId()];
+                    fitness += weight * standsStorage.getGatesDistance(s, transferArrivingStand);
                 }
             }
         }
