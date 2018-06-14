@@ -16,7 +16,6 @@ public class FlightDataModel {
     private int aircraftId;
     private int priority;
     private int categoryId;
-    private int arrivalId;
     private String destination;
 
     public int getId() {
@@ -124,15 +123,6 @@ public class FlightDataModel {
 
     public FlightDataModel setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-        return this;
-    }
-
-    public int getArrivalId() {
-        return arrivalId;
-    }
-
-    public FlightDataModel setArrivalId(int arrivalId) {
-        this.arrivalId = arrivalId;
         return this;
     }
 

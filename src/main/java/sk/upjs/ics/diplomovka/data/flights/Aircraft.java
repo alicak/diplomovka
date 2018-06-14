@@ -7,9 +7,9 @@ public class Aircraft extends Attribute {
     private String name;
     private double wingspan; // in meters
     private int engineType;
-    private int weight; // in kilograms
+    private double weight; // in tones
 
-    public Aircraft(int id, String name, double wingspan, int engineType, int weight) {
+    public Aircraft(int id, String name, double wingspan, int engineType, double weight) {
         this.id = id;
         this.name = name;
         this.wingspan = wingspan;
@@ -33,7 +33,7 @@ public class Aircraft extends Attribute {
         return engineType;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 }

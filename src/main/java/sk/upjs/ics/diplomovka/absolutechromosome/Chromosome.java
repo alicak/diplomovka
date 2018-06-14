@@ -17,7 +17,7 @@ public class Chromosome implements Comparable<Chromosome> {
     private List<Integer> genes;
     private double fitness = -1;
     private int noOfStands;
-    private int[] noOfFlights; // number of flights per gate
+    private int[] noOfFlights; // number of flights per stand
     private int maxNoFlights;
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
     private Map<Integer, Integer> currentFlightStarts = new HashMap<>();
@@ -322,7 +322,7 @@ public class Chromosome implements Comparable<Chromosome> {
         for (int f = 0; f < getNoOfFlights(standNo); f++) {
             int currentStart = getCurrentFlightStart(standNo, f);
             int currentEnd = getCurrentFlightEnd(standNo, f);
-            Flight flight = storage.getFlight(f);
+            Flight flight = storage.getFlight(getGene(standNo, f));
 
             if (!closure.checkFlight(flight, currentStart, currentEnd)) {
                 int delay = closure.getEnd() - currentStart;

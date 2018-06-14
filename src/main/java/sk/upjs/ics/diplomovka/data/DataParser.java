@@ -33,8 +33,8 @@ public class DataParser {
         flightAttributes = new FlightAttributes()
                 .setCategories(parseStringAttribute(categoriesFile))
                 .setEngineTypes(parseStringAttribute(engineTypesFile))
-                .setAircrafts(parseObjectAttribute(aircraftsFile, Aircraft.class))
-                .setTransfers(parseObjectAttribute(transfersFile, Transfer.class));
+                .setAircrafts(parseObjectAttribute(aircraftsFile, Aircraft[].class))
+                .setTransfers(parseObjectAttribute(transfersFile, Transfer[].class));
     }
 
     private void parseStandAttributes(String gatesFile) {
@@ -43,7 +43,7 @@ public class DataParser {
     }
 
     private void parseStands(String standsFile) {
-        Stand[] stands = parseObjects(standsFile, Stand.class);
+        Stand[] stands = parseObjects(standsFile, Stand[].class);
 
         Map<Integer, Stand> standsMap = new HashMap<>();
         Map<Integer, Stand> gatesToStands = new HashMap<>();
@@ -59,7 +59,7 @@ public class DataParser {
     }
 
     private void parseFlights(String flightsFile) {
-        FlightDataModel[] flights = parseObjects(flightsFile, FlightDataModel.class);
+        FlightDataModel[] flights = parseObjects(flightsFile, FlightDataModel[].class);
 
         Map<Integer, Flight> flightsMap = new HashMap<>();
 
@@ -71,7 +71,7 @@ public class DataParser {
     }
 
     private Map<Integer, String> parseStringAttribute(String attributesFile) {
-        FlightAttribute[] attributes = parseObjects(attributesFile, FlightAttribute.class);
+        FlightAttribute[] attributes = parseObjects(attributesFile, FlightAttribute[].class);
 
         Map<Integer, String> attributeMap = new HashMap<>();
         for (FlightAttribute attribute : attributes) {
@@ -81,7 +81,7 @@ public class DataParser {
         return attributeMap;
     }
 
-    private <T extends Attribute> Map<Integer, T> parseObjectAttribute(String attributesFile, Class<T> type) {
+    private <T extends Attribute> Map<Integer, T> parseObjectAttribute(String attributesFile, Class<T[]> type) {
         T[] attributes = parseObjects(attributesFile, type);
 
         Map<Integer, T> aircraftMap = new HashMap<>();
@@ -92,7 +92,7 @@ public class DataParser {
         return aircraftMap;
     }
 
-    private <T> T[] parseObjects(String fileName, Class<T> type) {
+    private <T> T[] parseObjects(String fileName, Class<T[]> type) {
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(fileName));

@@ -34,7 +34,9 @@ public class AbsoluteMain {
         int generationSize = 30; // TODO
 
         DataParser parser = new DataParser();
-        GeneralStorage storage = parser.parseDataFromJsons(null, null, null, null, null, null, null); // TODO
+        GeneralStorage storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
+                "engineTypes.json", "transfers.json", "gates.json",
+                "stands.json", "departures.json"); // TODO
         StandsStorage standsStorage = storage.getStandsStorage();
         FlightStorage flightStorage = storage.getFlightStorage();
 
@@ -42,7 +44,7 @@ public class AbsoluteMain {
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage, 2);
         Disruption gate9closed = new StandClosedDisruption(9, standsStorage, 3);
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage, 4);
-        Disruption flight0delayed = new FlightDelayedDisruption(180, 0, flightStorage, 5); // no 2
+        Disruption flight0delayed = new FlightDelayedDisruption(180, 1, flightStorage, 5); // no 2
         Disruption flight34delayed = new FlightDelayedDisruption(60, 34, flightStorage, 6); // no 75
         Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage, 7);
         Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage, 8);
@@ -139,8 +141,6 @@ public class AbsoluteMain {
         System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
 
         List<FlightViewModel> flightViewModels = SolutionCreator.createSolutionFromChromosome(result, storage);
-        System.out.println(flightViewModels);
-
 
         PrintWriter writer = new PrintWriter(new File("results.txt"));
         writer.append(result.toString());

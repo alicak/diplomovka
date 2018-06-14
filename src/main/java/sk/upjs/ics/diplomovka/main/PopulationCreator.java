@@ -11,8 +11,11 @@ import java.util.List;
 
 public class PopulationCreator {
 
-    public static AbsolutePositionPopulation createAbsoluteInitialPopulation(int generationSize, Chromosome originalAssignment, AbsolutePositionFeasibilityChecker feasibilityChecker, GeneralStorage storage) {
-        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfStands(), originalAssignment.getNoOfFlights(), feasibilityChecker);
+    public static AbsolutePositionPopulation createAbsoluteInitialPopulation(int generationSize, Chromosome originalAssignment,
+                                                                             AbsolutePositionFeasibilityChecker feasibilityChecker,
+                                                                             GeneralStorage storage) {
+        AbsolutePositionChromosomeGenerator generator = new AbsolutePositionChromosomeGenerator(originalAssignment.getNoOfStands(),
+                storage.getFlightStorage().getSortedFlights(), feasibilityChecker);
 
         // first half are random assignments
         List<Chromosome> generation = new ArrayList<>();

@@ -3,10 +3,7 @@ package sk.upjs.ics.diplomovka.data.stands;
 import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class StandsStorage {
 
@@ -104,8 +101,10 @@ public class StandsStorage {
     private int[] initializeStands() {
         standsIds = new int[stands.size()];
 
-        for (int j = 0; j < standsIds.length; j++) {
-            standsIds[j] = j;
+        int j = 0;
+        for(Stand stand: stands.values()) {
+            standsIds[j] = stand.getId();
+            j++;
         }
 
         return standsIds;
@@ -178,5 +177,9 @@ public class StandsStorage {
 
     public int getNoOfStandsInUse() {
         return noOfStandsInUse;
+    }
+
+    public Set<Integer> getGates() {
+        return attributes.getGates().keySet();
     }
 }

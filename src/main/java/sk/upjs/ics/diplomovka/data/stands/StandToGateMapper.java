@@ -26,7 +26,7 @@ public class StandToGateMapper {
 
         Map<Integer, Integer> flightsToGates = new HashMap<>();
 
-        List<Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
+        Map<Integer, Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
 
         for (int g = 0; g < chromosome.getNoOfStands(); g++) {
             int currentStandId = standsStorage.getStandByNumber(g).getId();
@@ -43,7 +43,7 @@ public class StandToGateMapper {
                     // try the original gate
                     if (usedTimesOnGates.get(originalGate) <= start) {
                         flightsToGates.put(flight.getId(), originalGate);
-                        usedTimesOnGates.set(originalGate, end);
+                        usedTimesOnGates.put(originalGate, end);
                         continue;
                     }
                 }
@@ -58,7 +58,7 @@ public class StandToGateMapper {
                     int gate = gatesForStand.get((randomGateIndex + i) % noOfGates);
                     if (usedTimesOnGates.get(gate) <= start) {
                         flightsToGates.put(flight.getId(), gate);
-                        usedTimesOnGates.set(gate, end);
+                        usedTimesOnGates.put(gate, end);
                         control = true;
                         break;
                     }
@@ -74,11 +74,11 @@ public class StandToGateMapper {
     }
 
 
-    private List<Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
-        Integer[] times = new Integer[standsStorage.getNoOfGates()];
-        for (int i = 0; i < times.length; i++) {
-            times[i] = 0;
+    private Map<Integer, Integer>  initalizeUsedTimesOnGates(StandsStorage standsStorage) {
+        Map<Integer, Integer> usedTimesOnGates = new HashMap<>();
+        for(Integer gate: standsStorage.getGates()) {
+            usedTimesOnGates.put(gate, 0);
         }
-        return Arrays.asList(times);
+        return usedTimesOnGates;
     }
 }
