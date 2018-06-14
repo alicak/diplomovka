@@ -2,7 +2,6 @@ package sk.upjs.ics.diplomovka.data.flights;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FlightAttributes {

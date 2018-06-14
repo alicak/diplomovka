@@ -1,7 +1,6 @@
 package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightAttributes;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 

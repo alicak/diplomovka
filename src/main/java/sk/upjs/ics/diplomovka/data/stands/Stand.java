@@ -39,10 +39,10 @@ public class Stand {
 
     public boolean checkFlight(Flight flight) {
         return flight != null &&
-                this.flightCategories.contains(flight.getCategory()) &&
-                flight.getAircraft().getWingspan() <= this.maxWingspan &&
-                flight.getAircraft().getWeight() <= this.maxWeight &&
-                this.engineTypes.contains(flight.getAircraft().getEngineType());
+                flightCategories.contains(flight.getCategory()) &&
+                flight.getAircraft().getWingspan() <= maxWingspan &&
+                flight.getAircraft().getWeight() <= maxWeight &&
+                engineTypes.contains(flight.getAircraft().getEngineType());
     }
 
     public int getId() {

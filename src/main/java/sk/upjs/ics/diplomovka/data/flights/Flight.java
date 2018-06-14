@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-
 import java.util.Map;
 
 public class Flight implements Comparable<Flight> {

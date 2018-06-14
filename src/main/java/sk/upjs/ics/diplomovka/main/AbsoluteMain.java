@@ -10,8 +10,12 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDi
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
-import sk.upjs.ics.diplomovka.data.*;
-import sk.upjs.ics.diplomovka.data.flights.*;
+import sk.upjs.ics.diplomovka.data.DataParser;
+import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.SolutionCreator;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.flights.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.disruption.*;
