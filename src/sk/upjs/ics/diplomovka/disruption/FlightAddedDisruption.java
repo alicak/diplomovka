@@ -7,10 +7,12 @@ import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 public class FlightAddedDisruption implements Disruption {
     private Flight flight;
     private int id;
+    private FlightStorage flightStorage;
 
-    public FlightAddedDisruption(Flight flight, int id) {
+    public FlightAddedDisruption(Flight flight, FlightStorage flightStorage, int id) {
         this.flight = flight;
         this.id = id;
+        this.flightStorage = flightStorage;
     }
 
     @Override
@@ -20,10 +22,13 @@ public class FlightAddedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() {
+        if (flightStorage.getFlight(flight.getId()) == null)
+            flightStorage.addFlight(flight);
     }
 
     @Override
     public void undisruptStorage() {
+        flightStorage.removeFlight(flight);
     }
 
     @Override

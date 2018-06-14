@@ -4,8 +4,9 @@ import java.util.*;
 
 public class FlightStorage {
     private Map<Integer, Flight> flightsMap;
+    private List<Flight> sortedFlights;
 
-    public FlightStorage(List<Flight> flightsList, Map<Integer, Flight> flightsMap) {
+    public FlightStorage(Map<Integer, Flight> flightsMap) {
         this.flightsMap = flightsMap;
     }
 
@@ -19,26 +20,36 @@ public class FlightStorage {
 
     public void addFlight(Flight flight) {
         flightsMap.put(flight.getId(), flight);
+        sortedFlights = null;
+    }
+
+    public void removeFlight(Flight flight) {
+        flightsMap.remove(flight.getId());
+        sortedFlights = null;
     }
 
     public List<Flight> getSortedFlights() {
-        List<Flight> flights = new ArrayList<>(flightsMap.values());
-        Collections.sort(flights);
-        return flights;
+        if (sortedFlights == null) {
+            sortedFlights = new ArrayList<>(flightsMap.values());
+            Collections.sort(sortedFlights);
+        }
+        return sortedFlights;
     }
 
     // returns new FlightStorage which includes only flights that have (actual) starts after given time
     public FlightStorage flightsAfterTime(int startTime) {
-        List<Flight> flights = new ArrayList<>();
         Map<Integer, Flight> flightsMap = new HashMap<>();
 
-        for(Flight flight : getSortedFlights()) {
-            if(flight.getStart() >= startTime) {
-                flights.add(flight);
+        for (Flight flight : getSortedFlights()) {
+            if (flight.getStart() >= startTime) {
                 flightsMap.put(flight.getId(), flight);
             }
         }
 
-        return new FlightStorage(flights, flightsMap);
+        return new FlightStorage(flightsMap);
+    }
+
+    public void flightTimeChanged() {
+        sortedFlights = null;
     }
 }

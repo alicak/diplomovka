@@ -61,18 +61,8 @@ public class Flight implements Comparable<Flight> {
         return code;
     }
 
-    public Flight setCode(String code) {
-        this.code = code;
-        return this;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public Flight setId(int id) {
-        this.id = id;
-        return this;
     }
 
     public int getStart() {
@@ -86,11 +76,6 @@ public class Flight implements Comparable<Flight> {
 
     public int getOriginalStart() {
         return originalStart;
-    }
-
-    public Flight setOriginalStart(int originalStart) {
-        this.originalStart = originalStart;
-        return this;
     }
 
     public int getEnd() {
@@ -115,41 +100,16 @@ public class Flight implements Comparable<Flight> {
         return category;
     }
 
-    public Flight setCategory(int category) {
-        this.category = category;
-        return this;
-    }
-
     public int getPriority() {
         return priority;
-    }
-
-    public Flight setPriority(int priority) {
-        this.priority = priority;
-        return this;
     }
 
     public Aircraft getAircraft() {
         return aircraft;
     }
 
-    public Flight setAircraft(Aircraft aircraft) {
-        this.aircraft = aircraft;
-        return this;
-    }
-
     public int getTurnaroundTime() {
         return turnaroundTime;
-    }
-
-    public Flight setTurnaroundTime(int turnaroundTime) {
-        this.turnaroundTime = turnaroundTime;
-        return this;
-    }
-
-    public Flight setOriginalStandId(int originalStandId) {
-        this.originalStandId = originalStandId;
-        return this;
     }
 
     public int getOriginalStandId() {
@@ -160,27 +120,12 @@ public class Flight implements Comparable<Flight> {
         return noOfPassengers;
     }
 
-    public Flight setNoOfPassengers(int noOfPassengers) {
-        this.noOfPassengers = noOfPassengers;
-        return this;
-    }
-
     public String getDestination() {
         return destination;
     }
 
-    public Flight setDestination(String destination) {
-        this.destination = destination;
-        return this;
-    }
-
     public int getOriginalGateId() {
         return originalGateId;
-    }
-
-    public Flight setOriginalGateId(int originalGateId) {
-        this.originalGateId = originalGateId;
-        return this;
     }
 
     public boolean hasTransfers() {
@@ -191,18 +136,8 @@ public class Flight implements Comparable<Flight> {
         return transfers;
     }
 
-    public Flight setTransfers(Map<Integer, Integer> transfers) {
-        this.transfers = transfers;
-        return this;
-    }
-
     public boolean hasArrival() {
         return arrival != null;
-    }
-
-    public Flight setArrival(Arrival arrival) {
-        this.arrival = arrival;
-        return this;
     }
 
     public Arrival getArrival() {
