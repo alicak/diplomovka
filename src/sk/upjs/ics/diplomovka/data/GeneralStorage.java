@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.flights.FlightAttributes;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
@@ -12,11 +13,13 @@ import static sk.upjs.ics.diplomovka.utils.Utils.MINUTES_IN_DAY;
 public class GeneralStorage {
 
     private FlightStorage flightStorage;
+    private FlightAttributes flightAttributes;
     private StandsStorage standsStorage;
     private int startTime;
 
-    public GeneralStorage(FlightStorage flightStorage, StandsStorage standsStorage, int startTime) {
+    public GeneralStorage(FlightStorage flightStorage, FlightAttributes flightAttributes, StandsStorage standsStorage, int startTime) {
         this.flightStorage = flightStorage;
+        this.flightAttributes = flightAttributes;
         this.standsStorage = standsStorage;
         this.startTime = startTime;
     }
@@ -45,7 +48,8 @@ public class GeneralStorage {
                 availabilityTimes.put(flight.getOriginalStandId(), flight.getEnd());
             }
         }
-        return new GeneralStorage(flightStorage.flightsAfterTime(startTime), standsStorage.storageWithNewAvailabilityTimes(availabilityTimes), startTime);
+        return new GeneralStorage(flightStorage.flightsAfterTime(startTime), flightAttributes,
+                standsStorage.storageWithNewAvailabilityTimes(availabilityTimes), startTime);
     }
 
     public int getStartTime() {

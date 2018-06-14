@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+import sk.upjs.ics.diplomovka.data.flights.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.stands.StandToGateMapper;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class SolutionCreator {
 
-    public static List<FlightInfo> createSolutionFromChromosome(Chromosome chromosome, GeneralStorage storage) {
-        List<FlightInfo> flightInfos = new ArrayList<>();
+    public static List<FlightViewModel> createSolutionFromChromosome(Chromosome chromosome, GeneralStorage storage) {
+        List<FlightViewModel> flightViewModels = new ArrayList<>();
 
         StandsStorage standsStorage = storage.getStandsStorage();
 
@@ -24,7 +24,7 @@ public class SolutionCreator {
             for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
                 Flight flight = storage.getFlightStorage().getFlight(chromosome.getGene(s, f));
 
-                FlightInfo flightInfo = new FlightInfo()
+                FlightViewModel flightViewModel = new FlightViewModel()
                         .setActualStart(chromosome.getCurrentFlightStart(s, f) + flight.getTurnaroundTime())
                         .setAssignmentDelay(chromosome.getCurrentFlightStart(s, f) - flight.getStart())
                         .setDelay(flight.getDelay())
@@ -33,10 +33,10 @@ public class SolutionCreator {
                         .setOriginalStart(flight.getOriginalStart())
                         .setGate(standsStorage.getGateById(flightsToGates.get(flight.getId())));
 
-                flightInfos.add(flightInfo);
+                flightViewModels.add(flightViewModel);
             }
         }
-        return flightInfos;
+        return flightViewModels;
     }
 
 }

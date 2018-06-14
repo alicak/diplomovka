@@ -4,9 +4,9 @@ import sk.upjs.ics.diplomovka.data.flights.Flight;
 
 public class WingspanClosureCondition implements ClosureCondition {
 
-    private int wingspan;
+    private double wingspan;
 
-    public WingspanClosureCondition(int wingspan) {
+    public WingspanClosureCondition(double wingspan) {
         this.wingspan = wingspan;
     }
 

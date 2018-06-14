@@ -5,7 +5,7 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
-import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+import sk.upjs.ics.diplomovka.data.flights.FlightViewModel;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
@@ -245,13 +245,13 @@ public class MainFrame extends javax.swing.JFrame {
         newAssignmentDialog.setVisible(true);
     }//GEN-LAST:event_newAssignmentButtonActionPerformed
 
-    public void refreshAssignment(List<FlightInfo> flights) {
+    public void refreshAssignment(List<FlightViewModel> flights) {
         refreshFlights(flights);
         calculateAndSetStatistics(flights);
         setCurrentTime();
     }
 
-    private void refreshFlights(List<FlightInfo> flights) {
+    private void refreshFlights(List<FlightViewModel> flights) {
         flightTableModel.setData(flights);
     }
 
@@ -260,7 +260,7 @@ public class MainFrame extends javax.swing.JFrame {
         lastReassignmentTimeLabel.setText(sdf.format(new Date()));
     }
 
-    private void calculateAndSetStatistics(List<FlightInfo> flights) {
+    private void calculateAndSetStatistics(List<FlightViewModel> flights) {
         if (flights.isEmpty()) {
             regularDelayMaxLabel.setText("n/a");
             regularDelayCountLabel.setText("n/a");
@@ -281,7 +281,7 @@ public class MainFrame extends javax.swing.JFrame {
         int assignmentDelayCount = 0;
         int assignmentDelayMax = 0;
 
-        for (FlightInfo flight : flights) {
+        for (FlightViewModel flight : flights) {
             int delay = flight.getDelay();
             regularDelaySum += delay;
             if (flight.isDelayed())
@@ -370,7 +370,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel regularDelayMaxLabel;
     // End of variables declaration//GEN-END:variables
 
-    private class CalculationWorker extends SwingWorker<List<FlightInfo>, Integer> {
+    private class CalculationWorker extends SwingWorker<List<FlightViewModel>, Integer> {
         MainFrame parentFrame;
         InProgressDialog inProgressDialog;
 
@@ -379,7 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.inProgressDialog = inProgressDialog;
         }
 
-        protected List<FlightInfo> doInBackground() {
+        protected List<FlightViewModel> doInBackground() {
             // TODO add calculation
             try {
                 Thread.sleep(2000);

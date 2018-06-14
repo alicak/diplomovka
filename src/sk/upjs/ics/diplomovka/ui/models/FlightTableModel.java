@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.ui.models;
 
-import sk.upjs.ics.diplomovka.data.flights.FlightInfo;
+import sk.upjs.ics.diplomovka.data.flights.FlightViewModel;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import javax.swing.table.AbstractTableModel;
@@ -8,10 +8,10 @@ import java.util.List;
 
 public class FlightTableModel extends AbstractTableModel {
 
-    private List<FlightInfo> flights;
+    private List<FlightViewModel> flights;
     private static final String[] COLUMN_NAMES = {"Flight", "Time", "Destination", "Delay reg.", "Delay asg.", "Gate"};
 
-    public FlightTableModel(List<FlightInfo> flights) {
+    public FlightTableModel(List<FlightViewModel> flights) {
         this.flights = flights;
     }
 
@@ -27,7 +27,7 @@ public class FlightTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        FlightInfo flight = flights.get(rowIndex);
+        FlightViewModel flight = flights.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return flight.getCode();
@@ -50,7 +50,7 @@ public class FlightTableModel extends AbstractTableModel {
         return COLUMN_NAMES[column];
     }
 
-    public void setData(List<FlightInfo> flights) {
+    public void setData(List<FlightViewModel> flights) {
         this.flights = flights;
         fireTableDataChanged();
     }

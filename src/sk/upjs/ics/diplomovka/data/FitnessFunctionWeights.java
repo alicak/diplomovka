@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.data;
 
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +13,6 @@ public class FitnessFunctionWeights {
     private double passengerWeight = DEFAULT_WEIGHT;
     private double flightPriorityWeight = DEFAULT_WEIGHT;
     private double timeChangedWeight = DEFAULT_WEIGHT;
-    private List<Double> priorityValues = Arrays.asList(DEFAULT_WEIGHT - 0.5, DEFAULT_WEIGHT, DEFAULT_WEIGHT + 0.5);
     private double walkingDistanceWeight = DEFAULT_WEIGHT;
     private List<IntervalWeight> futureWeights = Arrays.asList(new IntervalWeight(0, MINUTES_IN_DAY, DEFAULT_WEIGHT));
 
@@ -29,18 +26,6 @@ public class FitnessFunctionWeights {
 
     public double getFlightPriorityWeight() {
         return flightPriorityWeight;
-    }
-
-    public double getFlightPriorityValue(Flight.FlightPriority priority) {
-        switch (priority) {
-            case LOW:
-                return priorityValues.get(0);
-            case HIGH:
-                return priorityValues.get(2);
-            case NORMAL:
-            default:
-                return priorityValues.get(1);
-        }
     }
 
     public double getTimeChangedWeight() {
@@ -85,13 +70,29 @@ public class FitnessFunctionWeights {
         return this;
     }
 
-    public FitnessFunctionWeights setPriorityValues(List<Double> priorityValues) {
-        this.priorityValues = priorityValues;
-        return this;
-    }
-
     public FitnessFunctionWeights setFutureWeights(List<IntervalWeight> futureWeights) {
         this.futureWeights = futureWeights;
         return this;
+    }
+
+    public class IntervalWeight {
+
+        private int start;
+        private int end;
+        private double weight;
+
+        public IntervalWeight(int start, int end, double weight) {
+            this.start = start;
+            this.end = end;
+            this.weight = weight;
+        }
+
+        public boolean contains(int number) {
+            return number >= start && number < end;
+        }
+
+        public double getWeight() {
+            return weight;
+        }
     }
 }

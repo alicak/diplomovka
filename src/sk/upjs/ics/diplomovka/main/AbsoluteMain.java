@@ -10,10 +10,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDi
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
-import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
-import sk.upjs.ics.diplomovka.data.FlightCsvParser;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.SolutionCreator;
+import sk.upjs.ics.diplomovka.data.*;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
@@ -29,17 +26,12 @@ import java.util.*;
 public class AbsoluteMain {
     public static void main(String[] args) throws IOException, InterruptedException {
         // general part
-        File aircraftsFile = new File("aircrafts.csv");
-        // File arrivalsFile = new File("arrivals.csv");
-        File departuresFile = new File("departures.csv");
-        File standsFile = new File("stands.csv");
-
         int generationSize = 30; // TODO
 
-        FlightCsvParser parser = new FlightCsvParser(aircraftsFile);
-        StandsStorage standsStorage = parser.parseStands(standsFile);
-        FlightStorage flightStorage = processFlights(departuresFile, parser, standsStorage);
-        GeneralStorage storage = new GeneralStorage(flightStorage, standsStorage, 0);
+        DataParser parser = new DataParser();
+        GeneralStorage storage = parser.parseDataFromJsons(null, null, null, null, null); // TODO
+        StandsStorage standsStorage = storage.getStandsStorage();
+        FlightStorage flightStorage = storage.getFlightStorage();
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage, 1);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage, 2);
@@ -50,7 +42,7 @@ public class AbsoluteMain {
         Disruption gate1tempClosed = new StandTemporarilyClosedDisruption(1, 500, 1000, standsStorage, 7);
         Disruption gate5tempClosed = new StandTemporarilyClosedDisruption(5, 300, 900, standsStorage, 8);
         Disruption gate7condTempClosed = new StandConditionallyClosedDisruption(7, 0, 1439,
-                new EngineTypeClosureCondition(Arrays.asList(Aircraft.EngineType.JET)), standsStorage, 9);
+                new EngineTypeClosureCondition(Arrays.asList(1)), storage, 9);
 
 
         SelectionBase selection = new RankingSelection();
@@ -141,8 +133,8 @@ public class AbsoluteMain {
         System.out.println("timediff fitness: " + timeDiffFitness.calculateNonWeightedFitness(result));
         System.out.println("reassignment fitness: " + reassignmentFitness.calculateNonWeightedFitness(result));
 
-        List<FlightInfo> flightInfos = SolutionCreator.createSolutionFromChromosome(result, storage);
-        System.out.println(flightInfos);
+        List<FlightViewModel> flightViewModels = SolutionCreator.createSolutionFromChromosome(result, storage);
+        System.out.println(flightViewModels);
 
 
         PrintWriter writer = new PrintWriter(new File("results.txt"));
@@ -150,24 +142,4 @@ public class AbsoluteMain {
         writer.append("No of iterations: " + Integer.toString(termination.getNoOfIterations()) + "\n\n");
         writer.close();
     }
-
-    private static FlightStorage processFlights(File departuresFile, FlightCsvParser parser, StandsStorage standsStorage) throws IOException {
-        List<FullFlight> departuresFull = parser.parseDepartures(departuresFile);
-        FlightId.reset();
-
-        List<Flight> flights = new ArrayList<>();
-        Map<Integer, Flight> flightsMap = new HashMap<>();
-
-        for (FullFlight d : departuresFull) {
-            Flight f = FullFlight.toFlight(d, standsStorage);
-            f.setOriginalStandId(standsStorage.getStandIdByGate(d.getGate()));
-            flights.add(f);
-            flightsMap.put(f.getId(), f);
-        }
-
-        Collections.sort(flights);
-
-        return new FlightStorage(flights, flightsMap);
-    }
-
 }

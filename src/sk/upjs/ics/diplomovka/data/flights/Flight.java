@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-import java.util.HashMap;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+
 import java.util.Map;
 
 public class Flight implements Comparable<Flight> {
@@ -11,26 +12,34 @@ public class Flight implements Comparable<Flight> {
     private int originalStart;
     private int end;
     private int delay;
-    private FlightCategory category;
-    private FlightPriority priority;
+    private int category;
+    private int priority;
     private Aircraft aircraft;
     private int turnaroundTime; // in minutes
     private int originalStandId;
+    private int originalGateId;
     private int noOfPassengers;
     private String destination;
-    private int originalGateId;
     private Arrival arrival;
-    private Map<Integer, Integer> transfers = new HashMap<>(); // key is id of departure that has this arrival, value is no of passengers
+    private Map<Integer, Integer> transfers; // key is id of departure that has this arrival, value is no of passengers
 
-    public enum FlightCategory {
-        SCHENGEN,
-        NON_SCHENGEN
-    }
-
-    public enum FlightPriority {
-        NORMAL,
-        HIGH,
-        LOW
+    public Flight(FlightDataModel flightDataModel, FlightAttributes attributes, StandsStorage standsStorage) {
+        this.code = flightDataModel.getCode();
+        this.id = flightDataModel.getId();
+        this.start = flightDataModel.getScheduled() - flightDataModel.getTurnaroundTime();
+        this.originalStart = flightDataModel.getScheduled();
+        this.end = flightDataModel.getScheduled();
+        this.delay = 0;
+        this.category = flightDataModel.getCategoryId();
+        this.priority = flightDataModel.getPriorityId();
+        this.aircraft = attributes.getAircraftByName(flightDataModel.getAircraftName());
+        this.turnaroundTime = flightDataModel.getTurnaroundTime();
+        this.originalStandId = flightDataModel.getStandId();
+        this.originalGateId = standsStorage.getGateId(flightDataModel.getGate());
+        this.noOfPassengers = flightDataModel.getNoOfPassengers();
+        this.destination = flightDataModel.getDestination();
+        this.arrival = flightDataModel.getArrival();
+        this.transfers = flightDataModel.getTransfers();
     }
 
     @Override
@@ -102,20 +111,20 @@ public class Flight implements Comparable<Flight> {
         return this;
     }
 
-    public FlightCategory getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public Flight setCategory(FlightCategory category) {
+    public Flight setCategory(int category) {
         this.category = category;
         return this;
     }
 
-    public FlightPriority getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public Flight setPriority(FlightPriority priority) {
+    public Flight setPriority(int priority) {
         this.priority = priority;
         return this;
     }
@@ -200,25 +209,5 @@ public class Flight implements Comparable<Flight> {
         return arrival;
     }
 
-    public class Arrival {
-        private int originalGateId; // stand is the same, but gate can be different
-        private int noOfPassengers; // redundant for now...
-        // arrival time is the same as start time of Flight
 
-        public int getOriginalGateId() {
-            return originalGateId;
-        }
-
-        public void setOriginalGateId(int originalGateId) {
-            this.originalGateId = originalGateId;
-        }
-
-        public int getNoOfPassengers() {
-            return noOfPassengers;
-        }
-
-        public void setNoOfPassengers(int noOfPassengers) {
-            this.noOfPassengers = noOfPassengers;
-        }
-    }
 }

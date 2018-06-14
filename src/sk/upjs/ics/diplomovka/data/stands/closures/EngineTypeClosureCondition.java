@@ -7,9 +7,9 @@ import java.util.List;
 
 public class EngineTypeClosureCondition implements ClosureCondition {
 
-    private List<Aircraft.EngineType> engineTypes;
+    private List<Integer> engineTypes;
 
-    public EngineTypeClosureCondition(List<Aircraft.EngineType> engineTypes) {
+    public EngineTypeClosureCondition(List<Integer> engineTypes) {
         this.engineTypes = engineTypes;
     }
 

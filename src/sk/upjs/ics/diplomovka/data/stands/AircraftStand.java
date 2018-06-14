@@ -1,22 +1,22 @@
 package sk.upjs.ics.diplomovka.data.stands;
 
-import sk.upjs.ics.diplomovka.data.flights.Aircraft;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AircraftStand {
 
     private int id;
     private double maxWingspan;
-    private List<Flight.FlightCategory> flightCategories;
-    private List<Aircraft.EngineType> engineTypes;
+    private double maxWeight;
+    private List<Integer> flightCategories;
+    private List<Integer> engineTypes;
     private List<Integer> gates;
 
-    public AircraftStand(int id, double maxWingspan, List<Flight.FlightCategory> flightCategories, List<Aircraft.EngineType> engineTypes) {
+    public AircraftStand(int id, double maxWingspan, double maxWeight, List<Integer> flightCategories, List<Integer> engineTypes) {
         this.id = id;
         this.maxWingspan = maxWingspan;
+        this.maxWeight = maxWeight;
         this.flightCategories = flightCategories;
         this.engineTypes = engineTypes;
     }
@@ -25,27 +25,36 @@ public class AircraftStand {
         return maxWingspan;
     }
 
-    public List<Flight.FlightCategory> getFlightCategories() {
+    public double getMaxWeight() {
+        return maxWeight;
+    }
+
+    public List<Integer> getFlightCategories() {
         return flightCategories;
     }
 
-    public boolean hasCategory(Flight.FlightCategory category) {
+    public List<Integer> getGates() {
+        return gates;
+    }
+
+    public List<Integer> getEngineTypes() {
+        return engineTypes;
+    }
+
+    public boolean hasCategory(int category) {
         return flightCategories.contains(category);
     }
 
     public boolean checkFlight(Flight flight) {
         return flight != null &&
                 this.flightCategories.contains(flight.getCategory()) &&
-                !(this.maxWingspan < flight.getAircraft().getWingspan()) &&
+                flight.getAircraft().getWingspan() <= this.maxWingspan &&
+                flight.getAircraft().getWeight() <= this.maxWeight &&
                 this.engineTypes.contains(flight.getAircraft().getEngineType());
     }
 
     public int getId() {
         return id;
-    }
-
-    public List<Integer> getGates() {
-        return gates;
     }
 
     public void setGates(List<Integer> gates) {

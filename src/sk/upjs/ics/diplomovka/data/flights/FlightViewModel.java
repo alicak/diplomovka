@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
-public class FlightInfo {
+public class FlightViewModel {
 
     private String code;
     private String destination;
@@ -41,7 +41,7 @@ public class FlightInfo {
         return destination;
     }
 
-    public FlightInfo setDestination(String destination) {
+    public FlightViewModel setDestination(String destination) {
         this.destination = destination;
         return this;
     }
@@ -50,7 +50,7 @@ public class FlightInfo {
         return originalStart;
     }
 
-    public FlightInfo setOriginalStart(int originalStart) {
+    public FlightViewModel setOriginalStart(int originalStart) {
         this.originalStart = originalStart;
         return this;
     }
@@ -59,7 +59,7 @@ public class FlightInfo {
         return actualStart;
     }
 
-    public FlightInfo setActualStart(int actualStart) {
+    public FlightViewModel setActualStart(int actualStart) {
         this.actualStart = actualStart;
         return this;
     }
@@ -68,7 +68,7 @@ public class FlightInfo {
         return originalGate;
     }
 
-    public FlightInfo setOriginalGate(String originalGate) {
+    public FlightViewModel setOriginalGate(String originalGate) {
         this.originalGate = originalGate;
         return this;
     }
@@ -77,7 +77,7 @@ public class FlightInfo {
         return gate;
     }
 
-    public FlightInfo setGate(String gate) {
+    public FlightViewModel setGate(String gate) {
         this.gate = gate;
         return this;
     }
@@ -86,7 +86,7 @@ public class FlightInfo {
         return delay;
     }
 
-    public FlightInfo setDelay(int delay) {
+    public FlightViewModel setDelay(int delay) {
         this.delay = delay;
         return this;
     }
@@ -95,12 +95,12 @@ public class FlightInfo {
         return assignmentDelay;
     }
 
-    public FlightInfo setAssignmentDelay(int assignmentDelay) {
+    public FlightViewModel setAssignmentDelay(int assignmentDelay) {
         this.assignmentDelay = assignmentDelay;
         return this;
     }
 
-    public int compareTo(FlightInfo f) {
+    public int compareTo(FlightViewModel f) {
         if (this.getOriginalStart() == f.getOriginalStart())
             return 0;
 

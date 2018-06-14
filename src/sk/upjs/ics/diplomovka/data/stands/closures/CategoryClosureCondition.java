@@ -6,9 +6,9 @@ import java.util.List;
 
 public class CategoryClosureCondition implements ClosureCondition {
 
-    private List<Flight.FlightCategory> flightCategories;
+    private List<Integer> flightCategories;
 
-    public CategoryClosureCondition(List<Flight.FlightCategory> flightCategories) {
+    public CategoryClosureCondition(List<Integer> flightCategories) {
         this.flightCategories = flightCategories;
     }
 
