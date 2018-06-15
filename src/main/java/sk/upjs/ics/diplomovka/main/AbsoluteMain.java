@@ -10,15 +10,14 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDi
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
-import sk.upjs.ics.diplomovka.data.DataParser;
+import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.SolutionCreator;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.data.stands.closures.EngineTypeClosureCondition;
+import sk.upjs.ics.diplomovka.data.stands.closures.conditions.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
@@ -41,6 +40,8 @@ public class AbsoluteMain {
                 "standDistances.json", "stands.json", "departures.json"); // TODO
         StandsStorage standsStorage = storage.getStandsStorage();
         FlightStorage flightStorage = storage.getFlightStorage();
+
+        parser.parseDisruptions("disruptionsExample.json", storage);
 
         Disruption gate5closed = new StandClosedDisruption(5, standsStorage, 1);
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage, 2);

@@ -2,9 +2,11 @@ package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.parser.Types;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandConditionallyClosedDisruptionDataModel;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.data.stands.closures.ClosureCondition;
-import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.data.stands.closures.*;
+import sk.upjs.ics.diplomovka.data.stands.closures.conditions.ClosureCondition;
 
 public class StandConditionallyClosedDisruption implements Disruption {
 
@@ -18,6 +20,10 @@ public class StandConditionallyClosedDisruption implements Disruption {
         this.storage = storage;
         this.closure = new ConditionalStandClosure(standId, start, end, condition, id);
         this.id = id;
+    }
+
+    public StandConditionallyClosedDisruption(StandConditionallyClosedDisruptionDataModel disruption, GeneralStorage storage) {
+        this(disruption.getStandId(), disruption.getStart(), disruption.getEnd(), Types.getConditionFromModel(disruption.getCondition()), storage, disruption.getId());
     }
 
     @Override

@@ -1,12 +1,18 @@
-package sk.upjs.ics.diplomovka.data.stands.closures;
+package sk.upjs.ics.diplomovka.data.stands.closures.conditions;
 
 import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.models.data.closureconditions.WeightClosureConditionDataModel;
+import sk.upjs.ics.diplomovka.data.stands.closures.conditions.ClosureCondition;
 
 public class WeightClosureCondition implements ClosureCondition {
     private double weight;
 
     public WeightClosureCondition(double weight) {
         this.weight = weight;
+    }
+
+    public WeightClosureCondition(WeightClosureConditionDataModel condition) {
+        this.weight = condition.getWeight();
     }
 
     @Override

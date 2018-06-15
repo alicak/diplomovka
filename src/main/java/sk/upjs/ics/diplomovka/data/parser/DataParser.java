@@ -1,13 +1,19 @@
-package sk.upjs.ics.diplomovka.data;
+package sk.upjs.ics.diplomovka.data.parser;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import sk.upjs.ics.diplomovka.data.Attribute;
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.*;
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
+import sk.upjs.ics.diplomovka.data.models.data.closureconditions.ClosureConditionDataModel;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.DisruptionDataModel;
 import sk.upjs.ics.diplomovka.data.stands.DistancesMatrix;
 import sk.upjs.ics.diplomovka.data.stands.Stand;
 import sk.upjs.ics.diplomovka.data.stands.StandAttributes;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.disruption.Disruption;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,11 +25,10 @@ public class DataParser {
     private StandAttributes standAttributes;
     private StandsStorage standsStorage;
     private FlightStorage flightStorage;
-    private Gson gson = new Gson();
 
-    public sk.upjs.ics.diplomovka.data.GeneralStorage parseDataFromJsons(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile,
-                                                                         String gatesFile, String gateDistancesFile, String standDistancesFile,
-                                                                         String standsFile, String flightsFile) {
+    public GeneralStorage parseDataFromJsons(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile,
+                                             String gatesFile, String gateDistancesFile, String standDistancesFile,
+                                             String standsFile, String flightsFile) {
         parseFlightAttributes(categoriesFile, aircraftsFile, engineTypesFile, transfersFile);
         parseStandAttributes(gatesFile, gateDistancesFile, standDistancesFile);
         parseStands(standsFile);
@@ -113,7 +118,7 @@ public class DataParser {
         return new DistancesMatrix(allDistances);
     }
 
-    private <T> T[] parseObjects(String fileName, Class<T[]> type) {
+    private <T> T[] parseObjects(String fileName, Class<T[]> type, Gson gson) {
         JsonReader reader = null;
         try {
             reader = new JsonReader(new FileReader(fileName));
@@ -121,6 +126,10 @@ public class DataParser {
             System.err.println("Input file " + fileName + " not found.");
         }
         return gson.fromJson(reader, type);
+    }
+
+    private <T> T[] parseObjects(String fileName, Class<T[]> type) {
+        return parseObjects(fileName, type, new Gson());
     }
 
     private class FlightAttribute {
@@ -136,5 +145,21 @@ public class DataParser {
     private class Distance {
         private int id;
         private double distance;
+    }
+
+    public List<Disruption> parseDisruptions(String disruptionsFile, GeneralStorage storage) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(DisruptionDataModel.class, new DisruptionDeserializer());
+        gsonBuilder.registerTypeAdapter(ClosureConditionDataModel.class, new ClosureConditionDeserializer());
+        Gson gson = gsonBuilder.create();
+
+        DisruptionDataModel[] disruptions = parseObjects(disruptionsFile, DisruptionDataModel[].class, gson);
+
+        List<Disruption> disruptionList = new ArrayList<>();
+        for(DisruptionDataModel model: disruptions) {
+            disruptionList.add(Types.getDisruptionFromModel(model, storage));
+        }
+
+        return disruptionList;
     }
 }

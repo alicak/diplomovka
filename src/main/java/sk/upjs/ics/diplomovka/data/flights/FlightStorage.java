@@ -55,4 +55,8 @@ public class FlightStorage {
     public void flightTimeChanged() {
         sortedFlights = null;
     }
+
+    public FlightAttributes getAttributes() {
+        return attributes;
+    }
 }

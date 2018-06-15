@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandClosedDisruptionDataModel;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 public class StandClosedDisruption implements Disruption {
@@ -12,6 +13,10 @@ public class StandClosedDisruption implements Disruption {
         this.stand = stand;
         this.standsStorage = standsStorage;
         this.id = id;
+    }
+
+    public StandClosedDisruption(StandClosedDisruptionDataModel disruption, StandsStorage standsStorage) {
+        this(disruption.getStandId(), standsStorage, disruption.getId());
     }
 
     @Override

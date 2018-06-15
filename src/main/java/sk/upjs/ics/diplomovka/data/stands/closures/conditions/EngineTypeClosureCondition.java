@@ -1,6 +1,8 @@
-package sk.upjs.ics.diplomovka.data.stands.closures;
+package sk.upjs.ics.diplomovka.data.stands.closures.conditions;
 
 import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.data.models.data.closureconditions.EngineTypeClosureConditionDataModel;
+import sk.upjs.ics.diplomovka.data.stands.closures.conditions.ClosureCondition;
 
 import java.util.List;
 
@@ -10,6 +12,10 @@ public class EngineTypeClosureCondition implements ClosureCondition {
 
     public EngineTypeClosureCondition(List<Integer> engineTypes) {
         this.engineTypes = engineTypes;
+    }
+
+    public EngineTypeClosureCondition(EngineTypeClosureConditionDataModel condition) {
+        this.engineTypes = condition.getEngineTypes();
     }
 
     @Override

@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.disruption;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.FlightAddedDisruptionDataModel;
 
 public class FlightAddedDisruption implements Disruption {
     private Flight flight;
@@ -13,6 +14,10 @@ public class FlightAddedDisruption implements Disruption {
         this.flight = flight;
         this.id = id;
         this.flightStorage = flightStorage;
+    }
+
+    public FlightAddedDisruption(FlightAddedDisruptionDataModel disruption, FlightStorage flightStorage) {
+        this(new Flight(disruption.getFlight(), flightStorage.getAttributes()), flightStorage, disruption.getId());
     }
 
     @Override

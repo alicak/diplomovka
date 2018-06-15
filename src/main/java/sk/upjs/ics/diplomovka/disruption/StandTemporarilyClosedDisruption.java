@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandTemporarilyClosedDisruptionDataModel;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
@@ -15,6 +16,10 @@ public class StandTemporarilyClosedDisruption implements Disruption {
         this.standsStorage = standsStorage;
         this.closure = new StandClosure(standId, start, end, id);
         this.id = id;
+    }
+
+    public StandTemporarilyClosedDisruption(StandTemporarilyClosedDisruptionDataModel disruption, StandsStorage standsStorage) {
+        this(disruption.getStandId(), disruption.getStart(), disruption.getEnd(), standsStorage, disruption.getId());
     }
 
     @Override
