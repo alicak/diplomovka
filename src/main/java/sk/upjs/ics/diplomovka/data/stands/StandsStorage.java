@@ -16,8 +16,6 @@ public class StandsStorage {
     private Map<Integer, Map<Integer, StandClosure>> closures; // stand ids to closures
     private Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures;
     private Map<Integer, Integer> availabilityTimes;
-    private double[][] standsDistances; // TODO
-    private double[][] gateDistances; // TODO
     private int noOfStandsInUse;
 
     public StandsStorage(Map<Integer, Stand> stands, Map<Integer, Stand> gatesToStands, StandAttributes attributes) {
@@ -34,15 +32,12 @@ public class StandsStorage {
                           StandAttributes attributes,
                           Map<Integer, Map<Integer, StandClosure>> closures,
                           Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures,
-                          Map<Integer, Integer> availabilityTimes, double[][] standsDistances,
-                          double[][] gateDistances, int noOfStandsInUse) {
+                          Map<Integer, Integer> availabilityTimes, int noOfStandsInUse) {
         this(stands, gatesToStands, attributes);
         this.standsIds = standsIds;
         this.closures = closures;
         this.conditionalClosures = conditionalClosures;
         this.availabilityTimes = availabilityTimes;
-        this.standsDistances = standsDistances;
-        this.gateDistances = gateDistances;
         this.noOfStandsInUse = noOfStandsInUse;
     }
 
@@ -152,19 +147,19 @@ public class StandsStorage {
 
     public StandsStorage storageWithNewAvailabilityTimes(Map<Integer, Integer> availabilityTimes) {
         return new StandsStorage(stands, standsIds, gatesToStands, attributes, closures, conditionalClosures,
-                availabilityTimes, standsDistances, gateDistances, noOfStandsInUse);
+                availabilityTimes, noOfStandsInUse);
     }
 
     public int getStandAvailabilityTime(int standNo) {
         return availabilityTimes.get(getStandByNumber(standNo).getId());
     }
 
-    public double getGatesDistance(int g1, int g2) {
-        return gateDistances[g1][g2];
+    public double getGatesDistance(int id1, int id2) {
+        return attributes.getGatesDistance(id1, id2);
     }
 
-    public double getStandsDistance(int standNo1, int standNo2) {
-        return standsDistances[standsIds[standNo1]][standsIds[standNo2]];
+    public double getStandsDistance(int id1, int id2) {
+        return attributes.getStandsDistance(id1, id2);
     }
 
     public int getNoOfGates() {

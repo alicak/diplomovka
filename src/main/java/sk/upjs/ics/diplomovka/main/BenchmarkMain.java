@@ -38,7 +38,7 @@ public class BenchmarkMain {
         int generationSize = 30; // TODO
 
         DataParser parser = new DataParser();
-        GeneralStorage storage = parser.parseDataFromJsons(null, null,null, null, null, null, null); // TODO
+        GeneralStorage storage = parser.parseDataFromJsons(null, null,null, null, null, null, null, null, null); // TODO
         StandsStorage standsStorage = storage.getStandsStorage();
         FlightStorage flightStorage = storage.getFlightStorage();
 

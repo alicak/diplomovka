@@ -34,9 +34,10 @@ public class AbsoluteMain {
         int generationSize = 30; // TODO
 
         DataParser parser = new DataParser();
+
         GeneralStorage storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
-                "engineTypes.json", "transfers.json", "gates.json",
-                "stands.json", "departures.json"); // TODO
+                "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
+                "standDistances.json", "stands.json", "departures.json"); // TODO
         StandsStorage standsStorage = storage.getStandsStorage();
         FlightStorage flightStorage = storage.getFlightStorage();
 
