@@ -70,13 +70,13 @@ public class StandsStorage {
         return standsIds[number];
     }
 
-    public void addStand(Stand stand) {
+    public void openStand(Stand stand) {
         standsIds[getNoOfStands() - 1] = standsIds[noOfStandsInUse];
         standsIds[noOfStandsInUse] = stand.getId();
         noOfStandsInUse++;
     }
 
-    public void removeStand(int standId) {
+    public void closeStand(int standId) {
         int length = standsIds.length;
 
         for (int i = 0; i < length; i++) {

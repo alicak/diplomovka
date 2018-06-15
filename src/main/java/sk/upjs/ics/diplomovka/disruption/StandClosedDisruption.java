@@ -21,12 +21,12 @@ public class StandClosedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() {
-        standsStorage.removeStand(stand);
+        standsStorage.closeStand(stand);
     }
 
     @Override
     public void undisruptStorage() {
-        standsStorage.addStand(standsStorage.getStandById(stand));
+        standsStorage.openStand(standsStorage.getStandById(stand));
     }
 
     @Override

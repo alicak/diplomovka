@@ -4,12 +4,12 @@ import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.stands.Stand;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
-public class StandAddedDisruption implements Disruption {
+public class StandOpenedDisruption implements Disruption {
     private Stand stand;
     private StandsStorage standsStorage;
     private int id;
 
-    public StandAddedDisruption(Stand stand, StandsStorage standsStorage, int id) {
+    public StandOpenedDisruption(Stand stand, StandsStorage standsStorage, int id) {
         this.stand = stand;
         this.standsStorage = standsStorage;
         this.id = id;
@@ -22,12 +22,12 @@ public class StandAddedDisruption implements Disruption {
 
     @Override
     public void disruptStorage() {
-        standsStorage.addStand(stand);
+        standsStorage.openStand(stand);
     }
 
     @Override
     public void undisruptStorage() {
-        standsStorage.removeStand(stand.getId());
+        standsStorage.closeStand(stand.getId());
     }
 
     @Override
