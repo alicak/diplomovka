@@ -3,6 +3,7 @@ package sk.upjs.ics.diplomovka.data;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import sk.upjs.ics.diplomovka.data.flights.*;
+import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.stands.DistancesMatrix;
 import sk.upjs.ics.diplomovka.data.stands.Stand;
 import sk.upjs.ics.diplomovka.data.stands.StandAttributes;

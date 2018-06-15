@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.data.flights;
 
+import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.List;

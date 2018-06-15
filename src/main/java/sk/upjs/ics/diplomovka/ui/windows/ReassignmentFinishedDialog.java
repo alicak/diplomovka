@@ -5,7 +5,7 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
-import sk.upjs.ics.diplomovka.data.flights.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 
 import javax.swing.*;
 import java.util.Collections;
@@ -14,12 +14,12 @@ import java.util.List;
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
     private MainFrame parent;
-    private List<FlightViewModel> data;
+    private List<FlightDataModel.FlightViewModel> data;
 
     /**
      * Creates new form AssignmentCreated
      */
-    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightViewModel> data) {
+    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightDataModel.FlightViewModel> data) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
