@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "name": "A319",
+    "wingspan": 35.8,
+    "engineType": 1,
+    "weight": 75.5
+  },
+  {
+    "id": 2,
+    "name": "A320",
+    "wingspan": 35.8,
+    "engineType": 1,
+    "weight": 78
+  },
+  {
+    "id": 3,
+    "name": "A321",
+    "wingspan": 35.8,
+    "engineType": 1,
+    "weight": 93.5
+  },
+  {
+    "id": 4,
+    "name": "A330",
+    "wingspan": 60.3,
+    "engineType": 1,
+    "weight": 242
+  },
+  {
+    "id": 5,
+    "name": "A380",
+    "wingspan": 80,
+    "engineType": 1,
+    "weight": 575
+  },
+  {
+    "id": 6,
+    "name": "ATR 42",
+    "wingspan": 25,
+    "engineType": 2,
+    "weight": 18.6
+  },
+  {
+    "id": 7,
+    "name": "ATR 72",
+    "wingspan": 27,
+    "engineType": 2,
+    "weight": 23
+  },
+  {
+    "id": 8,
+    "name": "Avro RJ70 / RJ85 / RJ100",
+    "wingspan": 26.34,
+    "engineType": 1,
+    "weight": 46
+  },
+  {
+    "id": 9,
+    "name": "Boeing 737",
+    "wingspan": 34.32,
+    "engineType": 1,
+    "weight": 85
+  },
+  {
+    "id": 10,
+    "name": "Boeing 737-500",
+    "wingspan": 28.88,
+    "engineType": 1,
+    "weight": 68
+  },
+  {
+    "id": 11,
+    "name": "Boeing 737-700",
+    "wingspan": 34.32,
+    "engineType": 1,
+    "weight": 70
+  },
+  {
+    "id": 12,
+    "name": "Boeing 737-800",
+    "wingspan": 34.32,
+    "engineType": 1,
+    "weight": 79
+  },
+  {
+    "id": 13,
+    "name": "Boeing 737-900",
+    "wingspan": 34.32,
+    "engineType": 1,
+    "weight": 85
+  },
+  {
+    "id": 14,
+    "name": "Boeing 777-200 / 200ER",
+    "wingspan": 60.93,
+    "engineType": 1,
+    "weight": 247
+  },
+  {
+    "id": 15,
+    "name": "Bombardier CS300",
+    "wingspan": 35.1,
+    "engineType": 1,
+    "weight": 67.5
+  },
+  {
+    "id": 16,
+    "name": "Bombardier RJ1000",
+    "wingspan": 26.2,
+    "engineType": 1,
+    "weight": 41.5
+  },
+  {
+    "id": 17,
+    "name": "Bombardier RJ700",
+    "wingspan": 23.2,
+    "engineType": 1,
+    "weight": 34
+  },
+  {
+    "id": 18,
+    "name": "Bombardier RJ900",
+    "wingspan": 24.9,
+    "engineType": 1,
+    "weight": 38
+  },
+  {
+    "id": 19,
+    "name": "Bombardier DHC-8",
+    "wingspan": 28.4,
+    "engineType": 2,
+    "weight": 30.5
+  },
+  {
+    "id": 20,
+    "name": "Embraer 175",
+    "wingspan": 26,
+    "engineType": 1,
+    "weight": 40
+  },
+  {
+    "id": 21,
+    "name": "Embraer 190",
+    "wingspan": 29,
+    "engineType": 1,
+    "weight": 52
+  },
+  {
+    "id": 22,
+    "name": "Embraer 195",
+    "wingspan": 29,
+    "engineType": 1,
+    "weight": 52
+  },
+  {
+    "id": 23,
+    "name": "Fokker 100",
+    "wingspan": 28,
+    "engineType": 1,
+    "weight": 46
+  },
+  {
+    "id": 24,
+    "name": "Sukhoi Superjet 100-95",
+    "wingspan": 27.8,
+    "engineType": 1,
+    "weight": 50
+  }
+]

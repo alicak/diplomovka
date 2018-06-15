@@ -1,0 +1,224 @@
+[
+  {
+    "id": 1,
+    "gates": [
+      1,
+      11
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 2,
+    "gates": [
+      2,
+      12
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 3,
+    "gates": [
+      5,
+      14
+    ],
+    "maxWingspan": 44,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 4,
+    "gates": [
+      7,
+      15
+    ],
+    "maxWingspan": 29,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 5,
+    "gates": [
+      8,
+      18,
+      20
+    ],
+    "maxWingspan": 48,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 6,
+    "gates": [
+      9,
+      10,
+      19
+    ],
+    "maxWingspan": 65,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 7,
+    "gates": [
+      6,
+      16,
+      17
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 8,
+    "gates": [
+      3,
+      4,
+      13
+    ],
+    "maxWingspan": 52,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 9,
+    "gates": [
+      21
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 10,
+    "gates": [
+      22
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 11,
+    "gates": [
+      23
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 12,
+    "gates": [
+      24
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 13,
+    "gates": [
+      25
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 14,
+    "gates": [
+      26
+    ],
+    "maxWingspan": 36,
+    "maxWeight": 100,
+    "flightCategories": [
+      1
+    ],
+    "engineTypes": [
+      1,
+      2
+    ]
+  }
+]

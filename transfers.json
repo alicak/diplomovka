@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "flightId": 13,
+    "noOfPassengers": 10
+  },
+  {
+    "id": 2,
+    "flightId": 23,
+    "noOfPassengers": 15
+  },
+  {
+    "id": 3,
+    "flightId": 13,
+    "noOfPassengers": 7
+  },
+  {
+    "id": 4,
+    "flightId": 38,
+    "noOfPassengers": 12
+  }
+]
