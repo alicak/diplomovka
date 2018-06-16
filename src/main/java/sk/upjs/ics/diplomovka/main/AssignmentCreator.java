@@ -15,12 +15,12 @@ public class AssignmentCreator {
     private StandsStorage standsStorage;
     private FlightStorage flightStorage;
 
-    public AssignmentCreator(GeneralStorage storage) throws IOException {
+    public AssignmentCreator(GeneralStorage storage) {
         this.standsStorage = storage.getStandsStorage();
         this.flightStorage = storage.getFlightStorage();
     }
 
-    public Chromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) throws IOException {
+    public Chromosome createAbsoluteOriginalAssignment(AbsolutePositionFeasibilityChecker feasibilityChecker) {
         int noOfFlights = flightStorage.getNoOfFlights();
 
         Chromosome originalAssignment = new Chromosome(standsStorage.getNoOfStands(), noOfFlights);
