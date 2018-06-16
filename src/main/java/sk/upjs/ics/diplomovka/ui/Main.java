@@ -50,6 +50,18 @@ public class Main {
     private TerminationBase termination = new IterationsTermination(1000);
     CombinedFitness fitnessFunction;
 
+    private String dataFolder = "data/";
+    private String categoriesFile = dataFolder + "categories.json";
+    private String aircraftsFile = dataFolder + "aircrafts.json";
+    private String engineTypesFile = dataFolder + "engineTypes.json";
+    private String transfersFile = dataFolder + "transfers.json";
+    private String gatesFile = dataFolder + "gates.json";
+    private String gateDistancesFile = dataFolder + "gateDistances.json";
+    private String standDistancesFile = dataFolder + "standDistances.json";
+    private String standsFile = dataFolder + "stands.json";
+    private String flightsFile = dataFolder + "departures.json";
+    private String disruptionsFile = dataFolder + "disruptionsExample.json";
+
     private ReassignmentStatistics reassignmentStatistics;
 
     public Main() {
@@ -62,11 +74,10 @@ public class Main {
     public void prepareData() {
         DataParser parser = new DataParser();
 
-        storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
-                "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
-                "standDistances.json", "stands.json", "departures.json");
+        storage = parser.parseDataFromJsons(categoriesFile, aircraftsFile, engineTypesFile, transfersFile,
+                gatesFile, gateDistancesFile, standDistancesFile, standsFile, flightsFile);
 
-        disruptions = parser.parseDisruptions("disruptionsExample.json", storage);
+        disruptions = parser.parseDisruptions(disruptionsFile, storage);
     }
 
     public void applyDisruptions() {
