@@ -4,9 +4,9 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChec
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
@@ -91,15 +91,15 @@ public class AbsoluteMain {
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
                 .setReassignmentWeight(30)
                 .setPassengerWeight(0.1);
-        AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(storage, weights);
 
+        CombinedFitness fitnessFunction = new CombinedFitness(storage,
+                Arrays.asList(new ReassignmentFitness(storage, weights), new TimeDiffFitness(storage,weights)));
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);
         }
 
         CrossoverBase crossover = new AbsolutePositionCrossover(1);
         MutationBase mutation = new AbsolutePositionMutation(0.1);
-
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
