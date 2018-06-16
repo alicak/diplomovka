@@ -7,6 +7,7 @@ import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.Flight;
 import sk.upjs.ics.diplomovka.data.flights.Transfer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class StandsDistanceFitness extends FitnessFunctionBase {
@@ -27,10 +28,10 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
     private double calculateGeneralFitness(Chromosome chromosome, boolean weighted) {
         double fitness = 0;
 
-        int[] flightsToStands = new int[chromosome.getNoOfFlights()];
+        Map<Integer, Integer> flightsToStands = new HashMap<>();
         for (int g = 0; g < chromosome.getNoOfStands(); g++) {
             for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                flightsToStands[chromosome.getGene(g, f)] = g;
+                flightsToStands.put(chromosome.getGene(g, f), g);
             }
         }
 
@@ -43,8 +44,8 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
                 fitness += weight * standsStorage.getStandsDistance(s, originalStandNo);
 
                 for (Transfer transfer : flight.getTransfers()) {
-                    int transferArrivingStand = flightsToStands[transfer.getFlightId()];
-                    fitness += weight * standsStorage.getGatesDistance(s, transferArrivingStand);
+                    int transferArrivingStand = flightsToStands.get(transfer.getFlightId());
+                    fitness += weight * standsStorage.getStandsDistance(s, transferArrivingStand);
                 }
             }
         }
