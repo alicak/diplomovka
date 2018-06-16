@@ -16,5 +16,17 @@
 		"type":"engineType",
 		"engineTypes":[89]
 	}
+},
+{
+	"id":3,
+	"type":"flightDelayed",
+	"flightId": 6,
+	"delay": 60
+},
+{
+	"id":4,
+	"type":"flightDelayed",
+	"flightId": 10,
+	"delay": 90
 }
 ]

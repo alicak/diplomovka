@@ -5,8 +5,12 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.parser.DataParser;
+import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
@@ -14,9 +18,7 @@ import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
 import javax.swing.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -29,6 +31,22 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        DataParser parser = new DataParser();
+
+        GeneralStorage storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
+                "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
+                "standDistances.json", "stands.json", "departures.json"); // TODO
+
+        List<Disruption> disruptions = parser.parseDisruptions("disruptionsExample.json", storage);
+        refreshDisruptions(disruptions);
+
+        for (Disruption disruption : disruptions) {
+            disruption.disruptStorage();
+        }
+
+        List<FlightViewModel> flights = new ArrayList<>();
+        storage.getFlightStorage().getSortedFlights().forEach(x -> flights.add(new FlightViewModel(x, storage)));
+        refreshAssignment(flights);
     }
 
 
@@ -112,17 +130,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         lastReassignmentTimeLabel.setText("n/a");
 
-        regularDelayCountLabel.setText("0");
+        regularDelayCountLabel.setText("n/a");
 
-        regularDelayMaxLabel.setText("0");
+        regularDelayMaxLabel.setText("n/a");
 
-        regularDelayAverageLabel.setText("0");
+        regularDelayAverageLabel.setText("n/a");
 
-        assignmentDelayCountLabel.setText("0");
+        assignmentDelayCountLabel.setText("n/a");
 
-        assignmentDelayMaxLabel.setText("0");
+        assignmentDelayMaxLabel.setText("n/a");
 
-        assignmentDelayAverageLabel.setText("0");
+        assignmentDelayAverageLabel.setText("n/a");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,18 +280,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void calculateAndSetStatistics(List<FlightViewModel> flights) {
-        if (flights.isEmpty()) {
-            regularDelayMaxLabel.setText("n/a");
-            regularDelayCountLabel.setText("n/a");
-            regularDelayAverageLabel.setText("n/a");
-
-            assignmentDelayMaxLabel.setText("n/a");
-            assignmentDelayCountLabel.setText("n/a");
-            assignmentDelayAverageLabel.setText("n/a");
-
-            return;
-        }
-
         int regularDelaySum = 0;
         int regularDelayCount = 0;
         int regularDelayMax = 0;
@@ -296,13 +302,26 @@ public class MainFrame extends javax.swing.JFrame {
             assignmentDelayMax = Math.max(assignmentDelayMax, assignmentDelay);
         }
 
-        regularDelayMaxLabel.setText(Integer.toString(regularDelayMax));
-        regularDelayCountLabel.setText(Integer.toString(regularDelayCount));
-        regularDelayAverageLabel.setText(Integer.toString(regularDelaySum / regularDelayCount));
+        if (regularDelayCount == 0) {
+            regularDelayMaxLabel.setText("0");
+            regularDelayCountLabel.setText("0");
+            regularDelayAverageLabel.setText("0");
+        } else {
+            regularDelayMaxLabel.setText(Integer.toString(regularDelayMax));
+            regularDelayCountLabel.setText(Integer.toString(regularDelayCount));
+            regularDelayAverageLabel.setText(Integer.toString(regularDelaySum / regularDelayCount));
+        }
 
-        assignmentDelayMaxLabel.setText(Integer.toString(assignmentDelayMax));
-        assignmentDelayCountLabel.setText(Integer.toString(assignmentDelayCount));
-        assignmentDelayAverageLabel.setText(Integer.toString(assignmentDelaySum / assignmentDelayCount));
+        if (assignmentDelayCount == 0) {
+            assignmentDelayMaxLabel.setText("0");
+            assignmentDelayCountLabel.setText("0");
+            assignmentDelayAverageLabel.setText("0");
+        } else {
+            assignmentDelayMaxLabel.setText(Integer.toString(assignmentDelayMax));
+            assignmentDelayCountLabel.setText(Integer.toString(assignmentDelayCount));
+            assignmentDelayAverageLabel.setText(Integer.toString(assignmentDelaySum / assignmentDelayCount));
+        }
+
     }
 
     public void refreshDisruptions(List<Disruption> disruptions) {
