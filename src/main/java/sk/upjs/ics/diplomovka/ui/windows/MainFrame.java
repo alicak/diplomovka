@@ -5,6 +5,9 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
+import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
@@ -12,8 +15,12 @@ import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.main.AssignmentCreator;
+import sk.upjs.ics.diplomovka.main.PopulationCreator;
+import sk.upjs.ics.diplomovka.ui.Main;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
+import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 
 import javax.swing.*;
 import java.text.DateFormat;
@@ -25,28 +32,23 @@ public class MainFrame extends javax.swing.JFrame {
 
     private FlightTableModel flightTableModel = new FlightTableModel(Collections.emptyList());
     private DisruptionListModel disruptionListModel = new DisruptionListModel(Collections.emptyList());
+    private Main main;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        DataParser parser = new DataParser();
 
-        GeneralStorage storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
-                "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
-                "standDistances.json", "stands.json", "departures.json"); // TODO
+        main = new Main();
 
-        List<Disruption> disruptions = parser.parseDisruptions("disruptionsExample.json", storage);
-        refreshDisruptions(disruptions);
+        refreshDisruptions(main.getDisruptions());
+        refreshAssignment(main.getFlights());
 
-        for (Disruption disruption : disruptions) {
-            disruption.disruptStorage();
-        }
+        main.applyDisruptions();
 
-        List<FlightViewModel> flights = new ArrayList<>();
-        storage.getFlightStorage().getSortedFlights().forEach(x -> flights.add(new FlightViewModel(x, storage)));
-        refreshAssignment(flights);
+        // refreshDisruptions(main.getDisruptions()); // redundant for now
+        refreshAssignment(main.getFlights());
     }
 
 
@@ -328,10 +330,10 @@ public class MainFrame extends javax.swing.JFrame {
         disruptionListModel.setData(disruptions);
     }
 
-    public void calculateNewAssignment() {
+    public void calculateNewAssignment(ReassignmentParameters parameters) {
         InProgressDialog inProgressDialog = new InProgressDialog(this, true);
 
-        CalculationWorker calculationWorker = new CalculationWorker(this, inProgressDialog);
+        CalculationWorker calculationWorker = new CalculationWorker(this, parameters, inProgressDialog);
         calculationWorker.execute();
 
         inProgressDialog.setVisible(true);
@@ -391,22 +393,18 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private class CalculationWorker extends SwingWorker<List<FlightViewModel>, Integer> {
-        MainFrame parentFrame;
-        InProgressDialog inProgressDialog;
+        private MainFrame parentFrame;
+        private InProgressDialog inProgressDialog;
+        private ReassignmentParameters parameters;
 
-        public CalculationWorker(MainFrame parentFrame, InProgressDialog inProgressDialog) {
+        public CalculationWorker(MainFrame parentFrame, ReassignmentParameters parameters, InProgressDialog inProgressDialog) {
             this.parentFrame = parentFrame;
+            this.parameters = parameters;
             this.inProgressDialog = inProgressDialog;
         }
 
         protected List<FlightViewModel> doInBackground() {
-            // TODO add calculation
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return Collections.emptyList();
+            return main.calculateNewAssignment(parameters);
         }
 
         protected void done() {

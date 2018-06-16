@@ -5,6 +5,8 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
+
 public class NewAssignmentDialog extends javax.swing.JDialog {
 
     private MainFrame parent;
@@ -226,6 +228,32 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
         }
     }
 
+    private ReassignmentParameters prepareParameters() {
+        ReassignmentParameters parameters = new ReassignmentParameters(
+                considerPassengersCheckBox.isEnabled(),
+                considerPriorityCheckBox.isEnabled(),
+                optimizeReassignmentsCheckBox.isEnabled(),
+                optimizeTimeCheckBox.isEnabled(),
+                optimizeWalkingCheckBox.isEnabled());
+
+        if(parameters.considerPassengers())
+            parameters.setPassengersWeight(new Double(passengersWeightTextField.getText()));
+
+        if(parameters.considerPriority())
+            parameters.setPriorityWeight(new Double(priorityWeightTextField.getText()));
+
+        if(parameters.optimizeReassignments())
+            parameters.setReassignmentsWeight(new Double(reassignmentsWeightTextField.getText()));
+
+        if(parameters.optimizeTime())
+            parameters.setTimeWeight(new Double(timeWeightTextField.getText()));
+
+        if(parameters.optimizeWalking())
+            parameters.setWalkingWeight(new Double(walkingWeightTextField.getText()));
+
+        return parameters;
+    }
+
     private void optimizeTimeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optimizeTimeCheckBoxActionPerformed
         setTextBoxEnable(optimizeTimeCheckBox, timeWeightTextField);
     }
@@ -248,7 +276,7 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         dispose();
-        parent.calculateNewAssignment();
+        parent.calculateNewAssignment(prepareParameters());
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

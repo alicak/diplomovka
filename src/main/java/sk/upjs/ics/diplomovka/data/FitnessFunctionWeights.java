@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.data;
 
+import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,22 @@ public class FitnessFunctionWeights {
     private double timeChangedWeight = DEFAULT_WEIGHT;
     private double walkingDistanceWeight = DEFAULT_WEIGHT;
     private List<IntervalWeight> futureWeights = Arrays.asList(new IntervalWeight(0, MINUTES_IN_DAY, DEFAULT_WEIGHT));
+
+    public FitnessFunctionWeights() {
+    }
+
+    public FitnessFunctionWeights(ReassignmentParameters parameters) {
+        if (parameters.considerPriority())
+            flightPriorityWeight = parameters.getPriorityWeight();
+        if (parameters.considerPassengers())
+            passengerWeight = parameters.getPassengersWeight();
+        if (parameters.optimizeWalking())
+            walkingDistanceWeight = parameters.getWalkingWeight();
+        if (parameters.optimizeTime())
+            timeChangedWeight = parameters.getTimeWeight();
+        if (parameters.optimizeReassignments())
+            reassignmentWeight = parameters.getReassignmentsWeight();
+    }
 
     public double getReassignmentWeight() {
         return reassignmentWeight;
