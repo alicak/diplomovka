@@ -5,7 +5,9 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.ui.Main;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
@@ -252,7 +254,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void refreshAssignment(List<FlightViewModel> flights) {
         refreshFlights(flights);
-        calculateAndSetStatistics(flights);
+        setStatistics(main.calculateAssignmentStatistics(flights));
         setCurrentTime();
     }
 
@@ -263,6 +265,16 @@ public class MainFrame extends javax.swing.JFrame {
     private void setCurrentTime() {
         DateFormat sdf = new SimpleDateFormat("HH:mm");
         lastReassignmentTimeLabel.setText(sdf.format(new Date()));
+    }
+
+    private void setStatistics(AssignmentStatistics statistics) {
+        regularDelayMaxLabel.setText(Integer.toString(statistics.getRegularDelayMax()));
+        regularDelayCountLabel.setText(Integer.toString(statistics.getRegularDelayCount()));
+        regularDelayAverageLabel.setText(Integer.toString(statistics.getRegularDelayAverage()));
+
+        assignmentDelayMaxLabel.setText(Integer.toString(statistics.getAssignmentDelayMax()));
+        assignmentDelayCountLabel.setText(Integer.toString(statistics.getAssignmentDelayCount()));
+        assignmentDelayAverageLabel.setText(Integer.toString(statistics.getAssignmentDelayAverage()));
     }
 
     private void calculateAndSetStatistics(List<FlightViewModel> flights) {
@@ -396,7 +408,8 @@ public class MainFrame extends javax.swing.JFrame {
             inProgressDialog.dispose();
 
             try {
-                ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame, true, get());
+                ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame,
+                        true, main.getReassignmentStatistics(), get());
                 reassignmentFinishedDialog.setVisible(true);
             } catch (InterruptedException e) {
                 e.printStackTrace();

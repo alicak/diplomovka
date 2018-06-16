@@ -6,6 +6,7 @@
 package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 
 import javax.swing.*;
 import java.util.Collections;
@@ -19,11 +20,13 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     /**
      * Creates new form AssignmentCreated
      */
-    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightViewModel> flights) {
+    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, ReassignmentStatistics statistics, List<FlightViewModel> flights) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
         this.flights = flights;
+
+        statusTextArea.setText(statistics.toString());
     }
 
     /**
@@ -147,7 +150,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainFrame(), true, Collections.emptyList());
+                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainFrame(), true, new ReassignmentStatistics(0,0,0), Collections.emptyList());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -4,7 +4,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChec
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
-import sk.upjs.ics.diplomovka.absolutechromosome.fitness.combined.AbsoluteTimeDiffAndReassignmentFitness;
+import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
@@ -102,7 +102,8 @@ public class BenchmarkMain {
         FitnessFunctionWeights weights = new FitnessFunctionWeights()
                 .setReassignmentWeight(10)
                 .setPassengerWeight(0.5);
-        AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(storage, weights);
+        //AbsoluteTimeDiffAndReassignmentFitness fitnessFunction = new AbsoluteTimeDiffAndReassignmentFitness(storage, weights);
+        CombinedFitness fitnessFunction = new CombinedFitness(null, null);
 
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);

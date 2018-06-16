@@ -14,7 +14,9 @@ import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.data.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.SolutionCreator;
+import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.main.AssignmentCreator;
@@ -39,7 +41,16 @@ public class Main {
 
     private int generationSize = 30;
     private Chromosome originalAssignment;
+    private Chromosome reassignment;
     private AbsolutePositionPopulation population;
+
+    private CrossoverBase crossover = new AbsolutePositionCrossover(1);
+    private MutationBase mutation = new AbsolutePositionMutation(0.1);
+    private SelectionBase selection = new RankingSelection();
+    private TerminationBase termination = new IterationsTermination(1000);
+    CombinedFitness fitnessFunction;
+
+    private ReassignmentStatistics reassignmentStatistics;
 
     public Main() {
         prepareData();
@@ -53,7 +64,7 @@ public class Main {
 
         storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
                 "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
-                "standDistances.json", "stands.json", "departures.json"); // TODO
+                "standDistances.json", "stands.json", "departures.json");
 
         disruptions = parser.parseDisruptions("disruptionsExample.json", storage);
     }
@@ -62,7 +73,7 @@ public class Main {
         preparePopulation();
 
         for (Disruption disruption : disruptions) {
-            //disruption.disruptAssignment(originalAssignment);
+            disruption.disruptAssignment(originalAssignment);
             for (Chromosome c : population.get()) {
                 disruption.disruptAssignment(c);
             }
@@ -96,12 +107,61 @@ public class Main {
         return disruptions;
     }
 
+    public AssignmentStatistics calculateAssignmentStatistics(List<FlightViewModel> flights) {
+        int regularDelaySum = 0;
+        int regularDelayCount = 0;
+        int regularDelayMax = 0;
+
+        int assignmentDelaySum = 0;
+        int assignmentDelayCount = 0;
+        int assignmentDelayMax = 0;
+
+        for (FlightViewModel flight : flights) {
+            int delay = flight.getDelay();
+            regularDelaySum += delay;
+            if (flight.isDelayed())
+                regularDelayCount++;
+            regularDelayMax = Math.max(regularDelayMax, delay);
+
+            int assignmentDelay = flight.getAssignmentDelay();
+            assignmentDelaySum += assignmentDelay;
+            if (flight.isAssignmentDelayed())
+                assignmentDelayCount++;
+            assignmentDelayMax = Math.max(assignmentDelayMax, assignmentDelay);
+        }
+
+        AssignmentStatistics statistics = new AssignmentStatistics()
+                .setAssignmentDelayCount(assignmentDelayCount)
+                .setAssignmentDelayMax(assignmentDelayMax)
+                .setRegularDelayCount(regularDelayCount)
+                .setRegularDelayMax(regularDelayMax);
+
+        if (assignmentDelayCount != 0)
+            statistics.setAssignmentDelayAverage(assignmentDelaySum / assignmentDelayCount);
+        else
+            statistics.setAssignmentDelayAverage(0);
+
+        if (regularDelayCount != 0)
+            statistics.setRegularDelayAverage(regularDelaySum / regularDelayCount);
+        else
+            statistics.setRegularDelayAverage(0);
+
+        return statistics;
+    }
+
+    private ReassignmentStatistics calculateReassignmentStatistics(Chromosome reassignment) {
+        ReassignmentFitness reassignmentFitness = new ReassignmentFitness(storage, null);
+        TimeDiffFitness timeDiffFitness = new TimeDiffFitness(storage, null);
+        StandsDistanceFitness distanceFitness = new StandsDistanceFitness(storage, null);
+
+        return new ReassignmentStatistics(
+                (-1) * (int) reassignmentFitness.calculateNonWeightedFitness(reassignment),
+                (-1) * (int) distanceFitness.calculateNonWeightedFitness(reassignment),
+                (-1) * (int) timeDiffFitness.calculateNonWeightedFitness(reassignment));
+    }
+
     public List<FlightViewModel> calculateNewAssignment(ReassignmentParameters parameters) {
-        CrossoverBase crossover = new AbsolutePositionCrossover(1);
-        MutationBase mutation = new AbsolutePositionMutation(0.1);
-        SelectionBase selection = new RankingSelection();
-        TerminationBase termination = new IterationsTermination(1000);
-        CombinedFitness fitnessFunction = createFunction(parameters);
+        fitnessFunction = createFunction(parameters);
 
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);
@@ -115,7 +175,14 @@ public class Main {
             e.printStackTrace(); // TODO
         }
 
-        return SolutionCreator.createSolutionFromChromosome(finalPopulation.bestChromosome(), storage);
+        reassignment = finalPopulation.bestChromosome();
+        reassignmentStatistics = calculateReassignmentStatistics(reassignment);
+
+        return SolutionCreator.createSolutionFromChromosome(reassignment, storage);
+    }
+
+    public ReassignmentStatistics getReassignmentStatistics() {
+        return reassignmentStatistics;
     }
 
     private CombinedFitness createFunction(ReassignmentParameters parameters) {
