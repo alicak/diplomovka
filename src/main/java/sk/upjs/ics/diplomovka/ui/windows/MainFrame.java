@@ -5,18 +5,8 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
-import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
-import sk.upjs.ics.diplomovka.data.parser.DataParser;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
-import sk.upjs.ics.diplomovka.main.AssignmentCreator;
-import sk.upjs.ics.diplomovka.main.PopulationCreator;
 import sk.upjs.ics.diplomovka.ui.Main;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
@@ -41,16 +31,10 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
 
         main = new Main();
-
+        main.applyDisruptions();
         refreshDisruptions(main.getDisruptions());
         refreshAssignment(main.getFlights());
-
-        main.applyDisruptions();
-
-        // refreshDisruptions(main.getDisruptions()); // redundant for now
-        refreshAssignment(main.getFlights());
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -304,10 +288,11 @@ public class MainFrame extends javax.swing.JFrame {
             assignmentDelayMax = Math.max(assignmentDelayMax, assignmentDelay);
         }
 
+        String zero = "0";
         if (regularDelayCount == 0) {
-            regularDelayMaxLabel.setText("0");
-            regularDelayCountLabel.setText("0");
-            regularDelayAverageLabel.setText("0");
+            regularDelayMaxLabel.setText(zero);
+            regularDelayCountLabel.setText(zero);
+            regularDelayAverageLabel.setText(zero);
         } else {
             regularDelayMaxLabel.setText(Integer.toString(regularDelayMax));
             regularDelayCountLabel.setText(Integer.toString(regularDelayCount));
@@ -315,9 +300,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         if (assignmentDelayCount == 0) {
-            assignmentDelayMaxLabel.setText("0");
-            assignmentDelayCountLabel.setText("0");
-            assignmentDelayAverageLabel.setText("0");
+            assignmentDelayMaxLabel.setText(zero);
+            assignmentDelayCountLabel.setText(zero);
+            assignmentDelayAverageLabel.setText(zero);
         } else {
             assignmentDelayMaxLabel.setText(Integer.toString(assignmentDelayMax));
             assignmentDelayCountLabel.setText(Integer.toString(assignmentDelayCount));
