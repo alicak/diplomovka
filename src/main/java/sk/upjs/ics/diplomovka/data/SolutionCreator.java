@@ -8,6 +8,7 @@ import sk.upjs.ics.diplomovka.data.stands.StandToGateMapper;
 import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public class SolutionCreator {
                         .setActualStart(chromosome.getCurrentFlightStart(s, f) + flight.getTurnaroundTime())
                         .setAssignmentDelay(chromosome.getCurrentFlightStart(s, f) - flight.getStart())
                         .setDelay(flight.getDelay())
+                        .setCode(flight.getCode())
                         .setDestination(flight.getDestination())
                         .setOriginalGate(standsStorage.getGateById(flight.getOriginalGateId()))
                         .setStandId(standsStorage.getStandByNumber(s).getId())
@@ -38,6 +40,8 @@ public class SolutionCreator {
                 flightViewModels.add(flightViewModel);
             }
         }
+
+        Collections.sort(flightViewModels);
         return flightViewModels;
     }
 
