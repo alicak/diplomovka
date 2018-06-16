@@ -61,12 +61,7 @@ public class StandsStorage {
         return STAND_NOT_FOUND;
     }
 
-    public int getIdByNumber(int number) {
-        return standsIds[number];
-    }
-
     public void openStand(Stand stand) {
-        standsIds[getNoOfStands() - 1] = standsIds[noOfStandsInUse];
         standsIds[noOfStandsInUse] = stand.getId();
         noOfStandsInUse++;
     }
@@ -76,13 +71,11 @@ public class StandsStorage {
 
         for (int i = 0; i < length; i++) {
             if (standsIds[i] == standId) {
-                standsIds[i] = standsIds[length - 1];
-                standsIds[length - 1] = standId;
+                standsIds[i] = standsIds[noOfStandsInUse - 1];
+                noOfStandsInUse--;
                 return;
             }
         }
-
-        noOfStandsInUse--;
     }
 
     public int getNoOfStands() {
@@ -162,16 +155,8 @@ public class StandsStorage {
         return attributes.getStandsDistance(id1, id2);
     }
 
-    public int getNoOfGates() {
-        return gatesToStands.size();
-    }
-
     public String getGateById(int gateId) {
         return attributes.getGateById(gateId);
-    }
-
-    public int getNoOfStandsInUse() {
-        return noOfStandsInUse;
     }
 
     public Set<Integer> getGates() {

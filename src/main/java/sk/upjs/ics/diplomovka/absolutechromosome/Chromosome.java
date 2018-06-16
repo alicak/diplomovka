@@ -98,6 +98,7 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public void insertFlight(int stand, int flight, int flightValue) {
+        // TODO: what if the stand is full?
         boolean append = true;
         for (int f = noOfFlights[stand] - 1; f >= flight; f--) {
             setGene(getIndex(stand, f + 1), getGene(stand, f));
@@ -121,9 +122,14 @@ public class Chromosome implements Comparable<Chromosome> {
         setGenes(newGenes);
         maxNoFlights++;
 
-        int standForFlight = Utils.randomInt(noOfStands);
-        addNextFlight(standForFlight, flightValue);
+        int standForFlight = -1;
+        boolean feasible = false;
+        while (!feasible) {
+            standForFlight = Utils.randomInt(noOfStands);
+            feasible = checkFlightFeasibility(flightValue, standForFlight);
+        }
 
+        addNextFlight(standForFlight, flightValue);
         return standForFlight;
     }
 
@@ -152,20 +158,6 @@ public class Chromosome implements Comparable<Chromosome> {
         resetFitness();
     }
 
-    public int addGate() {
-        for (int i = 0; i < maxNoFlights; i++) {
-            genes.add(EMPTY_GENE);
-        }
-
-        int newNumber = noOfStands;
-        noOfStands++;
-
-        noOfFlights = Arrays.copyOf(noOfFlights, noOfStands);
-        noOfFlights[newNumber] = 0;
-
-        return newNumber;
-    }
-
     public void removeStand(int stand) {
         for (int i = 0; i < noOfFlights[stand]; i++) { // assign flights to remaining gates
             int gene = getGene(stand, i);
@@ -185,7 +177,7 @@ public class Chromosome implements Comparable<Chromosome> {
         int lastStand = noOfStands - 1;
 
         for (int i = 0; i < maxNoFlights; i++) {
-            setGene(stand, getGene(lastStand, i));
+            setGene(getIndex(stand,i), getGene(lastStand, i));
         }
         genes = genes.subList(0, genes.size() - maxNoFlights);
 
