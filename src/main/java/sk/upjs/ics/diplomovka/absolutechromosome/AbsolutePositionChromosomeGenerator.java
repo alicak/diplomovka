@@ -35,8 +35,8 @@ public class AbsolutePositionChromosomeGenerator {
             Arrays.fill(genesArray, Chromosome.EMPTY_GENE);
 
             for(Flight flight: flights) {
-                int gate = Utils.randomInt(noOfStands);
-                chromosome.addNextFlight(gate, flight.getId());
+                int stand = Utils.randomInt(noOfStands);
+                chromosome.addNextFlight(stand, flight.getId());
             }
 
             feasible = chromosome.checkFeasibility();

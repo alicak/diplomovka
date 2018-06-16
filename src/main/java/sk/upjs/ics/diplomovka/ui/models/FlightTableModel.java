@@ -10,7 +10,7 @@ import java.util.List;
 public class FlightTableModel extends AbstractTableModel {
 
     private List<FlightViewModel> flights;
-    private static final String[] COLUMN_NAMES = {"Flight", "Time", "Destination", "Delay reg.", "Delay asg.", "Gate"};
+    private static final String[] COLUMN_NAMES = {"Flight", "Time", "Destination", "Delay reg.", "Delay asg.", "Gate", "Stand"};
 
     public FlightTableModel(List<FlightViewModel> flights) {
         this.flights = flights;
@@ -42,6 +42,8 @@ public class FlightTableModel extends AbstractTableModel {
                 return flight.getAssignmentDelay();
             case 5:
                 return flight.getGate();
+            case 6:
+                return flight.getStandId();
         }
         return null;
     }

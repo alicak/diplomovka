@@ -1,5 +1,8 @@
 package sk.upjs.ics.diplomovka.data.models.view;
 
+import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.data.flights.Flight;
+
 public class FlightViewModel {
 
     private String code;
@@ -8,10 +11,25 @@ public class FlightViewModel {
     private int actualStart;
     private String originalGate;
     private String gate;
+    private int standId;
     private int delay;
     private int assignmentDelay;
 
     private static final int DELAY_TOLERANCE = 10;
+
+    public FlightViewModel() {}
+
+    public FlightViewModel(Flight flight, GeneralStorage storage) {
+        this.code = flight.getCode();
+        this.destination = flight.getDestination();
+        this.originalStart = flight.getOriginalStart();
+        this.actualStart = flight.getOriginalStart() + flight.getDelay();
+        this.originalGate = storage.getStandsStorage().getGateById(flight.getOriginalGateId());
+        this.gate = originalGate;
+        this.standId = flight.getOriginalStandId();
+        this.delay = flight.getDelay();
+        this.assignmentDelay = 0;
+    }
 
     public boolean isGateChanged() {
         return !gate.equals(originalGate);
@@ -79,6 +97,15 @@ public class FlightViewModel {
 
     public FlightViewModel setGate(String gate) {
         this.gate = gate;
+        return this;
+    }
+
+    public int getStandId() {
+        return standId;
+    }
+
+    public FlightViewModel setStandId(int standId) {
+        this.standId = standId;
         return this;
     }
 

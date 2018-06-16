@@ -31,6 +31,7 @@ public class SolutionCreator {
                         .setDelay(flight.getDelay())
                         .setDestination(flight.getDestination())
                         .setOriginalGate(standsStorage.getGateById(flight.getOriginalGateId()))
+                        .setStandId(standsStorage.getStandByNumber(s).getId())
                         .setOriginalStart(flight.getOriginalStart())
                         .setGate(standsStorage.getGateById(flightsToGates.get(flight.getId())));
 
