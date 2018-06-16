@@ -5,7 +5,6 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
-import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 
 import javax.swing.*;
@@ -15,16 +14,16 @@ import java.util.List;
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
     private MainFrame parent;
-    private List<FlightViewModel> data;
+    private List<FlightViewModel> flights;
 
     /**
      * Creates new form AssignmentCreated
      */
-    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightViewModel> data) {
+    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, List<FlightViewModel> flights) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
-        this.data = data;
+        this.flights = flights;
     }
 
     /**
@@ -114,13 +113,12 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, data);
+        ReassignmentDetailsDialog reassignmentDetailsDialog = new ReassignmentDetailsDialog(new javax.swing.JFrame(), true, flights);
         reassignmentDetailsDialog.setVisible(true);
     } //GEN-LAST:event_detailsButtonActionPerformed
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
-        parent.refreshAssignment(data);
-        parent.refreshDisruptions(Collections.emptyList()); // TODO: add new disruptions?
+        parent.refreshAssignment(flights);
         dispose();
     } //GEN-LAST:event_acceptButtonActionPerformed
 
