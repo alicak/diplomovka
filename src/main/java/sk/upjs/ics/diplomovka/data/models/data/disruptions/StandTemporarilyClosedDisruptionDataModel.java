@@ -6,6 +6,13 @@ public class StandTemporarilyClosedDisruptionDataModel extends DisruptionDataMod
     private int start;
     private int end;
 
+    public StandTemporarilyClosedDisruptionDataModel(int id, int standId, int start, int end) {
+        this.id = id;
+        this.standId = standId;
+        this.start = start;
+        this.end = end;
+    }
+
     public int getStandId() {
         return standId;
     }

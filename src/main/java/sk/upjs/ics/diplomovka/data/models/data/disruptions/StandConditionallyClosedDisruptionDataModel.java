@@ -9,6 +9,14 @@ public class StandConditionallyClosedDisruptionDataModel extends DisruptionDataM
     private int end;
     private ClosureConditionDataModel condition;
 
+    public StandConditionallyClosedDisruptionDataModel(int id, int standId, int start, int end, ClosureConditionDataModel condition) {
+        this.id = id;
+        this.standId = standId;
+        this.start = start;
+        this.end = end;
+        this.condition = condition;
+    }
+
     public int getStandId() {
         return standId;
     }
