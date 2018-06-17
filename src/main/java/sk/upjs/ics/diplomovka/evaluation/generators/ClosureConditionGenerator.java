@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ClosureConditionGenerator extends Generator {
+public class ClosureConditionGenerator extends TestDataGenerator {
 
     private FlightAttributes attributes;
 

@@ -5,11 +5,11 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.Set;
 
-public abstract class Generator {
+public abstract class TestDataGenerator {
 
     protected GeneralStorage storage;
 
-    public Generator(GeneralStorage storage) {
+    public TestDataGenerator(GeneralStorage storage) {
         this.storage = storage;
     }
 

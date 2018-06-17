@@ -5,7 +5,7 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class DisruptionGenerator extends Generator {
+public class DisruptionGenerator extends TestDataGenerator {
 
     private int id = 1;
     private FlightGenerator flightGenerator;
