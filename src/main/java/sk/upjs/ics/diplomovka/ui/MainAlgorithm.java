@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Main {
+public class MainAlgorithm {
 
     private List<FlightViewModel> flights;
     private List<Disruption> disruptions;
@@ -70,7 +70,7 @@ public class Main {
 
     private ReassignmentStatistics reassignmentStatistics;
 
-    public Main() {
+    public MainAlgorithm() {
         prepareData();
 
         feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);

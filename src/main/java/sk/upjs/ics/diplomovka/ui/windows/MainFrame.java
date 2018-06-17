@@ -8,7 +8,7 @@ package sk.upjs.ics.diplomovka.ui.windows;
 import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
-import sk.upjs.ics.diplomovka.ui.Main;
+import sk.upjs.ics.diplomovka.ui.MainAlgorithm;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
@@ -23,7 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private FlightTableModel flightTableModel = new FlightTableModel(Collections.emptyList());
     private DisruptionListModel disruptionListModel = new DisruptionListModel(Collections.emptyList());
-    private Main main;
+    private MainAlgorithm mainAlgorithm;
 
     /**
      * Creates new form MainFrame
@@ -31,10 +31,10 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
 
-        main = new Main();
-        main.applyDisruptions();
-        refreshDisruptions(main.getDisruptions());
-        refreshAssignment(main.getFlights());
+        mainAlgorithm = new MainAlgorithm();
+        mainAlgorithm.applyDisruptions();
+        refreshDisruptions(mainAlgorithm.getDisruptions());
+        refreshAssignment(mainAlgorithm.getFlights());
     }
 
     /**
@@ -253,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void refreshAssignment(List<FlightViewModel> flights) {
         refreshFlights(flights);
-        setStatistics(main.calculateAssignmentStatistics(flights));
+        setStatistics(mainAlgorithm.calculateAssignmentStatistics(flights));
         setCurrentTime();
     }
 
@@ -284,7 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void calculateNewAssignment(ReassignmentParameters parameters) {
         InProgressDialog inProgressDialog = new InProgressDialog(this, true);
 
-        parameters.setStartTime(main.getStartTime());
+        parameters.setStartTime(mainAlgorithm.getStartTime());
         CalculationWorker calculationWorker = new CalculationWorker(this, parameters, inProgressDialog);
         calculationWorker.execute();
 
@@ -356,7 +356,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         protected List<FlightViewModel> doInBackground() {
-            return main.calculateNewAssignment(parameters);
+            return mainAlgorithm.calculateNewAssignment(parameters);
         }
 
         protected void done() {
@@ -364,9 +364,9 @@ public class MainFrame extends javax.swing.JFrame {
 
             try {
                 ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame,
-                        true, main.getReassignmentStatistics(), get());
+                        true, mainAlgorithm.getReassignmentStatistics(), get());
                 reassignmentFinishedDialog.setVisible(true);
-                main = new Main(); // we reset data
+                mainAlgorithm = new MainAlgorithm(); // we reset data
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
