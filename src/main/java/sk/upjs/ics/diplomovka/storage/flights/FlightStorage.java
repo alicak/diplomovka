@@ -17,6 +17,10 @@ public class FlightStorage {
         return flightsMap.get(id);
     }
 
+    public Set<Integer> getFlightIds() {
+        return flightsMap.keySet();
+    }
+
     public int getNoOfFlights() {
         return flightsMap.size();
     }
