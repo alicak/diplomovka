@@ -31,7 +31,8 @@ public class ClosureConditionGenerator extends TestDataGenerator {
                 return generateCategoryCondition();
             case 2:
                 return generateEngineTypeCondition();
-            case 3: default:
+            case 3:
+            default:
                 return generateWeightCondition();
         }
     }
@@ -57,11 +58,11 @@ public class ClosureConditionGenerator extends TestDataGenerator {
     private List<Integer> chooseListFromSet(Set<Integer> set) {
         List<Integer> list = new ArrayList<>(set);
 
-        int count = Utils.randomInt(1, list.size()) - 1; // minus one because all would mean normal stand closure
+        int count = Utils.randomInt(1, list.size() - 1); // minus one because all would mean normal stand closure
         List<Integer> result = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            int position = Utils.randomInt(1, list.size());
+            int position = Utils.randomInt(0, list.size());
             result.add(list.get(position));
             list.remove(position);
             count--;

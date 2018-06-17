@@ -14,8 +14,12 @@ public class DisruptionGenerator extends TestDataGenerator {
     private ClosureConditionGenerator conditionGenerator;
     private int startTime;
     private Set<Integer> nonDisruptedStands;
+    private Set<Integer> nonDisruptedFlights;
 
     private static final int KINDS_OF_DISRUPTIONS = 5;
+    private static final int KINDS_OF_STAND_DISRUPTIONS = 3;
+    private static final int KINDS_OF_FLIGHT_DISRUPTIONS = 2;
+
 
     public DisruptionGenerator(GeneralStorage storage, int startTime) {
         super(storage);
@@ -23,28 +27,35 @@ public class DisruptionGenerator extends TestDataGenerator {
         this.conditionGenerator = new ClosureConditionGenerator(storage);
         this.startTime = startTime;
         this.nonDisruptedStands = new HashSet<>(storage.getStandsStorage().getStandsIds());
+        this.nonDisruptedFlights = new HashSet<>(storage.getFlightStorage().getFlightIds());
     }
 
-    public DisruptionDataModel generateDisruption() {
-        int type = Utils.randomInt(1, KINDS_OF_DISRUPTIONS + 1);
+    public DisruptionDataModel generateStandDisruption() {
+        int type = Utils.randomInt(1, KINDS_OF_STAND_DISRUPTIONS + 1);
         switch (type) {
             case 1:
-                return generateFlightDelayedDisruption();
-            case 2:
-                return generateFlightAddedDisruption();
-            case 3:
                 return generateStandClosedDisruption();
-            case 4:
+            case 2:
                 return generateStandConditionallyClosedDisruption();
-            case 5:
+            case 3:
             default:
                 return generateStandTemporarilyClosedDisruption();
         }
     }
 
+    public DisruptionDataModel generateFlightDisruption() {
+        int type = Utils.randomInt(1, KINDS_OF_FLIGHT_DISRUPTIONS + 1);
+        switch (type) {
+            case 1:
+                return generateFlightDelayedDisruption();
+            case 2:
+            default:
+                return generateFlightAddedDisruption();
+        }
+    }
+
     public DisruptionDataModel generateFlightDelayedDisruption() {
-        return new FlightDelayedDisruptionDataModel(
-                id++, chooseFromSet(storage.getFlightStorage().getFlightIds()), Utils.randomInt(15, 300));
+        return new FlightDelayedDisruptionDataModel(id++, randomFlightId(), Utils.randomInt(15, 300));
     }
 
     public DisruptionDataModel generateFlightAddedDisruption() {
@@ -70,6 +81,12 @@ public class DisruptionGenerator extends TestDataGenerator {
         int standId = chooseFromSet(nonDisruptedStands);
         nonDisruptedStands.remove(standId);
         return standId;
+    }
+
+    private int randomFlightId() {
+        int flightId = chooseFromSet(nonDisruptedFlights);
+        nonDisruptedFlights.remove(flightId);
+        return flightId;
     }
 
     private int randomStart() {

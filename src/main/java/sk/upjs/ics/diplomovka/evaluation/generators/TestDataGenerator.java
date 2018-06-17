@@ -14,8 +14,7 @@ public abstract class TestDataGenerator {
     }
 
     protected int chooseFromSet(Set<Integer> set) {
-        Integer[] ids = {};
-        set.toArray(ids);
+        Integer[] ids = set.toArray(new Integer[set.size()]);
         return ids[Utils.randomInt(ids.length)];
     }
 }

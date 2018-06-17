@@ -47,8 +47,15 @@ public class ScenarioMaker {
         }
 
         List<DisruptionDataModel> disruptions = new ArrayList<>();
-        for (int i = 0; i < noOfDisruptions; i++) {
-            disruptions.add(disruptionGenerator.generateDisruption());
+
+        int noOfStandDisruptions = Math.min(noOfDisruptions/2, storage.getStandsStorage().getNoOfStands());
+
+        for (int i = 0; i < noOfStandDisruptions; i++) {
+            disruptions.add(disruptionGenerator.generateStandDisruption());
+        }
+
+        for (int i = noOfStandDisruptions; i < noOfDisruptions; i++) {
+            disruptions.add(disruptionGenerator.generateFlightDisruption());
         }
 
         return disruptions;
