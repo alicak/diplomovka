@@ -3,7 +3,6 @@ package sk.upjs.ics.diplomovka.evaluation.generators;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.*;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +15,8 @@ public class DisruptionGenerator extends TestDataGenerator {
     private int startTime;
     private Set<Integer> nonDisruptedStands;
 
+    private static final int KINDS_OF_DISRUPTIONS = 5;
+
     public DisruptionGenerator(GeneralStorage storage, int startTime) {
         super(storage);
         this.flightGenerator = new FlightGenerator(storage, startTime);
@@ -25,7 +26,20 @@ public class DisruptionGenerator extends TestDataGenerator {
     }
 
     public DisruptionDataModel generateDisruption() {
-        throw new NotImplementedException();
+        int type = Utils.randomInt(1, KINDS_OF_DISRUPTIONS + 1);
+        switch (type) {
+            case 1:
+                return generateFlightDelayedDisruption();
+            case 2:
+                return generateFlightAddedDisruption();
+            case 3:
+                return generateStandClosedDisruption();
+            case 4:
+                return generateStandConditionallyClosedDisruption();
+            case 5:
+            default:
+                return generateStandTemporarilyClosedDisruption();
+        }
     }
 
     public DisruptionDataModel generateFlightDelayedDisruption() {

@@ -33,13 +33,17 @@ public class ScenarioMaker {
         int noOfDisruptions = 0;
         switch (type) {
             case EASY:
-                noOfDisruptions = Utils.randomInt(0, EASY_NO_OF_DISRUPTIONS + 1); break;
+                noOfDisruptions = Utils.randomInt(0, EASY_NO_OF_DISRUPTIONS + 1);
+                break;
             case MEDIUM:
-                noOfDisruptions = Utils.randomInt(EASY_NO_OF_DISRUPTIONS, MEDIUM_NO_OF_DISRUPTIONS + 1); break;
+                noOfDisruptions = Utils.randomInt(EASY_NO_OF_DISRUPTIONS, MEDIUM_NO_OF_DISRUPTIONS + 1);
+                break;
             case HARD:
-                noOfDisruptions = Utils.randomInt(MEDIUM_NO_OF_DISRUPTIONS, HARD_NO_OF_DISRUPTIONS + 1); break;
+                noOfDisruptions = Utils.randomInt(MEDIUM_NO_OF_DISRUPTIONS, HARD_NO_OF_DISRUPTIONS + 1);
+                break;
             case EXTREME:
-                noOfDisruptions = Utils.randomInt(HARD_NO_OF_DISRUPTIONS, EXTREME_NO_OF_DISRUPTIONS + 1); break;
+                noOfDisruptions = Utils.randomInt(HARD_NO_OF_DISRUPTIONS, EXTREME_NO_OF_DISRUPTIONS + 1);
+                break;
         }
 
         List<DisruptionDataModel> disruptions = new ArrayList<>();

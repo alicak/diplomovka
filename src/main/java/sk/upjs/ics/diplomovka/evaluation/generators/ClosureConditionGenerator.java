@@ -31,10 +31,8 @@ public class ClosureConditionGenerator extends TestDataGenerator {
                 return generateCategoryCondition();
             case 2:
                 return generateEngineTypeCondition();
-            case 3:
+            case 3: default:
                 return generateWeightCondition();
-            default:
-                return generateEngineTypeCondition();
         }
     }
 
