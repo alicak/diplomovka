@@ -1,0 +1,1 @@
+[{"standId":2,"start":1104,"end":1572,"id":1},{"standId":5,"id":2},{"flight":{"id":94,"scheduled":"10:15","actual":"10:15","turnaroundTime":52,"gateId":17,"standId":7,"code":"17462","noOfPassengers":145,"transfersIds":[],"aircraftId":13,"priority":3,"categoryId":2,"destination":"Hamburg"},"id":3},{"flightId":91,"delay":126,"id":4}]
