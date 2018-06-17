@@ -1,29 +1,59 @@
 package sk.upjs.ics.diplomovka.evaluation.generators;
 
-import sk.upjs.ics.diplomovka.data.models.data.closureconditions.ClosureConditionDataModel;
+import sk.upjs.ics.diplomovka.data.models.data.closureconditions.*;
+import sk.upjs.ics.diplomovka.data.parser.Types;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import sk.upjs.ics.diplomovka.storage.flights.FlightAttributes;
+import sk.upjs.ics.diplomovka.utils.Utils;
+
+import java.util.*;
 
 public class ClosureConditionGenerator extends Generator {
 
+    private FlightAttributes attributes;
+
+    private static final int MIN_WEIGHT = 40;
+    private static final int MAX_WEIGHT = 100;
+    private static final int MIN_WINGSPAN= 28;
+    private static final int MAX_WINGSPAN = 40;
+
     public ClosureConditionGenerator(GeneralStorage storage) {
         super(storage);
+        attributes = storage.getFlightStorage().getAttributes();
     }
 
     public ClosureConditionDataModel generateCategoryCondition() {
-        throw new NotImplementedException();
+        return new CategoryClosureConditionDataModel(Types.ClosureCondition.CATEGORY,
+                chooseFromSet(attributes.getCategories().keySet()));
     }
 
     public ClosureConditionDataModel generateEngineTypeCondition() {
-        throw new NotImplementedException();
+        return new EngineTypeClosureConditionDataModel(Types.ClosureCondition.ENGINE_TYPE,
+                chooseFromSet(attributes.getEngineTypes().keySet()));
     }
 
     public ClosureConditionDataModel generateWeightCondition() {
-        throw new NotImplementedException();
+        return new WeightClosureConditionDataModel(Types.ClosureCondition.WEIGHT, Utils.randomInt(MIN_WEIGHT, MAX_WEIGHT));
     }
 
     public ClosureConditionDataModel generateWingspanCondition() {
-        throw new NotImplementedException();
+        return new WingspanClosureConditionDataModel(Types.ClosureCondition.WEIGHT, Utils.randomInt(MIN_WINGSPAN, MAX_WINGSPAN));
+    }
+
+    private List<Integer> chooseFromSet(Set<Integer> set) {
+        List<Integer> list = new ArrayList<>(set);
+
+        int count = Utils.randomInt(1, list.size()) - 1; // minus one because all would mean normal stand closure
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            int position = Utils.randomInt(1, list.size());
+            result.add(list.get(position));
+            list.remove(position);
+            count--;
+        }
+
+        return result;
     }
 
 }
