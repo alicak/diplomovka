@@ -15,6 +15,7 @@ import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
+import sk.upjs.ics.diplomovka.data.parser.Files;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.main.AssignmentCreator;
 import sk.upjs.ics.diplomovka.main.PopulationCreator;
@@ -56,18 +57,6 @@ public class MainAlgorithm {
     private TimeDiffFitness timeDiffFitness;
     private StandsDistanceFitness distanceFitness;
 
-    private String dataFolder = "data/";
-    private String categoriesFile = dataFolder + "categories.json";
-    private String aircraftsFile = dataFolder + "aircrafts.json";
-    private String engineTypesFile = dataFolder + "engineTypes.json";
-    private String transfersFile = dataFolder + "transfers.json";
-    private String gatesFile = dataFolder + "gates.json";
-    private String gateDistancesFile = dataFolder + "gateDistances.json";
-    private String standDistancesFile = dataFolder + "standDistances.json";
-    private String standsFile = dataFolder + "stands.json";
-    private String flightsFile = dataFolder + "departures.json";
-    private String disruptionsFile = dataFolder + "disruptionsExample.json";
-
     private ReassignmentStatistics reassignmentStatistics;
 
     public MainAlgorithm() {
@@ -84,10 +73,10 @@ public class MainAlgorithm {
     public void prepareData() {
         DataParser parser = new DataParser();
 
-        storage = parser.parseDataFromJsons(categoriesFile, aircraftsFile, engineTypesFile, transfersFile,
-                gatesFile, gateDistancesFile, standDistancesFile, standsFile, flightsFile);
+        storage = parser.parseDataFromJsons(Files.CATEGORIES, Files.AIRCRAFTS, Files.ENGINE_TYPES, Files.TRANSFERS,
+                Files.GATES, Files.GATE_DISTANCES, Files.STAND_DISTANCES, Files.STANDS, Files.FLIGHTS);
 
-        disruptions = parser.parseDisruptions(disruptionsFile, storage);
+        disruptions = parser.parseDisruptions(Files.DISRUPTIONS, storage);
     }
 
     public void applyDisruptions() {
