@@ -33,7 +33,7 @@ public class PopulationCreator {
 
         AbsolutePositionPopulation population = new AbsolutePositionPopulation(generation);
 
-        for(Chromosome ch: population.get())
+        for (Chromosome ch : population.get())
             ch.prepareForFitnessCalculation(storage);
 
         return population;

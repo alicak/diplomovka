@@ -34,7 +34,7 @@ public class AbsolutePositionChromosomeGenerator {
             chromosome.setGenes(Arrays.asList(genesArray));
             Arrays.fill(genesArray, Chromosome.EMPTY_GENE);
 
-            for(Flight flight: flights) {
+            for (Flight flight : flights) {
                 int stand = Utils.randomInt(noOfStands);
                 chromosome.addNextFlight(stand, flight.getId());
             }

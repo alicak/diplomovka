@@ -12,7 +12,7 @@ public class FitnessTermination extends TerminationBase {
     public FitnessTermination(double targetFitness, PopulationBase population, FitnessFunctionBase fitnessFunction) {
         this.targetFitness = targetFitness;
         this.population = population;
-        for (Chromosome c: population.get()) {
+        for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);
         }
     }

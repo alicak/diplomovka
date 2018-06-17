@@ -2,13 +2,13 @@ package sk.upjs.ics.diplomovka.evaluation.generators;
 
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
-import sk.upjs.ics.diplomovka.storage.flights.FlightAttributes;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FlightGenerator extends Generator {
 

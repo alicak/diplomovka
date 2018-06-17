@@ -236,19 +236,19 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
                 optimizeTimeCheckBox.isEnabled(),
                 optimizeWalkingCheckBox.isEnabled());
 
-        if(parameters.considerPassengers())
+        if (parameters.considerPassengers())
             parameters.setPassengersWeight(new Double(passengersWeightTextField.getText()));
 
-        if(parameters.considerPriority())
+        if (parameters.considerPriority())
             parameters.setPriorityWeight(new Double(priorityWeightTextField.getText()));
 
-        if(parameters.optimizeReassignments())
+        if (parameters.optimizeReassignments())
             parameters.setReassignmentsWeight(new Double(reassignmentsWeightTextField.getText()));
 
-        if(parameters.optimizeTime())
+        if (parameters.optimizeTime())
             parameters.setTimeWeight(new Double(timeWeightTextField.getText()));
 
-        if(parameters.optimizeWalking())
+        if (parameters.optimizeWalking())
             parameters.setWalkingWeight(new Double(walkingWeightTextField.getText()));
 
         return parameters;

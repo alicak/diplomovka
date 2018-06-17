@@ -3,7 +3,10 @@ package sk.upjs.ics.diplomovka.storage.stands;
 import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
 import sk.upjs.ics.diplomovka.storage.stands.closures.StandClosure;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StandsStorage {
 
@@ -90,7 +93,7 @@ public class StandsStorage {
         standsIds = new int[stands.size()];
 
         int j = 0;
-        for(Stand stand: stands.values()) {
+        for (Stand stand : stands.values()) {
             standsIds[j] = stand.getId();
             j++;
         }

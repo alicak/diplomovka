@@ -34,13 +34,11 @@ public class Utils {
         return hours * 60 + minutes;
     }
 
-    public static String randomString(String characters, int minLength, int maxLength)
-    {
+    public static String randomString(String characters, int minLength, int maxLength) {
         int length = randomInt(minLength, maxLength);
         char[] text = new char[length];
 
-        for (int i = 0; i < length; i++)
-        {
+        for (int i = 0; i < length; i++) {
             text[i] = characters.charAt(randomInt(characters.length()));
         }
         return new String(text);

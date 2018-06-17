@@ -16,7 +16,9 @@ import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 import javax.swing.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainFrame extends javax.swing.JFrame {

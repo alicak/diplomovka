@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.storage.stands.closures.conditions;
 
-import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.WeightClosureConditionDataModel;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
 public class WeightClosureCondition implements ClosureCondition {
     private double weight;

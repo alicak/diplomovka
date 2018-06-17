@@ -33,8 +33,8 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
     public boolean checkConditionalClosures(int flightIdx, int gate, Chromosome chromosome) {
         Flight flight = flightStorage.getFlight(chromosome.getGene(gate, flightIdx));
 
-        for (ConditionalStandClosure closure: standsStorage.getConditionalClosuresForStand(gate)) {
-            if(!closure.checkFlight(flight, chromosome.getCurrentFlightStart(gate, flightIdx), chromosome.getCurrentFlightEnd(gate, flightIdx)))
+        for (ConditionalStandClosure closure : standsStorage.getConditionalClosuresForStand(gate)) {
+            if (!closure.checkFlight(flight, chromosome.getCurrentFlightStart(gate, flightIdx), chromosome.getCurrentFlightEnd(gate, flightIdx)))
                 return false;
         }
         return true;

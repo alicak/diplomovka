@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.FlightCancelledDisruptionDataModel;
+import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 
 public class FlightCancelledDisruption implements Disruption {
     private int flight;
@@ -25,10 +25,12 @@ public class FlightCancelledDisruption implements Disruption {
     }
 
     @Override
-    public void disruptStorage() { }
+    public void disruptStorage() {
+    }
 
     @Override
-    public void undisruptStorage() { }
+    public void undisruptStorage() {
+    }
 
     @Override
     public int getId() {

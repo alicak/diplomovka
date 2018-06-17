@@ -19,7 +19,7 @@ public class CombinedFitness extends FitnessFunctionBase {
     @Override
     public double calculateFitness(Chromosome chromosome) {
         double result = 0;
-        for (FitnessFunctionBase function: functions) {
+        for (FitnessFunctionBase function : functions) {
             result += function.calculateFitness(chromosome);
         }
         return result;
@@ -28,7 +28,7 @@ public class CombinedFitness extends FitnessFunctionBase {
     @Override
     public double calculateNonWeightedFitness(Chromosome chromosome) {
         double result = 0;
-        for (FitnessFunctionBase function: functions) {
+        for (FitnessFunctionBase function : functions) {
             result += function.calculateNonWeightedFitness(chromosome);
         }
         return result;

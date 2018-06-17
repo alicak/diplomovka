@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.storage;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.stands.StandToGateMapper;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 

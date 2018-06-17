@@ -10,16 +10,16 @@ import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
+import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
+import sk.upjs.ics.diplomovka.disruption.*;
+import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.SolutionCreator;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.EngineTypeClosureCondition;
-import sk.upjs.ics.diplomovka.disruption.*;
-import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
@@ -93,7 +93,7 @@ public class AbsoluteMain {
                 .setPassengerWeight(0.1);
 
         CombinedFitness fitnessFunction = new CombinedFitness(storage,
-                Arrays.asList(new ReassignmentFitness(storage, weights), new TimeDiffFitness(storage,weights)));
+                Arrays.asList(new ReassignmentFitness(storage, weights), new TimeDiffFitness(storage, weights)));
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);
         }

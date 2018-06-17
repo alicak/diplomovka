@@ -3,21 +3,24 @@ package sk.upjs.ics.diplomovka.data.parser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import sk.upjs.ics.diplomovka.storage.Attribute;
-import sk.upjs.ics.diplomovka.storage.GeneralStorage;
-import sk.upjs.ics.diplomovka.storage.flights.*;
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.ClosureConditionDataModel;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.DisruptionDataModel;
+import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.storage.Attribute;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.flights.*;
 import sk.upjs.ics.diplomovka.storage.stands.DistancesMatrix;
 import sk.upjs.ics.diplomovka.storage.stands.Stand;
 import sk.upjs.ics.diplomovka.storage.stands.StandAttributes;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.disruption.Disruption;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataParser {
 
@@ -157,7 +160,7 @@ public class DataParser {
         DisruptionDataModel[] disruptions = parseObjects(disruptionsFile, DisruptionDataModel[].class, gson);
 
         List<Disruption> disruptionList = new ArrayList<>();
-        for(DisruptionDataModel model: disruptions) {
+        for (DisruptionDataModel model : disruptions) {
             disruptionList.add(Types.getDisruptionFromModel(model, storage));
         }
 

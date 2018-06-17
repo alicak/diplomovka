@@ -6,7 +6,9 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.FlightAttributes;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class ClosureConditionGenerator extends Generator {
 

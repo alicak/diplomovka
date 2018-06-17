@@ -6,7 +6,6 @@
 package sk.upjs.ics.diplomovka.ui.windows;
 
 /**
- *
  * @author alica
  */
 public class InProgressDialog extends javax.swing.JDialog {

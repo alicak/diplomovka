@@ -176,7 +176,7 @@ public class Chromosome implements Comparable<Chromosome> {
         int lastStand = noOfStands - 1;
 
         for (int i = 0; i < maxNoFlights; i++) {
-            setGene(getIndex(stand,i), getGene(lastStand, i));
+            setGene(getIndex(stand, i), getGene(lastStand, i));
         }
         genes = genes.subList(0, genes.size() - maxNoFlights);
 
@@ -303,7 +303,7 @@ public class Chromosome implements Comparable<Chromosome> {
                 applyStandClosure(closure, s);
             }
             Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(s);
-            for(ConditionalStandClosure closure: conditionalClosuresForStand) {
+            for (ConditionalStandClosure closure : conditionalClosuresForStand) {
                 applyConditionalStandClosure(closure, s, storage.getFlightStorage());
             }
         }

@@ -30,18 +30,18 @@ public class GeneralStorage {
     }
 
     public GeneralStorage getStorageWithOptionalStart(int startTime) {
-        if(startTime > MINUTES_IN_DAY) {
+        if (startTime > MINUTES_IN_DAY) {
             throw new IllegalArgumentException("Start time can't be more than number of minutes in one day.");
         }
 
         Map<Integer, Integer> availabilityTimes = new HashMap<>();
 
-        for(Integer standId: standsStorage.getStandsIds()){
+        for (Integer standId : standsStorage.getStandsIds()) {
             availabilityTimes.put(standId, startTime);
         }
 
-        for(Flight flight: flightStorage.getSortedFlights()) {
-            if(flight.getStart() < startTime && flight.getEnd() > startTime) {
+        for (Flight flight : flightStorage.getSortedFlights()) {
+            if (flight.getStart() < startTime && flight.getEnd() > startTime) {
                 availabilityTimes.put(flight.getOriginalStandId(), flight.getEnd());
             }
         }

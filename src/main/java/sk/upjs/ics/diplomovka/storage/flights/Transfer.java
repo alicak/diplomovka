@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.storage.flights;
 
 import sk.upjs.ics.diplomovka.storage.Attribute;
 
-public class Transfer extends Attribute{
+public class Transfer extends Attribute {
 
     private int flightId; // id of departure that was arrival before and passengers transfer from that arrival
     private int noOfPassengers;

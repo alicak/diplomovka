@@ -1,9 +1,9 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.data.models.data.disruptions.FlightAddedDisruptionDataModel;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.models.data.disruptions.FlightAddedDisruptionDataModel;
 
 public class FlightAddedDisruption implements Disruption {
     private Flight flight;

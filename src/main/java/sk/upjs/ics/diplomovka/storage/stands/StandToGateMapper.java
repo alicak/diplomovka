@@ -74,9 +74,9 @@ public class StandToGateMapper {
     }
 
 
-    private Map<Integer, Integer>  initalizeUsedTimesOnGates(StandsStorage standsStorage) {
+    private Map<Integer, Integer> initalizeUsedTimesOnGates(StandsStorage standsStorage) {
         Map<Integer, Integer> usedTimesOnGates = new HashMap<>();
-        for(Integer gate: standsStorage.getGates()) {
+        for (Integer gate : standsStorage.getGates()) {
             usedTimesOnGates.put(gate, 0);
         }
         return usedTimesOnGates;

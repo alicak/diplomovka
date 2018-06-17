@@ -3,7 +3,7 @@ package sk.upjs.ics.diplomovka.data.models.view;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
-public class FlightViewModel implements Comparable<FlightViewModel>{
+public class FlightViewModel implements Comparable<FlightViewModel> {
 
     private String code;
     private String destination;
@@ -17,7 +17,8 @@ public class FlightViewModel implements Comparable<FlightViewModel>{
 
     private static final int DELAY_TOLERANCE = 10;
 
-    public FlightViewModel() {}
+    public FlightViewModel() {
+    }
 
     public FlightViewModel(Flight flight, GeneralStorage storage) {
         this.code = flight.getCode();

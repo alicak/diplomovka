@@ -13,7 +13,7 @@ public class ConditionalStandClosure extends StandClosure {
     }
 
     public boolean checkFlight(Flight flight, int currentStart, int currentEnd) {
-        if(currentEnd <= getStart() || currentStart >= getEnd()) // flight is outside the closure
+        if (currentEnd <= getStart() || currentStart >= getEnd()) // flight is outside the closure
             return true;
 
         return condition.checkFlight(flight);

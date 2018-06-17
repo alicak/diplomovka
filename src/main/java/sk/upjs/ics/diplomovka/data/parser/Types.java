@@ -1,10 +1,13 @@
 package sk.upjs.ics.diplomovka.data.parser;
 
-import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.*;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.*;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.*;
 import sk.upjs.ics.diplomovka.disruption.*;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.CategoryClosureCondition;
+import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.EngineTypeClosureCondition;
+import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.WeightClosureCondition;
+import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.WingspanClosureCondition;
 
 public final class Types {
 

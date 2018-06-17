@@ -16,7 +16,7 @@ public class ReassignmentParameters {
 
     private int startTime = 0;
 
-    public ReassignmentParameters(boolean considerPassengers,boolean considerPriority, boolean optimizeReassignments,
+    public ReassignmentParameters(boolean considerPassengers, boolean considerPriority, boolean optimizeReassignments,
                                   boolean optimizeTime, boolean optimizeWalking) {
         this.considerPassengers = considerPassengers;
         this.considerPriority = considerPriority;
