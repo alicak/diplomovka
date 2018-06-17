@@ -98,7 +98,6 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public void insertFlight(int stand, int flight, int flightValue) {
-        // TODO: what if the stand is full?
         boolean append = true;
         for (int f = noOfFlights[stand] - 1; f >= flight; f--) {
             setGene(getIndex(stand, f + 1), getGene(stand, f));

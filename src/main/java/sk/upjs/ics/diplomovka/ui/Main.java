@@ -183,7 +183,7 @@ public class Main {
         try {
             finalPopulation = algorithm.evolve();
         } catch (InterruptedException e) {
-            e.printStackTrace(); // TODO
+            e.printStackTrace();
         }
 
         reassignment = finalPopulation.bestChromosome();

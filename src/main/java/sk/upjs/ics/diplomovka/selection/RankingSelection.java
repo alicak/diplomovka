@@ -19,7 +19,7 @@ public class RankingSelection extends SelectionBase {
     }
 
     @Override
-    public Chromosome select(List<Chromosome> generation) { // TODO: returns only the best chromosome
+    public Chromosome select(List<Chromosome> generation) {
         Collections.sort(generation);
         return generation.get(0);
     }
