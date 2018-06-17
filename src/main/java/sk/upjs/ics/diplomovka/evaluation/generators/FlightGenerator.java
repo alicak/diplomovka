@@ -48,4 +48,7 @@ public class FlightGenerator extends TestDataGenerator {
                 priority, categoryId, destination);
     }
 
+    protected void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
 }

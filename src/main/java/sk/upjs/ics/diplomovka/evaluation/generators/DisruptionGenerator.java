@@ -5,18 +5,23 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DisruptionGenerator extends TestDataGenerator {
 
     private int id = 1;
     private FlightGenerator flightGenerator;
     private ClosureConditionGenerator conditionGenerator;
     private int startTime;
+    private Set<Integer> nonDisruptedStands;
 
     public DisruptionGenerator(GeneralStorage storage, int startTime) {
         super(storage);
         this.flightGenerator = new FlightGenerator(storage, startTime);
         this.conditionGenerator = new ClosureConditionGenerator(storage);
         this.startTime = startTime;
+        this.nonDisruptedStands = new HashSet<>(storage.getStandsStorage().getStandsIds());
     }
 
     public DisruptionDataModel generateDisruption() {
@@ -48,7 +53,9 @@ public class DisruptionGenerator extends TestDataGenerator {
     }
 
     private int randomStandId() {
-        return chooseFromSet(storage.getStandsStorage().getStandsIds());
+        int standId = chooseFromSet(nonDisruptedStands);
+        nonDisruptedStands.remove(standId);
+        return standId;
     }
 
     private int randomStart() {
