@@ -129,10 +129,10 @@ public class FlightViewModel implements Comparable<FlightViewModel>{
     }
 
     public int compareTo(FlightViewModel f) {
-        if (this.getOriginalStart() == f.getOriginalStart())
+        if (this.getActualStart() == f.getActualStart())
             return 0;
 
-        if (this.getOriginalStart() < f.getOriginalStart())
+        if (this.getActualStart() < f.getActualStart())
             return -1;
 
         return 1;

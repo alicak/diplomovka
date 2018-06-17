@@ -217,4 +217,8 @@ public class Main {
 
         return new CombinedFitness(storage, functions);
     }
+
+    public int getStartTime() {
+        return storage.getStartTime();
+    }
 }

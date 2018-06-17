@@ -7,7 +7,6 @@ package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
-import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.ui.Main;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
@@ -259,6 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void refreshFlights(List<FlightViewModel> flights) {
+        Collections.sort(flights);
         flightTableModel.setData(flights);
     }
 
@@ -277,52 +277,6 @@ public class MainFrame extends javax.swing.JFrame {
         assignmentDelayAverageLabel.setText(Integer.toString(statistics.getAssignmentDelayAverage()));
     }
 
-    private void calculateAndSetStatistics(List<FlightViewModel> flights) {
-        int regularDelaySum = 0;
-        int regularDelayCount = 0;
-        int regularDelayMax = 0;
-
-        int assignmentDelaySum = 0;
-        int assignmentDelayCount = 0;
-        int assignmentDelayMax = 0;
-
-        for (FlightViewModel flight : flights) {
-            int delay = flight.getDelay();
-            regularDelaySum += delay;
-            if (flight.isDelayed())
-                regularDelayCount++;
-            regularDelayMax = Math.max(regularDelayMax, delay);
-
-            int assignmentDelay = flight.getAssignmentDelay();
-            assignmentDelaySum += assignmentDelay;
-            if (flight.isAssignmentDelayed())
-                assignmentDelayCount++;
-            assignmentDelayMax = Math.max(assignmentDelayMax, assignmentDelay);
-        }
-
-        String zero = "0";
-        if (regularDelayCount == 0) {
-            regularDelayMaxLabel.setText(zero);
-            regularDelayCountLabel.setText(zero);
-            regularDelayAverageLabel.setText(zero);
-        } else {
-            regularDelayMaxLabel.setText(Integer.toString(regularDelayMax));
-            regularDelayCountLabel.setText(Integer.toString(regularDelayCount));
-            regularDelayAverageLabel.setText(Integer.toString(regularDelaySum / regularDelayCount));
-        }
-
-        if (assignmentDelayCount == 0) {
-            assignmentDelayMaxLabel.setText(zero);
-            assignmentDelayCountLabel.setText(zero);
-            assignmentDelayAverageLabel.setText(zero);
-        } else {
-            assignmentDelayMaxLabel.setText(Integer.toString(assignmentDelayMax));
-            assignmentDelayCountLabel.setText(Integer.toString(assignmentDelayCount));
-            assignmentDelayAverageLabel.setText(Integer.toString(assignmentDelaySum / assignmentDelayCount));
-        }
-
-    }
-
     public void refreshDisruptions(List<Disruption> disruptions) {
         disruptionListModel.setData(disruptions);
     }
@@ -330,6 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void calculateNewAssignment(ReassignmentParameters parameters) {
         InProgressDialog inProgressDialog = new InProgressDialog(this, true);
 
+        parameters.setStartTime(main.getStartTime());
         CalculationWorker calculationWorker = new CalculationWorker(this, parameters, inProgressDialog);
         calculationWorker.execute();
 

@@ -14,6 +14,8 @@ public class ReassignmentParameters {
     private double timeWeight;
     private double walkingWeight;
 
+    private int startTime = 0;
+
     public ReassignmentParameters(boolean considerPassengers,boolean considerPriority, boolean optimizeReassignments,
                                   boolean optimizeTime, boolean optimizeWalking) {
         this.considerPassengers = considerPassengers;
@@ -85,6 +87,15 @@ public class ReassignmentParameters {
 
     public ReassignmentParameters setWalkingWeight(double walkingWeight) {
         this.walkingWeight = walkingWeight;
+        return this;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public ReassignmentParameters setStartTime(int startTime) {
+        this.startTime = startTime;
         return this;
     }
 }
