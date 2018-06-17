@@ -1,8 +1,8 @@
-package sk.upjs.ics.diplomovka.data;
+package sk.upjs.ics.diplomovka.storage;
 
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 
 import java.util.HashMap;
 import java.util.Map;

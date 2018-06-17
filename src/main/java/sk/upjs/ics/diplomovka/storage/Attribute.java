@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.data;
+package sk.upjs.ics.diplomovka.storage;
 
 public abstract class Attribute {
     protected int id;

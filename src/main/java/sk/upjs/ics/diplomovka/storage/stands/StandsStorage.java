@@ -1,7 +1,7 @@
-package sk.upjs.ics.diplomovka.data.stands;
+package sk.upjs.ics.diplomovka.storage.stands;
 
-import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.data.stands.closures.StandClosure;
+import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.storage.stands.closures.StandClosure;
 
 import java.util.*;
 

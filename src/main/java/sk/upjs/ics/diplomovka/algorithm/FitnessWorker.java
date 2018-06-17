@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.algorithm;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;

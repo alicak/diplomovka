@@ -1,10 +1,10 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.base.FeasibilityCheckerBase;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.stands.Stand;
-import sk.upjs.ics.diplomovka.data.stands.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.stands.Stand;
+import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
 
 public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
     public AbsolutePositionFeasibilityChecker(GeneralStorage storage) {

@@ -1,6 +1,6 @@
-package sk.upjs.ics.diplomovka.data.stands;
+package sk.upjs.ics.diplomovka.storage.stands;
 
-import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
 import java.util.List;
 

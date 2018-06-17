@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.base;
 
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -2,11 +2,11 @@ package sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
-import sk.upjs.ics.diplomovka.data.FitnessFunctionWeights;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.Transfer;
-import sk.upjs.ics.diplomovka.data.stands.StandToGateMapper;
+import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.Transfer;
+import sk.upjs.ics.diplomovka.storage.stands.StandToGateMapper;
 
 import java.util.Map;
 

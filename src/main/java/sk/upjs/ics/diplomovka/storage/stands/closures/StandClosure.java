@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.data.stands.closures;
+package sk.upjs.ics.diplomovka.storage.stands.closures;
 
 public class StandClosure {
 

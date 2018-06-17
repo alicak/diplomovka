@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.data.flights;
+package sk.upjs.ics.diplomovka.storage.flights;
 
 import java.util.*;
 

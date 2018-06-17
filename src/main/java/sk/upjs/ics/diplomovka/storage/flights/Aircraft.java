@@ -1,6 +1,6 @@
-package sk.upjs.ics.diplomovka.data.flights;
+package sk.upjs.ics.diplomovka.storage.flights;
 
-import sk.upjs.ics.diplomovka.data.Attribute;
+import sk.upjs.ics.diplomovka.storage.Attribute;
 
 public class Aircraft extends Attribute {
 

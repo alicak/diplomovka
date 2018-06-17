@@ -1,6 +1,6 @@
-package sk.upjs.ics.diplomovka.data.stands.closures.conditions;
+package sk.upjs.ics.diplomovka.storage.stands.closures.conditions;
 
-import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.WingspanClosureConditionDataModel;
 
 public class WingspanClosureCondition implements ClosureCondition {

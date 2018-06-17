@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.Arrays;

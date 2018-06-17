@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.data.stands;
+package sk.upjs.ics.diplomovka.storage.stands;
 
 import java.util.Collections;
 import java.util.Map;

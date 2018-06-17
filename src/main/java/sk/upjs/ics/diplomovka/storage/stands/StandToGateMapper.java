@@ -1,12 +1,11 @@
-package sk.upjs.ics.diplomovka.data.stands;
+package sk.upjs.ics.diplomovka.storage.stands;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

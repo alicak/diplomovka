@@ -2,7 +2,7 @@ package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandClosedDisruptionDataModel;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 
 public class StandClosedDisruption implements Disruption {
     private int stand;

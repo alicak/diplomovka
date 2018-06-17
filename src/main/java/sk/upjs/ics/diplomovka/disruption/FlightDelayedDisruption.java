@@ -1,8 +1,8 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
-import sk.upjs.ics.diplomovka.data.flights.FlightStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.FlightDelayedDisruptionDataModel;
 
 public class FlightDelayedDisruption implements Disruption {

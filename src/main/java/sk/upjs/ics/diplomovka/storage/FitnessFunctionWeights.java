@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.data;
+package sk.upjs.ics.diplomovka.storage;
 
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 import sk.upjs.ics.diplomovka.utils.Utils;

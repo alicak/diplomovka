@@ -4,7 +4,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionChromosomeGener
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.ArrayList;
 import java.util.List;

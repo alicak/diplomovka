@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.data.models.view;
 
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
-import sk.upjs.ics.diplomovka.data.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
 public class FlightViewModel implements Comparable<FlightViewModel>{
 

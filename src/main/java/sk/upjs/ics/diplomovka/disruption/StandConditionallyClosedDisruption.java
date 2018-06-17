@@ -1,12 +1,12 @@
 package sk.upjs.ics.diplomovka.disruption;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.data.GeneralStorage;
+import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.data.parser.Types;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandConditionallyClosedDisruptionDataModel;
-import sk.upjs.ics.diplomovka.data.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.data.stands.closures.*;
-import sk.upjs.ics.diplomovka.data.stands.closures.conditions.ClosureCondition;
+import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
+import sk.upjs.ics.diplomovka.storage.stands.closures.*;
+import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.ClosureCondition;
 
 public class StandConditionallyClosedDisruption implements Disruption {
 
