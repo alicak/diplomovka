@@ -48,7 +48,13 @@ public class Main {
     private MutationBase mutation = new AbsolutePositionMutation(0.1);
     private SelectionBase selection = new RankingSelection();
     private TerminationBase termination = new IterationsTermination(1000);
-    CombinedFitness fitnessFunction;
+
+    private CombinedFitness fitnessFunction;
+
+    // fitness functions for reassignment statistics (there are no weights)
+    private ReassignmentFitness reassignmentFitness;
+    private TimeDiffFitness timeDiffFitness;
+    private StandsDistanceFitness distanceFitness;
 
     private String dataFolder = "data/";
     private String categoriesFile = dataFolder + "categories.json";
@@ -69,6 +75,10 @@ public class Main {
 
         feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);
         assignmentCreator = new AssignmentCreator(storage);
+
+        reassignmentFitness = new ReassignmentFitness(storage, null);
+        timeDiffFitness = new TimeDiffFitness(storage, null);
+        distanceFitness = new StandsDistanceFitness(storage, null);
     }
 
     public void prepareData() {
@@ -161,10 +171,6 @@ public class Main {
     }
 
     private ReassignmentStatistics calculateReassignmentStatistics(Chromosome reassignment) {
-        ReassignmentFitness reassignmentFitness = new ReassignmentFitness(storage, null);
-        TimeDiffFitness timeDiffFitness = new TimeDiffFitness(storage, null);
-        StandsDistanceFitness distanceFitness = new StandsDistanceFitness(storage, null);
-
         return new ReassignmentStatistics(
                 (-1) * (int) reassignmentFitness.calculateNonWeightedFitness(reassignment),
                 (-1) * (int) distanceFitness.calculateNonWeightedFitness(reassignment),
@@ -179,14 +185,13 @@ public class Main {
         }
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
-        PopulationBase finalPopulation = null;
         try {
-            finalPopulation = algorithm.evolve();
+            algorithm.evolve();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        reassignment = finalPopulation.bestChromosome();
+        reassignment = population.bestChromosome();
         reassignmentStatistics = calculateReassignmentStatistics(reassignment);
 
         return SolutionCreator.createSolutionFromChromosome(reassignment, storage);

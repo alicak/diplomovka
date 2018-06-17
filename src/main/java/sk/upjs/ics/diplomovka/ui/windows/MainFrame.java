@@ -366,6 +366,7 @@ public class MainFrame extends javax.swing.JFrame {
                 ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame,
                         true, main.getReassignmentStatistics(), get());
                 reassignmentFinishedDialog.setVisible(true);
+                main = new Main(); // we reset data
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

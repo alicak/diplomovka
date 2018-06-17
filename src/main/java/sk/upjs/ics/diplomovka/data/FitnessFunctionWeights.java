@@ -1,7 +1,9 @@
 package sk.upjs.ics.diplomovka.data;
 
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
+import sk.upjs.ics.diplomovka.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +18,13 @@ public class FitnessFunctionWeights {
     private double flightPriorityWeight = DEFAULT_WEIGHT;
     private double timeChangedWeight = DEFAULT_WEIGHT;
     private double walkingDistanceWeight = DEFAULT_WEIGHT;
+
     private List<IntervalWeight> futureWeights = Arrays.asList(new IntervalWeight(0, MINUTES_IN_DAY, DEFAULT_WEIGHT));
+    private static final int CLOSE_INTERVAL_LENGTH = 60;
+    private static final int MEDIUM_INTERVAL_LENGTH = 180;
+    private static final int CLOSE_FLIGHT_WEIGHT = 10;
+    private static final int MEDIUM_FLIGHT_WEIGHT = 3;
+    private static final int FAR_FLIGHT_WEIGHT = 1;
 
     public FitnessFunctionWeights() {
     }
@@ -32,6 +40,15 @@ public class FitnessFunctionWeights {
             timeChangedWeight = parameters.getTimeWeight();
         if (parameters.optimizeReassignments())
             reassignmentWeight = parameters.getReassignmentsWeight();
+
+        futureWeights = new ArrayList<>();
+        int end1 = parameters.getStartTime() + CLOSE_INTERVAL_LENGTH;
+        int end2 = end1 + MEDIUM_INTERVAL_LENGTH;
+
+        futureWeights = Arrays.asList(
+                new IntervalWeight(0, end1, CLOSE_FLIGHT_WEIGHT),
+                new IntervalWeight(end1, end2, MEDIUM_FLIGHT_WEIGHT),
+                new IntervalWeight(end2, Math.max(end2, Utils.MINUTES_IN_DAY), FAR_FLIGHT_WEIGHT));
     }
 
     public double getReassignmentWeight() {
