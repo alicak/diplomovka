@@ -14,7 +14,7 @@ public class ClosureConditionGenerator extends Generator {
 
     private static final int MIN_WEIGHT = 40;
     private static final int MAX_WEIGHT = 100;
-    private static final int MIN_WINGSPAN= 28;
+    private static final int MIN_WINGSPAN = 28;
     private static final int MAX_WINGSPAN = 40;
 
     public ClosureConditionGenerator(GeneralStorage storage) {
@@ -22,14 +22,28 @@ public class ClosureConditionGenerator extends Generator {
         attributes = storage.getFlightStorage().getAttributes();
     }
 
+    public ClosureConditionDataModel generateCondition() {
+        int condType = Utils.randomInt(1, 4);
+        switch (condType) {
+            case 1:
+                return generateCategoryCondition();
+            case 2:
+                return generateEngineTypeCondition();
+            case 3:
+                return generateWeightCondition();
+            default:
+                return generateEngineTypeCondition();
+        }
+    }
+
     public ClosureConditionDataModel generateCategoryCondition() {
         return new CategoryClosureConditionDataModel(Types.ClosureCondition.CATEGORY,
-                chooseFromSet(attributes.getCategories().keySet()));
+                chooseListFromSet(attributes.getCategories().keySet()));
     }
 
     public ClosureConditionDataModel generateEngineTypeCondition() {
         return new EngineTypeClosureConditionDataModel(Types.ClosureCondition.ENGINE_TYPE,
-                chooseFromSet(attributes.getEngineTypes().keySet()));
+                chooseListFromSet(attributes.getEngineTypes().keySet()));
     }
 
     public ClosureConditionDataModel generateWeightCondition() {
@@ -40,7 +54,7 @@ public class ClosureConditionGenerator extends Generator {
         return new WingspanClosureConditionDataModel(Types.ClosureCondition.WEIGHT, Utils.randomInt(MIN_WINGSPAN, MAX_WINGSPAN));
     }
 
-    private List<Integer> chooseFromSet(Set<Integer> set) {
+    private List<Integer> chooseListFromSet(Set<Integer> set) {
         List<Integer> list = new ArrayList<>(set);
 
         int count = Utils.randomInt(1, list.size()) - 1; // minus one because all would mean normal stand closure

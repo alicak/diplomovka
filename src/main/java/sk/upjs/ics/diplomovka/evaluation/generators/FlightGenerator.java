@@ -48,10 +48,4 @@ public class FlightGenerator extends Generator {
                 priority, categoryId, destination);
     }
 
-    private int chooseFromSet(Set<Integer> set) {
-        Integer[] ids = {};
-        set.toArray(ids);
-        return ids[Utils.randomInt(ids.length)];
-    }
-
 }
