@@ -33,8 +33,17 @@ public abstract class FitnessFunctionBase {
     public abstract double calculateNonWeightedFitness(Chromosome chromosome);
 
     protected double calculateTotalWeights(Flight flight, double fitnessSpecificWeight) {
-        return (fitnessSpecificWeight + weights.getPassengerWeight() * flight.getNoOfPassengers())
-                * weights.getFutureWeight(flight.getStart() - storage.getStartTime())
-                * weights.getFlightPriorityWeight() * flight.getPriority();
+        double weight = fitnessSpecificWeight;
+
+        if (weights.getFlightPriorityWeight() != 0) {
+            weight *= weights.getPassengerWeight() * flight.getNoOfPassengers();
+        }
+        if (weights.getFlightPriorityWeight() != 0) {
+            weight *= weights.getFutureWeight(flight.getStart() - storage.getStartTime());
+        }
+
+        weight *= weights.getFutureWeight(flight.getStart() - storage.getStartTime());
+
+        return weight;
     }
 }
