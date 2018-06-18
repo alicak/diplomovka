@@ -1,5 +1,7 @@
 package sk.upjs.ics.diplomovka.data.models.data.disruptions;
 
+import sk.upjs.ics.diplomovka.data.parser.Types;
+
 public class FlightDelayedDisruptionDataModel extends DisruptionDataModel {
 
     private int flightId;
@@ -7,6 +9,7 @@ public class FlightDelayedDisruptionDataModel extends DisruptionDataModel {
 
     public FlightDelayedDisruptionDataModel(int id, int flightId, int delay) {
         this.id = id;
+        this.type = Types.Disruption.FLIGHT_DELAYED;
         this.flightId = flightId;
         this.delay = delay;
     }

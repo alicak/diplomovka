@@ -21,20 +21,6 @@
     "weight": 93.5
   },
   {
-    "id": 4,
-    "name": "A330",
-    "wingspan": 60.3,
-    "engineType": 1,
-    "weight": 242
-  },
-  {
-    "id": 5,
-    "name": "A380",
-    "wingspan": 80,
-    "engineType": 1,
-    "weight": 575
-  },
-  {
     "id": 6,
     "name": "ATR 42",
     "wingspan": 25,
@@ -89,13 +75,6 @@
     "wingspan": 34.32,
     "engineType": 1,
     "weight": 85
-  },
-  {
-    "id": 14,
-    "name": "Boeing 777-200 / 200ER",
-    "wingspan": 60.93,
-    "engineType": 1,
-    "weight": 247
   },
   {
     "id": 15,

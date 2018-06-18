@@ -30,7 +30,7 @@ public class FlightGenerator extends TestDataGenerator {
         FlightStorage flightStorage = storage.getFlightStorage();
 
         int id = maxId++;
-        String scheduled = Utils.minutesToTime(Utils.randomInt(startTime + 60, Utils.MINUTES_IN_DAY - 180)); // TODO startTime constraint
+        String scheduled = Utils.minutesToTime(Utils.randomInt(startTime + 120, Utils.MINUTES_IN_DAY - 180)); // TODO startTime constraint
         String actual = scheduled;
         int turnaround = Utils.randomInt(30, 50);
         int standId = chooseFromSet(standsStorage.getStandsIds());
