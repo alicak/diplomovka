@@ -2,11 +2,16 @@ package sk.upjs.ics.diplomovka.data.models.view;
 
 public class ReassignmentStatistics {
 
+    private double originalFitness;
+    private double newFitness;
+
     private int noOfReassignments;
     private int totalWalkingDistance;
     private int totalTimeDiff;
 
-    public ReassignmentStatistics(int noOfReassignments, int totalWalkingDistance, int totalTimeDiff) {
+    public ReassignmentStatistics(double originalFitness, double newFitness, int noOfReassignments, int totalWalkingDistance, int totalTimeDiff) {
+        this.originalFitness = originalFitness;
+        this.newFitness = newFitness;
         this.noOfReassignments = noOfReassignments;
         this.totalWalkingDistance = totalWalkingDistance;
         this.totalTimeDiff = totalTimeDiff;
@@ -22,6 +27,14 @@ public class ReassignmentStatistics {
 
     public int getTotalTimeDiff() {
         return totalTimeDiff;
+    }
+
+    public double getOriginalFitness() {
+        return originalFitness;
+    }
+
+    public double getNewFitness() {
+        return newFitness;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.ui;
+package sk.upjs.ics.diplomovka.main;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
@@ -37,6 +37,8 @@ public class MainAlgorithm {
 
     private GeneralStorage storage;
 
+    private final String disruptionFile;
+
     private AbsolutePositionFeasibilityChecker feasibilityChecker;
     private AssignmentCreator assignmentCreator;
 
@@ -59,7 +61,8 @@ public class MainAlgorithm {
 
     private ReassignmentStatistics reassignmentStatistics;
 
-    public MainAlgorithm() {
+    public MainAlgorithm(String disruptionFile) {
+        this.disruptionFile = disruptionFile;
         prepareData();
 
         feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);
@@ -76,7 +79,7 @@ public class MainAlgorithm {
         storage = parser.parseDataFromJsons(Files.CATEGORIES, Files.AIRCRAFTS, Files.ENGINE_TYPES, Files.TRANSFERS,
                 Files.GATES, Files.GATE_DISTANCES, Files.STAND_DISTANCES, Files.STANDS, Files.FLIGHTS);
 
-        disruptions = parser.parseDisruptions(Files.DISRUPTIONS, storage);
+        disruptions = parser.parseDisruptions(disruptionFile, storage);
     }
 
     public void applyDisruptions() {
@@ -160,7 +163,8 @@ public class MainAlgorithm {
     }
 
     private ReassignmentStatistics calculateReassignmentStatistics(Chromosome reassignment) {
-        return new ReassignmentStatistics(
+        return new ReassignmentStatistics(fitnessFunction.calculateFitness(originalAssignment),
+                fitnessFunction.calculateFitness(reassignment),
                 (-1) * (int) reassignmentFitness.calculateNonWeightedFitness(reassignment),
                 (-1) * (int) distanceFitness.calculateNonWeightedFitness(reassignment),
                 (-1) * (int) timeDiffFitness.calculateNonWeightedFitness(reassignment));
@@ -214,5 +218,13 @@ public class MainAlgorithm {
 
     public int getStartTime() {
         return storage.getStartTime();
+    }
+
+    public double getAssignmentFitness() {
+        return fitnessFunction.calculateFitness(originalAssignment);
+    }
+
+    public double getReassignmentFitness() {
+        return fitnessFunction.calculateFitness(reassignment);
     }
 }

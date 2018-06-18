@@ -11,14 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class Main {
+public class ScenarioMakerMain {
 
-    private static final String SCENARIOS_DATA_FOLDER = "data/scenarios/";
+    public static final String SCENARIOS_DATA_FOLDER = "data/scenarios/";
     private static final Gson GSON = new Gson();
 
     public static void main(String[] args) throws FileNotFoundException {
         DataParser parser = new DataParser();
-
         GeneralStorage storage = parser.parseDataFromJsons(Files.CATEGORIES, Files.AIRCRAFTS, Files.ENGINE_TYPES, Files.TRANSFERS,
                 Files.GATES, Files.GATE_DISTANCES, Files.STAND_DISTANCES, Files.STANDS, Files.FLIGHTS);
 
@@ -41,4 +40,5 @@ public class Main {
             pw.close();
         }
     }
+
 }

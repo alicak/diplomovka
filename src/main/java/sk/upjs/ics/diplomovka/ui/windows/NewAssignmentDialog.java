@@ -5,16 +5,17 @@
  */
 package sk.upjs.ics.diplomovka.ui.windows;
 
+import sk.upjs.ics.diplomovka.ui.MainWindow;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 
 public class NewAssignmentDialog extends javax.swing.JDialog {
 
-    private MainFrame parent;
+    private MainWindow parent;
 
     /**
      * Creates new form NewAssignmentDialog
      */
-    public NewAssignmentDialog(MainFrame parent, boolean modal) {
+    public NewAssignmentDialog(MainWindow parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
@@ -303,7 +304,7 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewAssignmentDialog dialog = new NewAssignmentDialog(new MainFrame(), true);
+                NewAssignmentDialog dialog = new NewAssignmentDialog(new MainWindow(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

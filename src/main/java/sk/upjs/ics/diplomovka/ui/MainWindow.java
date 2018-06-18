@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.upjs.ics.diplomovka.ui.windows;
+package sk.upjs.ics.diplomovka.ui;
 
 import sk.upjs.ics.diplomovka.data.models.view.AssignmentStatistics;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
+import sk.upjs.ics.diplomovka.data.parser.Files;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
-import sk.upjs.ics.diplomovka.ui.MainAlgorithm;
+import sk.upjs.ics.diplomovka.main.MainAlgorithm;
 import sk.upjs.ics.diplomovka.ui.models.DisruptionListModel;
 import sk.upjs.ics.diplomovka.ui.models.FlightTableModel;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
+import sk.upjs.ics.diplomovka.ui.windows.InProgressDialog;
+import sk.upjs.ics.diplomovka.ui.windows.NewAssignmentDialog;
+import sk.upjs.ics.diplomovka.ui.windows.ReassignmentFinishedDialog;
 
 import javax.swing.*;
 import java.text.DateFormat;
@@ -21,19 +25,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
     private FlightTableModel flightTableModel = new FlightTableModel(Collections.emptyList());
     private DisruptionListModel disruptionListModel = new DisruptionListModel(Collections.emptyList());
     private MainAlgorithm mainAlgorithm;
 
     /**
-     * Creates new form MainFrame
+     * Creates new form MainWindow
      */
-    public MainFrame() {
+    public MainWindow() {
         initComponents();
 
-        mainAlgorithm = new MainAlgorithm();
+        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS);
         mainAlgorithm.applyDisruptions();
         refreshDisruptions(mainAlgorithm.getDisruptions());
         refreshAssignment(mainAlgorithm.getFlights());
@@ -301,20 +305,20 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainWindow().setVisible(true);
             }
         });
     }
@@ -347,11 +351,11 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private class CalculationWorker extends SwingWorker<List<FlightViewModel>, Integer> {
-        private MainFrame parentFrame;
+        private MainWindow parentFrame;
         private InProgressDialog inProgressDialog;
         private ReassignmentParameters parameters;
 
-        public CalculationWorker(MainFrame parentFrame, ReassignmentParameters parameters, InProgressDialog inProgressDialog) {
+        public CalculationWorker(MainWindow parentFrame, ReassignmentParameters parameters, InProgressDialog inProgressDialog) {
             this.parentFrame = parentFrame;
             this.parameters = parameters;
             this.inProgressDialog = inProgressDialog;
@@ -368,7 +372,7 @@ public class MainFrame extends javax.swing.JFrame {
                 ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame,
                         true, mainAlgorithm.getReassignmentStatistics(), get());
                 reassignmentFinishedDialog.setVisible(true);
-                mainAlgorithm = new MainAlgorithm(); // we reset data
+                mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

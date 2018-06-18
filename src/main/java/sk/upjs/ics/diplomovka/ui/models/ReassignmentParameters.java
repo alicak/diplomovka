@@ -8,11 +8,11 @@ public class ReassignmentParameters {
     private boolean optimizeTime;
     private boolean optimizeWalking;
 
-    private double passengersWeight;
-    private double priorityWeight;
-    private double reassignmentsWeight;
-    private double timeWeight;
-    private double walkingWeight;
+    private double passengersWeight = 0;
+    private double priorityWeight = 0;
+    private double reassignmentsWeight = 0;
+    private double timeWeight = 0;
+    private double walkingWeight = 0;
 
     private int startTime = 0;
 

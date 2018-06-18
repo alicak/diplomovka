@@ -7,6 +7,7 @@ package sk.upjs.ics.diplomovka.ui.windows;
 
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
+import sk.upjs.ics.diplomovka.ui.MainWindow;
 
 import javax.swing.*;
 import java.util.Collections;
@@ -14,13 +15,13 @@ import java.util.List;
 
 public class ReassignmentFinishedDialog extends javax.swing.JDialog {
 
-    private MainFrame parent;
+    private MainWindow parent;
     private List<FlightViewModel> flights;
 
     /**
      * Creates new form AssignmentCreated
      */
-    public ReassignmentFinishedDialog(MainFrame parent, boolean modal, ReassignmentStatistics statistics, List<FlightViewModel> flights) {
+    public ReassignmentFinishedDialog(MainWindow parent, boolean modal, ReassignmentStatistics statistics, List<FlightViewModel> flights) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
@@ -150,7 +151,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainFrame(), true, new ReassignmentStatistics(0, 0, 0), Collections.emptyList());
+                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainWindow(), true, new ReassignmentStatistics(0,0, 0, 0, 0), Collections.emptyList());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
