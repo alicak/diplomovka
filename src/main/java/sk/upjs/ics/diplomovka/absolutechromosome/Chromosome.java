@@ -121,6 +121,9 @@ public class Chromosome implements Comparable<Chromosome> {
         setGenes(newGenes);
         maxNoFlights++;
 
+        currentFlightStarts.put(flightValue, 0);
+        currentFlightEnds.put(flightValue,0);
+
         int standForFlight = -1;
         boolean feasible = false;
         while (!feasible) {

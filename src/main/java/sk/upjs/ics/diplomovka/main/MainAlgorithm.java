@@ -16,7 +16,7 @@ import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.parser.Files;
-import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.main.AssignmentCreator;
 import sk.upjs.ics.diplomovka.main.PopulationCreator;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
@@ -50,7 +50,7 @@ public class MainAlgorithm {
     private CrossoverBase crossover = new AbsolutePositionCrossover(1);
     private MutationBase mutation = new AbsolutePositionMutation(0.1);
     private SelectionBase selection = new RankingSelection();
-    private TerminationBase termination = new IterationsTermination(1000);
+    private TerminationBase termination = new IterationsTermination(2000);
 
     private CombinedFitness fitnessFunction;
 
@@ -86,14 +86,31 @@ public class MainAlgorithm {
         preparePopulation();
 
         for (Disruption disruption : disruptions) {
+            Class type = disruption.getClass();
+            if (type == FlightAddedDisruption.class) {
+                continue;
+            }
+
             disruption.disruptAssignment(originalAssignment);
             for (Chromosome c : population.get()) {
                 disruption.disruptAssignment(c);
             }
+
+            disruption.disruptStorage();
         }
 
         for (Disruption disruption : disruptions) {
+            Class type = disruption.getClass();
+            if (type != FlightAddedDisruption.class) {
+                continue;
+            }
+
             disruption.disruptStorage();
+
+            disruption.disruptAssignment(originalAssignment);
+            for (Chromosome c : population.get()) {
+                disruption.disruptAssignment(c);
+            }
         }
 
         flights = null;

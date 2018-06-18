@@ -154,9 +154,8 @@ public class StandsStorage {
         return attributes.getGatesDistance(id1, id2);
     }
 
-    public double getStandsDistance(int no1, int no2) {
+    public double getStandsDistance(int no1, int id2) {
         int id1 = standsIds[no1];
-        int id2 = standsIds[no2];
         return attributes.getStandsDistance(id1, id2);
     }
 

@@ -38,14 +38,13 @@ public class StandsDistanceFitness extends FitnessFunctionBase {
         for (int s = 0; s < chromosome.getNoOfStands(); s++) {
             for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
                 Flight flight = flightStorage.getFlight(chromosome.getGene(s, f));
-                int originalStandNo = standsStorage.getNumberById(flight.getOriginalStandId());
 
                 double weight = weighted ? calculateTotalWeights(flight, weights.getWalkingDistanceWeight()) : 1;
-                fitness += weight * standsStorage.getStandsDistance(s, originalStandNo);
+                fitness += weight * standsStorage.getStandsDistance(s, flight.getOriginalStandId());
 
                 for (Transfer transfer : flight.getTransfers()) {
                     int transferArrivingStand = flightsToStands.get(transfer.getFlightId());
-                    fitness += weight * standsStorage.getStandsDistance(s, transferArrivingStand);
+                    fitness += weight * standsStorage.getStandsDistance(s, standsStorage.getStandByNumber(transferArrivingStand).getId());
                 }
             }
         }

@@ -13,10 +13,10 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
 
     @Override
     public boolean checkChromosomeFeasibility(Chromosome chromosome) {
-        for (int g = 0; g < chromosome.getNoOfStands(); g++) {
-            for (int f = 0; f < chromosome.getNoOfFlights(g); f++) {
-                int flightNo = chromosome.getGene(g, f);
-                if (!checkFlightFeasibility(flightNo, g) || !checkConditionalClosures(f, g, chromosome)) {
+        for (int s = 0; s < chromosome.getNoOfStands(); s++) {
+            for (int f = 0; f < chromosome.getNoOfFlights(s); f++) {
+                int flightNo = chromosome.getGene(s, f);
+                if (!checkFlightFeasibility(flightNo, s) || !checkConditionalClosures(f, s, chromosome)) {
                     return false;
                 }
             }
@@ -25,16 +25,16 @@ public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
     }
 
     @Override
-    public boolean checkFlightFeasibility(int flightValue, int gate) {
-        Stand stand = standsStorage.getStandByNumber(gate);
+    public boolean checkFlightFeasibility(int flightValue, int standNo) {
+        Stand stand = standsStorage.getStandByNumber(standNo);
         return stand.checkFlight(flightStorage.getFlight(flightValue));
     }
 
-    public boolean checkConditionalClosures(int flightIdx, int gate, Chromosome chromosome) {
-        Flight flight = flightStorage.getFlight(chromosome.getGene(gate, flightIdx));
+    public boolean checkConditionalClosures(int flightIdx, int standNo, Chromosome chromosome) {
+        Flight flight = flightStorage.getFlight(chromosome.getGene(standNo, flightIdx));
 
-        for (ConditionalStandClosure closure : standsStorage.getConditionalClosuresForStand(gate)) {
-            if (!closure.checkFlight(flight, chromosome.getCurrentFlightStart(gate, flightIdx), chromosome.getCurrentFlightEnd(gate, flightIdx)))
+        for (ConditionalStandClosure closure : standsStorage.getConditionalClosuresForStand(standNo)) {
+            if (!closure.checkFlight(flight, chromosome.getCurrentFlightStart(standNo, flightIdx), chromosome.getCurrentFlightEnd(standNo, flightIdx)))
                 return false;
         }
         return true;
