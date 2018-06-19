@@ -10,19 +10,20 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class EvaluatorMain {
+    private static final File SCENARIOS_FOLDER = new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER);
+    private static final String RESULTS_FOLDER = "data/results/";
+
     public static void main(String[] args) throws FileNotFoundException {
-        File scenariosFolder = new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER);
-        String resultsFolder = "data/results/";
-        File[] scenariosFiles = scenariosFolder.listFiles();
+        File[] scenariosFiles = SCENARIOS_FOLDER.listFiles();
         Gson gson = new Gson();
 
         for (File scenarioFile : scenariosFiles) {
             String name = scenarioFile.getName();
-            if (!name.contains("_scenario_")) // in case there is some other file
+            if (!name.contains("_scenario_")) // in case there is some other file in the directory
                 break;
             ReassignmentStatistics statistics = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
 
-            PrintWriter pw = new PrintWriter(new File(resultsFolder + name));
+            PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + name));
             pw.write(gson.toJson(statistics));
             pw.close();
         }
