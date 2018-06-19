@@ -1,6 +1,6 @@
-package sk.upjs.ics.diplomovka.storage.stands.closures;
+package sk.upjs.ics.diplomovka.disruption.closures;
 
-public class StandClosure {
+public abstract class StandClosure {
 
     private int id;
     private int start;

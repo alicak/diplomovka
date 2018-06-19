@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * creates sorted list of FlightViewModels from Chromosome
+ */
 public class SolutionCreator {
 
     public static List<FlightViewModel> createSolutionFromChromosome(Chromosome chromosome, GeneralStorage storage) {

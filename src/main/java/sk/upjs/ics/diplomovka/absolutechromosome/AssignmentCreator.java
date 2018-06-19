@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.main;
+package sk.upjs.ics.diplomovka.absolutechromosome;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
@@ -8,6 +8,10 @@ import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 
 import java.util.Arrays;
+
+/**
+ * creates original chromosome - from data in storage
+ */
 
 public class AssignmentCreator {
 
@@ -19,7 +23,7 @@ public class AssignmentCreator {
         this.flightStorage = storage.getFlightStorage();
     }
 
-    public Chromosome createAbsoluteOriginalAssignment(FeasibilityChecker feasibilityChecker) {
+    public Chromosome createOriginalAssignment(FeasibilityChecker feasibilityChecker) {
         int noOfFlights = flightStorage.getNoOfFlights();
 
         Chromosome originalAssignment = new Chromosome(standsStorage.getNoOfStands(), noOfFlights);

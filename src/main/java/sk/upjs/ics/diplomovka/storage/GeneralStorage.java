@@ -29,17 +29,20 @@ public class GeneralStorage {
         return standsStorage;
     }
 
+    // creates storage with new start time - but not a copy
     public GeneralStorage getStorageWithOptionalStart(int startTime) {
         if (startTime > MINUTES_IN_DAY) {
             throw new IllegalArgumentException("Start time can't be more than number of minutes in one day.");
         }
 
+        // times for stands form which we can start assigning flights
         Map<Integer, Integer> availabilityTimes = new HashMap<>();
 
         for (Integer standId : standsStorage.getStandsIds()) {
             availabilityTimes.put(standId, startTime);
         }
 
+        // if a flight overlaps start time, we set it as end of that flight
         for (Flight flight : flightStorage.getSortedFlights()) {
             if (flight.getStart() < startTime && flight.getEnd() > startTime) {
                 availabilityTimes.put(flight.getOriginalStandId(), flight.getEnd());

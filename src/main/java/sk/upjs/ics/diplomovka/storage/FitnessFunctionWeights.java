@@ -11,7 +11,7 @@ import static sk.upjs.ics.diplomovka.utils.Utils.MINUTES_IN_DAY;
 
 public class FitnessFunctionWeights {
 
-    private static final double DEFAULT_WEIGHT = 1;
+    private static final double DEFAULT_WEIGHT = 0;
 
     private double reassignmentWeight = DEFAULT_WEIGHT;
     private double passengerWeight = DEFAULT_WEIGHT;

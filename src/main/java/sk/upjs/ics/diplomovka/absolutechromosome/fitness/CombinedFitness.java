@@ -7,12 +7,15 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.List;
 
+/**
+ * sums results of multiple fitness functions
+ */
 public class CombinedFitness extends FitnessFunctionBase {
 
     private List<FitnessFunctionBase> functions;
 
     public CombinedFitness(GeneralStorage storage, List<FitnessFunctionBase> functions) {
-        super(storage, new FitnessFunctionWeights()); // we don't need weights here
+        super(storage, new FitnessFunctionWeights()); // we don't need weights here, so we use class with no weights set up
         this.functions = functions;
     }
 

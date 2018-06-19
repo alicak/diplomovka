@@ -42,15 +42,15 @@ public class DataParser {
 
     private void parseFlightAttributes(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile) {
         flightAttributes = new FlightAttributes()
-                .setCategories(parseStringAttribute(categoriesFile))
-                .setEngineTypes(parseStringAttribute(engineTypesFile))
+                .setCategories(parseStringFlightAttribute(categoriesFile))
+                .setEngineTypes(parseStringFlightAttribute(engineTypesFile))
                 .setAircrafts(parseObjectAttribute(aircraftsFile, Aircraft[].class))
                 .setTransfers(parseObjectAttribute(transfersFile, Transfer[].class));
     }
 
     private void parseStandAttributes(String gatesFile, String gateDistancesFile, String standDistancesFile) {
         standAttributes = new StandAttributes()
-                .setGates(parseStringAttribute(gatesFile))
+                .setGates(parseStringFlightAttribute(gatesFile))
                 .setGateDistances(parseDistances(gateDistancesFile))
                 .setStandsDistances(parseDistances(standDistancesFile));
     }
@@ -83,7 +83,7 @@ public class DataParser {
         flightStorage = new FlightStorage(flightsMap, flightAttributes);
     }
 
-    private Map<Integer, String> parseStringAttribute(String attributesFile) {
+    private Map<Integer, String> parseStringFlightAttribute(String attributesFile) {
         FlightAttribute[] attributes = parseObjects(attributesFile, FlightAttribute[].class);
 
         Map<Integer, String> attributeMap = new HashMap<>();
@@ -97,12 +97,12 @@ public class DataParser {
     private <T extends Attribute> Map<Integer, T> parseObjectAttribute(String attributesFile, Class<T[]> type) {
         T[] attributes = parseObjects(attributesFile, type);
 
-        Map<Integer, T> aircraftMap = new HashMap<>();
+        Map<Integer, T> map = new HashMap<>();
         for (T attribute : attributes) {
-            aircraftMap.put(attribute.getId(), attribute);
+            map.put(attribute.getId(), attribute);
         }
 
-        return aircraftMap;
+        return map;
     }
 
     private DistancesMatrix parseDistances(String distancesFile) {
@@ -135,6 +135,8 @@ public class DataParser {
     private <T> T[] parseObjects(String fileName, Class<T[]> type) {
         return parseObjects(fileName, type, new Gson());
     }
+
+    // helper classes for flight and stand attribute parsing:
 
     private class FlightAttribute {
         private int id;

@@ -25,6 +25,7 @@ public class StandToGateMapper {
 
         Map<Integer, Integer> flightsToGates = new HashMap<>();
 
+        // last time when the gate was used
         Map<Integer, Integer> usedTimesOnGates = initalizeUsedTimesOnGates(standsStorage);
 
         for (int g = 0; g < chromosome.getNoOfStands(); g++) {

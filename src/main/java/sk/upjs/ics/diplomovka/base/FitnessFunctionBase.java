@@ -42,6 +42,7 @@ public abstract class FitnessFunctionBase {
             weight *= weights.getFutureWeight(flight.getStart() - storage.getStartTime());
         }
 
+        // flights get their weights depending on their starts
         weight *= weights.getFutureWeight(flight.getStart() - storage.getStartTime());
 
         return weight;

@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.main;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AssignmentCreator;
 import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.Population;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
@@ -29,6 +30,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * prepares everything for the calculation, runs the actual algorithm and provides the results
+ */
 public class MainAlgorithm {
 
     private List<FlightViewModel> flights;
@@ -53,7 +57,6 @@ public class MainAlgorithm {
 
     private CombinedFitness fitnessFunction;
 
-    // fitness functions for reassignment statistics (there are no weights)
     private ReassignmentFitness reassignmentFitness;
     private TimeDiffFitness timeDiffFitness;
     private StandsDistanceFitness distanceFitness;
@@ -67,6 +70,7 @@ public class MainAlgorithm {
         feasibilityChecker = new FeasibilityChecker(storage);
         assignmentCreator = new AssignmentCreator(storage);
 
+        // fitness functions for reassignment statistics (there are no weights)
         reassignmentFitness = new ReassignmentFitness(storage, null);
         timeDiffFitness = new TimeDiffFitness(storage, null);
         distanceFitness = new StandsDistanceFitness(storage, null);
@@ -83,6 +87,8 @@ public class MainAlgorithm {
 
     public void applyDisruptions() {
         preparePopulation();
+
+        // it depends on the kind of disruption if storage needs to be disrupted before or after chromosomes are disrupted
 
         for (Disruption disruption : disruptions) {
             Class type = disruption.getClass();
@@ -116,7 +122,7 @@ public class MainAlgorithm {
     }
 
     private void preparePopulation() {
-        originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
+        originalAssignment = assignmentCreator.createOriginalAssignment(feasibilityChecker);
         population = PopulationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
     }
 
@@ -165,7 +171,7 @@ public class MainAlgorithm {
                 .setRegularDelayCount(regularDelayCount)
                 .setRegularDelayMax(regularDelayMax);
 
-        if (assignmentDelayCount != 0)
+        if (assignmentDelayCount != 0) // to prevent division by zero
             statistics.setAssignmentDelayAverage(assignmentDelaySum / assignmentDelayCount);
         else
             statistics.setAssignmentDelayAverage(0);
@@ -183,7 +189,7 @@ public class MainAlgorithm {
                 fitnessFunction.calculateFitness(reassignment),
                 (-1) * (int) reassignmentFitness.calculateNonWeightedFitness(reassignment),
                 (-1) * (int) distanceFitness.calculateNonWeightedFitness(reassignment),
-                (-1) * (int) timeDiffFitness.calculateNonWeightedFitness(reassignment));
+                (-1) * (int) timeDiffFitness.calculateNonWeightedFitness(reassignment)); // fitness is maximized, so we multiple by -1
     }
 
     public List<FlightViewModel> calculateNewAssignment(ReassignmentParameters parameters) {

@@ -12,6 +12,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * performs actual evolution of population
+ */
 public class Algorithm extends AlgorithmBase {
 
     public Algorithm(PopulationBase population, FitnessFunctionBase fitnessFunction, CrossoverBase crossover,
@@ -24,6 +27,7 @@ public class Algorithm extends AlgorithmBase {
         BlockingQueue<Chromosome> offspring = new LinkedBlockingQueue<>();
         AtomicInteger counter = new AtomicInteger(population.size());
 
+        // does crossover in parallel
         List<CrossoverWorker> crossoverWorkers = new LinkedList<>();
         for (int w = 0; w < noOfCores; w++) {
             crossoverWorkers.add(new CrossoverWorker(crossover, population, offspring, counter));
@@ -33,6 +37,7 @@ public class Algorithm extends AlgorithmBase {
         offspring.addAll(population.get());
         counter.set(offspring.size());
 
+        // does mutation in parallel
         List<MutationWorker> mutationWorkers = new LinkedList<>();
         for (int w = 0; w < noOfCores; w++) {
             mutationWorkers.add(new MutationWorker(mutation, offspring, counter));
@@ -41,6 +46,7 @@ public class Algorithm extends AlgorithmBase {
 
         counter.set(offspring.size());
 
+        // calculates fitness in parallel
         List<FitnessWorker> fitnessWorkers = new LinkedList<>();
         for (int w = 0; w < noOfCores; w++) {
             fitnessWorkers.add(new FitnessWorker(fitnessFunction, offspring, counter, storage));

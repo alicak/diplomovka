@@ -10,6 +10,9 @@ import sk.upjs.ics.diplomovka.storage.flights.Transfer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * calculates fitness by summing distances between stands
+ */
 public class StandsDistanceFitness extends FitnessFunctionBase {
     public StandsDistanceFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
         super(storage, weights);

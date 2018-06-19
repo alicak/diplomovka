@@ -11,6 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * creates and saves mutliple test scenarios
+ */
 public class ScenarioMakerMain {
 
     public static final String SCENARIOS_DATA_FOLDER = "data/scenarios/";
@@ -24,7 +27,7 @@ public class ScenarioMakerMain {
         ScenarioMaker scenarioMaker = new ScenarioMaker(storage);
 
         for (ScenarioMaker.ScenarioType type: ScenarioMaker.ScenarioType.values()) {
-            generateAndWriteScenariosSet(scenarioMaker, type,10);
+            generateAndWriteScenariosSet(scenarioMaker, type,10); // we create 10 scenarios of every type
         }
     }
 

@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+/**
+ * runs reassignment calculation for all test scenarios and saves the results
+ */
 public class EvaluatorMain {
     private static final File SCENARIOS_FOLDER = new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER);
     private static final String RESULTS_FOLDER = "data/results/";
@@ -32,6 +35,7 @@ public class EvaluatorMain {
     private static ReassignmentStatistics runReassignment(String disruptionsFile) {
         MainAlgorithm algorithm = new MainAlgorithm(disruptionsFile);
 
+        // all reassignments will use the same parameters
         ReassignmentParameters parameters = new ReassignmentParameters(true, true, true, true, true)
                 .setStartTime(algorithm.getStartTime())
                 .setReassignmentsWeight(60)

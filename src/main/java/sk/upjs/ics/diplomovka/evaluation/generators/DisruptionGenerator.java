@@ -16,7 +16,6 @@ public class DisruptionGenerator extends TestDataGenerator {
     private Set<Integer> nonDisruptedStands;
     private Set<Integer> nonDisruptedFlights;
 
-    private static final int KINDS_OF_DISRUPTIONS = 5;
     private static final int KINDS_OF_STAND_DISRUPTIONS = 3;
     private static final int KINDS_OF_FLIGHT_DISRUPTIONS = 2;
 

@@ -6,6 +6,9 @@ import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
+/**
+ * calculates fitness by counting differences between scheduled and actual time
+ */
 public class TimeDiffCountFitness extends FitnessFunctionBase {
     public TimeDiffCountFitness(GeneralStorage storage, FitnessFunctionWeights weights) {
         super(storage, weights);

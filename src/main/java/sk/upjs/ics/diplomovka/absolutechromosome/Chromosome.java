@@ -1,11 +1,12 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
+import sk.upjs.ics.diplomovka.disruption.closures.TemporaryStandClosure;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.storage.stands.closures.StandClosure;
+import sk.upjs.ics.diplomovka.disruption.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.disruption.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.*;
@@ -18,7 +19,7 @@ public class Chromosome implements Comparable<Chromosome> {
     private double fitness = -1;
     private int noOfStands;
     private int[] noOfFlights; // number of flights per stand
-    private int maxNoFlights;
+    private int maxNoFlights; // total number of flights
     private FeasibilityChecker feasibilityChecker;
     private Map<Integer, Integer> currentFlightStarts = new HashMap<>();
     private Map<Integer, Integer> currentFlightEnds = new HashMap<>();
@@ -61,10 +62,9 @@ public class Chromosome implements Comparable<Chromosome> {
     public void setGene(int stand, int flight, int flightValue) {
         int oldValue = getGene(stand, flight);
         if (flightValue != EMPTY_GENE && oldValue == EMPTY_GENE) {
-            noOfFlights[stand]++;
+            noOfFlights[stand]++; // new flight is added to the stand
         }
         setGene(getIndex(stand, flight), flightValue);
-        resetFitness();
     }
 
     public void setGenes(List<Integer> genes) {
@@ -88,20 +88,23 @@ public class Chromosome implements Comparable<Chromosome> {
         fitness = FITNESS_NOT_SET;
     }
 
+    // we need this to happen before we calculate fitness
     public void prepareForFitnessCalculation(GeneralStorage storage) {
         calculateCurrentFlightStarts(storage);
         applyAllClosures(storage);
     }
 
-    public void addNextFlight(int stand, int flightValue) {
+    // add flight to the end of the queue
+    public void appendFlight(int stand, int flightValue) {
         setGene(stand, noOfFlights[stand], flightValue);
     }
 
+    // insert flight at specific position in the queue
     public void insertFlight(int stand, int flight, int flightValue) {
         boolean append = true;
-        for (int f = noOfFlights[stand] - 1; f >= flight; f--) {
+        for (int f = noOfFlights[stand] - 1; f >= flight; f--) { // we move flights by one slot behind to free the position
             setGene(getIndex(stand, f + 1), getGene(stand, f));
-            append = false;
+            append = false; // if no flight is moved behind, we are appending
         }
 
         setGene(stand, flight, flightValue);
@@ -109,6 +112,7 @@ public class Chromosome implements Comparable<Chromosome> {
             noOfFlights[stand]++;
     }
 
+    // adds totally new flight to the chromosome
     public int addFlight(int flightValue) {
         List<Integer> newGenes = new ArrayList<>(genes.size() + maxNoFlights + 1);
 
@@ -116,7 +120,7 @@ public class Chromosome implements Comparable<Chromosome> {
             for (int f = 0; f < maxNoFlights; f++) {
                 newGenes.add(getGene(s, f));
             }
-            newGenes.add(EMPTY_GENE);
+            newGenes.add(EMPTY_GENE); // add empty gene at the end of each queue
         }
         setGenes(newGenes);
         maxNoFlights++;
@@ -126,12 +130,12 @@ public class Chromosome implements Comparable<Chromosome> {
 
         int standForFlight = -1;
         boolean feasible = false;
-        while (!feasible) {
+        while (!feasible) { // find feasible stand for the flight
             standForFlight = Utils.randomInt(noOfStands);
             feasible = checkFlightFeasibility(flightValue, standForFlight);
         }
 
-        addNextFlight(standForFlight, flightValue);
+        appendFlight(standForFlight, flightValue);
         return standForFlight;
     }
 
@@ -140,6 +144,7 @@ public class Chromosome implements Comparable<Chromosome> {
         removeFlightFromGenes(position.getStand(), position.getFlight());
 
         Integer[] newGenes = new Integer[(maxNoFlights - 1) * noOfStands];
+        // remove one slot from each queue
         for (int s = 0; s < noOfStands; s++) {
             for (int f = 0; f < maxNoFlights - 1; f++) {
                 int idx = s * (maxNoFlights - 1) + f;
@@ -148,16 +153,15 @@ public class Chromosome implements Comparable<Chromosome> {
             }
         }
         setGenes(Arrays.asList(newGenes));
-
         maxNoFlights--;
     }
 
+    // removes flight from its position, but does not shorten the queues
     public void removeFlightFromGenes(int stand, int flight) {
         for (int f = flight; f < noOfFlights[stand]; f++) {
             setGene(stand, f, getGene(stand, f + 1));
         }
         noOfFlights[stand]--;
-        resetFitness();
     }
 
     public void removeStand(int stand) {
@@ -178,16 +182,18 @@ public class Chromosome implements Comparable<Chromosome> {
 
         int lastStand = noOfStands - 1;
 
+        // copy flights from last stand to positions of removed stand
         for (int i = 0; i < maxNoFlights; i++) {
             setGene(getIndex(stand, i), getGene(lastStand, i));
         }
-        genes = genes.subList(0, genes.size() - maxNoFlights);
+
+        // remove last stand
+        setGenes(genes.subList(0, genes.size() - maxNoFlights));
 
         noOfFlights[stand] = noOfFlights[lastStand];
         noOfFlights = Arrays.copyOf(noOfFlights, noOfFlights.length - 1);
 
         noOfStands--;
-        resetFitness();
     }
 
     public int getNoOfFlights(int stand) {
@@ -280,34 +286,17 @@ public class Chromosome implements Comparable<Chromosome> {
         this.currentFlightEnds = currentFlightEnds;
     }
 
-    public void applyStandClosure(StandClosure closure, int standNo) {
+    public void applyStandClosure(TemporaryStandClosure closure, int standNo) {
         for (int f = 0; f < getNoOfFlights(standNo); f++) {
+            int currentStart = getCurrentFlightStart(standNo, f);
             int currentEnd = getCurrentFlightEnd(standNo, f);
 
-            if (currentEnd >= closure.getStart()) {
-                int currentStart = getCurrentFlightStart(standNo, f);
-                int delay = closure.getLength();
-
-                if (currentStart < closure.getStart())
-                    delay = delay + (closure.getStart() - currentStart); // we also have to consider the gap between planned start and closure
-
-                for (int lateFlight = f; lateFlight < getNoOfFlights(standNo); lateFlight++) {
+            if (currentEnd >= closure.getStart()) { // flight ends after the closure starts - it has to be started after the closure
+                int delay = closure.getEnd() - currentStart; // we also have to consider the gap between planned start and closure
+                for (int lateFlight = f; lateFlight < getNoOfFlights(standNo); lateFlight++) { // all later flights get that delay
                     incrementCurrentStartAndEnd(standNo, lateFlight, delay);
                 }
                 break;
-            }
-        }
-    }
-
-    public void applyAllClosures(GeneralStorage storage) {
-        for (int s = 0; s < noOfStands; s++) {
-            Collection<StandClosure> closuresForStand = storage.getStandsStorage().getClosuresForStand(s);
-            for (StandClosure closure : closuresForStand) {
-                applyStandClosure(closure, s);
-            }
-            Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(s);
-            for (ConditionalStandClosure closure : conditionalClosuresForStand) {
-                applyConditionalStandClosure(closure, s, storage.getFlightStorage());
             }
         }
     }
@@ -328,6 +317,20 @@ public class Chromosome implements Comparable<Chromosome> {
         }
     }
 
+    // updates chromosome state to reflect all closures
+    public void applyAllClosures(GeneralStorage storage) {
+        for (int s = 0; s < noOfStands; s++) {
+            Collection<TemporaryStandClosure> closuresForStand = storage.getStandsStorage().getClosuresForStand(s);
+            for (TemporaryStandClosure closure : closuresForStand) {
+                applyStandClosure(closure, s);
+            }
+            Collection<ConditionalStandClosure> conditionalClosuresForStand = storage.getStandsStorage().getConditionalClosuresForStand(s);
+            for (ConditionalStandClosure closure : conditionalClosuresForStand) {
+                applyConditionalStandClosure(closure, s, storage.getFlightStorage());
+            }
+        }
+    }
+
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int s = 0; s < noOfStands; s++) {
@@ -340,6 +343,7 @@ public class Chromosome implements Comparable<Chromosome> {
         return result.toString();
     }
 
+    // creates a copy of chromosome that can be edited without changing the original chromosome
     public Chromosome copy() {
         Chromosome chromosome = new Chromosome(noOfStands, maxNoFlights);
 
@@ -364,5 +368,25 @@ public class Chromosome implements Comparable<Chromosome> {
             return 1; // this object is worse, thus later in order
 
         return -1;
+    }
+
+    // represents coordinates of the flight in chromosome
+    public class FlightPosition {
+
+        private int stand;
+        private int flight;
+
+        public FlightPosition(int stand, int flight) {
+            this.stand = stand;
+            this.flight = flight;
+        }
+
+        public int getStand() {
+            return stand;
+        }
+
+        public int getFlight() {
+            return flight;
+        }
     }
 }

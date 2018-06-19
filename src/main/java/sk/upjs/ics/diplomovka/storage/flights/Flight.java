@@ -9,9 +9,9 @@ public class Flight implements Comparable<Flight> {
 
     private String code;
     private int id;
-    private int start;
-    private int originalStart;
-    private int end;
+    private int start; // actual departure time minus turnaround time - in minutes
+    private int originalStart; // original departure time - in minutes
+    private int end; // actual departure time - in minutes
     private int delay;
     private int category;
     private int priority;

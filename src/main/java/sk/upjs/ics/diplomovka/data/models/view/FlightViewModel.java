@@ -12,10 +12,10 @@ public class FlightViewModel implements Comparable<FlightViewModel> {
     private String originalGate;
     private String gate;
     private int standId;
-    private int delay;
+    private int delay; // regular delay
     private int assignmentDelay;
 
-    private static final int DELAY_TOLERANCE = 10;
+    private static final int DELAY_TOLERANCE = 10; // if the flight is delayed less than 10 minutes, it's not cosidered a delay
 
     public FlightViewModel() {
     }

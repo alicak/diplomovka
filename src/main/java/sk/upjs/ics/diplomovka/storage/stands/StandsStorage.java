@@ -1,7 +1,6 @@
 package sk.upjs.ics.diplomovka.storage.stands;
 
-import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.storage.stands.closures.StandClosure;
+import sk.upjs.ics.diplomovka.disruption.closures.*;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,12 +12,12 @@ public class StandsStorage {
     public static final int STAND_NOT_FOUND = -1;
 
     private StandAttributes attributes;
-    private Map<Integer, Stand> stands;
-    private int[] standsIds;
-    private Map<Integer, Stand> gatesToStands;
-    private Map<Integer, Map<Integer, StandClosure>> closures; // stand ids to closures
+    private Map<Integer, Stand> stands; // keys are ids
+    private int[] standsIds; // stand numbers are positions, ids are values - contains only stands that aren't closed
+    private Map<Integer, Stand> gatesToStands; // keys are gate ids
+    private Map<Integer, Map<Integer, TemporaryStandClosure>> closures; // keys are ids, values are maps of closures with their ids
     private Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures;
-    private Map<Integer, Integer> availabilityTimes;
+    private Map<Integer, Integer> availabilityTimes; // keys are ids
     private int noOfStandsInUse;
 
     public StandsStorage(Map<Integer, Stand> stands, Map<Integer, Stand> gatesToStands, StandAttributes attributes) {
@@ -33,7 +32,7 @@ public class StandsStorage {
 
     private StandsStorage(Map<Integer, Stand> stands, int[] standsIds, Map<Integer, Stand> gatesToStands,
                           StandAttributes attributes,
-                          Map<Integer, Map<Integer, StandClosure>> closures,
+                          Map<Integer, Map<Integer, TemporaryStandClosure>> closures,
                           Map<Integer, Map<Integer, ConditionalStandClosure>> conditionalClosures,
                           Map<Integer, Integer> availabilityTimes, int noOfStandsInUse) {
         this(stands, gatesToStands, attributes);
@@ -64,11 +63,13 @@ public class StandsStorage {
         return STAND_NOT_FOUND;
     }
 
+    // stand id is added to an array of stands in use
     public void openStand(Stand stand) {
         standsIds[noOfStandsInUse] = stand.getId();
         noOfStandsInUse++;
     }
 
+    // stand id is removed from an array of stands in use
     public void closeStand(int standId) {
         int length = standsIds.length;
 
@@ -117,7 +118,7 @@ public class StandsStorage {
         }
     }
 
-    public Collection<StandClosure> getClosuresForStand(int standNo) {
+    public Collection<TemporaryStandClosure> getClosuresForStand(int standNo) {
         return closures.get(getStandByNumber(standNo).getId()).values();
     }
 
@@ -125,7 +126,7 @@ public class StandsStorage {
         return conditionalClosures.get(getStandByNumber(standNo).getId()).values();
     }
 
-    public void addClosure(StandClosure closure) {
+    public void addClosure(TemporaryStandClosure closure) {
         closures.get(closure.getStandId()).put(closure.getId(), closure);
     }
 
@@ -154,6 +155,7 @@ public class StandsStorage {
         return attributes.getGatesDistance(id1, id2);
     }
 
+    // first argument is stand no, second is stand id - because of how the method is used
     public double getStandsDistance(int no1, int id2) {
         int id1 = standsIds[no1];
         return attributes.getStandsDistance(id1, id2);

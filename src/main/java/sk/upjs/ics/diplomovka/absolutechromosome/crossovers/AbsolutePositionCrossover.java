@@ -1,7 +1,6 @@
 package sk.upjs.ics.diplomovka.absolutechromosome.crossovers;
 
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.absolutechromosome.FlightPosition;
 import sk.upjs.ics.diplomovka.base.CrossoverBase;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -91,13 +90,13 @@ public class AbsolutePositionCrossover extends CrossoverBase {
             }
 
             if (flightU == EMPTY_GENE) { // we'll be getting new flight for empty position
-                FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+                Chromosome.FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
 
                 if (!updatedChromosome.checkFlightFeasibility(flightS, gate))
                     return false;
 
                 updatedChromosome.removeFlightFromGenes(flightSPosition.getStand(), flightSPosition.getFlight()); // we remove new flight from where it is now
-                updatedChromosome.addNextFlight(gate, flightS); // we add new flight to the position that is being updated
+                updatedChromosome.appendFlight(gate, flightS); // we add new flight to the position that is being updated
 
             } else if (flightS == EMPTY_GENE) { // we'll be removing flight on the position and must add it somewhere else - to the next gate
                 int newGate = (gate + 1) % updatedChromosome.getNoOfStands();
@@ -106,16 +105,16 @@ public class AbsolutePositionCrossover extends CrossoverBase {
                     return false;
 
                 updatedChromosome.removeFlightFromGenes(gate, f); // we remove the flight
-                updatedChromosome.addNextFlight(newGate, flightU); // we add removed flight to the next gate
+                updatedChromosome.appendFlight(newGate, flightU); // we add removed flight to the next gate
 
             } else { // we'll be getting new flight for the position, so we must put old flight to the old position of new flight
-                FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
+                Chromosome.FlightPosition flightSPosition = updatedChromosome.findPosition(flightS);
 
                 if (!updatedChromosome.checkFlightFeasibility(flightS, gate) || !updatedChromosome.checkFlightFeasibility(flightU, flightSPosition.getStand()))
                     return false;
 
                 updatedChromosome.setGene(gate, f, flightS);
-                updatedChromosome.setGene(flightSPosition.getStand(), flightSPosition.getFlight(), flightU); // TODO replace chronologically
+                updatedChromosome.setGene(flightSPosition.getStand(), flightSPosition.getFlight(), flightU);
             }
         }
         return true;

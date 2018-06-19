@@ -260,7 +260,7 @@ public class MainWindow extends javax.swing.JFrame {
     public void refreshAssignment(List<FlightViewModel> flights) {
         refreshFlights(flights);
         setStatistics(mainAlgorithm.calculateAssignmentStatistics(flights));
-        setCurrentTime();
+        setCurrentTime(); // sets current time as time of last reassignment
     }
 
     private void refreshFlights(List<FlightViewModel> flights) {
@@ -291,6 +291,7 @@ public class MainWindow extends javax.swing.JFrame {
         InProgressDialog inProgressDialog = new InProgressDialog(this, true);
 
         parameters.setStartTime(mainAlgorithm.getStartTime());
+        // we calculate reassignment in a separate thread
         CalculationWorker calculationWorker = new CalculationWorker(this, parameters, inProgressDialog);
         calculationWorker.execute();
 

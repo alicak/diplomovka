@@ -4,10 +4,10 @@ import sk.upjs.ics.diplomovka.data.models.data.closureconditions.*;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.*;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.CategoryClosureCondition;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.EngineTypeClosureCondition;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.WeightClosureCondition;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.WingspanClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.CategoryClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.EngineTypeClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.WeightClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.WingspanClosureCondition;
 
 public final class Types {
 
@@ -29,7 +29,7 @@ public final class Types {
         public static final String STAND_CONDITIONALLY_CLOSED = "standConditionallyClosed";
     }
 
-    public static sk.upjs.ics.diplomovka.storage.stands.closures.conditions.ClosureCondition getConditionFromModel(ClosureConditionDataModel model) {
+    public static sk.upjs.ics.diplomovka.disruption.closures.conditions.ClosureCondition getConditionFromModel(ClosureConditionDataModel model) {
         switch (model.getType()) {
             case ClosureCondition.ENGINE_TYPE:
                 return new EngineTypeClosureCondition((EngineTypeClosureConditionDataModel) model);

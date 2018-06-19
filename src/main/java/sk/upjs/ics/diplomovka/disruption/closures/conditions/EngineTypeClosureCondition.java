@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.storage.stands.closures.conditions;
+package sk.upjs.ics.diplomovka.disruption.closures.conditions;
 
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.EngineTypeClosureConditionDataModel;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;

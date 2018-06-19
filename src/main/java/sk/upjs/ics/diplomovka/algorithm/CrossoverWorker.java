@@ -37,7 +37,7 @@ public class CrossoverWorker implements Callable<Integer> {
                 if (counter.decrementAndGet() >= 0)
                     offspring.offer(ch);
                 else
-                    return 1;
+                    return 0; // we're done
             }
         }
     }

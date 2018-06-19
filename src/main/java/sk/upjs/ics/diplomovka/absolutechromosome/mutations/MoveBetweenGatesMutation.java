@@ -27,7 +27,7 @@ public class MoveBetweenGatesMutation extends AbsolutePositionMutation {
             return false;
 
         chromosome.removeFlightFromGenes(stand1, flightIdx);
-        chromosome.addNextFlight(stand2, flight);
+        chromosome.appendFlight(stand2, flight);
 
         return true;
     }

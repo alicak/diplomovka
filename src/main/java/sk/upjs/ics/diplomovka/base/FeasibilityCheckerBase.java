@@ -16,6 +16,6 @@ public abstract class FeasibilityCheckerBase {
 
     public abstract boolean checkChromosomeFeasibility(Chromosome chromosome);
 
-    public abstract boolean checkFlightFeasibility(int flightValue, int gate);
+    public abstract boolean checkFlightFeasibility(int flightValue, int standNo);
 
 }

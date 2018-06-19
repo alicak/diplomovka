@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.main;
 
+import sk.upjs.ics.diplomovka.absolutechromosome.AssignmentCreator;
 import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.Population;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
@@ -20,13 +21,14 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.SolutionCreator;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.EngineTypeClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class AbsoluteMain {
@@ -60,7 +62,7 @@ public class AbsoluteMain {
 
         FeasibilityChecker feasibilityChecker = new FeasibilityChecker(storage);
         AssignmentCreator assignmentCreator = new AssignmentCreator(storage);
-        Chromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
+        Chromosome originalAssignment = assignmentCreator.createOriginalAssignment(feasibilityChecker);
         Population population = PopulationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
 
         // only if we need original assignment - otherwise it's already in population

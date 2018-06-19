@@ -19,6 +19,6 @@ public class FitnessTermination extends TerminationBase {
 
     @Override
     public boolean isTerminated() {
-        return targetFitness >= population.bestChromosome().getFitness();
+        return targetFitness <= population.bestChromosome().getFitness();
     }
 }

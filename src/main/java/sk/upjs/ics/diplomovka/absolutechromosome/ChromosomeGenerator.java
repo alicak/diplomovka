@@ -27,7 +27,7 @@ public class ChromosomeGenerator {
         Chromosome chromosome = null;
 
         boolean feasible = false;
-        while (!feasible) {
+        while (!feasible) { // generates new chromosome until it gets one that is feasible
             chromosome = new Chromosome(noOfStands, noOfFlights);
             chromosome.setFeasibilityChecker(feasibilityChecker);
             Integer[] genesArray = new Integer[noOfStands * noOfFlights];
@@ -36,7 +36,7 @@ public class ChromosomeGenerator {
 
             for (Flight flight : flights) {
                 int stand = Utils.randomInt(noOfStands);
-                chromosome.addNextFlight(stand, flight.getId());
+                chromosome.appendFlight(stand, flight.getId());
             }
 
             feasible = chromosome.checkFeasibility();
@@ -49,7 +49,7 @@ public class ChromosomeGenerator {
         Chromosome chromosome = existingChromosome.copy();
         boolean mutated = false;
         while (!mutated) {
-            mutated = mutation.doMutation(chromosome);
+            mutated = mutation.doMutation(chromosome); // mutation certainly happens as the rate is set to 1 in constructor
         }
         return chromosome;
     }

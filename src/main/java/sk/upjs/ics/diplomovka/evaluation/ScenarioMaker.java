@@ -8,6 +8,9 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * creates a test scenario (list of disruptions)
+ */
 public class ScenarioMaker {
 
     private static final int EASY_NO_OF_DISRUPTIONS = 5;
@@ -48,7 +51,8 @@ public class ScenarioMaker {
 
         List<DisruptionDataModel> disruptions = new ArrayList<>();
 
-        int noOfStandDisruptions = Math.min(noOfDisruptions/2, storage.getStandsStorage().getNoOfStands()/2);
+        // to prevent too many stand closures
+        int noOfStandDisruptions = Math.min(noOfDisruptions / 2, storage.getStandsStorage().getNoOfStands() / 2);
 
         for (int i = 0; i < noOfStandDisruptions; i++) {
             disruptions.add(disruptionGenerator.generateStandDisruption());

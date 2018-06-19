@@ -5,8 +5,8 @@ import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandConditionallyClo
 import sk.upjs.ics.diplomovka.data.parser.Types;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.storage.stands.closures.conditions.ClosureCondition;
+import sk.upjs.ics.diplomovka.disruption.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.ClosureCondition;
 
 public class StandConditionallyClosedDisruption implements Disruption {
 

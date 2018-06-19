@@ -7,6 +7,9 @@ import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 
+/**
+ * calculates fitness by summing number of reassignments
+ */
 public class ReassignmentFitness extends FitnessFunctionBase {
     private StandsStorage standsStorage;
 

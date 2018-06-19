@@ -37,7 +37,7 @@ public class FitnessWorker implements Callable<Integer> {
 
                 offspring.offer(chromosome);
             } else
-                return 1;
+                return 0; // we're done
         }
     }
 }

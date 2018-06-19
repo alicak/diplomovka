@@ -28,7 +28,7 @@ public class PopulationCreator {
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
 
-        generation.add(originalAssignment.copy()); // we also add original assignment
+        generation.add(originalAssignment.copy()); // we also add copy of original assignment
         originalAssignment.calculateCurrentFlightStarts(storage);
 
         Population population = new Population(generation);

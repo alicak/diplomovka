@@ -29,7 +29,7 @@ public class MutationWorker implements Callable<Integer> {
                 mutation.doMutation(chromosome);
                 offspring.offer(chromosome);
             } else
-                return 1;
+                return 0; // we're done
         }
     }
 }

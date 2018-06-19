@@ -21,7 +21,7 @@ public class Stand {
         return maxWeight;
     }
 
-    public List<Integer> getFlightCategories() {
+    public List<Integer> getCategories() {
         return flightCategories;
     }
 

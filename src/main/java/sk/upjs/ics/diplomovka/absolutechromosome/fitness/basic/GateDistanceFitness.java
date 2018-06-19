@@ -10,6 +10,9 @@ import sk.upjs.ics.diplomovka.storage.stands.StandToGateMapper;
 
 import java.util.Map;
 
+/**
+ * calculates fitness by summing distances between gates
+ */
 public class GateDistanceFitness extends FitnessFunctionBase {
     private StandToGateMapper standToGateMapper;
 
@@ -41,7 +44,6 @@ public class GateDistanceFitness extends FitnessFunctionBase {
                 int newGate = flightsToGates.get(flight.getId());
                 fitness += weight * standsStorage.getGatesDistance(newGate, originalGate);
 
-                // TODO arriving gate should be different than departing gate
                 for (Transfer transfer : flight.getTransfers()) {
                     int arrivingGate = flightsToGates.get(transfer.getFlightId());
                     fitness += weight * standsStorage.getGatesDistance(newGate, arrivingGate);
