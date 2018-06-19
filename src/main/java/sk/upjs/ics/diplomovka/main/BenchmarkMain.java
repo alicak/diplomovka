@@ -117,7 +117,7 @@ public class BenchmarkMain {
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
 
-        long startTime = System.nanoTime();
+        long startTime = System.nanoTime(); // and what about creating the population? :-o
 
         PopulationBase finalPopulation = algorithm.evolve();
         Chromosome result = finalPopulation.bestChromosome();
