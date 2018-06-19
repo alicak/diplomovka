@@ -19,7 +19,7 @@ public class Chromosome implements Comparable<Chromosome> {
     private int noOfStands;
     private int[] noOfFlights; // number of flights per stand
     private int maxNoFlights;
-    private AbsolutePositionFeasibilityChecker feasibilityChecker;
+    private FeasibilityChecker feasibilityChecker;
     private Map<Integer, Integer> currentFlightStarts = new HashMap<>();
     private Map<Integer, Integer> currentFlightEnds = new HashMap<>();
 
@@ -216,7 +216,7 @@ public class Chromosome implements Comparable<Chromosome> {
         this.noOfFlights = noOfFlights;
     }
 
-    public void setFeasibilityChecker(AbsolutePositionFeasibilityChecker feasibilityChecker) {
+    public void setFeasibilityChecker(FeasibilityChecker feasibilityChecker) {
         this.feasibilityChecker = feasibilityChecker;
     }
 

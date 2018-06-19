@@ -7,15 +7,15 @@ import sk.upjs.ics.diplomovka.utils.Utils;
 import java.util.Arrays;
 import java.util.List;
 
-public class AbsolutePositionChromosomeGenerator {
+public class ChromosomeGenerator {
 
     private List<Flight> flights;
     private int noOfFlights;
     private int noOfStands;
     private AbsolutePositionMutation mutation;
-    private AbsolutePositionFeasibilityChecker feasibilityChecker;
+    private FeasibilityChecker feasibilityChecker;
 
-    public AbsolutePositionChromosomeGenerator(int noOfStands, List<Flight> sortedFlights, AbsolutePositionFeasibilityChecker feasibilityChecker) {
+    public ChromosomeGenerator(int noOfStands, List<Flight> sortedFlights, FeasibilityChecker feasibilityChecker) {
         this.noOfStands = noOfStands;
         this.flights = sortedFlights;
         this.noOfFlights = flights.size();

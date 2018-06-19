@@ -4,9 +4,9 @@ import sk.upjs.ics.diplomovka.base.PopulationBase;
 
 import java.util.List;
 
-public class AbsolutePositionPopulation extends PopulationBase {
+public class Population extends PopulationBase {
 
-    public AbsolutePositionPopulation(List<Chromosome> generation) {
+    public Population(List<Chromosome> generation) {
         super(generation);
     }
 }

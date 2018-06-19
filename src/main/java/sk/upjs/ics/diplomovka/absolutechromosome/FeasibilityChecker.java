@@ -6,8 +6,8 @@ import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.stands.Stand;
 import sk.upjs.ics.diplomovka.storage.stands.closures.ConditionalStandClosure;
 
-public class AbsolutePositionFeasibilityChecker extends FeasibilityCheckerBase {
-    public AbsolutePositionFeasibilityChecker(GeneralStorage storage) {
+public class FeasibilityChecker extends FeasibilityCheckerBase {
+    public FeasibilityChecker(GeneralStorage storage) {
         super(storage);
     }
 

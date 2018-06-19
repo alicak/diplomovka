@@ -1,8 +1,9 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
+import sk.upjs.ics.diplomovka.absolutechromosome.Population;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.PopulationCreator;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
@@ -17,8 +18,6 @@ import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.parser.Files;
 import sk.upjs.ics.diplomovka.disruption.*;
-import sk.upjs.ics.diplomovka.main.AssignmentCreator;
-import sk.upjs.ics.diplomovka.main.PopulationCreator;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
@@ -39,13 +38,13 @@ public class MainAlgorithm {
 
     private final String disruptionFile;
 
-    private AbsolutePositionFeasibilityChecker feasibilityChecker;
+    private FeasibilityChecker feasibilityChecker;
     private AssignmentCreator assignmentCreator;
 
     private int generationSize = 30;
     private Chromosome originalAssignment;
     private Chromosome reassignment;
-    private AbsolutePositionPopulation population;
+    private Population population;
 
     private CrossoverBase crossover = new AbsolutePositionCrossover(1);
     private MutationBase mutation = new AbsolutePositionMutation(0.1);
@@ -65,7 +64,7 @@ public class MainAlgorithm {
         this.disruptionFile = disruptionFile;
         prepareData();
 
-        feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);
+        feasibilityChecker = new FeasibilityChecker(storage);
         assignmentCreator = new AssignmentCreator(storage);
 
         reassignmentFitness = new ReassignmentFitness(storage, null);
@@ -118,7 +117,7 @@ public class MainAlgorithm {
 
     private void preparePopulation() {
         originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
-        population = PopulationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
+        population = PopulationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
     }
 
     private void refreshFlights() {

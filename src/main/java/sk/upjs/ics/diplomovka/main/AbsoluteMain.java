@@ -1,8 +1,9 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionFeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.AbsolutePositionPopulation;
+import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
+import sk.upjs.ics.diplomovka.absolutechromosome.Population;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
+import sk.upjs.ics.diplomovka.absolutechromosome.PopulationCreator;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
@@ -57,10 +58,10 @@ public class AbsoluteMain {
         // here we would do that...
         GeneralStorage storage2 = storage.getStorageWithOptionalStart(100);
 
-        AbsolutePositionFeasibilityChecker feasibilityChecker = new AbsolutePositionFeasibilityChecker(storage);
+        FeasibilityChecker feasibilityChecker = new FeasibilityChecker(storage);
         AssignmentCreator assignmentCreator = new AssignmentCreator(storage);
         Chromosome originalAssignment = assignmentCreator.createAbsoluteOriginalAssignment(feasibilityChecker);
-        AbsolutePositionPopulation population = PopulationCreator.createAbsoluteInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
+        Population population = PopulationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
 
         // only if we need original assignment - otherwise it's already in population
         gate6closed.disruptAssignment(originalAssignment);
