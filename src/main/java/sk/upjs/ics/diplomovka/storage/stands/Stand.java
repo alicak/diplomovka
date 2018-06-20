@@ -1,5 +1,6 @@
 package sk.upjs.ics.diplomovka.storage.stands;
 
+import sk.upjs.ics.diplomovka.data.models.data.StandDataModel;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
 import java.util.List;
@@ -12,6 +13,15 @@ public class Stand {
     private List<Integer> flightCategories;
     private List<Integer> engineTypes;
     private List<Integer> gates;
+
+    public Stand(StandDataModel standDataModel) {
+        this.id = standDataModel.getId();
+        this.maxWingspan = standDataModel.getMaxWingspan();
+        this.maxWeight = standDataModel.getMaxWeight();
+        this.flightCategories = standDataModel.getFlightCategories();
+        this.engineTypes = standDataModel.getEngineTypes();
+        this.gates = standDataModel.getGates();
+    }
 
     public double getMaxWingspan() {
         return maxWingspan;

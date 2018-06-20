@@ -1,6 +1,4 @@
-package sk.upjs.ics.diplomovka.storage.flights;
-
-import sk.upjs.ics.diplomovka.storage.Attribute;
+package sk.upjs.ics.diplomovka.data.models.data;
 
 public class Transfer extends Attribute {
 

@@ -3,11 +3,10 @@ package sk.upjs.ics.diplomovka.data.parser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
+import sk.upjs.ics.diplomovka.data.models.data.*;
 import sk.upjs.ics.diplomovka.data.models.data.closureconditions.ClosureConditionDataModel;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.DisruptionDataModel;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
-import sk.upjs.ics.diplomovka.storage.Attribute;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.*;
 import sk.upjs.ics.diplomovka.storage.stands.DistancesMatrix;
@@ -56,12 +55,13 @@ public class DataParser {
     }
 
     private void parseStands(String standsFile) {
-        Stand[] stands = parseObjects(standsFile, Stand[].class);
+        StandDataModel[] stands = parseObjects(standsFile, StandDataModel[].class);
 
         Map<Integer, Stand> standsMap = new HashMap<>();
         Map<Integer, Stand> gatesToStands = new HashMap<>();
 
-        for (Stand stand : stands) {
+        for (StandDataModel standDataModel : stands) {
+            Stand stand = new Stand(standDataModel);
             standsMap.put(stand.getId(), stand);
             for (Integer gate : stand.getGates()) {
                 gatesToStands.put(gate, stand);

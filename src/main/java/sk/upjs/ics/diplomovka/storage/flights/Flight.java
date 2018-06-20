@@ -1,6 +1,8 @@
 package sk.upjs.ics.diplomovka.storage.flights;
 
+import sk.upjs.ics.diplomovka.data.models.data.Aircraft;
 import sk.upjs.ics.diplomovka.data.models.data.FlightDataModel;
+import sk.upjs.ics.diplomovka.data.models.data.Transfer;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package sk.upjs.ics.diplomovka.storage;
+package sk.upjs.ics.diplomovka.data.models.data;
 
 /**
  * class for object flight/stand attributes

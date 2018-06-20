@@ -5,7 +5,7 @@ import sk.upjs.ics.diplomovka.base.FitnessFunctionBase;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
-import sk.upjs.ics.diplomovka.storage.flights.Transfer;
+import sk.upjs.ics.diplomovka.data.models.data.Transfer;
 import sk.upjs.ics.diplomovka.storage.stands.StandToGateMapper;
 
 import java.util.Map;
