@@ -1,6 +1,6 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
+import sk.upjs.ics.diplomovka.absolutechromosome.mutations.Mutation;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
@@ -12,14 +12,14 @@ public class ChromosomeGenerator {
     private List<Flight> flights;
     private int noOfFlights;
     private int noOfStands;
-    private AbsolutePositionMutation mutation;
+    private Mutation mutation;
     private FeasibilityChecker feasibilityChecker;
 
     public ChromosomeGenerator(int noOfStands, List<Flight> sortedFlights, FeasibilityChecker feasibilityChecker) {
         this.noOfStands = noOfStands;
         this.flights = sortedFlights;
         this.noOfFlights = flights.size();
-        this.mutation = new AbsolutePositionMutation(1);
+        this.mutation = new Mutation(1);
         this.feasibilityChecker = feasibilityChecker;
     }
 

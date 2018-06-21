@@ -5,11 +5,11 @@ import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
 import sk.upjs.ics.diplomovka.absolutechromosome.Population;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.absolutechromosome.PopulationCreator;
-import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.AbsolutePositionCrossover;
+import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.Crossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.TimeDiffFitness;
-import sk.upjs.ics.diplomovka.absolutechromosome.mutations.AbsolutePositionMutation;
+import sk.upjs.ics.diplomovka.absolutechromosome.mutations.Mutation;
 import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AbsoluteMain {
@@ -101,8 +100,8 @@ public class AbsoluteMain {
             fitnessFunction.calculateAndSetFitness(c);
         }
 
-        CrossoverBase crossover = new AbsolutePositionCrossover(1);
-        MutationBase mutation = new AbsolutePositionMutation(0.1);
+        CrossoverBase crossover = new Crossover(1);
+        MutationBase mutation = new Mutation(0.1);
 
         // results
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);

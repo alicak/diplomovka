@@ -3,7 +3,7 @@ package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
-public class SwapSuccessiveFlightsMutation extends AbsolutePositionMutation {
+public class SwapSuccessiveFlightsMutation extends Mutation {
     public SwapSuccessiveFlightsMutation(double probability) {
         this.probability = probability;
     }

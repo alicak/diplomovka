@@ -3,21 +3,19 @@ package sk.upjs.ics.diplomovka.absolutechromosome.mutations;
 import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.base.MutationBase;
 
-public class AbsolutePositionMutation extends MutationBase {
+public class Mutation extends MutationBase {
     private SwapBetweenGatesMutation swapBetweenGatesMutation;
-    private SwapSuccessiveFlightsMutation swapSuccessiveFlightsMutation;
     private MoveBetweenGatesMutation moveBetweenGatesMutation;
     private SwapFlightsMutation swapFlightsMutation;
 
-    public AbsolutePositionMutation(double probability) {
+    public Mutation(double probability) {
         super(probability);
         swapBetweenGatesMutation = new SwapBetweenGatesMutation(probability);
-        swapSuccessiveFlightsMutation = new SwapSuccessiveFlightsMutation(probability);
         moveBetweenGatesMutation = new MoveBetweenGatesMutation(probability);
         swapFlightsMutation = new SwapFlightsMutation(probability);
     }
 
-    protected AbsolutePositionMutation() {
+    protected Mutation() {
     }
 
     @Override

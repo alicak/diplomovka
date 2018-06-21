@@ -10,10 +10,10 @@ import java.util.List;
 
 import static sk.upjs.ics.diplomovka.absolutechromosome.Chromosome.EMPTY_GENE;
 
-public class AbsolutePositionCrossover extends CrossoverBase {
+public class Crossover extends CrossoverBase {
     public static final int MIN_QUEUE_LENGTH = 2;
 
-    public AbsolutePositionCrossover(double probability) {
+    public Crossover(double probability) {
         super(probability);
     }
 
