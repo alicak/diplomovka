@@ -35,7 +35,7 @@ public abstract class FitnessFunctionBase {
     protected double calculateTotalWeights(Flight flight, double fitnessSpecificWeight) {
         double weight = fitnessSpecificWeight;
 
-        if (weights.getFlightPriorityWeight() != 0) {
+        if (weights.getPassengerWeight() != 0) {
             weight *= weights.getPassengerWeight() * flight.getNoOfPassengers();
         }
         if (weights.getFlightPriorityWeight() != 0) {
