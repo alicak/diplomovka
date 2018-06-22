@@ -1,47 +1,62 @@
 [
-    {
-        "standId": 3,
-        "start": 13,
-        "end": 544,
-        "id": 1,
-        "type": "standTemporarilyClosed"
+  {
+    "standId": 8,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 11,
+    "start": 488,
+    "end": 882,
+    "condition": {
+      "weight": 44.0,
+      "type": "weight"
     },
-    {
-        "flight": {
-            "id": 94,
-            "scheduled": "07:21",
-            "actual": "07:21",
-            "turnaroundTime": 78,
-            "gateId": 4,
-            "standId": 8,
-            "code": "37225",
-            "noOfPassengers": 144,
-            "transfersIds": [],
-            "aircraftId": 19,
-            "priority": 1,
-            "categoryId": 1,
-            "destination": "Budapest"
-        },
-        "id": 2,
-        "type": "flightAdded"
+    "id": 2,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flightId": 51,
+    "delay": 165,
+    "id": 3,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "06:17",
+      "actual": "06:17",
+      "turnaroundTime": 44,
+      "gateId": 11,
+      "standId": 1,
+      "code": "436",
+      "noOfPassengers": 104,
+      "transfersIds": [],
+      "aircraftId": 21,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Berlin"
     },
-    {
-        "flight": {
-            "id": 95,
-            "scheduled": "02:17",
-            "actual": "02:17",
-            "turnaroundTime": 59,
-            "gateId": 21,
-            "standId": 9,
-            "code": "355343",
-            "noOfPassengers": 98,
-            "transfersIds": [],
-            "aircraftId": 16,
-            "priority": 1,
-            "categoryId": 1,
-            "destination": "Warszaw"
-        },
-        "id": 3,
-        "type": "flightAdded"
-    }
+    "id": 4,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "14:58",
+      "actual": "14:58",
+      "turnaroundTime": 30,
+      "gateId": 24,
+      "standId": 12,
+      "code": "757",
+      "noOfPassengers": 96,
+      "transfersIds": [],
+      "aircraftId": 13,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Amsterdam"
+    },
+    "id": 5,
+    "type": "flightAdded"
+  }
 ]

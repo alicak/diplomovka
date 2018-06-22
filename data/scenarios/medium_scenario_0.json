@@ -1,0 +1,45 @@
+[
+  {
+    "standId": 12,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 8,
+    "start": 793,
+    "end": 935,
+    "id": 2,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 10,
+    "start": 195,
+    "end": 1394,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 3,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flightId": 86,
+    "delay": 61,
+    "id": 4,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 66,
+    "delay": 178,
+    "id": 5,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 73,
+    "delay": 150,
+    "id": 6,
+    "type": "flightDelayed"
+  }
+]

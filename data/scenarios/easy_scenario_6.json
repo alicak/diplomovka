@@ -1,1 +1,27 @@
-[{"flight":{"id":94,"scheduled":"13:42","actual":"13:42","turnaroundTime":32,"gateId":21,"standId":9,"code":"9782","noOfPassengers":91,"transfersIds":[],"aircraftId":12,"priority":2,"categoryId":1,"destination":"Kosice"},"id":1,"type":"flightAdded"}]
+[
+  {
+    "standId": 8,
+    "start": 359,
+    "end": 1033,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 1,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flightId": 64,
+    "delay": 30,
+    "id": 2,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 22,
+    "delay": 218,
+    "id": 3,
+    "type": "flightDelayed"
+  }
+]

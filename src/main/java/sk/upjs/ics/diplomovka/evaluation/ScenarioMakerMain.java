@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.evaluation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.DisruptionDataModel;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.parser.Files;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ScenarioMakerMain {
 
     public static final String SCENARIOS_DATA_FOLDER = "data/scenarios/";
-    private static final Gson GSON = new Gson();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main(String[] args) throws FileNotFoundException {
         DataParser parser = new DataParser();
@@ -32,7 +33,7 @@ public class ScenarioMakerMain {
     }
 
     private static void generateAndWriteScenariosSet(ScenarioMaker scenarioMaker, ScenarioMaker.ScenarioType type, int count) throws FileNotFoundException {
-        for (int i = 1; i < count + 1; i++) {
+        for (int i = 0; i < count; i++) {
             List<DisruptionDataModel> scenario = scenarioMaker.generateScenario(type, 0);
             String serialisedScenario = GSON.toJson(scenario);
 

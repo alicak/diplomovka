@@ -1,1 +1,8 @@
-[{"flight":{"id":94,"scheduled":"13:49","actual":"13:49","turnaroundTime":69,"gateId":15,"standId":4,"code":"997","noOfPassengers":171,"transfersIds":[],"aircraftId":18,"priority":1,"categoryId":1,"destination":"Madrid"},"id":1,"type":"flightAdded"}]
+[
+    {
+        "flightId": 34,
+        "delay": 132,
+        "id": 1,
+        "type": "flightDelayed"
+      }
+]

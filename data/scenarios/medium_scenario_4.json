@@ -1,1 +1,120 @@
-[{"standId":6,"start":201,"end":343,"id":1,"type":"standTemporarilyClosed"},{"standId":7,"start":681,"end":1532,"id":2,"type":"standTemporarilyClosed"},{"standId":3,"start":466,"end":1893,"id":3,"type":"standTemporarilyClosed"},{"flight":{"id":94,"scheduled":"11:00","actual":"11:00","turnaroundTime":60,"gateId":8,"standId":5,"code":"223","noOfPassengers":174,"transfersIds":[],"aircraftId":13,"priority":2,"categoryId":1,"destination":"Madrid"},"id":4,"type":"flightAdded"},{"flightId":82,"delay":215,"id":5,"type":"flightDelayed"},{"flightId":55,"delay":238,"id":6,"type":"flightDelayed"},{"flight":{"id":95,"scheduled":"20:56","actual":"20:56","turnaroundTime":37,"gateId":24,"standId":12,"code":"5513","noOfPassengers":152,"transfersIds":[],"aircraftId":21,"priority":1,"categoryId":1,"destination":"Frankfurt"},"id":7,"type":"flightAdded"}]
+[
+  {
+    "standId": 12,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 13,
+    "start": 537,
+    "end": 809,
+    "condition": {
+      "weight": 86.0,
+      "type": "weight"
+    },
+    "id": 2,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 10,
+    "start": 263,
+    "end": 1376,
+    "id": 3,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 1,
+    "start": 285,
+    "end": 1410,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 4,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 3,
+    "start": 570,
+    "end": 1084,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 5,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flightId": 33,
+    "delay": 96,
+    "id": 6,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "07:05",
+      "actual": "07:05",
+      "turnaroundTime": 33,
+      "gateId": 4,
+      "standId": 8,
+      "code": "511",
+      "noOfPassengers": 92,
+      "transfersIds": [],
+      "aircraftId": 11,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Frankfurt"
+    },
+    "id": 7,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "15:04",
+      "actual": "15:04",
+      "turnaroundTime": 33,
+      "gateId": 25,
+      "standId": 13,
+      "code": "974",
+      "noOfPassengers": 115,
+      "transfersIds": [],
+      "aircraftId": 7,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Kosice"
+    },
+    "id": 8,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 96,
+      "scheduled": "10:29",
+      "actual": "10:29",
+      "turnaroundTime": 48,
+      "gateId": 6,
+      "standId": 7,
+      "code": "791",
+      "noOfPassengers": 87,
+      "transfersIds": [],
+      "aircraftId": 3,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Dusseldorf"
+    },
+    "id": 9,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 54,
+    "delay": 78,
+    "id": 10,
+    "type": "flightDelayed"
+  }
+]

@@ -58,7 +58,7 @@ public class ClosureConditionGenerator extends TestDataGenerator {
     private List<Integer> chooseListFromSet(Set<Integer> set) {
         List<Integer> list = new ArrayList<>(set);
 
-        int count = Utils.randomInt(1, list.size() - 1); // minus one because all would mean normal stand closure
+        int count = Math.max(1, Utils.randomInt(1, list.size() - 1)); // minus one because all would mean normal stand closure
         List<Integer> result = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {

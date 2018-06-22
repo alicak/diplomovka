@@ -1,0 +1,26 @@
+[
+  {
+    "standId": 4,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 11,
+    "start": 493,
+    "end": 895,
+    "id": 2,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flightId": 24,
+    "delay": 221,
+    "id": 3,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 48,
+    "delay": 130,
+    "id": 4,
+    "type": "flightDelayed"
+  }
+]

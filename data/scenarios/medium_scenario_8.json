@@ -1,110 +1,66 @@
 [
-    {
-        "standId": 4,
-        "start": 113,
-        "end": 1085,
-        "condition": {
-            "categories": [
-                1
-            ],
-            "type": "category"
-        },
-        "id": 1,
-        "type": "standConditionallyClosed"
+  {
+    "standId": 10,
+    "start": 18,
+    "end": 57,
+    "id": 1,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 5,
+    "start": 153,
+    "end": 261,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
     },
-    {
-        "standId": 14,
-        "start": 551,
-        "end": 1567,
-        "id": 2,
-        "type": "standTemporarilyClosed"
+    "id": 2,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 6,
+    "start": 92,
+    "end": 892,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
     },
-    {
-        "standId": 2,
-        "start": 128,
-        "end": 1206,
-        "id": 3,
-        "type": "standTemporarilyClosed"
+    "id": 3,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "06:04",
+      "actual": "06:04",
+      "turnaroundTime": 32,
+      "gateId": 26,
+      "standId": 14,
+      "code": "733",
+      "noOfPassengers": 112,
+      "transfersIds": [],
+      "aircraftId": 19,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Paris"
     },
-    {
-        "standId": 1,
-        "id": 4,
-        "type": "standClosed"
-    },
-    {
-        "standId": 12,
-        "start": 202,
-        "end": 745,
-        "id": 5,
-        "type": "standTemporarilyClosed"
-    },
-    {
-        "flightId": 45,
-        "delay": 168,
-        "id": 6,
-        "type": "flightDelayed"
-    },
-    {
-        "flight": {
-            "id": 94,
-            "scheduled": "02:28",
-            "actual": "02:28",
-            "turnaroundTime": 52,
-            "gateId": 3,
-            "standId": 8,
-            "code": "20269",
-            "noOfPassengers": 98,
-            "transfersIds": [],
-            "aircraftId": 12,
-            "priority": 3,
-            "categoryId": 1,
-            "destination": "Hamburg"
-        },
-        "id": 7,
-        "type": "flightAdded"
-    },
-    {
-        "flightId": 43,
-        "delay": 84,
-        "id": 8,
-        "type": "flightDelayed"
-    },
-    {
-        "flight": {
-            "id": 95,
-            "scheduled": "13:30",
-            "actual": "13:30",
-            "turnaroundTime": 75,
-            "gateId": 2,
-            "standId": 2,
-            "code": "372",
-            "noOfPassengers": 86,
-            "transfersIds": [],
-            "aircraftId": 12,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Hamburg"
-        },
-        "id": 9,
-        "type": "flightAdded"
-    },
-    {
-        "flight": {
-            "id": 96,
-            "scheduled": "06:21",
-            "actual": "06:21",
-            "turnaroundTime": 47,
-            "gateId": 8,
-            "standId": 5,
-            "code": "42581",
-            "noOfPassengers": 153,
-            "transfersIds": [],
-            "aircraftId": 13,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Dusseldorf"
-        },
-        "id": 10,
-        "type": "flightAdded"
-    }
+    "id": 4,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 31,
+    "delay": 137,
+    "id": 5,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 14,
+    "delay": 243,
+    "id": 6,
+    "type": "flightDelayed"
+  }
 ]

@@ -1,1 +1,280 @@
-[{"standId":14,"id":1,"type":"standClosed"},{"standId":9,"start":296,"end":1336,"condition":{"categories":[1],"type":"category"},"id":2,"type":"standConditionallyClosed"},{"standId":5,"id":3,"type":"standClosed"},{"standId":2,"start":491,"end":777,"condition":{"weight":100.0,"type":"weight"},"id":4,"type":"standConditionallyClosed"},{"standId":12,"start":415,"end":1664,"condition":{"weight":81.0,"type":"weight"},"id":5,"type":"standConditionallyClosed"},{"standId":4,"start":1117,"end":2001,"id":6,"type":"standTemporarilyClosed"},{"standId":8,"start":844,"end":1444,"id":7,"type":"standTemporarilyClosed"},{"flight":{"id":94,"scheduled":"10:42","actual":"10:42","turnaroundTime":63,"gateId":24,"standId":12,"code":"241492","noOfPassengers":163,"transfersIds":[],"aircraftId":3,"priority":1,"categoryId":1,"destination":"Kosice"},"id":8,"type":"flightAdded"},{"flight":{"id":95,"scheduled":"15:18","actual":"15:18","turnaroundTime":48,"gateId":24,"standId":12,"code":"5723","noOfPassengers":118,"transfersIds":[],"aircraftId":8,"priority":3,"categoryId":1,"destination":"Hamburg"},"id":9,"type":"flightAdded"},{"flight":{"id":96,"scheduled":"15:05","actual":"15:05","turnaroundTime":67,"gateId":23,"standId":11,"code":"594886","noOfPassengers":125,"transfersIds":[],"aircraftId":7,"priority":2,"categoryId":1,"destination":"Budapest"},"id":10,"type":"flightAdded"},{"flight":{"id":97,"scheduled":"02:50","actual":"02:50","turnaroundTime":31,"gateId":11,"standId":1,"code":"188731","noOfPassengers":155,"transfersIds":[],"aircraftId":9,"priority":3,"categoryId":1,"destination":"Budapest"},"id":11,"type":"flightAdded"},{"flightId":74,"delay":187,"id":12,"type":"flightDelayed"},{"flight":{"id":98,"scheduled":"09:39","actual":"09:39","turnaroundTime":53,"gateId":25,"standId":13,"code":"60063","noOfPassengers":177,"transfersIds":[],"aircraftId":19,"priority":1,"categoryId":1,"destination":"Hamburg"},"id":13,"type":"flightAdded"},{"flight":{"id":99,"scheduled":"08:55","actual":"08:55","turnaroundTime":39,"gateId":23,"standId":11,"code":"7435","noOfPassengers":103,"transfersIds":[],"aircraftId":15,"priority":1,"categoryId":1,"destination":"Amsterdam"},"id":14,"type":"flightAdded"},{"flight":{"id":100,"scheduled":"04:59","actual":"04:59","turnaroundTime":70,"gateId":14,"standId":3,"code":"84584","noOfPassengers":147,"transfersIds":[],"aircraftId":21,"priority":1,"categoryId":1,"destination":"Stockholm"},"id":15,"type":"flightAdded"},{"flight":{"id":101,"scheduled":"07:33","actual":"07:33","turnaroundTime":73,"gateId":1,"standId":1,"code":"681839","noOfPassengers":127,"transfersIds":[],"aircraftId":18,"priority":1,"categoryId":1,"destination":"Bratislava"},"id":16,"type":"flightAdded"},{"flightId":80,"delay":249,"id":17,"type":"flightDelayed"},{"flightId":30,"delay":184,"id":18,"type":"flightDelayed"},{"flightId":59,"delay":227,"id":19,"type":"flightDelayed"},{"flight":{"id":102,"scheduled":"07:13","actual":"07:13","turnaroundTime":37,"gateId":26,"standId":14,"code":"02383","noOfPassengers":179,"transfersIds":[],"aircraftId":24,"priority":2,"categoryId":1,"destination":"Madrid"},"id":20,"type":"flightAdded"},{"flight":{"id":103,"scheduled":"05:20","actual":"05:20","turnaroundTime":49,"gateId":22,"standId":10,"code":"544662","noOfPassengers":199,"transfersIds":[],"aircraftId":23,"priority":2,"categoryId":1,"destination":"Bratislava"},"id":21,"type":"flightAdded"},{"flight":{"id":104,"scheduled":"07:28","actual":"07:28","turnaroundTime":47,"gateId":22,"standId":10,"code":"901474","noOfPassengers":112,"transfersIds":[],"aircraftId":15,"priority":1,"categoryId":1,"destination":"Nice"},"id":22,"type":"flightAdded"},{"flightId":25,"delay":237,"id":23,"type":"flightDelayed"},{"flightId":79,"delay":142,"id":24,"type":"flightDelayed"},{"flight":{"id":105,"scheduled":"21:03","actual":"21:03","turnaroundTime":39,"gateId":21,"standId":9,"code":"78451","noOfPassengers":94,"transfersIds":[],"aircraftId":24,"priority":1,"categoryId":1,"destination":"Katowice"},"id":25,"type":"flightAdded"},{"flightId":45,"delay":174,"id":26,"type":"flightDelayed"},{"flight":{"id":106,"scheduled":"02:42","actual":"02:42","turnaroundTime":64,"gateId":7,"standId":4,"code":"017","noOfPassengers":169,"transfersIds":[],"aircraftId":9,"priority":2,"categoryId":1,"destination":"Budapest"},"id":27,"type":"flightAdded"},{"flightId":24,"delay":235,"id":28,"type":"flightDelayed"},{"flight":{"id":107,"scheduled":"11:18","actual":"11:18","turnaroundTime":58,"gateId":8,"standId":5,"code":"4424","noOfPassengers":92,"transfersIds":[],"aircraftId":16,"priority":2,"categoryId":1,"destination":"Brussels"},"id":29,"type":"flightAdded"},{"flight":{"id":108,"scheduled":"02:39","actual":"02:39","turnaroundTime":43,"gateId":25,"standId":13,"code":"985002","noOfPassengers":101,"transfersIds":[],"aircraftId":10,"priority":3,"categoryId":1,"destination":"Brussels"},"id":30,"type":"flightAdded"},{"flight":{"id":109,"scheduled":"19:39","actual":"19:39","turnaroundTime":38,"gateId":6,"standId":7,"code":"8490","noOfPassengers":144,"transfersIds":[],"aircraftId":18,"priority":3,"categoryId":1,"destination":"Bratislava"},"id":31,"type":"flightAdded"},{"flightId":4,"delay":127,"id":32,"type":"flightDelayed"},{"flight":{"id":110,"scheduled":"05:05","actual":"05:05","turnaroundTime":74,"gateId":7,"standId":4,"code":"085","noOfPassengers":163,"transfersIds":[],"aircraftId":21,"priority":2,"categoryId":1,"destination":"Warszaw"},"id":33,"type":"flightAdded"},{"flight":{"id":111,"scheduled":"21:28","actual":"21:28","turnaroundTime":45,"gateId":17,"standId":7,"code":"78443","noOfPassengers":129,"transfersIds":[],"aircraftId":9,"priority":3,"categoryId":1,"destination":"Kosice"},"id":34,"type":"flightAdded"},{"flight":{"id":112,"scheduled":"10:55","actual":"10:55","turnaroundTime":47,"gateId":26,"standId":14,"code":"1450","noOfPassengers":184,"transfersIds":[],"aircraftId":3,"priority":1,"categoryId":1,"destination":"Frankfurt"},"id":35,"type":"flightAdded"},{"flight":{"id":113,"scheduled":"08:16","actual":"08:16","turnaroundTime":74,"gateId":3,"standId":8,"code":"56023","noOfPassengers":83,"transfersIds":[],"aircraftId":3,"priority":2,"categoryId":1,"destination":"Amsterdam"},"id":36,"type":"flightAdded"},{"flightId":40,"delay":136,"id":37,"type":"flightDelayed"},{"flightId":20,"delay":30,"id":38,"type":"flightDelayed"},{"flightId":18,"delay":241,"id":39,"type":"flightDelayed"},{"flight":{"id":114,"scheduled":"06:19","actual":"06:19","turnaroundTime":50,"gateId":11,"standId":1,"code":"1182","noOfPassengers":87,"transfersIds":[],"aircraftId":17,"priority":1,"categoryId":1,"destination":"Berlin"},"id":40,"type":"flightAdded"},{"flightId":34,"delay":179,"id":41,"type":"flightDelayed"},{"flight":{"id":115,"scheduled":"21:59","actual":"21:59","turnaroundTime":52,"gateId":7,"standId":4,"code":"355","noOfPassengers":142,"transfersIds":[],"aircraftId":19,"priority":2,"categoryId":1,"destination":"Frankfurt"},"id":42,"type":"flightAdded"},{"flightId":72,"delay":47,"id":43,"type":"flightDelayed"},{"flight":{"id":116,"scheduled":"10:36","actual":"10:36","turnaroundTime":39,"gateId":8,"standId":5,"code":"93213","noOfPassengers":112,"transfersIds":[],"aircraftId":6,"priority":1,"categoryId":1,"destination":"Bratislava"},"id":44,"type":"flightAdded"},{"flightId":49,"delay":118,"id":45,"type":"flightDelayed"},{"flightId":29,"delay":214,"id":46,"type":"flightDelayed"},{"flight":{"id":117,"scheduled":"22:04","actual":"22:04","turnaroundTime":38,"gateId":11,"standId":1,"code":"91800","noOfPassengers":172,"transfersIds":[],"aircraftId":2,"priority":3,"categoryId":1,"destination":"Amsterdam"},"id":47,"type":"flightAdded"},{"flight":{"id":118,"scheduled":"17:55","actual":"17:55","turnaroundTime":50,"gateId":19,"standId":6,"code":"1109","noOfPassengers":84,"transfersIds":[],"aircraftId":8,"priority":2,"categoryId":1,"destination":"Hamburg"},"id":48,"type":"flightAdded"},{"flight":{"id":119,"scheduled":"09:17","actual":"09:17","turnaroundTime":61,"gateId":25,"standId":13,"code":"329922","noOfPassengers":109,"transfersIds":[],"aircraftId":23,"priority":1,"categoryId":1,"destination":"Paris"},"id":49,"type":"flightAdded"},{"flightId":44,"delay":295,"id":50,"type":"flightDelayed"},{"flight":{"id":120,"scheduled":"17:53","actual":"17:53","turnaroundTime":33,"gateId":24,"standId":12,"code":"0126","noOfPassengers":138,"transfersIds":[],"aircraftId":23,"priority":2,"categoryId":1,"destination":"Madrid"},"id":51,"type":"flightAdded"},{"flight":{"id":121,"scheduled":"12:47","actual":"12:47","turnaroundTime":33,"gateId":3,"standId":8,"code":"80349","noOfPassengers":96,"transfersIds":[],"aircraftId":10,"priority":3,"categoryId":1,"destination":"Nice"},"id":52,"type":"flightAdded"},{"flight":{"id":122,"scheduled":"03:31","actual":"03:31","turnaroundTime":58,"gateId":12,"standId":2,"code":"676917","noOfPassengers":157,"transfersIds":[],"aircraftId":20,"priority":2,"categoryId":1,"destination":"Dusseldorf"},"id":53,"type":"flightAdded"},{"flightId":76,"delay":314,"id":54,"type":"flightDelayed"}]
+[
+  {
+    "standId": 9,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 6,
+    "id": 2,
+    "type": "standClosed"
+  },
+  {
+    "standId": 12,
+    "start": 1108,
+    "end": 1420,
+    "id": 3,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 3,
+    "start": 1029,
+    "end": 1360,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 4,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 10,
+    "start": 68,
+    "end": 506,
+    "condition": {
+      "weight": 70.0,
+      "type": "weight"
+    },
+    "id": 5,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 11,
+    "start": 240,
+    "end": 1035,
+    "condition": {
+      "engineTypes": [
+        1
+      ],
+      "type": "engineType"
+    },
+    "id": 6,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 14,
+    "id": 7,
+    "type": "standClosed"
+  },
+  {
+    "flightId": 2,
+    "delay": 255,
+    "id": 8,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 24,
+    "delay": 34,
+    "id": 9,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 1,
+    "delay": 216,
+    "id": 10,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 68,
+    "delay": 36,
+    "id": 11,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "20:25",
+      "actual": "20:25",
+      "turnaroundTime": 33,
+      "gateId": 8,
+      "standId": 5,
+      "code": "345",
+      "noOfPassengers": 108,
+      "transfersIds": [],
+      "aircraftId": 24,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Brussels"
+    },
+    "id": 12,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "17:26",
+      "actual": "17:26",
+      "turnaroundTime": 48,
+      "gateId": 3,
+      "standId": 8,
+      "code": "338",
+      "noOfPassengers": 90,
+      "transfersIds": [],
+      "aircraftId": 18,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Amsterdam"
+    },
+    "id": 13,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 56,
+    "delay": 218,
+    "id": 14,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 96,
+      "scheduled": "18:53",
+      "actual": "18:53",
+      "turnaroundTime": 43,
+      "gateId": 22,
+      "standId": 10,
+      "code": "104",
+      "noOfPassengers": 101,
+      "transfersIds": [],
+      "aircraftId": 24,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Copenhagen"
+    },
+    "id": 15,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 97,
+      "scheduled": "16:44",
+      "actual": "16:44",
+      "turnaroundTime": 49,
+      "gateId": 23,
+      "standId": 11,
+      "code": "347",
+      "noOfPassengers": 112,
+      "transfersIds": [],
+      "aircraftId": 1,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Warszaw"
+    },
+    "id": 16,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 98,
+      "scheduled": "17:19",
+      "actual": "17:19",
+      "turnaroundTime": 40,
+      "gateId": 10,
+      "standId": 6,
+      "code": "238",
+      "noOfPassengers": 90,
+      "transfersIds": [],
+      "aircraftId": 21,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Katowice"
+    },
+    "id": 17,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 99,
+      "scheduled": "07:38",
+      "actual": "07:38",
+      "turnaroundTime": 40,
+      "gateId": 13,
+      "standId": 8,
+      "code": "812",
+      "noOfPassengers": 87,
+      "transfersIds": [],
+      "aircraftId": 9,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Budapest"
+    },
+    "id": 18,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 49,
+    "delay": 118,
+    "id": 19,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 28,
+    "delay": 51,
+    "id": 20,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 100,
+      "scheduled": "11:43",
+      "actual": "11:43",
+      "turnaroundTime": 34,
+      "gateId": 2,
+      "standId": 2,
+      "code": "812",
+      "noOfPassengers": 95,
+      "transfersIds": [],
+      "aircraftId": 10,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Berlin"
+    },
+    "id": 21,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 27,
+    "delay": 63,
+    "id": 22,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 101,
+      "scheduled": "03:56",
+      "actual": "03:56",
+      "turnaroundTime": 43,
+      "gateId": 19,
+      "standId": 6,
+      "code": "775",
+      "noOfPassengers": 102,
+      "transfersIds": [],
+      "aircraftId": 21,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Katowice"
+    },
+    "id": 23,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 102,
+      "scheduled": "20:46",
+      "actual": "20:46",
+      "turnaroundTime": 38,
+      "gateId": 22,
+      "standId": 10,
+      "code": "149",
+      "noOfPassengers": 80,
+      "transfersIds": [],
+      "aircraftId": 24,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Dusseldorf"
+    },
+    "id": 24,
+    "type": "flightAdded"
+  }
+]

@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class ScenarioMaker {
 
-    private static final int EASY_NO_OF_DISRUPTIONS = 5;
-    private static final int MEDIUM_NO_OF_DISRUPTIONS = 10;
-    private static final int HARD_NO_OF_DISRUPTIONS = 20;
-    private static final int EXTREME_NO_OF_DISRUPTIONS = 35;
+    private static final int EASY_NO_OF_DISRUPTIONS = 6;
+    private static final int MEDIUM_NO_OF_DISRUPTIONS = 11;
+    private static final int HARD_NO_OF_DISRUPTIONS = 21;
+    private static final int EXTREME_NO_OF_DISRUPTIONS = 36;
 
     private DisruptionGenerator disruptionGenerator;
     private GeneralStorage storage;
@@ -36,16 +36,16 @@ public class ScenarioMaker {
         int noOfDisruptions = 0;
         switch (type) {
             case EASY:
-                noOfDisruptions = Utils.randomInt(0, EASY_NO_OF_DISRUPTIONS + 1);
+                noOfDisruptions = Utils.randomInt(0, EASY_NO_OF_DISRUPTIONS);
                 break;
             case MEDIUM:
-                noOfDisruptions = Utils.randomInt(EASY_NO_OF_DISRUPTIONS, MEDIUM_NO_OF_DISRUPTIONS + 1);
+                noOfDisruptions = Utils.randomInt(EASY_NO_OF_DISRUPTIONS, MEDIUM_NO_OF_DISRUPTIONS);
                 break;
             case HARD:
-                noOfDisruptions = Utils.randomInt(MEDIUM_NO_OF_DISRUPTIONS, HARD_NO_OF_DISRUPTIONS + 1);
+                noOfDisruptions = Utils.randomInt(MEDIUM_NO_OF_DISRUPTIONS, HARD_NO_OF_DISRUPTIONS);
                 break;
             case EXTREME:
-                noOfDisruptions = Utils.randomInt(HARD_NO_OF_DISRUPTIONS, EXTREME_NO_OF_DISRUPTIONS + 1);
+                noOfDisruptions = Utils.randomInt(HARD_NO_OF_DISRUPTIONS, EXTREME_NO_OF_DISRUPTIONS);
                 break;
         }
 

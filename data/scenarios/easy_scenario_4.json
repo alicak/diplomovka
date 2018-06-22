@@ -1,58 +1,15 @@
 [
-    {
-        "standId": 10,
-        "start": 160,
-        "end": 203,
-        "id": 1,
-        "type": "standTemporarilyClosed"
-    },
-    {
-        "standId": 12,
-        "id": 2,
-        "type": "standClosed"
-    },
-    {
-        "flight": {
-            "id": 94,
-            "scheduled": "22:15",
-            "actual": "22:15",
-            "turnaroundTime": 72,
-            "gateId": 1,
-            "standId": 1,
-            "code": "288996",
-            "noOfPassengers": 156,
-            "transfersIds": [],
-            "aircraftId": 19,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Bratislava"
-        },
-        "id": 3,
-        "type": "flightAdded"
-    },
-    {
-        "flightId": 62,
-        "delay": 255,
-        "id": 4,
-        "type": "flightDelayed"
-    },
-    {
-        "flight": {
-            "id": 95,
-            "scheduled": "02:46",
-            "actual": "02:46",
-            "turnaroundTime": 36,
-            "gateId": 9,
-            "standId": 6,
-            "code": "874",
-            "noOfPassengers": 82,
-            "transfersIds": [],
-            "aircraftId": 23,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Madrid"
-        },
-        "id": 5,
-        "type": "flightAdded"
-    }
+  {
+    "standId": 12,
+    "start": 471,
+    "end": 848,
+    "id": 1,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flightId": 53,
+    "delay": 222,
+    "id": 2,
+    "type": "flightDelayed"
+  }
 ]

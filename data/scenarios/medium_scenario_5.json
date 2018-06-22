@@ -1,1 +1,78 @@
-[{"standId":13,"start":374,"end":940,"id":1,"type":"standTemporarilyClosed"},{"standId":12,"start":424,"end":1412,"id":2,"type":"standTemporarilyClosed"},{"standId":5,"start":794,"end":857,"id":3,"type":"standTemporarilyClosed"},{"standId":4,"start":70,"end":708,"id":4,"type":"standTemporarilyClosed"},{"standId":9,"start":836,"end":1224,"condition":{"weight":79.0,"type":"weight"},"id":5,"type":"standConditionallyClosed"},{"flight":{"id":94,"scheduled":"13:42","actual":"13:42","turnaroundTime":78,"gateId":26,"standId":14,"code":"09611","noOfPassengers":117,"transfersIds":[],"aircraftId":13,"priority":1,"categoryId":1,"destination":"Frankfurt"},"id":6,"type":"flightAdded"},{"flight":{"id":95,"scheduled":"16:20","actual":"16:20","turnaroundTime":38,"gateId":7,"standId":4,"code":"7457","noOfPassengers":132,"transfersIds":[],"aircraftId":22,"priority":3,"categoryId":1,"destination":"Katowice"},"id":7,"type":"flightAdded"},{"flight":{"id":96,"scheduled":"14:39","actual":"14:39","turnaroundTime":42,"gateId":10,"standId":6,"code":"45735","noOfPassengers":174,"transfersIds":[],"aircraftId":1,"priority":3,"categoryId":1,"destination":"Kosice"},"id":8,"type":"flightAdded"},{"flight":{"id":97,"scheduled":"16:57","actual":"16:57","turnaroundTime":60,"gateId":23,"standId":11,"code":"27458","noOfPassengers":89,"transfersIds":[],"aircraftId":1,"priority":3,"categoryId":1,"destination":"Bratislava"},"id":9,"type":"flightAdded"},{"flight":{"id":98,"scheduled":"05:09","actual":"05:09","turnaroundTime":38,"gateId":23,"standId":11,"code":"700149","noOfPassengers":116,"transfersIds":[],"aircraftId":12,"priority":3,"categoryId":1,"destination":"Dusseldorf"},"id":10,"type":"flightAdded"},{"flight":{"id":99,"scheduled":"20:26","actual":"20:26","turnaroundTime":42,"gateId":6,"standId":7,"code":"8858","noOfPassengers":183,"transfersIds":[],"aircraftId":12,"priority":2,"categoryId":1,"destination":"Amsterdam"},"id":11,"type":"flightAdded"}]
+[
+  {
+    "standId": 7,
+    "start": 437,
+    "end": 540,
+    "id": 1,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 10,
+    "start": 1106,
+    "end": 1336,
+    "id": 2,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 13,
+    "id": 3,
+    "type": "standClosed"
+  },
+  {
+    "standId": 6,
+    "start": 506,
+    "end": 1070,
+    "id": 4,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "02:33",
+      "actual": "02:33",
+      "turnaroundTime": 45,
+      "gateId": 19,
+      "standId": 6,
+      "code": "859",
+      "noOfPassengers": 111,
+      "transfersIds": [],
+      "aircraftId": 17,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Amsterdam"
+    },
+    "id": 5,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 58,
+    "delay": 125,
+    "id": 6,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "17:17",
+      "actual": "17:17",
+      "turnaroundTime": 41,
+      "gateId": 19,
+      "standId": 6,
+      "code": "485",
+      "noOfPassengers": 110,
+      "transfersIds": [],
+      "aircraftId": 3,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Katowice"
+    },
+    "id": 7,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 14,
+    "delay": 260,
+    "id": 8,
+    "type": "flightDelayed"
+  }
+]

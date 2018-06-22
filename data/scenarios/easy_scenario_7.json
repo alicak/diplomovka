@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "standId": 2,
+    "start": 672,
+    "end": 1263,
+    "id": 1,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "04:01",
+      "actual": "04:01",
+      "turnaroundTime": 45,
+      "gateId": 9,
+      "standId": 6,
+      "code": "035",
+      "noOfPassengers": 99,
+      "transfersIds": [],
+      "aircraftId": 23,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Hamburg"
+    },
+    "id": 2,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 37,
+    "delay": 97,
+    "id": 3,
+    "type": "flightDelayed"
+  }
+]

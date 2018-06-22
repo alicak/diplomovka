@@ -1,147 +1,145 @@
 [
-    {
-        "standId": 9,
-        "id": 1,
-        "type": "standClosed"
+  {
+    "standId": 8,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 13,
+    "start": 84,
+    "end": 668,
+    "id": 2,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 7,
+    "start": 34,
+    "end": 325,
+    "id": 3,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 1,
+    "start": 109,
+    "end": 597,
+    "id": 4,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 11,
+    "id": 5,
+    "type": "standClosed"
+  },
+  {
+    "standId": 12,
+    "start": 685,
+    "end": 1096,
+    "condition": {
+      "engineTypes": [
+        2
+      ],
+      "type": "engineType"
     },
-    {
-        "standId": 10,
-        "start": 774,
-        "end": 886,
-        "id": 2,
-        "type": "standTemporarilyClosed"
+    "id": 6,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 3,
+    "id": 7,
+    "type": "standClosed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "14:31",
+      "actual": "14:31",
+      "turnaroundTime": 46,
+      "gateId": 7,
+      "standId": 4,
+      "code": "746",
+      "noOfPassengers": 81,
+      "transfersIds": [],
+      "aircraftId": 1,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Berlin"
     },
-    {
-        "standId": 13,
-        "start": 673,
-        "end": 746,
-        "id": 3,
-        "type": "standTemporarilyClosed"
+    "id": 8,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "13:50",
+      "actual": "13:50",
+      "turnaroundTime": 34,
+      "gateId": 11,
+      "standId": 1,
+      "code": "435",
+      "noOfPassengers": 117,
+      "transfersIds": [],
+      "aircraftId": 2,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Paris"
     },
-    {
-        "standId": 12,
-        "start": 934,
-        "end": 1603,
-        "id": 4,
-        "type": "standTemporarilyClosed"
+    "id": 9,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 96,
+      "scheduled": "09:56",
+      "actual": "09:56",
+      "turnaroundTime": 42,
+      "gateId": 7,
+      "standId": 4,
+      "code": "435",
+      "noOfPassengers": 90,
+      "transfersIds": [],
+      "aircraftId": 2,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Dusseldorf"
     },
-    {
-        "standId": 1,
-        "start": 1133,
-        "end": 1605,
-        "id": 5,
-        "type": "standTemporarilyClosed"
+    "id": 10,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 39,
+    "delay": 246,
+    "id": 11,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 60,
+    "delay": 232,
+    "id": 12,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 97,
+      "scheduled": "04:00",
+      "actual": "04:00",
+      "turnaroundTime": 38,
+      "gateId": 23,
+      "standId": 11,
+      "code": "650",
+      "noOfPassengers": 93,
+      "transfersIds": [],
+      "aircraftId": 12,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Bratislava"
     },
-    {
-        "standId": 11,
-        "id": 6,
-        "type": "standClosed"
-    },
-    {
-        "flight": {
-            "id": 94,
-            "scheduled": "15:51",
-            "actual": "15:51",
-            "turnaroundTime": 73,
-            "gateId": 24,
-            "standId": 12,
-            "code": "767",
-            "noOfPassengers": 91,
-            "transfersIds": [],
-            "aircraftId": 6,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Frankfurt"
-        },
-        "id": 7,
-        "type": "flightAdded"
-    },
-    {
-        "flightId": 32,
-        "delay": 42,
-        "id": 8,
-        "type": "flightDelayed"
-    },
-    {
-        "flight": {
-            "id": 95,
-            "scheduled": "09:12",
-            "actual": "09:12",
-            "turnaroundTime": 41,
-            "gateId": 22,
-            "standId": 10,
-            "code": "8663",
-            "noOfPassengers": 81,
-            "transfersIds": [],
-            "aircraftId": 6,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Copenhagen"
-        },
-        "id": 9,
-        "type": "flightAdded"
-    },
-    {
-        "flight": {
-            "id": 96,
-            "scheduled": "20:34",
-            "actual": "20:34",
-            "turnaroundTime": 63,
-            "gateId": 22,
-            "standId": 10,
-            "code": "517386",
-            "noOfPassengers": 94,
-            "transfersIds": [],
-            "aircraftId": 9,
-            "priority": 1,
-            "categoryId": 1,
-            "destination": "Berlin"
-        },
-        "id": 10,
-        "type": "flightAdded"
-    },
-    {
-        "flightId": 69,
-        "delay": 152,
-        "id": 11,
-        "type": "flightDelayed"
-    },
-    {
-        "flight": {
-            "id": 97,
-            "scheduled": "09:28",
-            "actual": "09:28",
-            "turnaroundTime": 51,
-            "gateId": 14,
-            "standId": 3,
-            "code": "64904",
-            "noOfPassengers": 148,
-            "transfersIds": [],
-            "aircraftId": 23,
-            "priority": 2,
-            "categoryId": 1,
-            "destination": "Stockholm"
-        },
-        "id": 12,
-        "type": "flightAdded"
-    },
-    {
-        "flight": {
-            "id": 98,
-            "scheduled": "20:33",
-            "actual": "20:33",
-            "turnaroundTime": 68,
-            "gateId": 19,
-            "standId": 6,
-            "code": "7496",
-            "noOfPassengers": 162,
-            "transfersIds": [],
-            "aircraftId": 11,
-            "priority": 1,
-            "categoryId": 1,
-            "destination": "Dusseldorf"
-        },
-        "id": 13,
-        "type": "flightAdded"
-    }
+    "id": 13,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 24,
+    "delay": 145,
+    "id": 14,
+    "type": "flightDelayed"
+  }
 ]

@@ -1,1 +1,103 @@
-[{"standId":11,"start":27,"end":1121,"id":1,"type":"standTemporarilyClosed"},{"standId":13,"start":191,"end":570,"id":2,"type":"standTemporarilyClosed"},{"standId":4,"start":193,"end":663,"id":3,"type":"standTemporarilyClosed"},{"standId":10,"start":194,"end":1033,"id":4,"type":"standTemporarilyClosed"},{"standId":12,"id":5,"type":"standClosed"},{"standId":7,"start":547,"end":1671,"condition":{"engineTypes":[1],"type":"engineType"},"id":6,"type":"standConditionallyClosed"},{"standId":9,"start":1033,"end":1398,"id":7,"type":"standTemporarilyClosed"},{"flightId":46,"delay":66,"id":8,"type":"flightDelayed"},{"flight":{"id":94,"scheduled":"18:18","actual":"18:18","turnaroundTime":52,"gateId":13,"standId":8,"code":"718","noOfPassengers":129,"transfersIds":[],"aircraftId":2,"priority":3,"categoryId":1,"destination":"Paris"},"id":9,"type":"flightAdded"},{"flightId":71,"delay":58,"id":10,"type":"flightDelayed"},{"flight":{"id":95,"scheduled":"04:17","actual":"04:17","turnaroundTime":34,"gateId":2,"standId":2,"code":"44755","noOfPassengers":183,"transfersIds":[],"aircraftId":12,"priority":2,"categoryId":1,"destination":"Copenhagen"},"id":11,"type":"flightAdded"},{"flight":{"id":96,"scheduled":"04:47","actual":"04:47","turnaroundTime":79,"gateId":22,"standId":10,"code":"248","noOfPassengers":124,"transfersIds":[],"aircraftId":19,"priority":2,"categoryId":1,"destination":"Bratislava"},"id":12,"type":"flightAdded"},{"flight":{"id":97,"scheduled":"11:55","actual":"11:55","turnaroundTime":34,"gateId":26,"standId":14,"code":"0013","noOfPassengers":139,"transfersIds":[],"aircraftId":23,"priority":2,"categoryId":1,"destination":"Brussels"},"id":13,"type":"flightAdded"},{"flight":{"id":98,"scheduled":"06:26","actual":"06:26","turnaroundTime":75,"gateId":3,"standId":8,"code":"242","noOfPassengers":82,"transfersIds":[],"aircraftId":1,"priority":2,"categoryId":1,"destination":"Warszaw"},"id":14,"type":"flightAdded"},{"flight":{"id":99,"scheduled":"05:33","actual":"05:33","turnaroundTime":55,"gateId":22,"standId":10,"code":"41320","noOfPassengers":179,"transfersIds":[],"aircraftId":19,"priority":1,"categoryId":1,"destination":"Amsterdam"},"id":15,"type":"flightAdded"}]
+[
+  {
+    "standId": 5,
+    "start": 417,
+    "end": 780,
+    "id": 1,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 4,
+    "start": 922,
+    "end": 1103,
+    "condition": {
+      "weight": 70.0,
+      "type": "weight"
+    },
+    "id": 2,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 12,
+    "start": 1087,
+    "end": 1218,
+    "condition": {
+      "engineTypes": [
+        1
+      ],
+      "type": "engineType"
+    },
+    "id": 3,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 7,
+    "start": 1156,
+    "end": 1249,
+    "id": 4,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 11,
+    "start": 1176,
+    "end": 1374,
+    "id": 5,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flightId": 62,
+    "delay": 83,
+    "id": 6,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "14:28",
+      "actual": "14:28",
+      "turnaroundTime": 34,
+      "gateId": 10,
+      "standId": 6,
+      "code": "537",
+      "noOfPassengers": 118,
+      "transfersIds": [],
+      "aircraftId": 3,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Paris"
+    },
+    "id": 7,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 71,
+    "delay": 245,
+    "id": 8,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "09:56",
+      "actual": "09:56",
+      "turnaroundTime": 36,
+      "gateId": 24,
+      "standId": 12,
+      "code": "849",
+      "noOfPassengers": 103,
+      "transfersIds": [],
+      "aircraftId": 24,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Hamburg"
+    },
+    "id": 9,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 13,
+    "delay": 92,
+    "id": 10,
+    "type": "flightDelayed"
+  }
+]

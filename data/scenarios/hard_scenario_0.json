@@ -1,0 +1,151 @@
+[
+  {
+    "standId": 14,
+    "id": 1,
+    "type": "standClosed"
+  },
+  {
+    "standId": 9,
+    "start": 32,
+    "end": 868,
+    "id": 2,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 5,
+    "id": 3,
+    "type": "standClosed"
+  },
+  {
+    "standId": 13,
+    "start": 111,
+    "end": 700,
+    "condition": {
+      "categories": [
+        1
+      ],
+      "type": "category"
+    },
+    "id": 4,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 11,
+    "start": 1082,
+    "end": 1353,
+    "id": 5,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "standId": 1,
+    "start": 1193,
+    "end": 1425,
+    "condition": {
+      "weight": 63.0,
+      "type": "weight"
+    },
+    "id": 6,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "standId": 4,
+    "start": 628,
+    "end": 1389,
+    "id": 7,
+    "type": "standTemporarilyClosed"
+  },
+  {
+    "flightId": 78,
+    "delay": 59,
+    "id": 8,
+    "type": "flightDelayed"
+  },
+  {
+    "flightId": 11,
+    "delay": 197,
+    "id": 9,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 94,
+      "scheduled": "05:13",
+      "actual": "05:13",
+      "turnaroundTime": 36,
+      "gateId": 26,
+      "standId": 14,
+      "code": "510",
+      "noOfPassengers": 90,
+      "transfersIds": [],
+      "aircraftId": 18,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Warszaw"
+    },
+    "id": 10,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "20:54",
+      "actual": "20:54",
+      "turnaroundTime": 33,
+      "gateId": 12,
+      "standId": 2,
+      "code": "561",
+      "noOfPassengers": 85,
+      "transfersIds": [],
+      "aircraftId": 10,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Barcelona"
+    },
+    "id": 11,
+    "type": "flightAdded"
+  },
+  {
+    "flightId": 89,
+    "delay": 167,
+    "id": 12,
+    "type": "flightDelayed"
+  },
+  {
+    "flight": {
+      "id": 96,
+      "scheduled": "10:49",
+      "actual": "10:49",
+      "turnaroundTime": 48,
+      "gateId": 22,
+      "standId": 10,
+      "code": "880",
+      "noOfPassengers": 96,
+      "transfersIds": [],
+      "aircraftId": 10,
+      "priority": 2,
+      "categoryId": 1,
+      "destination": "Katowice"
+    },
+    "id": 13,
+    "type": "flightAdded"
+  },
+  {
+    "flight": {
+      "id": 97,
+      "scheduled": "09:12",
+      "actual": "09:12",
+      "turnaroundTime": 42,
+      "gateId": 24,
+      "standId": 12,
+      "code": "677",
+      "noOfPassengers": 102,
+      "transfersIds": [],
+      "aircraftId": 13,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Katowice"
+    },
+    "id": 14,
+    "type": "flightAdded"
+  }
+]
