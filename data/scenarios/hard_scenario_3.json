@@ -1,1 +1,147 @@
-[{"standId":9,"id":1,"type":"standClosed"},{"standId":10,"start":774,"end":886,"id":2,"type":"standTemporarilyClosed"},{"standId":13,"start":673,"end":746,"id":3,"type":"standTemporarilyClosed"},{"standId":12,"start":934,"end":1603,"id":4,"type":"standTemporarilyClosed"},{"standId":1,"start":1133,"end":1605,"id":5,"type":"standTemporarilyClosed"},{"standId":11,"id":6,"type":"standClosed"},{"flight":{"id":94,"scheduled":"15:51","actual":"15:51","turnaroundTime":73,"gateId":24,"standId":12,"code":"767","noOfPassengers":91,"transfersIds":[],"aircraftId":6,"priority":2,"categoryId":1,"destination":"Frankfurt"},"id":7,"type":"flightAdded"},{"flightId":32,"delay":42,"id":8,"type":"flightDelayed"},{"flight":{"id":95,"scheduled":"09:12","actual":"09:12","turnaroundTime":41,"gateId":22,"standId":10,"code":"8663","noOfPassengers":81,"transfersIds":[],"aircraftId":6,"priority":2,"categoryId":1,"destination":"Copenhagen"},"id":9,"type":"flightAdded"},{"flight":{"id":96,"scheduled":"20:34","actual":"20:34","turnaroundTime":63,"gateId":22,"standId":10,"code":"517386","noOfPassengers":94,"transfersIds":[],"aircraftId":9,"priority":1,"categoryId":1,"destination":"Berlin"},"id":10,"type":"flightAdded"},{"flightId":69,"delay":152,"id":11,"type":"flightDelayed"},{"flight":{"id":97,"scheduled":"09:28","actual":"09:28","turnaroundTime":51,"gateId":14,"standId":3,"code":"64904","noOfPassengers":148,"transfersIds":[],"aircraftId":23,"priority":2,"categoryId":1,"destination":"Stockholm"},"id":12,"type":"flightAdded"},{"flight":{"id":98,"scheduled":"20:33","actual":"20:33","turnaroundTime":68,"gateId":19,"standId":6,"code":"7496","noOfPassengers":162,"transfersIds":[],"aircraftId":11,"priority":1,"categoryId":1,"destination":"Dusseldorf"},"id":13,"type":"flightAdded"}]
+[
+    {
+        "standId": 9,
+        "id": 1,
+        "type": "standClosed"
+    },
+    {
+        "standId": 10,
+        "start": 774,
+        "end": 886,
+        "id": 2,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 13,
+        "start": 673,
+        "end": 746,
+        "id": 3,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 12,
+        "start": 934,
+        "end": 1603,
+        "id": 4,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 1,
+        "start": 1133,
+        "end": 1605,
+        "id": 5,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 11,
+        "id": 6,
+        "type": "standClosed"
+    },
+    {
+        "flight": {
+            "id": 94,
+            "scheduled": "15:51",
+            "actual": "15:51",
+            "turnaroundTime": 73,
+            "gateId": 24,
+            "standId": 12,
+            "code": "767",
+            "noOfPassengers": 91,
+            "transfersIds": [],
+            "aircraftId": 6,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Frankfurt"
+        },
+        "id": 7,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 32,
+        "delay": 42,
+        "id": 8,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 95,
+            "scheduled": "09:12",
+            "actual": "09:12",
+            "turnaroundTime": 41,
+            "gateId": 22,
+            "standId": 10,
+            "code": "8663",
+            "noOfPassengers": 81,
+            "transfersIds": [],
+            "aircraftId": 6,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Copenhagen"
+        },
+        "id": 9,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 96,
+            "scheduled": "20:34",
+            "actual": "20:34",
+            "turnaroundTime": 63,
+            "gateId": 22,
+            "standId": 10,
+            "code": "517386",
+            "noOfPassengers": 94,
+            "transfersIds": [],
+            "aircraftId": 9,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Berlin"
+        },
+        "id": 10,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 69,
+        "delay": 152,
+        "id": 11,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 97,
+            "scheduled": "09:28",
+            "actual": "09:28",
+            "turnaroundTime": 51,
+            "gateId": 14,
+            "standId": 3,
+            "code": "64904",
+            "noOfPassengers": 148,
+            "transfersIds": [],
+            "aircraftId": 23,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Stockholm"
+        },
+        "id": 12,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 98,
+            "scheduled": "20:33",
+            "actual": "20:33",
+            "turnaroundTime": 68,
+            "gateId": 19,
+            "standId": 6,
+            "code": "7496",
+            "noOfPassengers": 162,
+            "transfersIds": [],
+            "aircraftId": 11,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Dusseldorf"
+        },
+        "id": 13,
+        "type": "flightAdded"
+    }
+]

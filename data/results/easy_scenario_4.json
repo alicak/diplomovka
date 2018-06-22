@@ -1,1 +1,10 @@
-{"id":5,"name":"easy_4","type":"easy","originalFitness":-346051.30000000005,"newFitness":-308048.10000000003,"noOfReassignments":10,"totalWalkingDistance":26,"totalTimeDiff":441}
+{
+    "id": 5,
+    "name": "easy_4",
+    "type": "easy",
+    "originalFitness": -346051.30000000005,
+    "newFitness": -308048.10000000003,
+    "noOfReassignments": 10,
+    "totalWalkingDistance": 26,
+    "totalTimeDiff": 441
+}

@@ -1,1 +1,262 @@
-[{"standId":5,"start":462,"end":896,"id":1,"type":"standTemporarilyClosed"},{"standId":9,"id":2,"type":"standClosed"},{"standId":6,"start":1056,"end":1394,"condition":{"categories":[1],"type":"category"},"id":3,"type":"standConditionallyClosed"},{"standId":7,"start":1137,"end":1361,"id":4,"type":"standTemporarilyClosed"},{"standId":1,"start":938,"end":1234,"id":5,"type":"standTemporarilyClosed"},{"standId":11,"start":587,"end":1144,"id":6,"type":"standTemporarilyClosed"},{"standId":10,"start":509,"end":764,"id":7,"type":"standTemporarilyClosed"},{"flightId":86,"delay":272,"id":8,"type":"flightDelayed"},{"flight":{"id":94,"scheduled":"11:23","actual":"11:23","turnaroundTime":49,"gateId":25,"standId":13,"code":"61125","noOfPassengers":145,"transfersIds":[],"aircraftId":8,"priority":1,"categoryId":1,"destination":"Berlin"},"id":9,"type":"flightAdded"},{"flight":{"id":95,"scheduled":"17:15","actual":"17:15","turnaroundTime":69,"gateId":24,"standId":12,"code":"454082","noOfPassengers":182,"transfersIds":[],"aircraftId":10,"priority":2,"categoryId":1,"destination":"Madrid"},"id":10,"type":"flightAdded"},{"flight":{"id":96,"scheduled":"11:59","actual":"11:59","turnaroundTime":33,"gateId":14,"standId":3,"code":"2169","noOfPassengers":128,"transfersIds":[],"aircraftId":16,"priority":1,"categoryId":1,"destination":"Barcelona"},"id":11,"type":"flightAdded"},{"flight":{"id":97,"scheduled":"06:26","actual":"06:26","turnaroundTime":49,"gateId":2,"standId":2,"code":"837988","noOfPassengers":188,"transfersIds":[],"aircraftId":11,"priority":2,"categoryId":1,"destination":"Berlin"},"id":12,"type":"flightAdded"},{"flightId":4,"delay":18,"id":13,"type":"flightDelayed"},{"flight":{"id":98,"scheduled":"21:47","actual":"21:47","turnaroundTime":48,"gateId":7,"standId":4,"code":"8955","noOfPassengers":90,"transfersIds":[],"aircraftId":6,"priority":2,"categoryId":1,"destination":"Hamburg"},"id":14,"type":"flightAdded"},{"flight":{"id":99,"scheduled":"12:21","actual":"12:21","turnaroundTime":78,"gateId":26,"standId":14,"code":"715","noOfPassengers":115,"transfersIds":[],"aircraftId":12,"priority":3,"categoryId":1,"destination":"Nice"},"id":15,"type":"flightAdded"},{"flight":{"id":100,"scheduled":"20:37","actual":"20:37","turnaroundTime":77,"gateId":2,"standId":2,"code":"92244","noOfPassengers":160,"transfersIds":[],"aircraftId":22,"priority":3,"categoryId":1,"destination":"Budapest"},"id":16,"type":"flightAdded"},{"flight":{"id":101,"scheduled":"06:37","actual":"06:37","turnaroundTime":50,"gateId":25,"standId":13,"code":"727687","noOfPassengers":101,"transfersIds":[],"aircraftId":7,"priority":2,"categoryId":1,"destination":"Hamburg"},"id":17,"type":"flightAdded"},{"flightId":92,"delay":308,"id":18,"type":"flightDelayed"},{"flightId":32,"delay":150,"id":19,"type":"flightDelayed"},{"flightId":80,"delay":273,"id":20,"type":"flightDelayed"},{"flightId":81,"delay":116,"id":21,"type":"flightDelayed"},{"flight":{"id":102,"scheduled":"18:54","actual":"18:54","turnaroundTime":46,"gateId":19,"standId":6,"code":"30718","noOfPassengers":199,"transfersIds":[],"aircraftId":3,"priority":2,"categoryId":1,"destination":"Barcelona"},"id":22,"type":"flightAdded"}]
+[
+    {
+        "standId": 5,
+        "start": 462,
+        "end": 896,
+        "id": 1,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 9,
+        "id": 2,
+        "type": "standClosed"
+    },
+    {
+        "standId": 6,
+        "start": 1056,
+        "end": 1394,
+        "condition": {
+            "categories": [
+                1
+            ],
+            "type": "category"
+        },
+        "id": 3,
+        "type": "standConditionallyClosed"
+    },
+    {
+        "standId": 7,
+        "start": 1137,
+        "end": 1361,
+        "id": 4,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 1,
+        "start": 938,
+        "end": 1234,
+        "id": 5,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 11,
+        "start": 587,
+        "end": 1144,
+        "id": 6,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 10,
+        "start": 509,
+        "end": 764,
+        "id": 7,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "flightId": 86,
+        "delay": 272,
+        "id": 8,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 94,
+            "scheduled": "11:23",
+            "actual": "11:23",
+            "turnaroundTime": 49,
+            "gateId": 25,
+            "standId": 13,
+            "code": "61125",
+            "noOfPassengers": 145,
+            "transfersIds": [],
+            "aircraftId": 8,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Berlin"
+        },
+        "id": 9,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 95,
+            "scheduled": "17:15",
+            "actual": "17:15",
+            "turnaroundTime": 69,
+            "gateId": 24,
+            "standId": 12,
+            "code": "454082",
+            "noOfPassengers": 182,
+            "transfersIds": [],
+            "aircraftId": 10,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Madrid"
+        },
+        "id": 10,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 96,
+            "scheduled": "11:59",
+            "actual": "11:59",
+            "turnaroundTime": 33,
+            "gateId": 14,
+            "standId": 3,
+            "code": "2169",
+            "noOfPassengers": 128,
+            "transfersIds": [],
+            "aircraftId": 16,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Barcelona"
+        },
+        "id": 11,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 97,
+            "scheduled": "06:26",
+            "actual": "06:26",
+            "turnaroundTime": 49,
+            "gateId": 2,
+            "standId": 2,
+            "code": "837988",
+            "noOfPassengers": 188,
+            "transfersIds": [],
+            "aircraftId": 11,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Berlin"
+        },
+        "id": 12,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 4,
+        "delay": 18,
+        "id": 13,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 98,
+            "scheduled": "21:47",
+            "actual": "21:47",
+            "turnaroundTime": 48,
+            "gateId": 7,
+            "standId": 4,
+            "code": "8955",
+            "noOfPassengers": 90,
+            "transfersIds": [],
+            "aircraftId": 6,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Hamburg"
+        },
+        "id": 14,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 99,
+            "scheduled": "12:21",
+            "actual": "12:21",
+            "turnaroundTime": 78,
+            "gateId": 26,
+            "standId": 14,
+            "code": "715",
+            "noOfPassengers": 115,
+            "transfersIds": [],
+            "aircraftId": 12,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Nice"
+        },
+        "id": 15,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 100,
+            "scheduled": "20:37",
+            "actual": "20:37",
+            "turnaroundTime": 77,
+            "gateId": 2,
+            "standId": 2,
+            "code": "92244",
+            "noOfPassengers": 160,
+            "transfersIds": [],
+            "aircraftId": 22,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Budapest"
+        },
+        "id": 16,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 101,
+            "scheduled": "06:37",
+            "actual": "06:37",
+            "turnaroundTime": 50,
+            "gateId": 25,
+            "standId": 13,
+            "code": "727687",
+            "noOfPassengers": 101,
+            "transfersIds": [],
+            "aircraftId": 7,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Hamburg"
+        },
+        "id": 17,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 92,
+        "delay": 308,
+        "id": 18,
+        "type": "flightDelayed"
+    },
+    {
+        "flightId": 32,
+        "delay": 150,
+        "id": 19,
+        "type": "flightDelayed"
+    },
+    {
+        "flightId": 80,
+        "delay": 273,
+        "id": 20,
+        "type": "flightDelayed"
+    },
+    {
+        "flightId": 81,
+        "delay": 116,
+        "id": 21,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 102,
+            "scheduled": "18:54",
+            "actual": "18:54",
+            "turnaroundTime": 46,
+            "gateId": 19,
+            "standId": 6,
+            "code": "30718",
+            "noOfPassengers": 199,
+            "transfersIds": [],
+            "aircraftId": 3,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Barcelona"
+        },
+        "id": 22,
+        "type": "flightAdded"
+    }
+]

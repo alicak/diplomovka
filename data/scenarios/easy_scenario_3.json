@@ -1,1 +1,47 @@
-[{"standId":11,"start":672,"end":1296,"id":1,"type":"standTemporarilyClosed"},{"flight":{"id":94,"scheduled":"17:33","actual":"17:33","turnaroundTime":69,"gateId":10,"standId":6,"code":"433","noOfPassengers":174,"transfersIds":[],"aircraftId":2,"priority":1,"categoryId":1,"destination":"Katowice"},"id":2,"type":"flightAdded"},{"flight":{"id":95,"scheduled":"10:02","actual":"10:02","turnaroundTime":66,"gateId":25,"standId":13,"code":"74201","noOfPassengers":97,"transfersIds":[],"aircraftId":13,"priority":2,"categoryId":1,"destination":"Amsterdam"},"id":3,"type":"flightAdded"}]
+[
+    {
+        "standId": 11,
+        "start": 672,
+        "end": 1296,
+        "id": 1,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "flight": {
+            "id": 94,
+            "scheduled": "17:33",
+            "actual": "17:33",
+            "turnaroundTime": 69,
+            "gateId": 10,
+            "standId": 6,
+            "code": "433",
+            "noOfPassengers": 174,
+            "transfersIds": [],
+            "aircraftId": 2,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Katowice"
+        },
+        "id": 2,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 95,
+            "scheduled": "10:02",
+            "actual": "10:02",
+            "turnaroundTime": 66,
+            "gateId": 25,
+            "standId": 13,
+            "code": "74201",
+            "noOfPassengers": 97,
+            "transfersIds": [],
+            "aircraftId": 13,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Amsterdam"
+        },
+        "id": 3,
+        "type": "flightAdded"
+    }
+]

@@ -13,7 +13,7 @@ import java.io.PrintWriter;
  * runs reassignment calculation for all test scenarios and saves the results
  */
 public class EvaluatorMain {
-    private static final File SCENARIOS_FOLDER = new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER);
+    public static final File SCENARIOS_FOLDER = new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER);
     private static final String RESULTS_FOLDER = "data/results/";
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -32,7 +32,7 @@ public class EvaluatorMain {
         }
     }
 
-    private static ReassignmentStatistics runReassignment(String disruptionsFile) {
+    public static ReassignmentStatistics runReassignment(String disruptionsFile) {
         MainAlgorithm algorithm = new MainAlgorithm(disruptionsFile);
 
         // all reassignments will use the same parameters

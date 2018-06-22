@@ -46,7 +46,7 @@ public final class Types {
     public static sk.upjs.ics.diplomovka.disruption.Disruption getDisruptionFromModel(DisruptionDataModel model, GeneralStorage storage) {
         switch (model.getType()) {
             case Disruption.FLIGHT_ADDED:
-                return new FlightAddedDisruption((FlightAddedDisruptionDataModel) model, storage.getFlightStorage());
+                return new FlightAddedDisruption((FlightAddedDisruptionDataModel) model, storage);
             case Disruption.FLIGHT_CANCELLED:
                 return new FlightCancelledDisruption((FlightCancelledDisruptionDataModel) model, storage.getFlightStorage());
             case Disruption.FLIGHT_DELAYED:

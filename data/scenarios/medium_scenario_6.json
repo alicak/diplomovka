@@ -1,1 +1,82 @@
-[{"standId":9,"start":83,"end":276,"id":1,"type":"standTemporarilyClosed"},{"standId":4,"start":1069,"end":1072,"condition":{"engineTypes":[1],"type":"engineType"},"id":2,"type":"standConditionallyClosed"},{"standId":8,"id":3,"type":"standClosed"},{"standId":12,"id":4,"type":"standClosed"},{"flightId":48,"delay":49,"id":5,"type":"flightDelayed"},{"flight":{"id":94,"scheduled":"09:59","actual":"09:59","turnaroundTime":68,"gateId":14,"standId":3,"code":"13331","noOfPassengers":169,"transfersIds":[],"aircraftId":19,"priority":3,"categoryId":1,"destination":"Bratislava"},"id":6,"type":"flightAdded"},{"flight":{"id":95,"scheduled":"21:09","actual":"21:09","turnaroundTime":43,"gateId":25,"standId":13,"code":"641755","noOfPassengers":98,"transfersIds":[],"aircraftId":2,"priority":1,"categoryId":1,"destination":"Brussels"},"id":7,"type":"flightAdded"},{"flightId":82,"delay":43,"id":8,"type":"flightDelayed"}]
+[
+    {
+        "standId": 9,
+        "start": 83,
+        "end": 276,
+        "id": 1,
+        "type": "standTemporarilyClosed"
+    },
+    {
+        "standId": 4,
+        "start": 1069,
+        "end": 1072,
+        "condition": {
+            "engineTypes": [
+                1
+            ],
+            "type": "engineType"
+        },
+        "id": 2,
+        "type": "standConditionallyClosed"
+    },
+    {
+        "standId": 8,
+        "id": 3,
+        "type": "standClosed"
+    },
+    {
+        "standId": 12,
+        "id": 4,
+        "type": "standClosed"
+    },
+    {
+        "flightId": 48,
+        "delay": 49,
+        "id": 5,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 94,
+            "scheduled": "09:59",
+            "actual": "09:59",
+            "turnaroundTime": 68,
+            "gateId": 14,
+            "standId": 3,
+            "code": "13331",
+            "noOfPassengers": 169,
+            "transfersIds": [],
+            "aircraftId": 19,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Bratislava"
+        },
+        "id": 6,
+        "type": "flightAdded"
+    },
+    {
+        "flight": {
+            "id": 95,
+            "scheduled": "21:09",
+            "actual": "21:09",
+            "turnaroundTime": 43,
+            "gateId": 25,
+            "standId": 13,
+            "code": "641755",
+            "noOfPassengers": 98,
+            "transfersIds": [],
+            "aircraftId": 2,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Brussels"
+        },
+        "id": 7,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 82,
+        "delay": 43,
+        "id": 8,
+        "type": "flightDelayed"
+    }
+]
