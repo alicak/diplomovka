@@ -33,7 +33,7 @@ public class BenchmarkMain {
                 runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
             }
 
-            int noOfRuns = 20;
+            int noOfRuns = 10;
             long time1 = 0;
             long time2 = 0;
             for (int i = 0; i < noOfRuns; i++) {

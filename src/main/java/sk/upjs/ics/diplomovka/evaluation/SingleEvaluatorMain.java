@@ -20,14 +20,10 @@ public class SingleEvaluatorMain {
         Gson gson = new Gson();
 
         List<File> scenariosFiles = new LinkedList<>();
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "easy_scenario_2.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "easy_scenario_3.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "medium_scenario_1.json"));
+        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "easy_scenario_6.json"));
         scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "medium_scenario_3.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "hard_scenario_10.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "hard_scenario_7.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "extreme_scenario_4.json"));
-        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "extreme_scenario_5.json"));
+        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "hard_scenario_4.json"));
+        scenariosFiles.add(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + "extreme_scenario_8.json"));
 
         for (File scenarioFile : scenariosFiles) {
             String name = scenarioFile.getName();

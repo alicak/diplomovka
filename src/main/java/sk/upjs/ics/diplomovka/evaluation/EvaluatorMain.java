@@ -28,12 +28,6 @@ public class EvaluatorMain {
             String name = scenarioFile.getName();
             if (!name.contains("_scenario_")) // in case there is some other file in the directory
                 continue;
-//            if (name.contains("extreme_scenario_4")) // in case there is some other file in the directory
-//                continue;
-//            if (name.contains("hard_scenario_5")) // in case there is some other file in the directory
-//                continue;
-//            if (name.contains("hard_scenario_6")) // in case there is some other file in the directory
-//                continue;
             ReassignmentStatistics statistics = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
 
             reassignmentInfoList.add(new ReassignmentInfo(statistics, name));
@@ -41,7 +35,6 @@ public class EvaluatorMain {
             PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + name));
             pw.write(gson.toJson(statistics));
             pw.close();
-
         }
 
         PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + "results.json"));

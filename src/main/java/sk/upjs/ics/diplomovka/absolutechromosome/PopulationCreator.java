@@ -25,12 +25,10 @@ public class PopulationCreator {
         }
 
         // second half are mutations of original assignment
-        for (int i = generationSize / 2; i < generationSize - 1; i++) {
+        for (int i = generationSize / 2; i < generationSize - 1; i++) { // minus 1 because original assignment is added later
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
 
-        //generation.add(0, originalAssignment.copy()); // we also add copy of original assignment
-        //generation.add(originalAssignment.copy());
         originalAssignment.calculateCurrentFlightStarts(storage);
 
         Population population = new Population(generation);

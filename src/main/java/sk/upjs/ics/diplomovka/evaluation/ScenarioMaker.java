@@ -36,7 +36,7 @@ public class ScenarioMaker {
         int noOfDisruptions = 0;
         switch (type) {
             case EASY:
-                noOfDisruptions = Utils.randomInt(0, EASY_NO_OF_DISRUPTIONS);
+                noOfDisruptions = Utils.randomInt(1, EASY_NO_OF_DISRUPTIONS);
                 break;
             case MEDIUM:
                 noOfDisruptions = Utils.randomInt(EASY_NO_OF_DISRUPTIONS, MEDIUM_NO_OF_DISRUPTIONS);
