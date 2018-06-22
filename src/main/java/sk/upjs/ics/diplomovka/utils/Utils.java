@@ -9,7 +9,7 @@ public class Utils {
     public static final String NUM_CHARS = "0123456789";
 
     public static int randomInt(int min, int max) {
-        return (int) Math.floor(Math.random() * max + min);
+        return (int) Math.floor(Math.random() * (max - min) + min);
     }
 
     public static int randomInt(int max) {
