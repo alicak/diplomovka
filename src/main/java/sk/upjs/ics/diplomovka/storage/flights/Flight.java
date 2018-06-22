@@ -117,6 +117,10 @@ public class Flight implements Comparable<Flight> {
         return originalStandId;
     }
 
+    public void setOriginalStandId(int originalStandId) {
+        this.originalStandId = originalStandId;
+    }
+
     public int getNoOfPassengers() {
         return noOfPassengers;
     }
@@ -127,6 +131,10 @@ public class Flight implements Comparable<Flight> {
 
     public int getOriginalGateId() {
         return originalGateId;
+    }
+
+    public void setOriginalGateId(int originalGateId) {
+        this.originalGateId = originalGateId;
     }
 
     public boolean hasTransfers() {
