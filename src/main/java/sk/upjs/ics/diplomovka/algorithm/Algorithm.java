@@ -27,6 +27,9 @@ public class Algorithm extends AlgorithmBase {
         BlockingQueue<Chromosome> offspring = new LinkedBlockingQueue<>();
         AtomicInteger counter = new AtomicInteger(population.size());
 
+        // best chromosome is always in offspring
+        Chromosome bestSoFar = population.bestChromosome().copy();
+
         // does crossover in parallel
         List<CrossoverWorker> crossoverWorkers = new LinkedList<>();
         for (int w = 0; w < noOfCores; w++) {
@@ -44,6 +47,7 @@ public class Algorithm extends AlgorithmBase {
         }
         executor.invokeAll(mutationWorkers);
 
+        offspring.offer(bestSoFar);
         counter.set(offspring.size());
 
         // calculates fitness in parallel
@@ -54,8 +58,6 @@ public class Algorithm extends AlgorithmBase {
         executor.invokeAll(fitnessWorkers);
 
         List<Chromosome> offspringList = new ArrayList<>(offspring);
-        Collections.sort(offspringList);
-
         List<Chromosome> newGeneration = selection.select(offspringList, population.size());
 
         // TODO: remove that

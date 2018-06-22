@@ -7,6 +7,7 @@ import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PopulationCreator {
@@ -28,7 +29,8 @@ public class PopulationCreator {
             generation.add(generator.generateChromosomeFromExisting(originalAssignment));
         }
 
-        generation.add(originalAssignment.copy()); // we also add copy of original assignment
+        //generation.add(0, originalAssignment.copy()); // we also add copy of original assignment
+        //generation.add(originalAssignment.copy());
         originalAssignment.calculateCurrentFlightStarts(storage);
 
         Population population = new Population(generation);

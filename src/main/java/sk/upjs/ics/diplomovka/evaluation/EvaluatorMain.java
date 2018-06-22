@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.evaluation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.main.MainAlgorithm;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
@@ -8,6 +9,8 @@ import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * runs reassignment calculation for all test scenarios and saves the results
@@ -18,18 +21,32 @@ public class EvaluatorMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         File[] scenariosFiles = SCENARIOS_FOLDER.listFiles();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<ReassignmentInfo> reassignmentInfoList = new LinkedList<>();
 
         for (File scenarioFile : scenariosFiles) {
             String name = scenarioFile.getName();
             if (!name.contains("_scenario_")) // in case there is some other file in the directory
-                break;
+                continue;
+//            if (name.contains("extreme_scenario_4")) // in case there is some other file in the directory
+//                continue;
+//            if (name.contains("hard_scenario_5")) // in case there is some other file in the directory
+//                continue;
+//            if (name.contains("hard_scenario_6")) // in case there is some other file in the directory
+//                continue;
             ReassignmentStatistics statistics = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
+
+            reassignmentInfoList.add(new ReassignmentInfo(statistics, name));
 
             PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + name));
             pw.write(gson.toJson(statistics));
             pw.close();
+
         }
+
+        PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + "results.json"));
+        pw.write(gson.toJson(reassignmentInfoList));
+        pw.close();
     }
 
     public static ReassignmentStatistics runReassignment(String disruptionsFile) {
@@ -48,5 +65,4 @@ public class EvaluatorMain {
         algorithm.calculateNewAssignment(parameters);
         return algorithm.getReassignmentStatistics();
     }
-
 }

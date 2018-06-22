@@ -27,6 +27,7 @@ import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class MainAlgorithm {
                 continue;
             }
 
-            disruption.disruptAssignment(originalAssignment);
+            //disruption.disruptAssignment(originalAssignment);
             for (Chromosome c : population.get()) {
                 disruption.disruptAssignment(c);
             }
@@ -112,11 +113,13 @@ public class MainAlgorithm {
 
             disruption.disruptStorage();
 
-            disruption.disruptAssignment(originalAssignment);
+            //disruption.disruptAssignment(originalAssignment);
             for (Chromosome c : population.get()) {
                 disruption.disruptAssignment(c);
             }
         }
+
+
 
         flights = null;
     }
@@ -124,6 +127,7 @@ public class MainAlgorithm {
     private void preparePopulation() {
         originalAssignment = assignmentCreator.createOriginalAssignment(feasibilityChecker);
         population = PopulationCreator.createInitialPopulation(generationSize, originalAssignment, feasibilityChecker, storage);
+        population.add(originalAssignment);
     }
 
     private void refreshFlights() {
@@ -198,6 +202,8 @@ public class MainAlgorithm {
         for (Chromosome c : population.get()) {
             fitnessFunction.calculateAndSetFitness(c);
         }
+
+        Collections.sort(population.get());
 
         AlgorithmBase algorithm = new Algorithm(population, fitnessFunction, crossover, mutation, selection, termination, storage);
         try {
