@@ -1,226 +1,164 @@
 [
-  {
-    "standId": 5,
-    "start": 1070,
-    "end": 1120,
-    "id": 1,
-    "type": "standTemporarilyClosed"
-  },
-  {
-    "standId": 1,
-    "id": 2,
-    "type": "standClosed"
-  },
-  {
-    "standId": 8,
-    "start": 95,
-    "end": 428,
-    "condition": {
-      "categories": [
-        1
-      ],
-      "type": "category"
+    {
+        "standId": 13,
+        "start": 1136,
+        "end": 1633,
+        "condition": {
+            "weight": 87.0,
+            "type": "weight"
+        },
+        "id": 1,
+        "type": "standConditionallyClosed"
     },
-    "id": 3,
-    "type": "standConditionallyClosed"
-  },
-  {
-    "standId": 4,
-    "id": 4,
-    "type": "standClosed"
-  },
-  {
-    "standId": 10,
-    "start": 103,
-    "end": 810,
-    "condition": {
-      "engineTypes": [
-        1
-      ],
-      "type": "engineType"
+    {
+        "standId": 9,
+        "id": 2,
+        "type": "standClosed"
     },
-    "id": 5,
-    "type": "standConditionallyClosed"
-  },
-  {
-    "standId": 11,
-    "start": 579,
-    "end": 1109,
-    "condition": {
-      "weight": 47.0,
-      "type": "weight"
+    {
+        "standId": 2,
+        "id": 3,
+        "type": "standClosed"
     },
-    "id": 6,
-    "type": "standConditionallyClosed"
-  },
-  {
-    "standId": 13,
-    "start": 509,
-    "end": 728,
-    "id": 7,
-    "type": "standTemporarilyClosed"
-  },
-  {
-    "flight": {
-      "id": 94,
-      "scheduled": "19:44",
-      "actual": "19:44",
-      "turnaroundTime": 46,
-      "gateId": 18,
-      "standId": 5,
-      "code": "044",
-      "noOfPassengers": 91,
-      "transfersIds": [],
-      "aircraftId": 24,
-      "priority": 2,
-      "categoryId": 1,
-      "destination": "Warszaw"
+    {
+        "standId": 5,
+        "start": 26,
+        "end": 255,
+        "id": 4,
+        "type": "standTemporarilyClosed"
     },
-    "id": 8,
-    "type": "flightAdded"
-  },
-  {
-    "flightId": 27,
-    "delay": 159,
-    "id": 9,
-    "type": "flightDelayed"
-  },
-  {
-    "flight": {
-      "id": 95,
-      "scheduled": "08:26",
-      "actual": "08:26",
-      "turnaroundTime": 41,
-      "gateId": 26,
-      "standId": 14,
-      "code": "656",
-      "noOfPassengers": 80,
-      "transfersIds": [],
-      "aircraftId": 3,
-      "priority": 2,
-      "categoryId": 1,
-      "destination": "Barcelona"
+    {
+        "standId": 1,
+        "start": 1076,
+        "end": 1617,
+        "id": 5,
+        "type": "standTemporarilyClosed"
     },
-    "id": 10,
-    "type": "flightAdded"
-  },
-  {
-    "flightId": 80,
-    "delay": 246,
-    "id": 11,
-    "type": "flightDelayed"
-  },
-  {
-    "flight": {
-      "id": 96,
-      "scheduled": "05:13",
-      "actual": "05:13",
-      "turnaroundTime": 47,
-      "gateId": 5,
-      "standId": 3,
-      "code": "824",
-      "noOfPassengers": 103,
-      "transfersIds": [],
-      "aircraftId": 19,
-      "priority": 1,
-      "categoryId": 1,
-      "destination": "Madrid"
+    {
+        "standId": 7,
+        "start": 473,
+        "end": 1269,
+        "id": 6,
+        "type": "standTemporarilyClosed"
     },
-    "id": 12,
-    "type": "flightAdded"
-  },
-  {
-    "flight": {
-      "id": 97,
-      "scheduled": "09:09",
-      "actual": "09:09",
-      "turnaroundTime": 46,
-      "gateId": 24,
-      "standId": 12,
-      "code": "040",
-      "noOfPassengers": 116,
-      "transfersIds": [],
-      "aircraftId": 15,
-      "priority": 2,
-      "categoryId": 1,
-      "destination": "Katowice"
+    {
+        "standId": 8,
+        "start": 896,
+        "end": 1526,
+        "id": 7,
+        "type": "standTemporarilyClosed"
     },
-    "id": 13,
-    "type": "flightAdded"
-  },
-  {
-    "flightId": 5,
-    "delay": 115,
-    "id": 14,
-    "type": "flightDelayed"
-  },
-  {
-    "flight": {
-      "id": 98,
-      "scheduled": "13:54",
-      "actual": "13:54",
-      "turnaroundTime": 37,
-      "gateId": 19,
-      "standId": 6,
-      "code": "856",
-      "noOfPassengers": 103,
-      "transfersIds": [],
-      "aircraftId": 10,
-      "priority": 1,
-      "categoryId": 1,
-      "destination": "Madrid"
+    {
+        "flight": {
+            "id": 94,
+            "scheduled": "14:44",
+            "actual": "14:44",
+            "turnaroundTime": 38,
+            "gateId": 14,
+            "standId": 3,
+            "code": "1505",
+            "noOfPassengers": 117,
+            "transfersIds": [],
+            "aircraftId": 17,
+            "priority": 1,
+            "categoryId": 1,
+            "destination": "Katowice"
+        },
+        "id": 8,
+        "type": "flightAdded"
     },
-    "id": 15,
-    "type": "flightAdded"
-  },
-  {
-    "flightId": 1,
-    "delay": 296,
-    "id": 16,
-    "type": "flightDelayed"
-  },
-  {
-    "flightId": 38,
-    "delay": 27,
-    "id": 17,
-    "type": "flightDelayed"
-  },
-  {
-    "flight": {
-      "id": 99,
-      "scheduled": "20:49",
-      "actual": "20:49",
-      "turnaroundTime": 36,
-      "gateId": 23,
-      "standId": 11,
-      "code": "881",
-      "noOfPassengers": 84,
-      "transfersIds": [],
-      "aircraftId": 22,
-      "priority": 1,
-      "categoryId": 1,
-      "destination": "Brussels"
+    {
+        "flight": {
+            "id": 95,
+            "scheduled": "19:44",
+            "actual": "19:44",
+            "turnaroundTime": 36,
+            "gateId": 26,
+            "standId": 14,
+            "code": "081149",
+            "noOfPassengers": 173,
+            "transfersIds": [],
+            "aircraftId": 19,
+            "priority": 2,
+            "categoryId": 1,
+            "destination": "Amsterdam"
+        },
+        "id": 9,
+        "type": "flightAdded"
     },
-    "id": 18,
-    "type": "flightAdded"
-  },
-  {
-    "flight": {
-      "id": 100,
-      "scheduled": "04:25",
-      "actual": "04:25",
-      "turnaroundTime": 47,
-      "gateId": 11,
-      "standId": 1,
-      "code": "379",
-      "noOfPassengers": 118,
-      "transfersIds": [],
-      "aircraftId": 19,
-      "priority": 1,
-      "categoryId": 1,
-      "destination": "Copenhagen"
+    {
+        "flight": {
+            "id": 96,
+            "scheduled": "22:10",
+            "actual": "22:10",
+            "turnaroundTime": 50,
+            "gateId": 22,
+            "standId": 10,
+            "code": "641517",
+            "noOfPassengers": 107,
+            "transfersIds": [],
+            "aircraftId": 19,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Hamburg"
+        },
+        "id": 10,
+        "type": "flightAdded"
     },
-    "id": 19,
-    "type": "flightAdded"
-  }
+    {
+        "flightId": 51,
+        "delay": 174,
+        "id": 11,
+        "type": "flightDelayed"
+    },
+    {
+        "flightId": 56,
+        "delay": 81,
+        "id": 12,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 97,
+            "scheduled": "15:54",
+            "actual": "15:54",
+            "turnaroundTime": 55,
+            "gateId": 25,
+            "standId": 13,
+            "code": "555869",
+            "noOfPassengers": 137,
+            "transfersIds": [],
+            "aircraftId": 12,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Bratislava"
+        },
+        "id": 13,
+        "type": "flightAdded"
+    },
+    {
+        "flightId": 68,
+        "delay": 203,
+        "id": 14,
+        "type": "flightDelayed"
+    },
+    {
+        "flight": {
+            "id": 98,
+            "scheduled": "22:58",
+            "actual": "22:58",
+            "turnaroundTime": 38,
+            "gateId": 11,
+            "standId": 1,
+            "code": "1910",
+            "noOfPassengers": 127,
+            "transfersIds": [],
+            "aircraftId": 16,
+            "priority": 3,
+            "categoryId": 1,
+            "destination": "Brussels"
+        },
+        "id": 15,
+        "type": "flightAdded"
+    }
 ]

@@ -91,10 +91,10 @@
   },
   {
     "statistics": {
-      "originalFitness": -185911.30000000002,
-      "newFitness": -164323.80000000002,
-      "noOfReassignments": 0,
-      "totalWalkingDistance": 8,
+      "originalFitness": -587188.6000000001,
+      "newFitness": -165058.80000000002,
+      "noOfReassignments": 1,
+      "totalWalkingDistance": 9,
       "totalTimeDiff": 289
     },
     "scenario": "easy_scenario_9.json"

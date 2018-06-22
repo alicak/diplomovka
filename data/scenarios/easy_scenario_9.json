@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "standId": 7,
+    "start": 842,
+    "end": 1702,
+    "condition": {
+      "weight": 92.0,
+      "type": "weight"
+    },
+    "id": 1,
+    "type": "standConditionallyClosed"
+  },
+  {
+    "flight": {
+      "id": 95,
+      "scheduled": "19:23",
+      "actual": "19:23",
+      "turnaroundTime": 38,
+      "gateId": 21,
+      "standId": 9,
+      "code": "940",
+      "noOfPassengers": 105,
+      "transfersIds": [],
+      "aircraftId": 6,
+      "priority": 1,
+      "categoryId": 1,
+      "destination": "Warszaw"
+    },
+    "id": 11,
+    "type": "flightAdded"
+  }
+]
