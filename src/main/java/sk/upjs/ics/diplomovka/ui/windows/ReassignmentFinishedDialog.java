@@ -122,11 +122,12 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
     } //GEN-LAST:event_detailsButtonActionPerformed
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
-        parent.refreshAssignment(flights);
+        parent.onReassignmentAccepted(flights);
         dispose();
     } //GEN-LAST:event_acceptButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        parent.onReassignmentRefused();
         dispose();
     } //GEN-LAST:event_cancelButtonActionPerformed
 

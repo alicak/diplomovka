@@ -2,19 +2,19 @@
 {
 	"id":1,
 	"type":"standTemporarilyClosed",
-	"start":8,
-	"end":12,
+	"start":400,
+	"end":1200,
 	"standId": 6
 },
 {
 	"id":2,
 	"type":"standConditionallyClosed",
-	"start":5,
-	"end":7,
+	"start":500,
+	"end":700,
 	"standId": 4,
 	"condition": {
 		"type":"engineType",
-		"engineTypes":[89]
+		"engineTypes":[2]
 	}
 },
 {

@@ -18,6 +18,7 @@ public class GeneralStorage {
     public GeneralStorage(FlightStorage flightStorage, StandsStorage standsStorage, int startTime) {
         this.flightStorage = flightStorage;
         this.standsStorage = standsStorage;
+        standsStorage.initializeAvailabilityTimes(startTime);
         this.startTime = startTime;
     }
 

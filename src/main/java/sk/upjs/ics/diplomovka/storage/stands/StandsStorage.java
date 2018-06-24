@@ -27,7 +27,6 @@ public class StandsStorage {
         noOfStandsInUse = stands.size();
         initializeStands();
         initializeClosures();
-        initializeAvailabilityTimes();
     }
 
     private StandsStorage(Map<Integer, Stand> stands, int[] standsIds, Map<Integer, Stand> gatesToStands,
@@ -111,10 +110,10 @@ public class StandsStorage {
         }
     }
 
-    private void initializeAvailabilityTimes() {
+    public void initializeAvailabilityTimes(int startTime) {
         availabilityTimes = new HashMap<>();
         for (int i = 0; i < standsIds.length; i++) {
-            availabilityTimes.put(standsIds[i], 0);
+            availabilityTimes.put(standsIds[i], startTime);
         }
     }
 

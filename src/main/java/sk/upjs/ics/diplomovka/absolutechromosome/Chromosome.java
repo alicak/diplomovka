@@ -126,7 +126,7 @@ public class Chromosome implements Comparable<Chromosome> {
         maxNoFlights++;
 
         currentFlightStarts.put(flightValue, 0);
-        currentFlightEnds.put(flightValue,0);
+        currentFlightEnds.put(flightValue, 0);
 
         int standForFlight = -1;
         boolean feasible = false;
@@ -278,11 +278,11 @@ public class Chromosome implements Comparable<Chromosome> {
         return currentFlightEnds.get(getGene(stand, flightIdx));
     }
 
-    public void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
+    private void setCurrentFlightStarts(Map<Integer, Integer> currentFlightStarts) {
         this.currentFlightStarts = currentFlightStarts;
     }
 
-    public void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
+    private void setCurrentFlightEnds(Map<Integer, Integer> currentFlightEnds) {
         this.currentFlightEnds = currentFlightEnds;
     }
 

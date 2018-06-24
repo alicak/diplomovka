@@ -41,6 +41,7 @@ public class MainWindow extends javax.swing.JFrame {
         mainAlgorithm.applyDisruptions();
         refreshDisruptions(mainAlgorithm.getDisruptions());
         refreshAssignment(mainAlgorithm.getFlights());
+        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS);
     }
 
     /**
@@ -67,9 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         newAssignmentButton = new javax.swing.JButton();
-        lastReassignmentTimeLabel = new javax.swing.JLabel();
         regularDelayCountLabel = new javax.swing.JLabel();
         regularDelayMaxLabel = new javax.swing.JLabel();
         regularDelayAverageLabel = new javax.swing.JLabel();
@@ -110,9 +109,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel11.setText("Average:");
 
-        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel12.setText("Last reassignment");
-
         newAssignmentButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         newAssignmentButton.setText("New assignment");
         newAssignmentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,8 +116,6 @@ public class MainWindow extends javax.swing.JFrame {
                 newAssignmentButtonActionPerformed(evt);
             }
         });
-
-        lastReassignmentTimeLabel.setText("n/a");
 
         regularDelayCountLabel.setText("n/a");
 
@@ -167,11 +161,7 @@ public class MainWindow extends javax.swing.JFrame {
                                                         .addComponent(assignmentDelayCountLabel)
                                                         .addComponent(assignmentDelayMaxLabel)
                                                         .addComponent(assignmentDelayAverageLabel)))
-                                        .addComponent(jLabel12)
-                                        .addComponent(jLabel8)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(lastReassignmentTimeLabel)))
+                                        .addComponent(jLabel8))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,9 +196,6 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(jLabel11)
                                         .addComponent(assignmentDelayAverageLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lastReassignmentTimeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addComponent(newAssignmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33))
@@ -257,20 +244,14 @@ public class MainWindow extends javax.swing.JFrame {
         newAssignmentDialog.setVisible(true);
     }//GEN-LAST:event_newAssignmentButtonActionPerformed
 
-    public void refreshAssignment(List<FlightViewModel> flights) {
+    private void refreshAssignment(List<FlightViewModel> flights) {
         refreshFlights(flights);
         setStatistics(mainAlgorithm.calculateAssignmentStatistics(flights));
-        setCurrentTime(); // sets current time as time of last reassignment
     }
 
     private void refreshFlights(List<FlightViewModel> flights) {
         Collections.sort(flights);
         flightTableModel.setData(flights);
-    }
-
-    private void setCurrentTime() {
-        DateFormat sdf = new SimpleDateFormat("HH:mm");
-        lastReassignmentTimeLabel.setText(sdf.format(new Date()));
     }
 
     private void setStatistics(AssignmentStatistics statistics) {
@@ -283,7 +264,7 @@ public class MainWindow extends javax.swing.JFrame {
         assignmentDelayAverageLabel.setText(Integer.toString(statistics.getAssignmentDelayAverage()));
     }
 
-    public void refreshDisruptions(List<Disruption> disruptions) {
+    private void refreshDisruptions(List<Disruption> disruptions) {
         disruptionListModel.setData(disruptions);
     }
 
@@ -298,6 +279,15 @@ public class MainWindow extends javax.swing.JFrame {
         inProgressDialog.setVisible(true);
     }
 
+    public void onReassignmentAccepted(List<FlightViewModel> flights) {
+        refreshAssignment(flights);
+        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
+    }
+
+    public void onReassignmentRefused() {
+        refreshAssignment(mainAlgorithm.getFlights());
+        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
+    }
 
     /**
      * @param args the command line arguments
@@ -333,8 +323,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel lastReassignmentTimeLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -363,6 +351,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         protected List<FlightViewModel> doInBackground() {
+            mainAlgorithm.applyDisruptions();
             return mainAlgorithm.calculateNewAssignment(parameters);
         }
 
@@ -373,7 +362,6 @@ public class MainWindow extends javax.swing.JFrame {
                 ReassignmentFinishedDialog reassignmentFinishedDialog = new ReassignmentFinishedDialog(parentFrame,
                         true, mainAlgorithm.getReassignmentStatistics(), get());
                 reassignmentFinishedDialog.setVisible(true);
-                mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
