@@ -24,7 +24,7 @@ public class FlightViewModel implements Comparable<FlightViewModel> {
         this.code = flight.getCode();
         this.destination = flight.getDestination();
         this.originalStart = flight.getOriginalStart();
-        this.actualStart = flight.getOriginalStart() + flight.getDelay();
+        this.actualStart = flight.getStart() + flight.getLength();
         this.originalGate = storage.getStandsStorage().getGateById(flight.getOriginalGateId());
         this.gate = originalGate;
         this.standId = flight.getOriginalStandId();

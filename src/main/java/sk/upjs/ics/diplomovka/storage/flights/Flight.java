@@ -13,7 +13,6 @@ public class Flight implements Comparable<Flight> {
     private int id;
     private int start; // actual departure time minus turnaround time - in minutes
     private int originalStart; // original departure time - in minutes
-    private int end; // actual departure time - in minutes
     private int delay;
     private int category;
     private int priority;
@@ -30,7 +29,6 @@ public class Flight implements Comparable<Flight> {
         this.id = flightDataModel.getId();
         this.start = Utils.timeToMinutes(flightDataModel.getScheduled()) - flightDataModel.getTurnaroundTime();
         this.originalStart = Utils.timeToMinutes(flightDataModel.getScheduled());
-        this.end = Utils.timeToMinutes(flightDataModel.getScheduled());
         this.delay = 0;
         this.category = flightDataModel.getCategoryId();
         this.priority = flightDataModel.getPriority();
@@ -55,7 +53,7 @@ public class Flight implements Comparable<Flight> {
     }
 
     public int getLength() {
-        return end - start;
+        return turnaroundTime;
     }
 
     public String getCode() {
@@ -75,17 +73,12 @@ public class Flight implements Comparable<Flight> {
         return this;
     }
 
+    public int getEnd() {
+        return start + turnaroundTime;
+    }
+
     public int getOriginalStart() {
         return originalStart;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public Flight setEnd(int end) {
-        this.end = end;
-        return this;
     }
 
     public int getDelay() {

@@ -28,7 +28,7 @@ public class EvaluatorMain {
             String name = scenarioFile.getName();
             if (!name.contains("_scenario_")) // in case there is some other file in the directory
                 continue;
-            ReassignmentStatistics statistics = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
+            ReassignmentStatistics statistics = runReassignment(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name));
 
             reassignmentInfoList.add(new ReassignmentInfo(statistics, name));
 
@@ -42,7 +42,7 @@ public class EvaluatorMain {
         pw.close();
     }
 
-    public static ReassignmentStatistics runReassignment(String disruptionsFile) {
+    public static ReassignmentStatistics runReassignment(File disruptionsFile) {
         MainAlgorithm algorithm = new MainAlgorithm(disruptionsFile);
 
         // all reassignments will use the same parameters

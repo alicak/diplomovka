@@ -16,8 +16,12 @@ import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 import sk.upjs.ics.diplomovka.ui.windows.InProgressDialog;
 import sk.upjs.ics.diplomovka.ui.windows.NewAssignmentDialog;
 import sk.upjs.ics.diplomovka.ui.windows.ReassignmentFinishedDialog;
+import sk.upjs.ics.diplomovka.ui.windows.ScenarioPicker;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -30,18 +34,30 @@ public class MainWindow extends javax.swing.JFrame {
     private FlightTableModel flightTableModel = new FlightTableModel(Collections.emptyList());
     private DisruptionListModel disruptionListModel = new DisruptionListModel(Collections.emptyList());
     private MainAlgorithm mainAlgorithm;
+    private File disruptions;
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+        scenarioFilePicker.setFileFilter(new FileNameExtensionFilter("JSON file with disruptions", "json"));
+        chooseAndSetScenario();
+    }
 
-        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS);
-        mainAlgorithm.applyDisruptions();
-        refreshDisruptions(mainAlgorithm.getDisruptions());
-        refreshAssignment(mainAlgorithm.getFlights());
-        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS);
+    private void chooseAndSetScenario() {
+        int returnVal = scenarioFilePicker.showOpenDialog(MainWindow.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            disruptions = scenarioFilePicker.getSelectedFile();
+            mainAlgorithm = new MainAlgorithm(disruptions);
+
+            mainAlgorithm.applyDisruptions();
+            refreshDisruptions(mainAlgorithm.getDisruptions());
+            refreshAssignment(mainAlgorithm.getFlights());
+
+            mainAlgorithm = new MainAlgorithm(disruptions);
+        }
     }
 
     /**
@@ -75,6 +91,8 @@ public class MainWindow extends javax.swing.JFrame {
         assignmentDelayCountLabel = new javax.swing.JLabel();
         assignmentDelayMaxLabel = new javax.swing.JLabel();
         assignmentDelayAverageLabel = new javax.swing.JLabel();
+        scenarioFilePicker = new javax.swing.JFileChooser(Files.DATA_FOLDER + "scenarios");
+        loadScenarioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reassignment creator");
@@ -128,6 +146,15 @@ public class MainWindow extends javax.swing.JFrame {
         assignmentDelayMaxLabel.setText("n/a");
 
         assignmentDelayAverageLabel.setText("n/a");
+
+        scenarioFilePicker.setDialogTitle("Pick scenario file");
+
+        loadScenarioButton.setText("Load scenario from file");
+        loadScenarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scenarioFilePickerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,8 +222,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel11)
                                         .addComponent(assignmentDelayAverageLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                                 .addComponent(newAssignmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33))
         );
@@ -207,16 +233,15 @@ public class MainWindow extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(loadScenarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(0, 468, Short.MAX_VALUE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
@@ -231,13 +256,20 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jScrollPane2)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(loadScenarioButton))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void scenarioFilePickerActionPerformed(ActionEvent evt) {
+        chooseAndSetScenario();
+    }
 
     private void newAssignmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAssignmentButtonActionPerformed
         NewAssignmentDialog newAssignmentDialog = new NewAssignmentDialog(this, true);
@@ -281,12 +313,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     public void onReassignmentAccepted(List<FlightViewModel> flights) {
         refreshAssignment(flights);
-        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
+        mainAlgorithm = new MainAlgorithm(disruptions); // we reset data
     }
 
     public void onReassignmentRefused() {
-        refreshAssignment(mainAlgorithm.getFlights());
-        mainAlgorithm = new MainAlgorithm(Files.DISRUPTIONS); // we reset data
+        mainAlgorithm = new MainAlgorithm(disruptions); // we reset data
     }
 
     /**
@@ -337,6 +368,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel regularDelayAverageLabel;
     private javax.swing.JLabel regularDelayCountLabel;
     private javax.swing.JLabel regularDelayMaxLabel;
+    private javax.swing.JFileChooser scenarioFilePicker;
+    private javax.swing.JButton loadScenarioButton;
     // End of variables declaration//GEN-END:variables
 
     private class CalculationWorker extends SwingWorker<List<FlightViewModel>, Integer> {

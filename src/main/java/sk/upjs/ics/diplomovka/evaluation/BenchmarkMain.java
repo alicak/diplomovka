@@ -30,14 +30,14 @@ public class BenchmarkMain {
                 break;
 
             for (int i = 0; i < 5; i++) {
-                runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
+                runReassignment(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name));
             }
 
             int noOfRuns = 10;
             long time1 = 0;
             long time2 = 0;
             for (int i = 0; i < noOfRuns; i++) {
-                Result result = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
+                Result result = runReassignment(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name));
                 time1 += result.runWithPopulationCreation;
                 time2 += result.runWithoutPopulationCreation;
             }
@@ -50,7 +50,7 @@ public class BenchmarkMain {
         pw.close();
     }
 
-    private static Result runReassignment(String disruptionsFile) {
+    private static Result runReassignment(File disruptionsFile) {
         MainAlgorithm algorithm = new MainAlgorithm(disruptionsFile);
 
         // all reassignments will use the same parameters

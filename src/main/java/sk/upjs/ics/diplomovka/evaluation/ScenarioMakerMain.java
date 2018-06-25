@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
- * creates and saves mutliple test scenarios
+ * creates and saves multiple test scenarios
  */
 public class ScenarioMakerMain {
 

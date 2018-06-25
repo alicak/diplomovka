@@ -14,6 +14,7 @@ import sk.upjs.ics.diplomovka.storage.stands.Stand;
 import sk.upjs.ics.diplomovka.storage.stands.StandAttributes;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ public class DataParser {
     private StandsStorage standsStorage;
     private FlightStorage flightStorage;
 
-    public GeneralStorage parseDataFromJsons(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile,
-                                             String gatesFile, String gateDistancesFile, String standDistancesFile,
-                                             String standsFile, String flightsFile) {
+    public GeneralStorage parseDataFromJsons(File categoriesFile, File aircraftsFile, File engineTypesFile, File transfersFile,
+                                             File gatesFile, File gateDistancesFile, File standDistancesFile,
+                                             File standsFile, File flightsFile) {
         parseFlightAttributes(categoriesFile, aircraftsFile, engineTypesFile, transfersFile);
         parseStandAttributes(gatesFile, gateDistancesFile, standDistancesFile);
         parseStands(standsFile);
@@ -39,7 +40,7 @@ public class DataParser {
         return new GeneralStorage(flightStorage, standsStorage, startTime);
     }
 
-    private void parseFlightAttributes(String categoriesFile, String aircraftsFile, String engineTypesFile, String transfersFile) {
+    private void parseFlightAttributes(File categoriesFile, File aircraftsFile, File engineTypesFile, File transfersFile) {
         flightAttributes = new FlightAttributes()
                 .setCategories(parseStringFlightAttribute(categoriesFile))
                 .setEngineTypes(parseStringFlightAttribute(engineTypesFile))
@@ -47,14 +48,14 @@ public class DataParser {
                 .setTransfers(parseObjectAttribute(transfersFile, Transfer[].class));
     }
 
-    private void parseStandAttributes(String gatesFile, String gateDistancesFile, String standDistancesFile) {
+    private void parseStandAttributes(File gatesFile, File gateDistancesFile, File standDistancesFile) {
         standAttributes = new StandAttributes()
                 .setGates(parseStringFlightAttribute(gatesFile))
                 .setGateDistances(parseDistances(gateDistancesFile))
                 .setStandsDistances(parseDistances(standDistancesFile));
     }
 
-    private void parseStands(String standsFile) {
+    private void parseStands(File standsFile) {
         StandDataModel[] stands = parseObjects(standsFile, StandDataModel[].class);
 
         Map<Integer, Stand> standsMap = new HashMap<>();
@@ -71,7 +72,7 @@ public class DataParser {
         standsStorage = new StandsStorage(standsMap, gatesToStands, standAttributes);
     }
 
-    private void parseFlights(String flightsFile) {
+    private void parseFlights(File flightsFile) {
         FlightDataModel[] flights = parseObjects(flightsFile, FlightDataModel[].class);
 
         Map<Integer, Flight> flightsMap = new HashMap<>();
@@ -83,7 +84,7 @@ public class DataParser {
         flightStorage = new FlightStorage(flightsMap, flightAttributes);
     }
 
-    private Map<Integer, String> parseStringFlightAttribute(String attributesFile) {
+    private Map<Integer, String> parseStringFlightAttribute(File attributesFile) {
         FlightAttribute[] attributes = parseObjects(attributesFile, FlightAttribute[].class);
 
         Map<Integer, String> attributeMap = new HashMap<>();
@@ -94,7 +95,7 @@ public class DataParser {
         return attributeMap;
     }
 
-    private <T extends Attribute> Map<Integer, T> parseObjectAttribute(String attributesFile, Class<T[]> type) {
+    private <T extends Attribute> Map<Integer, T> parseObjectAttribute(File attributesFile, Class<T[]> type) {
         T[] attributes = parseObjects(attributesFile, type);
 
         Map<Integer, T> map = new HashMap<>();
@@ -105,7 +106,7 @@ public class DataParser {
         return map;
     }
 
-    private DistancesMatrix parseDistances(String distancesFile) {
+    private DistancesMatrix parseDistances(File distancesFile) {
         Map<Integer, Map<Integer, Double>> allDistances = new HashMap<>();
 
         DistancesList[] distancesLists = parseObjects(distancesFile, DistancesList[].class);
@@ -122,18 +123,18 @@ public class DataParser {
         return new DistancesMatrix(allDistances);
     }
 
-    private <T> T[] parseObjects(String fileName, Class<T[]> type, Gson gson) {
+    private <T> T[] parseObjects(File file, Class<T[]> type, Gson gson) {
         JsonReader reader = null;
         try {
-            reader = new JsonReader(new FileReader(fileName));
+            reader = new JsonReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            System.err.println("Input file " + fileName + " not found.");
+            System.err.println("Input file " + file + " not found.");
         }
         return gson.fromJson(reader, type);
     }
 
-    private <T> T[] parseObjects(String fileName, Class<T[]> type) {
-        return parseObjects(fileName, type, new Gson());
+    private <T> T[] parseObjects(File file, Class<T[]> type) {
+        return parseObjects(file, type, new Gson());
     }
 
     // helper classes for flight and stand attribute parsing:
@@ -153,7 +154,7 @@ public class DataParser {
         private double distance;
     }
 
-    public List<Disruption> parseDisruptions(String disruptionsFile, GeneralStorage storage) {
+    public List<Disruption> parseDisruptions(File disruptionsFile, GeneralStorage storage) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(DisruptionDataModel.class, new DisruptionDeserializer());
         gsonBuilder.registerTypeAdapter(ClosureConditionDataModel.class, new ClosureConditionDeserializer());

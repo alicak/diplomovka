@@ -29,7 +29,7 @@ public class SolutionCreator {
                 Flight flight = storage.getFlightStorage().getFlight(chromosome.getGene(s, f));
 
                 FlightViewModel flightViewModel = new FlightViewModel()
-                        .setActualStart(chromosome.getCurrentFlightStart(s, f) + flight.getTurnaroundTime())
+                        .setActualStart(chromosome.getCurrentFlightStart(s, f) + flight.getLength())
                         .setAssignmentDelay(chromosome.getCurrentFlightStart(s, f) - flight.getStart())
                         .setDelay(flight.getDelay())
                         .setCode(flight.getCode())

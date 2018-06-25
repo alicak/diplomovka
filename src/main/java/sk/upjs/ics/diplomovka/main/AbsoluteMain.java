@@ -14,6 +14,7 @@ import sk.upjs.ics.diplomovka.algorithm.Algorithm;
 import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
+import sk.upjs.ics.diplomovka.data.parser.Files;
 import sk.upjs.ics.diplomovka.disruption.*;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
@@ -37,13 +38,12 @@ public class AbsoluteMain {
 
         DataParser parser = new DataParser();
 
-        GeneralStorage storage = parser.parseDataFromJsons("categories.json", "aircrafts.json",
-                "engineTypes.json", "transfers.json", "gates.json", "gateDistances.json",
-                "standDistances.json", "stands.json", "departures.json");
+        GeneralStorage storage = parser.parseDataFromJsons(Files.CATEGORIES, Files.AIRCRAFTS, Files.ENGINE_TYPES, Files.TRANSFERS,
+                Files.GATES, Files.GATE_DISTANCES, Files.STAND_DISTANCES, Files.STANDS, Files.FLIGHTS);
         StandsStorage standsStorage = storage.getStandsStorage();
         FlightStorage flightStorage = storage.getFlightStorage();
 
-        List<Disruption> disruptions = parser.parseDisruptions("disruptionsExample.json", storage);
+        List<Disruption> disruptions = parser.parseDisruptions(new File("disruptionsExample.json"), storage);
 
         Disruption gate6closed = new StandClosedDisruption(6, standsStorage, 2);
         Disruption flight13cancelled = new FlightCancelledDisruption(13, flightStorage, 4);

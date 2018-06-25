@@ -31,16 +31,14 @@ public class FlightDelayedDisruption implements Disruption {
     @Override
     public void disruptStorage() {
         flight.setStart(flight.getStart() + delay)
-                .setDelay(delay)
-                .setEnd(flight.getEnd() + delay);
+                .setDelay(delay);
         flightStorage.flightTimeChanged();
     }
 
     @Override
     public void undisruptStorage() {
         flight.setStart(flight.getStart() - delay)
-                .setDelay(0)
-                .setEnd(flight.getEnd() - delay);
+                .setDelay(0);
         flightStorage.flightTimeChanged();
     }
 

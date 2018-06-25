@@ -30,7 +30,7 @@ public class SingleEvaluatorMain {
             List<ReassignmentStatistics> statisticsList = new LinkedList<>();
 
             for (int i = 0; i < 10; i++) {
-                ReassignmentStatistics statistics = runReassignment(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name);
+                ReassignmentStatistics statistics = runReassignment(new File(ScenarioMakerMain.SCENARIOS_DATA_FOLDER + name));
                 statisticsList.add(statistics);
             }
 

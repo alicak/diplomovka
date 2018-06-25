@@ -26,6 +26,7 @@ import sk.upjs.ics.diplomovka.storage.SolutionCreator;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -41,7 +42,7 @@ public class MainAlgorithm {
 
     private GeneralStorage storage;
 
-    private final String disruptionFile;
+    private final File disruptionFile;
 
     private FeasibilityChecker feasibilityChecker;
     private AssignmentCreator assignmentCreator;
@@ -64,7 +65,7 @@ public class MainAlgorithm {
 
     private ReassignmentStatistics reassignmentStatistics;
 
-    public MainAlgorithm(String disruptionFile) {
+    public MainAlgorithm(File disruptionFile) {
         this.disruptionFile = disruptionFile;
         prepareData();
 
