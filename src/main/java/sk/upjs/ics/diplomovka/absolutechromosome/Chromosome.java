@@ -291,7 +291,7 @@ public class Chromosome implements Comparable<Chromosome> {
             int currentStart = getCurrentFlightStart(standNo, f);
             int currentEnd = getCurrentFlightEnd(standNo, f);
 
-            if (currentEnd >= closure.getStart()) { // flight ends after the closure starts - it has to be started after the closure
+            if (currentEnd >= closure.getStart() && currentStart < closure.getEnd()) { // flight starts or ends after the closure starts - it has to be started after the closure
                 int delay = closure.getEnd() - currentStart; // we also have to consider the gap between planned start and closure
                 for (int lateFlight = f; lateFlight < getNoOfFlights(standNo); lateFlight++) { // all later flights get that delay
                     incrementCurrentStartAndEnd(standNo, lateFlight, delay);

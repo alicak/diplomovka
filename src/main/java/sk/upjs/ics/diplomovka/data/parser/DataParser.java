@@ -36,8 +36,7 @@ public class DataParser {
         parseStandAttributes(gatesFile, gateDistancesFile, standDistancesFile);
         parseStands(standsFile);
         parseFlights(flightsFile);
-        int startTime = flightStorage.getSortedFlights().get(0).getStart();
-        return new GeneralStorage(flightStorage, standsStorage, startTime);
+        return new GeneralStorage(flightStorage, standsStorage, 0);
     }
 
     private void parseFlightAttributes(File categoriesFile, File aircraftsFile, File engineTypesFile, File transfersFile) {

@@ -13,7 +13,7 @@ public class GeneralStorage {
 
     private FlightStorage flightStorage;
     private StandsStorage standsStorage;
-    private int startTime;
+    private int startTime = 0;
 
     public GeneralStorage(FlightStorage flightStorage, StandsStorage standsStorage, int startTime) {
         this.flightStorage = flightStorage;
