@@ -16,16 +16,12 @@ import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 import sk.upjs.ics.diplomovka.ui.windows.InProgressDialog;
 import sk.upjs.ics.diplomovka.ui.windows.NewAssignmentDialog;
 import sk.upjs.ics.diplomovka.ui.windows.ReassignmentFinishedDialog;
-import sk.upjs.ics.diplomovka.ui.windows.ScenarioPicker;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

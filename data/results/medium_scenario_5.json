@@ -1,7 +1,7 @@
 {
-  "originalFitness": -1554494.3,
-  "newFitness": -561659.7,
-  "noOfReassignments": 25,
-  "totalWalkingDistance": 74,
-  "totalTimeDiff": 1702
+  "originalFitness": -289185.8,
+  "newFitness": -19570.3,
+  "noOfReassignments": 24,
+  "totalWalkingDistance": 52,
+  "totalTimeDiff": 331
 }

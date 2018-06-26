@@ -48,7 +48,7 @@ public class EvaluatorMain {
         // all reassignments will use the same parameters
         ReassignmentParameters parameters = new ReassignmentParameters(true, true, true, true, true)
                 .setStartTime(algorithm.getStartTime())
-                .setReassignmentsWeight(60)
+                .setReassignmentsWeight(30)
                 .setPassengersWeight(0.1)
                 .setPriorityWeight(1)
                 .setTimeWeight(1)

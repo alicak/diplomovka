@@ -1,38 +1,38 @@
 [
   {
     "statistics": {
-      "originalFitness": -1363195.3000000003,
-      "newFitness": -418050.60000000003,
-      "noOfReassignments": 10,
-      "totalWalkingDistance": 36,
-      "totalTimeDiff": 377
+      "originalFitness": -29362.300000000003,
+      "newFitness": -9849.6,
+      "noOfReassignments": 8,
+      "totalWalkingDistance": 30,
+      "totalTimeDiff": 409
     },
     "scenario": "easy_scenario_0.json"
   },
   {
     "statistics": {
-      "originalFitness": -981418.2000000002,
-      "newFitness": -172099.80000000002,
-      "noOfReassignments": 2,
-      "totalWalkingDistance": 13,
-      "totalTimeDiff": 297
+      "originalFitness": -44716.7,
+      "newFitness": -4397.4,
+      "noOfReassignments": 0,
+      "totalWalkingDistance": 8,
+      "totalTimeDiff": 346
     },
     "scenario": "easy_scenario_1.json"
   },
   {
     "statistics": {
-      "originalFitness": -7199802.900000001,
-      "newFitness": -670463.3,
-      "noOfReassignments": 21,
-      "totalWalkingDistance": 62,
-      "totalTimeDiff": 531
+      "originalFitness": -146353.69999999998,
+      "newFitness": -17967.800000000003,
+      "noOfReassignments": 24,
+      "totalWalkingDistance": 61,
+      "totalTimeDiff": 420
     },
     "scenario": "easy_scenario_2.json"
   },
   {
     "statistics": {
-      "originalFitness": -225391.70000000004,
-      "newFitness": -164299.50000000003,
+      "originalFitness": -10892.800000000001,
+      "newFitness": -3324.6000000000004,
       "noOfReassignments": 0,
       "totalWalkingDistance": 8,
       "totalTimeDiff": 251
@@ -41,18 +41,18 @@
   },
   {
     "statistics": {
-      "originalFitness": -388917.2,
-      "newFitness": -246330.7,
-      "noOfReassignments": 4,
+      "originalFitness": -12123.7,
+      "newFitness": -5523.900000000001,
+      "noOfReassignments": 3,
       "totalWalkingDistance": 13,
-      "totalTimeDiff": 335
+      "totalTimeDiff": 316
     },
     "scenario": "easy_scenario_4.json"
   },
   {
     "statistics": {
-      "originalFitness": -852016.6000000001,
-      "newFitness": -161931.6,
+      "originalFitness": -9925.3,
+      "newFitness": -3510.3,
       "noOfReassignments": 0,
       "totalWalkingDistance": 8,
       "totalTimeDiff": 264
@@ -61,8 +61,8 @@
   },
   {
     "statistics": {
-      "originalFitness": -525509.2,
-      "newFitness": -164323.80000000002,
+      "originalFitness": -7909.0999999999985,
+      "newFitness": -3776.1000000000004,
       "noOfReassignments": 0,
       "totalWalkingDistance": 8,
       "totalTimeDiff": 289
@@ -71,331 +71,331 @@
   },
   {
     "statistics": {
-      "originalFitness": -809905.5999999999,
-      "newFitness": -255807.5,
-      "noOfReassignments": 10,
-      "totalWalkingDistance": 29,
-      "totalTimeDiff": 1378
+      "originalFitness": -128798.59999999999,
+      "newFitness": -18671.7,
+      "noOfReassignments": 7,
+      "totalWalkingDistance": 35,
+      "totalTimeDiff": 415
     },
     "scenario": "easy_scenario_7.json"
   },
   {
     "statistics": {
-      "originalFitness": -649588.2,
-      "newFitness": -115204.80000000002,
-      "noOfReassignments": 3,
-      "totalWalkingDistance": 10,
-      "totalTimeDiff": 533
+      "originalFitness": -103579.8,
+      "newFitness": -11896.7,
+      "noOfReassignments": 11,
+      "totalWalkingDistance": 42,
+      "totalTimeDiff": 408
     },
     "scenario": "easy_scenario_8.json"
   },
   {
     "statistics": {
-      "originalFitness": -587188.6000000001,
-      "newFitness": -165058.80000000002,
-      "noOfReassignments": 1,
-      "totalWalkingDistance": 9,
+      "originalFitness": -3841.3000000000006,
+      "newFitness": -3776.1000000000004,
+      "noOfReassignments": 0,
+      "totalWalkingDistance": 8,
       "totalTimeDiff": 289
     },
     "scenario": "easy_scenario_9.json"
   },
   {
     "statistics": {
-      "originalFitness": -8763166.400000002,
-      "newFitness": -1197222.4,
-      "noOfReassignments": 42,
-      "totalWalkingDistance": 141,
-      "totalTimeDiff": 2412
+      "originalFitness": -497766.39999999997,
+      "newFitness": -35174.6,
+      "noOfReassignments": 47,
+      "totalWalkingDistance": 140,
+      "totalTimeDiff": 629
     },
     "scenario": "extreme_scenario_0.json"
   },
   {
     "statistics": {
-      "originalFitness": -5099427.0,
-      "newFitness": -704466.0,
-      "noOfReassignments": 38,
-      "totalWalkingDistance": 104,
-      "totalTimeDiff": 2055
+      "originalFitness": -273898.5,
+      "newFitness": -36646.8,
+      "noOfReassignments": 40,
+      "totalWalkingDistance": 118,
+      "totalTimeDiff": 713
     },
     "scenario": "extreme_scenario_1.json"
   },
   {
     "statistics": {
-      "originalFitness": -7774944.8,
-      "newFitness": -1486626.5,
-      "noOfReassignments": 38,
-      "totalWalkingDistance": 126,
-      "totalTimeDiff": 3694
+      "originalFitness": -643887.5000000002,
+      "newFitness": -57001.6,
+      "noOfReassignments": 42,
+      "totalWalkingDistance": 127,
+      "totalTimeDiff": 664
     },
     "scenario": "extreme_scenario_2.json"
   },
   {
     "statistics": {
-      "originalFitness": -8231776.199999999,
-      "newFitness": -820984.7,
-      "noOfReassignments": 37,
-      "totalWalkingDistance": 92,
-      "totalTimeDiff": 904
+      "originalFitness": -153615.09999999998,
+      "newFitness": -31174.700000000004,
+      "noOfReassignments": 39,
+      "totalWalkingDistance": 107,
+      "totalTimeDiff": 804
     },
     "scenario": "extreme_scenario_3.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.7476835900000002E7,
-      "newFitness": -2319673.0,
-      "noOfReassignments": 71,
-      "totalWalkingDistance": 232,
-      "totalTimeDiff": 4638
+      "originalFitness": -816925.5,
+      "newFitness": -61875.799999999996,
+      "noOfReassignments": 67,
+      "totalWalkingDistance": 177,
+      "totalTimeDiff": 989
     },
     "scenario": "extreme_scenario_4.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.0971297300000003E7,
-      "newFitness": -1130596.8,
-      "noOfReassignments": 41,
-      "totalWalkingDistance": 125,
-      "totalTimeDiff": 2397
+      "originalFitness": -353803.49999999994,
+      "newFitness": -30900.1,
+      "noOfReassignments": 40,
+      "totalWalkingDistance": 103,
+      "totalTimeDiff": 483
     },
     "scenario": "extreme_scenario_5.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.4040080900000002E7,
-      "newFitness": -1501738.0,
+      "originalFitness": -275214.2,
+      "newFitness": -32410.9,
       "noOfReassignments": 44,
-      "totalWalkingDistance": 138,
-      "totalTimeDiff": 1995
+      "totalWalkingDistance": 117,
+      "totalTimeDiff": 682
     },
     "scenario": "extreme_scenario_6.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.0109453399999999E7,
-      "newFitness": -687421.8,
-      "noOfReassignments": 38,
-      "totalWalkingDistance": 108,
-      "totalTimeDiff": 1739
+      "originalFitness": -265954.9,
+      "newFitness": -33388.6,
+      "noOfReassignments": 37,
+      "totalWalkingDistance": 97,
+      "totalTimeDiff": 599
     },
     "scenario": "extreme_scenario_7.json"
   },
   {
     "statistics": {
-      "originalFitness": -5651119.500000001,
-      "newFitness": -723648.4,
-      "noOfReassignments": 36,
-      "totalWalkingDistance": 119,
-      "totalTimeDiff": 5096
+      "originalFitness": -613242.2000000001,
+      "newFitness": -61462.100000000006,
+      "noOfReassignments": 50,
+      "totalWalkingDistance": 133,
+      "totalTimeDiff": 741
     },
     "scenario": "extreme_scenario_8.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.1068596799999999E7,
-      "newFitness": -1142316.4,
-      "noOfReassignments": 41,
-      "totalWalkingDistance": 134,
-      "totalTimeDiff": 2731
+      "originalFitness": -464962.40000000014,
+      "newFitness": -44863.100000000006,
+      "noOfReassignments": 44,
+      "totalWalkingDistance": 167,
+      "totalTimeDiff": 1145
     },
     "scenario": "extreme_scenario_9.json"
   },
   {
     "statistics": {
-      "originalFitness": -9862468.999999998,
-      "newFitness": -1190953.0,
-      "noOfReassignments": 35,
-      "totalWalkingDistance": 105,
-      "totalTimeDiff": 898
+      "originalFitness": -144824.0,
+      "newFitness": -24953.4,
+      "noOfReassignments": 33,
+      "totalWalkingDistance": 104,
+      "totalTimeDiff": 359
     },
     "scenario": "hard_scenario_0.json"
   },
   {
     "statistics": {
-      "originalFitness": -1742320.8000000005,
-      "newFitness": -809075.8,
-      "noOfReassignments": 30,
-      "totalWalkingDistance": 94,
-      "totalTimeDiff": 1486
+      "originalFitness": -190518.2,
+      "newFitness": -25278.4,
+      "noOfReassignments": 31,
+      "totalWalkingDistance": 90,
+      "totalTimeDiff": 613
     },
     "scenario": "hard_scenario_1.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.2337886000000002E7,
-      "newFitness": -1619371.0,
-      "noOfReassignments": 45,
-      "totalWalkingDistance": 145,
-      "totalTimeDiff": 2887
+      "originalFitness": -409882.50000000006,
+      "newFitness": -48877.5,
+      "noOfReassignments": 64,
+      "totalWalkingDistance": 179,
+      "totalTimeDiff": 509
     },
     "scenario": "hard_scenario_2.json"
   },
   {
     "statistics": {
-      "originalFitness": -5362826.800000001,
-      "newFitness": -1496292.0,
-      "noOfReassignments": 41,
-      "totalWalkingDistance": 111,
-      "totalTimeDiff": 1721
+      "originalFitness": -348738.5,
+      "newFitness": -35215.2,
+      "noOfReassignments": 39,
+      "totalWalkingDistance": 94,
+      "totalTimeDiff": 744
     },
     "scenario": "hard_scenario_3.json"
   },
   {
     "statistics": {
-      "originalFitness": -8378347.500000002,
-      "newFitness": -1272426.2,
-      "noOfReassignments": 37,
-      "totalWalkingDistance": 81,
-      "totalTimeDiff": 2248
+      "originalFitness": -420121.00000000006,
+      "newFitness": -31046.8,
+      "noOfReassignments": 42,
+      "totalWalkingDistance": 115,
+      "totalTimeDiff": 551
     },
     "scenario": "hard_scenario_4.json"
   },
   {
     "statistics": {
-      "originalFitness": -1.0428514299999997E7,
-      "newFitness": -815463.2,
-      "noOfReassignments": 36,
-      "totalWalkingDistance": 125,
-      "totalTimeDiff": 549
+      "originalFitness": -211093.59999999998,
+      "newFitness": -29640.5,
+      "noOfReassignments": 38,
+      "totalWalkingDistance": 100,
+      "totalTimeDiff": 741
     },
     "scenario": "hard_scenario_5.json"
   },
   {
     "statistics": {
-      "originalFitness": -2955613.8000000003,
-      "newFitness": -447092.4,
-      "noOfReassignments": 19,
-      "totalWalkingDistance": 43,
-      "totalTimeDiff": 1913
+      "originalFitness": -146328.59999999998,
+      "newFitness": -14126.1,
+      "noOfReassignments": 20,
+      "totalWalkingDistance": 45,
+      "totalTimeDiff": 270
     },
     "scenario": "hard_scenario_6.json"
   },
   {
     "statistics": {
-      "originalFitness": -8802659.600000001,
-      "newFitness": -1077634.3,
-      "noOfReassignments": 34,
-      "totalWalkingDistance": 105,
-      "totalTimeDiff": 590
+      "originalFitness": -205373.10000000003,
+      "newFitness": -29692.3,
+      "noOfReassignments": 41,
+      "totalWalkingDistance": 128,
+      "totalTimeDiff": 369
     },
     "scenario": "hard_scenario_7.json"
   },
   {
     "statistics": {
-      "originalFitness": -8655733.3,
-      "newFitness": -1016914.1000000001,
-      "noOfReassignments": 42,
-      "totalWalkingDistance": 146,
-      "totalTimeDiff": 549
+      "originalFitness": -308459.5,
+      "newFitness": -26946.0,
+      "noOfReassignments": 35,
+      "totalWalkingDistance": 119,
+      "totalTimeDiff": 363
     },
     "scenario": "hard_scenario_8.json"
   },
   {
     "statistics": {
-      "originalFitness": -5545758.2,
-      "newFitness": -954602.7,
-      "noOfReassignments": 34,
-      "totalWalkingDistance": 108,
-      "totalTimeDiff": 3969
+      "originalFitness": -596225.4,
+      "newFitness": -51087.2,
+      "noOfReassignments": 45,
+      "totalWalkingDistance": 140,
+      "totalTimeDiff": 741
     },
     "scenario": "hard_scenario_9.json"
   },
   {
     "statistics": {
-      "originalFitness": -1421692.2999999998,
-      "newFitness": -265881.60000000003,
-      "noOfReassignments": 7,
-      "totalWalkingDistance": 22,
-      "totalTimeDiff": 377
+      "originalFitness": -102726.1,
+      "newFitness": -11435.400000000001,
+      "noOfReassignments": 16,
+      "totalWalkingDistance": 45,
+      "totalTimeDiff": 195
     },
     "scenario": "medium_scenario_0.json"
   },
   {
     "statistics": {
-      "originalFitness": -2340851.7,
-      "newFitness": -419083.0,
-      "noOfReassignments": 14,
-      "totalWalkingDistance": 60,
-      "totalTimeDiff": 500
+      "originalFitness": -86436.6,
+      "newFitness": -16731.2,
+      "noOfReassignments": 19,
+      "totalWalkingDistance": 51,
+      "totalTimeDiff": 514
     },
     "scenario": "medium_scenario_1.json"
   },
   {
     "statistics": {
-      "originalFitness": -9103692.900000002,
-      "newFitness": -734713.1,
-      "noOfReassignments": 24,
-      "totalWalkingDistance": 57,
-      "totalTimeDiff": 468
+      "originalFitness": -227699.3,
+      "newFitness": -18685.9,
+      "noOfReassignments": 25,
+      "totalWalkingDistance": 71,
+      "totalTimeDiff": 374
     },
     "scenario": "medium_scenario_2.json"
   },
   {
     "statistics": {
-      "originalFitness": -353485.6999999999,
-      "newFitness": -176061.2,
-      "noOfReassignments": 8,
-      "totalWalkingDistance": 29,
-      "totalTimeDiff": 297
+      "originalFitness": -29194.200000000004,
+      "newFitness": -6955.400000000001,
+      "noOfReassignments": 3,
+      "totalWalkingDistance": 12,
+      "totalTimeDiff": 483
     },
     "scenario": "medium_scenario_3.json"
   },
   {
     "statistics": {
-      "originalFitness": -3187162.0,
-      "newFitness": -533436.3,
-      "noOfReassignments": 16,
-      "totalWalkingDistance": 55,
-      "totalTimeDiff": 334
+      "originalFitness": -122848.70000000004,
+      "newFitness": -13856.7,
+      "noOfReassignments": 17,
+      "totalWalkingDistance": 51,
+      "totalTimeDiff": 357
     },
     "scenario": "medium_scenario_4.json"
   },
   {
     "statistics": {
-      "originalFitness": -1554494.3,
-      "newFitness": -561659.7,
-      "noOfReassignments": 25,
-      "totalWalkingDistance": 74,
-      "totalTimeDiff": 1702
+      "originalFitness": -289185.8,
+      "newFitness": -19570.3,
+      "noOfReassignments": 24,
+      "totalWalkingDistance": 52,
+      "totalTimeDiff": 331
     },
     "scenario": "medium_scenario_5.json"
   },
   {
     "statistics": {
-      "originalFitness": -5158777.600000001,
-      "newFitness": -330053.80000000005,
-      "noOfReassignments": 5,
-      "totalWalkingDistance": 16,
-      "totalTimeDiff": 417
+      "originalFitness": -77235.40000000001,
+      "newFitness": -9862.0,
+      "noOfReassignments": 10,
+      "totalWalkingDistance": 25,
+      "totalTimeDiff": 459
     },
     "scenario": "medium_scenario_6.json"
   },
   {
     "statistics": {
-      "originalFitness": -2306818.3,
-      "newFitness": -306894.6,
-      "noOfReassignments": 15,
-      "totalWalkingDistance": 41,
-      "totalTimeDiff": 1454
+      "originalFitness": -56934.7,
+      "newFitness": -17835.3,
+      "noOfReassignments": 18,
+      "totalWalkingDistance": 62,
+      "totalTimeDiff": 549
     },
     "scenario": "medium_scenario_7.json"
   },
   {
     "statistics": {
-      "originalFitness": -1188527.0000000002,
-      "newFitness": -142027.80000000002,
-      "noOfReassignments": 3,
-      "totalWalkingDistance": 15,
-      "totalTimeDiff": 308
+      "originalFitness": -20816.8,
+      "newFitness": -6569.700000000001,
+      "noOfReassignments": 4,
+      "totalWalkingDistance": 16,
+      "totalTimeDiff": 338
     },
     "scenario": "medium_scenario_8.json"
   },
   {
     "statistics": {
-      "originalFitness": -3193058.4000000004,
-      "newFitness": -750950.3,
-      "noOfReassignments": 18,
-      "totalWalkingDistance": 65,
-      "totalTimeDiff": 221
+      "originalFitness": -64791.500000000015,
+      "newFitness": -21982.7,
+      "noOfReassignments": 12,
+      "totalWalkingDistance": 52,
+      "totalTimeDiff": 1205
     },
     "scenario": "medium_scenario_9.json"
   }
