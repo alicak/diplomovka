@@ -1,10 +1,6 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AssignmentCreator;
-import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.Population;
-import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.absolutechromosome.PopulationCreator;
+import sk.upjs.ics.diplomovka.absolutechromosome.*;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.Crossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
@@ -16,13 +12,13 @@ import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.parser.Files;
 import sk.upjs.ics.diplomovka.disruption.*;
+import sk.upjs.ics.diplomovka.disruption.closures.conditions.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.SolutionCreator;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.disruption.closures.conditions.EngineTypeClosureCondition;
 import sk.upjs.ics.diplomovka.termination.IterationsTermination;
 
 import java.io.File;

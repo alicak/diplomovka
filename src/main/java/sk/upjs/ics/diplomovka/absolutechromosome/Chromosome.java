@@ -1,12 +1,11 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
+import sk.upjs.ics.diplomovka.disruption.closures.ConditionalStandClosure;
 import sk.upjs.ics.diplomovka.disruption.closures.TemporaryStandClosure;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.disruption.closures.ConditionalStandClosure;
-import sk.upjs.ics.diplomovka.disruption.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 import java.util.*;

@@ -1,6 +1,7 @@
 package sk.upjs.ics.diplomovka.storage.stands;
 
-import sk.upjs.ics.diplomovka.disruption.closures.*;
+import sk.upjs.ics.diplomovka.disruption.closures.ConditionalStandClosure;
+import sk.upjs.ics.diplomovka.disruption.closures.TemporaryStandClosure;
 
 import java.util.Collection;
 import java.util.HashMap;

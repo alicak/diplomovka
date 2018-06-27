@@ -1,13 +1,8 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.ChromosomeGenerator;
-import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.Population;
-import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PopulationCreator {

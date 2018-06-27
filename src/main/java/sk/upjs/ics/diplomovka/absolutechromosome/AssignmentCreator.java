@@ -1,7 +1,5 @@
 package sk.upjs.ics.diplomovka.absolutechromosome;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;

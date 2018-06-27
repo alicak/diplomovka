@@ -4,7 +4,6 @@ import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.StandTemporarilyClosedDisruptionDataModel;
 import sk.upjs.ics.diplomovka.disruption.closures.TemporaryStandClosure;
 import sk.upjs.ics.diplomovka.storage.stands.StandsStorage;
-import sk.upjs.ics.diplomovka.disruption.closures.StandClosure;
 import sk.upjs.ics.diplomovka.utils.Utils;
 
 public class StandTemporarilyClosedDisruption implements Disruption {

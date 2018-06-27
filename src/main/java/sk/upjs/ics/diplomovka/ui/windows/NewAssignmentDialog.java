@@ -54,7 +54,7 @@ public class NewAssignmentDialog extends javax.swing.JDialog {
         setTitle("New assignment");
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Optimize for:");
+        jLabel1.setText("Optimise for:");
 
         optimizeTimeCheckBox.setText("time");
         optimizeTimeCheckBox.addActionListener(new java.awt.event.ActionListener() {

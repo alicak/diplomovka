@@ -52,6 +52,10 @@ public class MainWindow extends javax.swing.JFrame {
             refreshDisruptions(mainAlgorithm.getDisruptions());
             refreshAssignment(mainAlgorithm.getFlights());
 
+            assignmentDelayCountLabel.setText("n/a");
+            assignmentDelayMaxLabel.setText("n/a");
+            assignmentDelayAverageLabel.setText("n/a");
+
             mainAlgorithm = new MainAlgorithm(disruptions);
         }
     }

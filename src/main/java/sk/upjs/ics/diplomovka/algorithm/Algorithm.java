@@ -5,7 +5,6 @@ import sk.upjs.ics.diplomovka.base.*;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;

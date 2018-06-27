@@ -8,7 +8,9 @@ import sk.upjs.ics.diplomovka.data.models.data.closureconditions.ClosureConditio
 import sk.upjs.ics.diplomovka.data.models.data.disruptions.DisruptionDataModel;
 import sk.upjs.ics.diplomovka.disruption.Disruption;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
-import sk.upjs.ics.diplomovka.storage.flights.*;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
+import sk.upjs.ics.diplomovka.storage.flights.FlightAttributes;
+import sk.upjs.ics.diplomovka.storage.flights.FlightStorage;
 import sk.upjs.ics.diplomovka.storage.stands.DistancesMatrix;
 import sk.upjs.ics.diplomovka.storage.stands.Stand;
 import sk.upjs.ics.diplomovka.storage.stands.StandAttributes;

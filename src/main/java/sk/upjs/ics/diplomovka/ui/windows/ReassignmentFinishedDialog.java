@@ -152,7 +152,7 @@ public class ReassignmentFinishedDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainWindow(), true, new ReassignmentStatistics(0,0, 0, 0, 0), Collections.emptyList());
+                ReassignmentFinishedDialog dialog = new ReassignmentFinishedDialog(new MainWindow(), true, new ReassignmentStatistics(0, 0, 0, 0, 0), Collections.emptyList());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

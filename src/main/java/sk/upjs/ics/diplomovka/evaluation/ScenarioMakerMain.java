@@ -27,8 +27,8 @@ public class ScenarioMakerMain {
 
         ScenarioMaker scenarioMaker = new ScenarioMaker(storage);
 
-        for (ScenarioMaker.ScenarioType type: ScenarioMaker.ScenarioType.values()) {
-            generateAndWriteScenariosSet(scenarioMaker, type,10); // we create 10 scenarios of every type
+        for (ScenarioMaker.ScenarioType type : ScenarioMaker.ScenarioType.values()) {
+            generateAndWriteScenariosSet(scenarioMaker, type, 10); // we create 10 scenarios of every type
         }
     }
 

@@ -1,10 +1,6 @@
 package sk.upjs.ics.diplomovka.main;
 
-import sk.upjs.ics.diplomovka.absolutechromosome.AssignmentCreator;
-import sk.upjs.ics.diplomovka.absolutechromosome.FeasibilityChecker;
-import sk.upjs.ics.diplomovka.absolutechromosome.Population;
-import sk.upjs.ics.diplomovka.absolutechromosome.Chromosome;
-import sk.upjs.ics.diplomovka.absolutechromosome.PopulationCreator;
+import sk.upjs.ics.diplomovka.absolutechromosome.*;
 import sk.upjs.ics.diplomovka.absolutechromosome.crossovers.Crossover;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.CombinedFitness;
 import sk.upjs.ics.diplomovka.absolutechromosome.fitness.basic.ReassignmentFitness;
@@ -18,7 +14,8 @@ import sk.upjs.ics.diplomovka.data.models.view.FlightViewModel;
 import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.data.parser.DataParser;
 import sk.upjs.ics.diplomovka.data.parser.Files;
-import sk.upjs.ics.diplomovka.disruption.*;
+import sk.upjs.ics.diplomovka.disruption.Disruption;
+import sk.upjs.ics.diplomovka.disruption.FlightAddedDisruption;
 import sk.upjs.ics.diplomovka.selection.RankingSelection;
 import sk.upjs.ics.diplomovka.storage.FitnessFunctionWeights;
 import sk.upjs.ics.diplomovka.storage.GeneralStorage;
@@ -119,7 +116,6 @@ public class MainAlgorithm {
                 disruption.disruptAssignment(c);
             }
         }
-
 
 
         flights = null;
@@ -247,13 +243,5 @@ public class MainAlgorithm {
 
     public int getStartTime() {
         return storage.getStartTime();
-    }
-
-    public double getAssignmentFitness() {
-        return fitnessFunction.calculateFitness(originalAssignment);
-    }
-
-    public double getReassignmentFitness() {
-        return fitnessFunction.calculateFitness(reassignment);
     }
 }

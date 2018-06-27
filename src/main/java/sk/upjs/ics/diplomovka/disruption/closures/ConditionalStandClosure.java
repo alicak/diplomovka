@@ -1,7 +1,7 @@
 package sk.upjs.ics.diplomovka.disruption.closures;
 
-import sk.upjs.ics.diplomovka.storage.flights.Flight;
 import sk.upjs.ics.diplomovka.disruption.closures.conditions.ClosureCondition;
+import sk.upjs.ics.diplomovka.storage.flights.Flight;
 
 public class ConditionalStandClosure extends StandClosure {
 

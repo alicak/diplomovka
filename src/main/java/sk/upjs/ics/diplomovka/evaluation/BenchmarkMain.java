@@ -1,7 +1,6 @@
 package sk.upjs.ics.diplomovka.evaluation;
 
 import com.google.gson.Gson;
-import sk.upjs.ics.diplomovka.data.models.view.ReassignmentStatistics;
 import sk.upjs.ics.diplomovka.main.MainAlgorithm;
 import sk.upjs.ics.diplomovka.ui.models.ReassignmentParameters;
 
@@ -42,7 +41,7 @@ public class BenchmarkMain {
                 time2 += result.runWithoutPopulationCreation;
             }
 
-            averageResults.add(new Result(name, time1/noOfRuns, time2/noOfRuns));
+            averageResults.add(new Result(name, time1 / noOfRuns, time2 / noOfRuns));
         }
 
         PrintWriter pw = new PrintWriter(new File(RESULTS_FOLDER + "benchmark.json"));
